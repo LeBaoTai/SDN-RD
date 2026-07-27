@@ -1,6 +1,7 @@
 package router
 
 import (
+	"encoding/json"
 	"log"
 	"os"
 
@@ -107,6 +108,51 @@ func (s *Session) HandleChageConfiguration(update []byte) {
 	// if err != nil {
 	// 	log.Printf("Failed:%v", err)
 	// }
+}
+
+func convertGetResponseToYAML(res *gnmi.GetResponse) ([]byte, error) {
+	var sb []byte
+	for _, notif := range res.Notification {
+		for _, upd := range notif.Update {
+			raw := upd.Val.GetJsonIetfVal()
+			var data any
+			if err := json.Unmarshal(raw, &data); err != nil {
+				return []byte(""), err
+			}
+			out, err := yaml.Marshal(data)
+			if err != nil {
+				return []byte(""), err
+			}
+			sb = append(sb, out...)
+		}
+	}
+	return sb, nil
+}
+
+func (s *Session) GerCurrentConfiguration() ([]byte, error) {
+	res, err := s.conn.GetConfigAsASCII(getConfigPath())
+	if err != nil {
+		log.Printf("Cannot get config: %v\b", err)
+	}
+
+	// convert gnmi to byte
+	var sb []byte
+	for _, notif := range res.Notification {
+		for _, upd := range notif.Update {
+			raw := upd.Val.GetJsonIetfVal()
+			var data any
+			if err := json.Unmarshal(raw, &data); err != nil {
+				return []byte(""), err
+			}
+			out, err := yaml.Marshal(data)
+			if err != nil {
+				return []byte(""), err
+			}
+			sb = append(sb, out...)
+		}
+	}
+
+	return sb, nil
 }
 
 func (s *Session) Close() {

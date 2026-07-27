@@ -28,6 +28,21 @@ func (c *Client) GetConfig(paths []*gnmi.Path) (*gnmi.GetResponse, error) {
 	return c.gnmiC.Get(ctx, req)
 }
 
+func (c *Client) GetConfigAsASCII(paths []*gnmi.Path) (*gnmi.GetResponse, error) {
+	ctx, cancel := c.ctxWithAuth()
+	defer cancel()
+
+	req := &gnmi.GetRequest{
+		Prefix: &gnmi.Path{
+			Origin: "native",
+		},
+		Path:     paths,
+		Type:     gnmi.GetRequest_CONFIG,
+		Encoding: gnmi.Encoding_JSON_IETF,
+	}
+	return c.gnmiC.Get(ctx, req)
+}
+
 func (c *Client) GetOperational(paths ...*gnmi.Path) (*gnmi.GetResponse, error) {
 	ctx, cancel := c.ctxWithAuth()
 	defer cancel()

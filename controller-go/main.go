@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-	"os"
 	"time"
 
 	"github.com/LeBaoTai/myco-controller/internal/controller/gnmib"
@@ -25,11 +24,16 @@ func main() {
 		panic(err)
 	}
 
-	newConfigFile, err := os.ReadFile("./mock-data/change.json")
-	if err != nil {
-		log.Printf("Cannot open newconfig file: %v", err)
-	}
+	// newConfigFile, err := os.ReadFile("./mock-data/change.json")
+	// if err != nil {
+	// 	log.Printf("Cannot open newconfig file: %v", err)
+	// }
 
 	session := router.CreateNewSession(client)
-	session.HandleChageConfiguration(newConfigFile)
+	// session.HandleChageConfiguration(newConfigFile)
+
+	currentConfig, err := session.GerCurrentConfiguration()
+	if err != nil {
+		log.Printf("Current config: %v\n", string(currentConfig))
+	}
 }
