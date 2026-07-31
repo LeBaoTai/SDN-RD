@@ -15,6 +15,7 @@ generate-yang:
 		-shorten_enum_leaf_names \
 		-typedef_enum_with_defmod \
 		-exclude_modules=ietf-interfaces \
+		-compress_paths=true \
 		-generate_simple_unions\
 		$(YANG_REPO)/openconfig/interfaces/openconfig-interfaces.yang \
 		$(YANG_REPO)/openconfig/interfaces/openconfig-if-ip.yang \
