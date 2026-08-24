@@ -1,11 +1,11 @@
 package main
 
 import (
+	"context"
 	"log"
 	"time"
 
 	"github.com/LeBaoTai/myco-controller/internal/controller/gnmib"
-	"github.com/LeBaoTai/myco-controller/internal/controller/router"
 )
 
 type ConfigPath struct {
@@ -13,27 +13,20 @@ type ConfigPath struct {
 }
 
 func main() {
-	client, err := gnmib.New(gnmib.Config{
-		Address:    "192.100.100.101: 57400",
-		Username:   "admin",
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	cfg := gnmib.Cfg{
+		Address:    "192.100.100.101",
 		Password:   "NokiaSrl1!",
 		SkipVerify: true,
-		Timeout:    5 * time.Second,
-	})
-	if err != nil {
-		panic(err)
+		Timeout:    time.Minute * 5,
 	}
 
-	// newConfigFile, err := os.ReadFile("./mock-data/change.json")
-	// if err != nil {
-	// 	log.Printf("Cannot open newconfig file: %v", err)
-	// }
-
-	session := router.CreateNewSession(client)
-	// session.HandleChageConfiguration(newConfigFile)
-
-	currentConfig, err := session.GerCurrentConfiguration()
+	connection, err := gnmib.CreateTargetConnection(cfg, ctx)
 	if err != nil {
-		log.Printf("Current config: %v\n", string(currentConfig))
+		log.Printf("Cannot establish connection:%v", err)
 	}
+	tr := connection.CreateTransaction()
+	connection.SetTransaction(tr)
 }

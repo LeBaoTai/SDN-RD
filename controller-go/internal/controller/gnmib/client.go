@@ -7,6 +7,8 @@ import (
 	"time"
 
 	"github.com/openconfig/gnmi/proto/gnmi"
+	"github.com/openconfig/gnmic/pkg/api"
+	"github.com/openconfig/gnmic/pkg/api/target"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/metadata"
@@ -20,7 +22,11 @@ type Client struct {
 	timeout  time.Duration
 }
 
-type Config struct {
+type TargetClient struct {
+	target *target.Target
+}
+
+type Cfg struct {
 	Address    string
 	Username   string
 	Password   string
@@ -28,7 +34,38 @@ type Config struct {
 	Timeout    time.Duration
 }
 
-func New(cfg Config) (*Client, error) {
+func CreateTargetConnection(cfg Cfg, ctx context.Context) (*TargetClient, error) {
+	target, err := NewTarget(cfg, ctx)
+	if err != nil {
+		return nil, err
+	}
+	return &TargetClient{
+		target: target,
+	}, nil
+}
+
+func NewTarget(cfg Cfg, ctx context.Context) (*target.Target, error) {
+	target, err := api.NewTarget(
+		api.Address(cfg.Address),
+		api.Insecure(cfg.SkipVerify),
+		api.Password(cfg.Password),
+		api.Timeout(cfg.Timeout),
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := target.CreateGNMIClient(ctx); err != nil {
+		return nil, err
+	}
+	return target, err
+}
+
+func (t *TargetClient) Close() {
+	t.Close()
+}
+
+func New(cfg Cfg) (*Client, error) {
 	tlsConfig := &tls.Config{
 		InsecureSkipVerify: cfg.SkipVerify,
 		NextProtos:         []string{"h2"},

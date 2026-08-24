@@ -16,7 +16,11 @@ generate-yang:
 		-typedef_enum_with_defmod \
 		-exclude_modules=ietf-interfaces \
 		-compress_paths=true \
-		-generate_simple_unions\
+		-generate_simple_unions \
+		-generate_getters=true \
+		-generate_append=true \
+		-generate_delete=true \
+		-generate_populate_defaults=true \
 		$(YANG_REPO)/openconfig/interfaces/openconfig-interfaces.yang \
 		$(YANG_REPO)/openconfig/interfaces/openconfig-if-ip.yang \
 		$(YANG_REPO)/openconfig/bgp/openconfig-bgp.yang \
