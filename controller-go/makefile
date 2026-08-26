@@ -7,7 +7,7 @@ OUTPUT    := ./internal/oc/oc.go
 .PHONY: generate-yang
 generate-yang:
 	go run github.com/openconfig/ygot/generator \
-		-path=../yang-repo/.. \
+		-path=$(YANG_REPO) \
 		-output_file=./internal/oc/oc.go \
 		-package_name=oc \
 		-generate_fakeroot \
@@ -17,10 +17,8 @@ generate-yang:
 		-exclude_modules=ietf-interfaces \
 		-compress_paths=true \
 		-generate_simple_unions \
-		-generate_getters=true \
-		-generate_append=true \
-		-generate_delete=true \
 		-generate_populate_defaults=true \
+		-generate_getters \
 		$(YANG_REPO)/openconfig/interfaces/openconfig-interfaces.yang \
 		$(YANG_REPO)/openconfig/interfaces/openconfig-if-ip.yang \
 		$(YANG_REPO)/openconfig/bgp/openconfig-bgp.yang \
@@ -28,8 +26,6 @@ generate-yang:
 		$(YANG_REPO)/openconfig/network-instance/openconfig-network-instance.yang \
 		$(YANG_REPO)/openconfig/system/openconfig-system.yang
 
-
-#-compress_paths=true \
 
 .PHONY: verify-yang
 verify-yang: generate-yang
