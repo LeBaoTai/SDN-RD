@@ -9,13 +9,50 @@ type IfcReq struct {
 	Name        string `json:"name"`
 	IP          string `json:"ip"`
 	Description string `json:"description"`
-	Enable      bool   `json:"enable"`
+	Enabled     bool   `json:"enable"`
+	SubIndex    uint32 `json:"sub-index"`
+	Mask        uint8  `json:"mask"`
+	Mtu         uint16 `json:"mtu"`
+	Speed       int16  `json:"speed"`
+	Duplex      string `json:"duplex"`
 }
 
-func BuildInterface(ifcReq *IfcReq) {
-	device := &oc.Device{}
-	iface := device.GetOrCreateInterface(ifcReq.Name)
-	iface.Description = ygot.String(ifcReq.Description)
+func CreateInterface(req *IfcReq) *oc.Interface {
+	iface := &oc.Interface{}
+
+	iface.Name = ygot.String(req.Name)
+
+	iface.Description = ygot.String(req.Description)
 	iface.Mtu = ygot.Uint16(1500)
-	iface.AdminStatus = oc.Interface_AdminStatus_UP
+	iface.Enabled = ygot.Bool(req.Enabled)
+
+	// ethernet
+	eth := iface.GetOrCreateEthernet()
+	switch req.Duplex {
+	case "full":
+		eth.DuplexMode = oc.Ethernet_DuplexMode_FULL
+	case "auto":
+		eth.DuplexMode = oc.Ethernet_DuplexMode_UNSET
+	}
+
+	switch req.Speed {
+	case 100:
+		eth.PortSpeed = oc.OpenconfigIfEthernet_ETHERNET_SPEED_SPEED_100MB
+	case 1000:
+		eth.PortSpeed = oc.OpenconfigIfEthernet_ETHERNET_SPEED_SPEED_1GB
+	case 10000:
+		eth.PortSpeed = oc.OpenconfigIfEthernet_ETHERNET_SPEED_SPEED_10GB
+	}
+
+	// Subinterface
+	subIface := iface.GetOrCreateSubinterface(req.SubIndex)
+	subIface.Enabled = ygot.Bool(req.Enabled)
+
+	// IPV4
+	ipv4 := subIface.GetOrCreateIpv4()
+
+	addr := ipv4.GetOrCreateAddress(req.IP)
+	addr.PrefixLength = ygot.Uint8(req.Mask)
+
+	return iface
 }
