@@ -24,6 +24,10 @@ module srl_nokia-isis-lsdb {
   description
     "This yang file models configuration and state of the IS-IS protocol";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -126,7 +130,9 @@ module srl_nokia-isis-lsdb {
       if-feature "srl-feat:isis-lsdb";
       config false;
       description
-        "State representation of the ISIS LSDB.";
+        "Enter the link-state-database context
+
+         State representation of the ISIS LSDB.";
       list lsp {
         key "lsp-id";
         description
@@ -141,7 +147,9 @@ module srl_nokia-isis-lsdb {
       "Common definitions of the metric in IS-IS.";
     container default-metric {
       description
-        "This container defines ISIS Default Metric.";
+        "Enter the default-metric context
+
+         This container defines ISIS Default Metric.";
       leaf flags {
         type enumeration {
           enum internal {
@@ -162,7 +170,9 @@ module srl_nokia-isis-lsdb {
     }
     container delay-metric {
       description
-        "This container defines the ISIS delay metric.";
+        "Enter the delay-metric context
+
+         This container defines the ISIS delay metric.";
       leaf metric {
         type isis-narrow-metric;
         description
@@ -178,7 +188,9 @@ module srl_nokia-isis-lsdb {
     }
     container expense-metric {
       description
-        "This container defines the ISIS expense metric.";
+        "Enter the expense-metric context
+
+         This container defines the ISIS expense metric.";
       leaf metric {
         type isis-narrow-metric;
         description
@@ -194,7 +206,9 @@ module srl_nokia-isis-lsdb {
     }
     container error-metric {
       description
-        "This container defines the ISIS error metric.";
+        "Enter the error-metric context
+
+         This container defines the ISIS error metric.";
       leaf metric {
         type isis-narrow-metric;
         description
@@ -233,7 +247,9 @@ module srl_nokia-isis-lsdb {
       "Grouping for unknown TLVs in the IS-IS LSDB";
     container undefined-tlvs {
       description
-        "Surrounding container for a list of unknown TLVs.";
+        "Enter the undefined-tlvs context
+
+         Surrounding container for a list of unknown TLVs.";
       list undefined-tlv {
         key "type";
         description
@@ -262,7 +278,9 @@ module srl_nokia-isis-lsdb {
       "Grouping for unknown Sub-TLVs in the IS-IS LSDB.";
     container undefined-subtlvs {
       description
-        "This container describes undefined ISIS TLVs.";
+        "Enter the undefined-subtlvs context
+
+         This container describes undefined ISIS TLVs.";
       list undefined-subtlv {
         key "type";
         description
@@ -291,7 +309,9 @@ module srl_nokia-isis-lsdb {
       "Structure for the Extended IS Reachability and MT-ISN Reachability Neighbour attributes.";
     container application-specific-link-attributes {
       description
-        "This grouping is to display application specific link attributes (sub-TLV 238).";
+        "Enter the application-specific-link-attributes context
+
+         This grouping is to display application specific link attributes (sub-TLV 238).";
       when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-application-specific-link-attributes'";
       list application-specific-link-attribute {
         key "instance";
@@ -352,7 +372,9 @@ module srl_nokia-isis-lsdb {
             container admin-group {
               when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-admin-group'";
               description
-                "This container defines sub-TLV 3.";
+                "Enter the admin-group context
+
+                 This container defines sub-TLV 3.";
               leaf-list admin-group {
                 type uint32;
                 description
@@ -364,7 +386,9 @@ module srl_nokia-isis-lsdb {
             container extended-admin-group {
               when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-extended-admin-group'";
               description
-                "This container defines sub-TLV 14.";
+                "Enter the extended-admin-group context
+
+                 This container defines sub-TLV 14.";
               leaf-list extended-admin-group {
                 type uint32;
                 description
@@ -374,7 +398,9 @@ module srl_nokia-isis-lsdb {
             container max-link-bandwidth {
               when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-max-link-bandwidth'";
               description
-                "This container defines sub-TLV 9.";
+                "Enter the max-link-bandwidth context
+
+                 This container defines sub-TLV 9.";
               leaf bandwidth {
                 type uint64;
                 units "bytes per second";
@@ -385,7 +411,9 @@ module srl_nokia-isis-lsdb {
             container te-default-metric {
               when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-te-default-metric'";
               description
-                "This container defines sub-TLV 18.";
+                "Enter the te-default-metric context
+
+                 This container defines sub-TLV 18.";
               leaf metric {
                 type uint32;
                 description
@@ -395,7 +423,9 @@ module srl_nokia-isis-lsdb {
             container min-max-link-delay {
               when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-min-max-link-delay'";
               description
-                "This container defines min/max link delay.";
+                "Enter the min-max-link-delay context
+
+                 This container defines min/max link delay.";
               leaf a-bit {
                 type boolean;
                 description
@@ -435,7 +465,9 @@ module srl_nokia-isis-lsdb {
           }
           container min-max-unidirectional-link-delay {
             description
-              "The minimum and maximum delay between two directly connected IS-IS neighbors.";
+              "Enter the min-max-unidirectional-link-delay context
+
+               The minimum and maximum delay between two directly connected IS-IS neighbors.";
             leaf anomolous {
               type boolean;
               description
@@ -454,6 +486,8 @@ module srl_nokia-isis-lsdb {
                 "Maximum forward-path delay (from the advertising router to the remote neighbor)";
             }
           }
+          description
+            "Enter the sub-sub-tlvs context";
         }
       }
     }
@@ -464,7 +498,9 @@ module srl_nokia-isis-lsdb {
       "This grouping defines is-reachability neighbor.";
     container subtlvs {
       description
-        "This container describes IS Neighbor sub-TLVs.";
+        "Enter the subtlvs context
+
+         This container describes IS Neighbor sub-TLVs.";
       list subtlv {
         key "type";
         description
@@ -479,7 +515,9 @@ module srl_nokia-isis-lsdb {
         container admin-group {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-admin-group'";
           description
-            "This container defines sub-TLV 3.";
+            "Enter the admin-group context
+
+             This container defines sub-TLV 3.";
           leaf-list admin-group {
             type uint32;
             description
@@ -491,7 +529,9 @@ module srl_nokia-isis-lsdb {
         container link-id {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-link-id'";
           description
-            "This container defines sub-TLV 4.";
+            "Enter the link-id context
+
+             This container defines sub-TLV 4.";
           leaf local {
             type uint32;
             description
@@ -506,7 +546,9 @@ module srl_nokia-isis-lsdb {
         container ipv4-interface-address {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-ipv4-interface-address'";
           description
-            "This container defines sub-TLV 6.";
+            "Enter the ipv4-interface-address context
+
+             This container defines sub-TLV 6.";
           leaf-list address {
             type srl_nokia-comm:ipv4-address;
             description
@@ -516,7 +558,9 @@ module srl_nokia-isis-lsdb {
         container ipv4-neighbor-address {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-ipv4-neighbor-address'";
           description
-            "This container defines sub-TLV 8.";
+            "Enter the ipv4-neighbor-address context
+
+             This container defines sub-TLV 8.";
           leaf-list address {
             type srl_nokia-comm:ipv4-address;
             description
@@ -527,7 +571,9 @@ module srl_nokia-isis-lsdb {
           if-feature "srl-feat:isis-lsdb-te-extensions";
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-max-link-bandwidth'";
           description
-            "This container defines sub-TLV 9.";
+            "Enter the max-link-bandwidth context
+
+             This container defines sub-TLV 9.";
           leaf bandwidth {
             type uint64;
             units "bytes per second";
@@ -539,7 +585,9 @@ module srl_nokia-isis-lsdb {
           if-feature "srl-feat:isis-lsdb-te-extensions";
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-max-reservable-bandwidth'";
           description
-            "This container defines sub-TLV 10.";
+            "Enter the max-reservable-link-bandwidth context
+
+             This container defines sub-TLV 10.";
           leaf bandwidth {
             type uint64;
             units "bytes per second";
@@ -551,7 +599,9 @@ module srl_nokia-isis-lsdb {
           if-feature "srl-feat:isis-lsdb-te-extensions";
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-unreserved-bandwidth'";
           description
-            "This container defines unreserved-bandwidth. The units are bytes per second.";
+            "Enter the unreserved-bandwidth context
+
+             This container defines unreserved-bandwidth. The units are bytes per second.";
           list setup-priority {
             key "priority";
             leaf priority {
@@ -572,7 +622,9 @@ module srl_nokia-isis-lsdb {
         container ipv6-interface-address {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-ipv6-interface-address'";
           description
-            "This container defines sub-TLV 12.";
+            "Enter the ipv6-interface-address context
+
+             This container defines sub-TLV 12.";
           leaf-list address {
             type srl_nokia-comm:ipv6-address;
             description
@@ -582,7 +634,9 @@ module srl_nokia-isis-lsdb {
         container ipv6-neighbor-address {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-ipv6-neighbor-address'";
           description
-            "This container defines sub-TLV 13.";
+            "Enter the ipv6-neighbor-address context
+
+             This container defines sub-TLV 13.";
           leaf-list address {
             type srl_nokia-comm:ipv6-address;
             description
@@ -592,7 +646,9 @@ module srl_nokia-isis-lsdb {
         container extended-admin-group {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-extended-admin-group'";
           description
-            "This container defines sub-TLV 14.";
+            "Enter the extended-admin-group context
+
+             This container defines sub-TLV 14.";
           leaf-list extended-admin-group {
             type uint32;
             description
@@ -602,7 +658,9 @@ module srl_nokia-isis-lsdb {
         container te-default-metric {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-te-default-metric'";
           description
-            "This container defines sub-TLV 18.";
+            "Enter the te-default-metric context
+
+             This container defines sub-TLV 18.";
           leaf metric {
             type uint32;
             description
@@ -612,7 +670,9 @@ module srl_nokia-isis-lsdb {
         container link-attributes {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-link-attributes'";
           description
-            "This container defines link-attributes.";
+            "Enter the link-attributes context
+
+             This container defines link-attributes.";
           leaf-list local-protection {
             type enumeration {
               enum local-protection {
@@ -632,7 +692,9 @@ module srl_nokia-isis-lsdb {
           if-feature "srl-feat:isis-lsdb-te-extensions";
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-link-protection-type'";
           description
-            "ISIS LSDB parameters relating to the type of link protection offered.";
+            "Enter the link-protection-type context
+
+             ISIS LSDB parameters relating to the type of link protection offered.";
           leaf-list type {
             type enumeration {
               enum extra-traffic {
@@ -667,7 +729,9 @@ module srl_nokia-isis-lsdb {
         container bandwidth-constraints {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-bandwidth-constraints'";
           description
-            "This container defines bandwidth-constraints. For DS-TE, the existing Maximum Reservable link bandwidth parameter is retained, but its semantics is generalized and interpreted as the aggregate bandwidth constraint across all Class-Types";
+            "Enter the bandwidth-constraints context
+
+             This container defines bandwidth-constraints. For DS-TE, the existing Maximum Reservable link bandwidth parameter is retained, but its semantics is generalized and interpreted as the aggregate bandwidth constraint across all Class-Types";
           list bandwidth-constraint {
             key "model-id";
             description
@@ -679,7 +743,9 @@ module srl_nokia-isis-lsdb {
             }
             container constraints {
               description
-                "Constraints contained within the Bandwidth Constraints sub-TLV";
+                "Enter the constraints context
+
+                 Constraints contained within the Bandwidth Constraints sub-TLV";
               list constraint {
                 key "constraint-id";
                 description
@@ -702,7 +768,9 @@ module srl_nokia-isis-lsdb {
         container unconstrained-lsp {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-unconstrained-lsp'";
           description
-            "This container defines sub-TLV 23.";
+            "Enter the unconstrained-lsp context
+
+             This container defines sub-TLV 23.";
           leaf type {
             type identityref {
               base srl_nokia-isis-lsdb-types:isis-subtlv-type;
@@ -719,7 +787,9 @@ module srl_nokia-isis-lsdb {
         container adjacency-sids {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-adj-sid'";
           description
-            "This container defines segment routing adjacency SIDs.";
+            "Enter the adjacency-sids context
+
+             This container defines segment routing adjacency SIDs.";
           list adjacency-sid {
             key "value";
             description
@@ -765,7 +835,9 @@ module srl_nokia-isis-lsdb {
         container lan-adjacency-sids {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-adj-lan-sid'";
           description
-            "This container defines segment routing LAN adjacency SIDs";
+            "Enter the lan-adjacency-sids context
+
+             This container defines segment routing LAN adjacency SIDs";
           list lan-adjacency-sid {
             key "value";
             description
@@ -816,7 +888,9 @@ module srl_nokia-isis-lsdb {
         container link-delay {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-link-delay'";
           description
-            "This container defines unidirectional link delay.";
+            "Enter the link-delay context
+
+             This container defines unidirectional link delay.";
           leaf a-bit {
             type boolean;
             description
@@ -832,7 +906,9 @@ module srl_nokia-isis-lsdb {
         container min-max-link-delay {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-min-max-link-delay'";
           description
-            "This container defines min/max link delay.";
+            "Enter the min-max-link-delay context
+
+             This container defines min/max link delay.";
           leaf a-bit {
             type boolean;
             description
@@ -854,7 +930,9 @@ module srl_nokia-isis-lsdb {
         container link-delay-variation {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-link-delay-variation'";
           description
-            "This container defines unidirectional link delay variation.";
+            "Enter the link-delay-variation context
+
+             This container defines unidirectional link delay variation.";
           leaf delay {
             type uint32;
             units "microseconds";
@@ -865,7 +943,9 @@ module srl_nokia-isis-lsdb {
         container link-loss {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-link-loss'";
           description
-            "This container defines unidirectional link loss delay.";
+            "Enter the link-loss context
+
+             This container defines unidirectional link loss delay.";
           leaf a-bit {
             type boolean;
             description
@@ -881,7 +961,9 @@ module srl_nokia-isis-lsdb {
           if-feature "srl-feat:isis-lsdb-te-extensions";
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-residual-bandwidth'";
           description
-            "This container defines unidirectional residual bandwidth.";
+            "Enter the residual-bandwidth context
+
+             This container defines unidirectional residual bandwidth.";
           leaf bandwidth {
             type uint64;
             units "bytes per second";
@@ -893,7 +975,9 @@ module srl_nokia-isis-lsdb {
           if-feature "srl-feat:isis-lsdb-te-extensions";
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-available-bandwidth'";
           description
-            "This container defines unidirectional lavailable bandwidth.";
+            "Enter the available-bandwidth context
+
+             This container defines unidirectional lavailable bandwidth.";
           leaf type {
             type identityref {
               base srl_nokia-isis-lsdb-types:isis-subtlv-type;
@@ -912,7 +996,9 @@ module srl_nokia-isis-lsdb {
           if-feature "srl-feat:isis-lsdb-te-extensions";
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-utilized-bandwidth'";
           description
-            "This container defines unidirectional utilized bandwidth.";
+            "Enter the utilized-bandwidth context
+
+             This container defines unidirectional utilized bandwidth.";
           leaf type {
             type identityref {
               base srl_nokia-isis-lsdb-types:isis-subtlv-type;
@@ -938,7 +1024,9 @@ module srl_nokia-isis-lsdb {
       "This grouping defines is-reachability neighbor.";
     container subtlvs {
       description
-        "This container describes IS Neighbor sub-TLVs.";
+        "Enter the subtlvs context
+
+         This container describes IS Neighbor sub-TLVs.";
       list subtlv {
         key "type";
         description
@@ -953,7 +1041,9 @@ module srl_nokia-isis-lsdb {
         container admin-group {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-admin-group'";
           description
-            "This container defines sub-TLV 3.";
+            "Enter the admin-group context
+
+             This container defines sub-TLV 3.";
           leaf-list admin-group {
             type uint32;
             description
@@ -965,7 +1055,9 @@ module srl_nokia-isis-lsdb {
         container link-id {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-link-id'";
           description
-            "This container defines sub-TLV 4.";
+            "Enter the link-id context
+
+             This container defines sub-TLV 4.";
           leaf local {
             type uint32;
             description
@@ -980,7 +1072,9 @@ module srl_nokia-isis-lsdb {
         container ipv4-interface-address {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-ipv4-interface-address'";
           description
-            "This container defines sub-TLV 6.";
+            "Enter the ipv4-interface-address context
+
+             This container defines sub-TLV 6.";
           leaf-list address {
             type srl_nokia-comm:ipv4-address;
             description
@@ -990,7 +1084,9 @@ module srl_nokia-isis-lsdb {
         container ipv4-neighbor-address {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-ipv4-neighbor-address'";
           description
-            "This container defines sub-TLV 8.";
+            "Enter the ipv4-neighbor-address context
+
+             This container defines sub-TLV 8.";
           leaf-list address {
             type srl_nokia-comm:ipv4-address;
             description
@@ -1000,7 +1096,9 @@ module srl_nokia-isis-lsdb {
         container max-link-bandwidth {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-max-link-bandwidth'";
           description
-            "This container defines sub-TLV 9.";
+            "Enter the max-link-bandwidth context
+
+             This container defines sub-TLV 9.";
           leaf bandwidth {
             type srl_nokia-comm:ieeefloat32;
             units "bytes per second";
@@ -1011,7 +1109,9 @@ module srl_nokia-isis-lsdb {
         container max-reservable-link-bandwidth {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-max-reservable-bandwidth'";
           description
-            "This container defines sub-TLV 10.";
+            "Enter the max-reservable-link-bandwidth context
+
+             This container defines sub-TLV 10.";
           leaf bandwidth {
             type srl_nokia-comm:ieeefloat32;
             units "bytes per second";
@@ -1022,7 +1122,9 @@ module srl_nokia-isis-lsdb {
         container unreserved-bandwidth {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-unreserved-bandwidth'";
           description
-            "This container defines unreserved-bandwidth. The units are bytes per second.";
+            "Enter the unreserved-bandwidth context
+
+             This container defines unreserved-bandwidth. The units are bytes per second.";
           list setup-priority {
             key "priority";
             leaf priority {
@@ -1043,7 +1145,9 @@ module srl_nokia-isis-lsdb {
         container ipv6-interface-address {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-ipv6-interface-address'";
           description
-            "This container defines sub-TLV 12.";
+            "Enter the ipv6-interface-address context
+
+             This container defines sub-TLV 12.";
           leaf-list address {
             type srl_nokia-comm:ipv6-address;
             description
@@ -1053,7 +1157,9 @@ module srl_nokia-isis-lsdb {
         container ipv6-neighbor-address {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-ipv6-neighbor-address'";
           description
-            "This container defines sub-TLV 13.";
+            "Enter the ipv6-neighbor-address context
+
+             This container defines sub-TLV 13.";
           leaf-list address {
             type srl_nokia-comm:ipv6-address;
             description
@@ -1063,7 +1169,9 @@ module srl_nokia-isis-lsdb {
         container extended-admin-group {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-extended-admin-group'";
           description
-            "This container defines sub-TLV 14.";
+            "Enter the extended-admin-group context
+
+             This container defines sub-TLV 14.";
           leaf-list extended-admin-group {
             type uint32;
             description
@@ -1073,7 +1181,9 @@ module srl_nokia-isis-lsdb {
         container te-default-metric {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-te-default-metric'";
           description
-            "This container defines sub-TLV 18.";
+            "Enter the te-default-metric context
+
+             This container defines sub-TLV 18.";
           leaf metric {
             type uint32;
             description
@@ -1083,7 +1193,9 @@ module srl_nokia-isis-lsdb {
         container link-attributes {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-link-attributes'";
           description
-            "This container defines link-attributes.";
+            "Enter the link-attributes context
+
+             This container defines link-attributes.";
           leaf-list local-protection {
             type enumeration {
               enum local-protection {
@@ -1102,7 +1214,9 @@ module srl_nokia-isis-lsdb {
         container link-protection-type {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-link-protection-type'";
           description
-            "ISIS LSDB parameters relating to the type of link protection offered.";
+            "Enter the link-protection-type context
+
+             ISIS LSDB parameters relating to the type of link protection offered.";
           leaf-list type {
             type enumeration {
               enum extra-traffic {
@@ -1137,7 +1251,9 @@ module srl_nokia-isis-lsdb {
         container bandwidth-constraints {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-bandwidth-constraints'";
           description
-            "This container defines bandwidth-constraints. For DS-TE, the existing Maximum Reservable link bandwidth parameter is retained, but its semantics is generalized and interpreted as the aggregate bandwidth constraint across all Class-Types";
+            "Enter the bandwidth-constraints context
+
+             This container defines bandwidth-constraints. For DS-TE, the existing Maximum Reservable link bandwidth parameter is retained, but its semantics is generalized and interpreted as the aggregate bandwidth constraint across all Class-Types";
           list bandwidth-constraint {
             key "model-id";
             description
@@ -1149,7 +1265,9 @@ module srl_nokia-isis-lsdb {
             }
             container constraints {
               description
-                "Constraints contained within the Bandwidth Constraints sub-TLV";
+                "Enter the constraints context
+
+                 Constraints contained within the Bandwidth Constraints sub-TLV";
               list constraint {
                 key "constraint-id";
                 description
@@ -1172,7 +1290,9 @@ module srl_nokia-isis-lsdb {
         container unconstrained-lsp {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-unconstrained-lsp'";
           description
-            "This container defines sub-TLV 23.";
+            "Enter the unconstrained-lsp context
+
+             This container defines sub-TLV 23.";
           leaf type {
             type identityref {
               base srl_nokia-isis-lsdb-types:isis-subtlv-type;
@@ -1189,7 +1309,9 @@ module srl_nokia-isis-lsdb {
         container adjacency-sids {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-adj-sid'";
           description
-            "This container defines segment routing adjacency SIDs.";
+            "Enter the adjacency-sids context
+
+             This container defines segment routing adjacency SIDs.";
           list adjacency-sid {
             key "value";
             description
@@ -1235,7 +1357,9 @@ module srl_nokia-isis-lsdb {
         container lan-adjacency-sids {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-adj-lan-sid'";
           description
-            "This container defines segment routing LAN adjacency SIDs";
+            "Enter the lan-adjacency-sids context
+
+             This container defines segment routing LAN adjacency SIDs";
           list lan-adjacency-sid {
             key "value";
             description
@@ -1286,7 +1410,9 @@ module srl_nokia-isis-lsdb {
         container link-delay {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-link-delay'";
           description
-            "This container defines unidirectional link delay.";
+            "Enter the link-delay context
+
+             This container defines unidirectional link delay.";
           leaf a-bit {
             type boolean;
             description
@@ -1302,7 +1428,9 @@ module srl_nokia-isis-lsdb {
         container min-max-link-delay {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-min-max-link-delay'";
           description
-            "This container defines min/max link delay.";
+            "Enter the min-max-link-delay context
+
+             This container defines min/max link delay.";
           leaf a-bit {
             type boolean;
             description
@@ -1324,7 +1452,9 @@ module srl_nokia-isis-lsdb {
         container link-delay-variation {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-link-delay-variation'";
           description
-            "This container defines unidirectional link delay variation.";
+            "Enter the link-delay-variation context
+
+             This container defines unidirectional link delay variation.";
           leaf delay {
             type uint32;
             units "microseconds";
@@ -1335,7 +1465,9 @@ module srl_nokia-isis-lsdb {
         container link-loss {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-link-loss'";
           description
-            "This container defines unidirectional link loss delay.";
+            "Enter the link-loss context
+
+             This container defines unidirectional link loss delay.";
           leaf a-bit {
             type boolean;
             description
@@ -1350,7 +1482,9 @@ module srl_nokia-isis-lsdb {
         container residual-bandwidth {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-residual-bandwidth'";
           description
-            "This container defines unidirectional residual bandwidth.";
+            "Enter the residual-bandwidth context
+
+             This container defines unidirectional residual bandwidth.";
           leaf bandwidth {
             type uint64;
             units "bytes per second";
@@ -1361,7 +1495,9 @@ module srl_nokia-isis-lsdb {
         container available-bandwidth {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-available-bandwidth'";
           description
-            "This container defines unidirectional lavailable bandwidth.";
+            "Enter the available-bandwidth context
+
+             This container defines unidirectional lavailable bandwidth.";
           leaf type {
             type identityref {
               base srl_nokia-isis-lsdb-types:isis-subtlv-type;
@@ -1379,7 +1515,9 @@ module srl_nokia-isis-lsdb {
         container utilized-bandwidth {
           when "../type = 'srl_nokia-isis-lsdb-types:is-reachability-utilized-bandwidth'";
           description
-            "This container defines unidirectional utilized bandwidth.";
+            "Enter the utilized-bandwidth context
+
+             This container defines unidirectional utilized bandwidth.";
           leaf type {
             type identityref {
               base srl_nokia-isis-lsdb-types:isis-subtlv-type;
@@ -1404,7 +1542,9 @@ module srl_nokia-isis-lsdb {
       "Common structure for the Extended IS Reachability and IS Reachability Neighbour attributes.";
     container neighbors {
       description
-        "This container describes IS neighbors.";
+        "Enter the neighbors context
+
+         This container describes IS neighbors.";
       list neighbor {
         key "system-id";
         description
@@ -1416,7 +1556,9 @@ module srl_nokia-isis-lsdb {
         }
         container instances {
           description
-            "This list contains all instances of an adjacency between the originating IS and the remote IS. Multiple instances are used where there are parallel adjacencies between two systems.";
+            "Enter the instances context
+
+             This list contains all instances of an adjacency between the originating IS and the remote IS. Multiple instances are used where there are parallel adjacencies between two systems.";
           list instance {
             key "id";
             description
@@ -1443,7 +1585,9 @@ module srl_nokia-isis-lsdb {
       "Common structure for the Extended IS Reachability and IS Reachability Neighbour attributes.";
     container neighbors {
       description
-        "This container describes IS neighbors.";
+        "Enter the neighbors context
+
+         This container describes IS neighbors.";
       list neighbor {
         key "system-id";
         description
@@ -1455,7 +1599,9 @@ module srl_nokia-isis-lsdb {
         }
         container instances {
           description
-            "This list contains all instances of an adjacency between the originating IS and the remote IS. Multiple instances are used where there are parallel adjacencies between two systems.";
+            "Enter the instances context
+
+             This list contains all instances of an adjacency between the originating IS and the remote IS. Multiple instances are used where there are parallel adjacencies between two systems.";
           list instance {
             key "id";
             description
@@ -1536,7 +1682,9 @@ module srl_nokia-isis-lsdb {
     container tag {
       when "../type = 'srl_nokia-isis-lsdb-types:ip-reachability-tag'";
       description
-        "This container defines sub-TLV 1.";
+        "Enter the tag context
+
+         This container defines sub-TLV 1.";
       leaf-list tag32 {
         type uint32;
         description
@@ -1549,7 +1697,9 @@ module srl_nokia-isis-lsdb {
     container tag64 {
       when "../type = 'srl_nokia-isis-lsdb-types:ip-reachability-tag64'";
       description
-        "This container defines sub-TLV 2.";
+        "Enter the tag64 context
+
+         This container defines sub-TLV 2.";
       leaf-list tag64 {
         type uint64;
         description
@@ -1562,7 +1712,9 @@ module srl_nokia-isis-lsdb {
     container flags {
       when "../type = 'srl_nokia-isis-lsdb-types:ip-reachability-prefix-flags'";
       description
-        "This container defines sub-TLV 4.";
+        "Enter the flags context
+
+         This container defines sub-TLV 4.";
       leaf type {
         type identityref {
           base srl_nokia-isis-lsdb-types:isis-subtlv-type;
@@ -1603,7 +1755,9 @@ module srl_nokia-isis-lsdb {
     container ipv4-source-router-id {
       when "../type = 'srl_nokia-isis-lsdb-types:ip-reachability-ipv4-router-id'";
       description
-        "This container defines sub-TLV 11.";
+        "Enter the ipv4-source-router-id context
+
+         This container defines sub-TLV 11.";
       leaf type {
         type identityref {
           base srl_nokia-isis-lsdb-types:isis-subtlv-type;
@@ -1623,7 +1777,9 @@ module srl_nokia-isis-lsdb {
     container ipv6-source-router-id {
       when "../type = 'srl_nokia-isis-lsdb-types:ip-reachability-ipv6-router-id'";
       description
-        "This container defines sub-TLV 12.";
+        "Enter the ipv6-source-router-id context
+
+         This container defines sub-TLV 12.";
       leaf type {
         type identityref {
           base srl_nokia-isis-lsdb-types:isis-subtlv-type;
@@ -1649,7 +1805,9 @@ module srl_nokia-isis-lsdb {
   grouping isis-lsdb-prefix-reach-subtlv-fapm {
     container flexible-algorithm-prefix-metrics {
       description
-        "This list defines sub-TLV 6 for Flexible Algorithm prefix metrics.";
+        "Enter the flexible-algorithm-prefix-metrics context
+
+         This list defines sub-TLV 6 for Flexible Algorithm prefix metrics.";
       list flexible-algorithm-prefix-metric {
         if-feature "srl-feat:isis-flex-algo";
         key "algorithm";
@@ -1685,7 +1843,9 @@ module srl_nokia-isis-lsdb {
     container prefix-sids {
       when "../type = 'srl_nokia-isis-lsdb-types:ip-reachability-prefix-sid'";
       description
-        "This container defines segment routing extensions for prefixes.";
+        "Enter the prefix-sids context
+
+         This container defines segment routing extensions for prefixes.";
       list prefix-sid {
         key "value";
         description
@@ -1739,7 +1899,9 @@ module srl_nokia-isis-lsdb {
       "This grouping defines prefix reachability.";
     container subtlvs {
       description
-        "This container describes IS prefix sub-TLVs.";
+        "Enter the subtlvs context
+
+         This container describes IS prefix sub-TLVs.";
       list subtlv {
         key "type";
         description
@@ -1843,7 +2005,9 @@ module srl_nokia-isis-lsdb {
       "Common grouping for structure used within the multi-topology IS neighbour and multi-topology IS neighbour attribute TLVs.";
     container neighbors {
       description
-        "MT-IS neigbor attributes.";
+        "Enter the neighbors context
+
+         MT-IS neigbor attributes.";
       list neighbor {
         key "mt-id system-id";
         description
@@ -1851,7 +2015,9 @@ module srl_nokia-isis-lsdb {
         uses mt-isis-neighbor-state;
         container instances {
           description
-            "This list contains all instances of an adjacency between the originating and remote IS. Multiple instances are used to indicate where there are arallel adjacencies between systems.";
+            "Enter the instances context
+
+             This list contains all instances of an adjacency between the originating and remote IS. Multiple instances are used to indicate where there are arallel adjacencies between systems.";
           list instance {
             key "id";
             description
@@ -1965,7 +2131,9 @@ module srl_nokia-isis-lsdb {
     }
     container tlvs {
       description
-        "This container defines Link State PDU State TLVs.";
+        "Enter the tlvs context
+
+         This container defines Link State PDU State TLVs.";
       list tlv {
         key "type";
         description
@@ -1980,7 +2148,9 @@ module srl_nokia-isis-lsdb {
         container area-address {
           when "../type = 'srl_nokia-isis-lsdb-types:area-addresses'";
           description
-            "This container defines TLV 1.";
+            "Enter the area-address context
+
+             This container defines TLV 1.";
           leaf-list address {
             type isis-area-address;
             description
@@ -1990,7 +2160,9 @@ module srl_nokia-isis-lsdb {
         container lsp-buffer-size {
           when "../type = 'srl_nokia-isis-lsdb-types:lsp-buffer-size'";
           description
-            "This container defines TLV 14 - the LSP Buffer Size TLV.";
+            "Enter the lsp-buffer-size context
+
+             This container defines TLV 14 - the LSP Buffer Size TLV.";
           leaf size {
             type uint16;
             units "bytes";
@@ -2001,7 +2173,9 @@ module srl_nokia-isis-lsdb {
         container nlpid {
           when "../type = 'srl_nokia-isis-lsdb-types:nlpid'";
           description
-            "This container defines TLV 129.";
+            "Enter the nlpid context
+
+             This container defines TLV 129.";
           leaf-list nlpid {
             type enumeration {
               enum ipv4 {
@@ -2020,7 +2194,9 @@ module srl_nokia-isis-lsdb {
         container hostname {
           when "../type = 'srl_nokia-isis-lsdb-types:dynamic-name'";
           description
-            "This container defines TLV 137.";
+            "Enter the hostname context
+
+             This container defines TLV 137.";
           leaf-list hostname {
             type string;
             description
@@ -2030,7 +2206,9 @@ module srl_nokia-isis-lsdb {
         container ipv4-interface-addresses {
           when "../type = 'srl_nokia-isis-lsdb-types:ipv4-interface-addresses'";
           description
-            "This container defines TLV 132.";
+            "Enter the ipv4-interface-addresses context
+
+             This container defines TLV 132.";
           leaf-list address {
             type srl_nokia-comm:ipv4-address;
             description
@@ -2040,7 +2218,9 @@ module srl_nokia-isis-lsdb {
         container ipv6-interface-addresses {
           when "../type = 'srl_nokia-isis-lsdb-types:ipv6-interface-addresses'";
           description
-            "This container defines TLV 232.";
+            "Enter the ipv6-interface-addresses context
+
+             This container defines TLV 232.";
           leaf-list address {
             type srl_nokia-comm:ipv6-address;
             description
@@ -2050,7 +2230,9 @@ module srl_nokia-isis-lsdb {
         container ipv4-te-router-id {
           when "../type = 'srl_nokia-isis-lsdb-types:ipv4-te-router-id'";
           description
-            "This container defines TLV 134.";
+            "Enter the ipv4-te-router-id context
+
+             This container defines TLV 134.";
           leaf-list router-id {
             type srl_nokia-comm:ipv4-address;
             description
@@ -2060,7 +2242,9 @@ module srl_nokia-isis-lsdb {
         container ipv6-te-router-id {
           when "../type = 'srl_nokia-isis-lsdb-types:ipv6-te-router-id'";
           description
-            "This container defines TLV 140.";
+            "Enter the ipv6-te-router-id context
+
+             This container defines TLV 140.";
           leaf-list router-id {
             type srl_nokia-comm:ipv6-address;
             description
@@ -2070,7 +2254,9 @@ module srl_nokia-isis-lsdb {
         container instance-ids {
           when "../type = 'srl_nokia-isis-lsdb-types:instance-id'";
           description
-            "This container defines ISIS Instance Identifier TLV.";
+            "Enter the instance-ids context
+
+             This container defines ISIS Instance Identifier TLV.";
           list instance-id {
             key "instance-id";
             description
@@ -2090,7 +2276,9 @@ module srl_nokia-isis-lsdb {
         container ipv4-srlgs {
           when "../type = 'srl_nokia-isis-lsdb-types:ipv4-srlg'";
           description
-            "This container defines ISIS SRLG TLV 138.";
+            "Enter the ipv4-srlgs context
+
+             This container defines ISIS SRLG TLV 138.";
           list ipv4-srlg {
             key "instance-number";
             description
@@ -2140,7 +2328,9 @@ module srl_nokia-isis-lsdb {
         container ipv6-srlgs {
           when "../type = 'srl_nokia-isis-lsdb-types:ipv6-srlg'";
           description
-            "This container defines ISIS SRLG TLV.";
+            "Enter the ipv6-srlgs context
+
+             This container defines ISIS SRLG TLV.";
           list ipv6-srlg {
             key "instance-number";
             description
@@ -2190,7 +2380,9 @@ module srl_nokia-isis-lsdb {
         container purge-oi {
           when "../type = 'srl_nokia-isis-lsdb-types:purge-oi'";
           description
-            "This container defines ISIS purge TLV.";
+            "Enter the purge-oi context
+
+             This container defines ISIS purge TLV.";
           leaf system-id-count {
             type uint8;
             description
@@ -2210,7 +2402,9 @@ module srl_nokia-isis-lsdb {
         container router-capabilities {
           when "../type = 'srl_nokia-isis-lsdb-types:router-capability'";
           description
-            "This container defines router capabilities.";
+            "Enter the router-capabilities context
+
+             This container defines router capabilities.";
           list capability {
             key "instance-number";
             description
@@ -2241,7 +2435,9 @@ module srl_nokia-isis-lsdb {
             }
             container subtlvs {
               description
-                "This container describes router capability TLV sub-TLVs";
+                "Enter the subtlvs context
+
+                 This container describes router capability TLV sub-TLVs";
               list subtlv {
                 key "type";
                 description
@@ -2256,7 +2452,9 @@ module srl_nokia-isis-lsdb {
                 container segment-routing-algorithms {
                   when "../type = 'srl_nokia-isis-lsdb-types:router-capability-sr-algorithm'";
                   description
-                    "This container defines SR algorithm sub-TLV 19.";
+                    "Enter the segment-routing-algorithms context
+
+                     This container defines SR algorithm sub-TLV 19.";
                   leaf-list standard-algorithm {
                     type enumeration {
                       enum spf {
@@ -2285,7 +2483,9 @@ module srl_nokia-isis-lsdb {
                 container segment-routing-capability {
                   when "../type = 'srl_nokia-isis-lsdb-types:router-capability-sr-capability'";
                   description
-                    "This container defines SR Capability sub-TLV 2.";
+                    "Enter the segment-routing-capability context
+
+                     This container defines SR Capability sub-TLV 2.";
                   leaf-list flags {
                     type enumeration {
                       enum ipv4-mpls {
@@ -2306,7 +2506,9 @@ module srl_nokia-isis-lsdb {
                   }
                   container srgb-descriptors {
                     description
-                      "SRGB Descriptors included within the SR capability sub-TLV";
+                      "Enter the srgb-descriptors context
+
+                       SRGB Descriptors included within the SR capability sub-TLV";
                     list srgb-descriptor {
                       key "range";
                       description
@@ -2327,7 +2529,9 @@ module srl_nokia-isis-lsdb {
                 container node-msds {
                   when "../type = 'srl_nokia-isis-lsdb-types:router-capability-node-msd'";
                   description
-                    "The Maximum Segment Depth (MSD) values supported by the advertising node. sub-tlv 23.";
+                    "Enter the node-msds context
+
+                     The Maximum Segment Depth (MSD) values supported by the advertising node. sub-tlv 23.";
                   leaf-list bmi-msd {
                     type uint16;
                     description
@@ -2345,7 +2549,9 @@ module srl_nokia-isis-lsdb {
                 container sbfd-discriminators {
                   when "../type = 'srl_nokia-isis-lsdb-types:router-capability-seamless-bfd-discriminator'";
                   description
-                    "This container defines sbfd discriminators sub-TLV 20.";
+                    "Enter the sbfd-discriminators context
+
+                     This container defines sbfd discriminators sub-TLV 20.";
                   leaf-list discriminator {
                     type uint32;
                     description
@@ -2355,7 +2561,9 @@ module srl_nokia-isis-lsdb {
                 container flexible-algorithm-definitions {
                   when "../type = 'srl_nokia-isis-lsdb-types:router-capability-flexible-algorithm-definition'";
                   description
-                    "This container defines IS-IS Sub-TLVs for the Flexible Algorithm Definition. sub-TLV 26.";
+                    "Enter the flexible-algorithm-definitions context
+
+                     This container defines IS-IS Sub-TLVs for the Flexible Algorithm Definition. sub-TLV 26.";
                   list flexible-algorithm-definition {
                     if-feature "srl-feat:isis-flex-algo";
                     key "flex-algorithm";
@@ -2415,10 +2623,14 @@ module srl_nokia-isis-lsdb {
         container is-reachability {
           when "../type = 'srl_nokia-isis-lsdb-types:iis-neighbors'";
           description
-            "This container describes list of ISIS neighbors and attributes.";
+            "Enter the is-reachability context
+
+             This container describes list of ISIS neighbors and attributes.";
           container neighbors {
             description
-              "This container describes IS neighbors.";
+              "Enter the neighbors context
+
+               This container describes IS neighbors.";
             list neighbor {
               key "system-id";
               description
@@ -2435,10 +2647,14 @@ module srl_nokia-isis-lsdb {
         container ipv4-internal-reachability {
           when "../type = 'srl_nokia-isis-lsdb-types:ipv4-internal-reachability'";
           description
-            "This container defines list of IPv4 internal reachability information.";
+            "Enter the ipv4-internal-reachability context
+
+             This container defines list of IPv4 internal reachability information.";
           container prefixes {
             description
-              "This container describes IS prefixes.";
+              "Enter the prefixes context
+
+               This container describes IS prefixes.";
             list prefix {
               key "prefix";
               description
@@ -2450,10 +2666,14 @@ module srl_nokia-isis-lsdb {
         container ipv4-external-reachability {
           when "../type = 'srl_nokia-isis-lsdb-types:ipv4-external-reachability'";
           description
-            "This container defines list of IPv4 external reachability information.";
+            "Enter the ipv4-external-reachability context
+
+             This container defines list of IPv4 external reachability information.";
           container prefixes {
             description
-              "This container describes IS neighbors.";
+              "Enter the prefixes context
+
+               This container describes IS neighbors.";
             list prefix {
               key "prefix";
               description
@@ -2465,7 +2685,9 @@ module srl_nokia-isis-lsdb {
         container authentication {
           when "../type = 'srl_nokia-isis-lsdb-types:authentication'";
           description
-            "This container defines authentication information of the node.";
+            "Enter the authentication context
+
+             This container defines authentication information of the node.";
           leaf crypto-type {
             type enumeration {
               enum cleartext {
@@ -2492,16 +2714,22 @@ module srl_nokia-isis-lsdb {
         container extended-is-reachability {
           when "../type = 'srl_nokia-isis-lsdb-types:extended-is-reachability'";
           description
-            "This container defines list of ISIS extended reachability neighbors.";
+            "Enter the extended-is-reachability context
+
+             This container defines list of ISIS extended reachability neighbors.";
           uses isis-lsdb-common-extisreach-neighbors;
         }
         container extended-ipv4-reachability {
           when "../type = 'srl_nokia-isis-lsdb-types:extended-ipv4-reachability'";
           description
-            "This container defines list of IPv4 extended reachability information.";
+            "Enter the extended-ipv4-reachability context
+
+             This container defines list of IPv4 extended reachability information.";
           container prefixes {
             description
-              "This container describes IS prefixes.";
+              "Enter the prefixes context
+
+               This container describes IS prefixes.";
             list prefix {
               key "prefix";
               description
@@ -2513,10 +2741,14 @@ module srl_nokia-isis-lsdb {
         container ipv6-reachability {
           when "../type = 'srl_nokia-isis-lsdb-types:ipv6-reachability'";
           description
-            "This container defines list of IPv6 reachability information.";
+            "Enter the ipv6-reachability context
+
+             This container defines list of IPv6 reachability information.";
           container prefixes {
             description
-              "This container describes IS prefixes.";
+              "Enter the prefixes context
+
+               This container describes IS prefixes.";
             list prefix {
               key "prefix";
               description
@@ -2528,10 +2760,14 @@ module srl_nokia-isis-lsdb {
         container multi-topology {
           when "../type = 'srl_nokia-isis-lsdb-types:multi-topology'";
           description
-            "This container defines the topology supported.";
+            "Enter the multi-topology context
+
+             This container defines the topology supported.";
           container topologies {
             description
-              "This container describes IS topologies.";
+              "Enter the topologies context
+
+               This container describes IS topologies.";
             list topology {
               key "mt-id";
               description
@@ -2563,13 +2799,17 @@ module srl_nokia-isis-lsdb {
         container isis-neighbor-attribute {
           when "../type = 'srl_nokia-isis-lsdb-types:is-neighbor-attribute'";
           description
-            "This container defines list of ISIS topology neighbors for extended ISIS LSP (multiple system IDs). ";
+            "Enter the isis-neighbor-attribute context
+
+             This container defines list of ISIS topology neighbors for extended ISIS LSP (multiple system IDs). ";
           uses isis-lsdb-common-isreach-neighbors;
         }
         container is-alias-id {
           when "../type = 'srl_nokia-isis-lsdb-types:isis-alias-id'";
           description
-            "This container defines the IS-Alias TLV which allows extension-capable ISs to recognize the Originating System of an Extended LSP set. It identifies the Normal system-id of the Originating System.";
+            "Enter the is-alias-id context
+
+             This container defines the IS-Alias TLV which allows extension-capable ISs to recognize the Originating System of an Extended LSP set. It identifies the Normal system-id of the Originating System.";
           leaf alias-id {
             type srl_nokia-comm:isis-system-id;
             description
@@ -2579,22 +2819,30 @@ module srl_nokia-isis-lsdb {
         container mt-isn {
           when "../type = 'srl_nokia-isis-lsdb-types:mt-isn'";
           description
-            "This container defines list of ISIS multi-topology neighbors.";
+            "Enter the mt-isn context
+
+             This container defines list of ISIS multi-topology neighbors.";
           uses isis-lsdb-mtis-common;
         }
         container mt-isis-neighbor-attribute {
           when "../type = 'srl_nokia-isis-lsdb-types:mt-is-neighbor-attribute'";
           description
-            "This container defines list of ISIS multi-topology neighbors.";
+            "Enter the mt-isis-neighbor-attribute context
+
+             This container defines list of ISIS multi-topology neighbors.";
           uses isis-lsdb-mtis-common;
         }
         container mt-ipv4-reachability {
           when "../type = 'srl_nokia-isis-lsdb-types:mt-ipv4-reachability'";
           description
-            "This container defines list of IPv4 reachability Information in multi-topology environment.";
+            "Enter the mt-ipv4-reachability context
+
+             This container defines list of IPv4 reachability Information in multi-topology environment.";
           container prefixes {
             description
-              "This container describes IS prefixes.";
+              "Enter the prefixes context
+
+               This container describes IS prefixes.";
             list prefix {
               key "mt-id prefix";
               description
@@ -2606,10 +2854,14 @@ module srl_nokia-isis-lsdb {
         container mt-ipv6-reachability {
           when "../type = 'srl_nokia-isis-lsdb-types:mt-ipv6-reachability'";
           description
-            "This container defines list of IPv6 reachability information in multi - topology environment.";
+            "Enter the mt-ipv6-reachability context
+
+             This container defines list of IPv6 reachability information in multi - topology environment.";
           container prefixes {
             description
-              "This container describes IS prefixes.";
+              "Enter the prefixes context
+
+               This container describes IS prefixes.";
             list prefix {
               key "prefix mt-id";
               description

@@ -18,6 +18,10 @@ module srl_nokia-platform-secure-boot {
   description
     "Model for operational states for Platform Trust: Secure Boot";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-07-31 {
     description
       "SRLinux 24.7.1";
@@ -180,7 +184,9 @@ module srl_nokia-platform-secure-boot {
     container secure-boot {
       config false;
       description
-        "State information related to Secure Boot";
+        "Enter the secure-boot context
+
+         State information related to Secure Boot";
       list control {
         description
           "Secure Boot states related to control modules";
@@ -227,7 +233,9 @@ module srl_nokia-platform-secure-boot {
         container uefi-variables-update {
           uses secure-boot-variables-status;
           description
-            "Update status of the UEFI Secure Boot variables PK, KEK, DB and DBx programmed in the control module compared to the UEFI variables update in the modification dataset";
+            "Enter the uefi-variables-update context
+
+             Update status of the UEFI Secure Boot variables PK, KEK, DB and DBx programmed in the control module compared to the UEFI variables update in the modification dataset";
         }
         list uefi-variables {
           description
@@ -241,7 +249,9 @@ module srl_nokia-platform-secure-boot {
           container contents {
             uses secure-boot-database-variable;
             description
-              "Content Secure Boot database variable";
+              "Enter the contents context
+
+               Content Secure Boot database variable";
           }
         }
       }

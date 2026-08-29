@@ -33,6 +33,10 @@ module srl_nokia-igmp {
   description
     "This yang file models configuration and state of the igmp protocol";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -131,10 +135,14 @@ module srl_nokia-igmp {
       "Source specific multicast (SSM) configuration";
     container ssm {
       description
-        "Container to configure Source specific multicast (SSM) options.";
+        "Enter the ssm context
+
+         Container to configure Source specific multicast (SSM) options.";
       container mappings {
         description
-          "A list of source specific multicast (SSM) mappings";
+          "Enter the mappings context
+
+           A list of source specific multicast (SSM) mappings";
         list group-range {
           key "start end";
           description
@@ -253,7 +261,9 @@ module srl_nokia-igmp {
         "Enter the trace-options context";
       container trace {
         description
-          "Tracing parameter flags";
+          "Enter the trace context
+
+           Tracing parameter flags";
         container interface {
           presence "Enable the tracing of IGMP packets";
           description
@@ -408,7 +418,9 @@ module srl_nokia-igmp {
     uses igmp-ssm-config;
     container static-membership-groups {
       description
-        "Container to configure static <S,G>s for this interface";
+        "Enter the static-membership-groups context
+
+         Container to configure static <S,G>s for this interface";
       list group-range {
         key "start end";
         uses igmp-grp-range-keys;
@@ -636,25 +648,33 @@ module srl_nokia-igmp {
     container received {
       config false;
       description
-        "Received message statistics";
+        "Enter the received context
+
+         Received message statistics";
       uses igmp-msg-stats;
     }
     container transmitted {
       config false;
       description
-        "Transmit message statistics";
+        "Enter the transmitted context
+
+         Transmit message statistics";
       uses igmp-msg-tx-stats;
     }
     container error {
       config false;
       description
-        "Error message statistics";
+        "Enter the error context
+
+         Error message statistics";
       uses igmp-msg-layer-3-error-stats;
     }
     container multicast-states {
       config false;
       description
-        "Multicast state count for this network instance";
+        "Enter the multicast-states context
+
+         Multicast state count for this network instance";
       uses igmp-multicast-state;
     }
   }
@@ -749,7 +769,9 @@ module srl_nokia-igmp {
     container membership-groups {
       config false;
       description
-        "List of IGMP Membership information";
+        "Enter the membership-groups context
+
+         List of IGMP Membership information";
       list group {
         key "group";
         config false;
@@ -798,7 +820,9 @@ module srl_nokia-igmp {
     container membership-groups {
       config false;
       description
-        "List of IGMP Membership information";
+        "Enter the membership-groups context
+
+         List of IGMP Membership information";
       list group {
         key "group";
         config false;
@@ -868,12 +892,16 @@ module srl_nokia-igmp {
         type uint32;
         units "seconds";
       }
+      description
+        "Enter the querier context";
     }
     uses igmp-interface-membership;
     container statistics {
       config false;
       description
-        "Global IGMP statistics";
+        "Enter the statistics context
+
+         Global IGMP statistics";
       uses igmp-statistics-state;
     }
   }

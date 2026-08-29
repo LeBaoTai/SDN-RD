@@ -31,6 +31,10 @@ module srl_nokia-sync-ptp {
     "Nokia SR Linux Support
      Web: <http://www.nokia.com>";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -218,6 +222,8 @@ module srl_nokia-sync-ptp {
         description
           "IP address for the PTP peer";
       }
+      description
+        "Enter the ip context";
     }
   }
 
@@ -291,7 +297,9 @@ module srl_nokia-sync-ptp {
     }
     container discards {
       description
-        "Aggregate discard statistics for the PTP clock";
+        "Enter the discards context
+
+         Aggregate discard statistics for the PTP clock";
       leaf bad-domain {
         type uint32;
         description
@@ -328,7 +336,9 @@ module srl_nokia-sync-ptp {
     container signaling-uni-neg-tlv {
       if-feature "srl_nokia-feat:sync-ptp-ip-peers";
       description
-        "Counts of different unicast negotiation TLVs";
+        "Enter the signaling-uni-neg-tlv context
+
+         Counts of different unicast negotiation TLVs";
       leaf request-anno-rx {
         type srl_nokia-comm:zero-based-counter64;
         description
@@ -601,7 +611,9 @@ module srl_nokia-sync-ptp {
       "Grouping for ptp default data set configuration";
     container default-ds {
       description
-        "The default data set of the PTP instance
+        "Enter the default-ds context
+
+         The default data set of the PTP instance
 
          In the context of the protocol, this data set is required
          for an Ordinary Clock or Boundary Clock";
@@ -646,7 +658,9 @@ module srl_nokia-sync-ptp {
       }
       container clock-quality {
         description
-          "The clockQuality of the local clock";
+          "Enter the clock-quality context
+
+           The clockQuality of the local clock";
         config false;
         uses clock-quality-grouping;
       }
@@ -717,7 +731,9 @@ module srl_nokia-sync-ptp {
       }
       container current-time {
         description
-          "The current time in the current data set";
+          "Enter the current-time context
+
+           The current time in the current data set";
         config false;
         uses ptp-time-grouping;
         leaf date-time {
@@ -744,12 +760,33 @@ module srl_nokia-sync-ptp {
         description
           "Indicates if the clock is operating in two-step mode";
       }
+      leaf max-steps-removed {
+        if-feature "srl_nokia-feat:sync-ptp-max-steps-removed";
+        type uint32 {
+          range "1..255";
+        }
+        default "255";
+        description
+          "Threshold for steps removed in Announce messages";
+      }
+      leaf within-holdover-spec-timer {
+        if-feature "srl_nokia-feat:sync-gnss-within-holdover";
+        type uint32 {
+          range "0..3600";
+        }
+        units "seconds";
+        default "600";
+        description
+          "Holdover time after primary reference time source loss";
+      }
       container statistics {
         srl_nokia-ext:stream-mode "sample=2";
         srl_nokia-ext:statistics-node "true";
         config false;
         description
-          "Aggregate statistics for the PTP clock";
+          "Enter the statistics context
+
+           Aggregate statistics for the PTP clock";
         uses ptp-message-counts;
         uses signaling-uni-neg-tlv-counts;
         leaf sync-packet-loss {
@@ -775,12 +812,16 @@ module srl_nokia-sync-ptp {
         container unicast-msg-rate {
           if-feature "srl_nokia-feat:sync-ptp-ip-peers";
           description
-            "Aggregate unicast message rates for the PTP clock";
+            "Enter the unicast-msg-rate context
+
+             Aggregate unicast message rates for the PTP clock";
           uses ptp-message-rates;
         }
         container multicast-msg-rate {
           description
-            "Aggregate multicast message rates for the PTP clock";
+            "Enter the multicast-msg-rate context
+
+             Aggregate multicast message rates for the PTP clock";
           uses ptp-message-rates;
         }
       }
@@ -804,7 +845,9 @@ module srl_nokia-sync-ptp {
         container clock-source {
           if-feature "srl_nokia-feat:sync-ptp-apts";
           description
-            "Identifies the source of PTP messages into PTP the time recovery engine
+            "Enter the clock-source context
+
+             Identifies the source of PTP messages into PTP the time recovery engine
 
               Only one of peer, interface, or sync0-neighbor will be populated";
           container port-ds-cfg-ip {
@@ -816,10 +859,14 @@ module srl_nokia-sync-ptp {
               description
                 "Peer used as the source of PTP messages into the recovery engine";
             }
+            description
+              "Enter the port-ds-cfg-ip context";
           }
           container port-ds-interface {
             description
-              "Interface used as the source of PTP messages into the recovery engine";
+              "Enter the port-ds-interface context
+
+               Interface used as the source of PTP messages into the recovery engine";
             leaf port-index {
               type leafref {
                 path "../../../../../port-ds-interface-list/port-index";
@@ -843,6 +890,8 @@ module srl_nokia-sync-ptp {
                 description
                   "The port number of this neighbor clock";
               }
+              description
+                "Enter the neighbor context";
             }
           }
           container port-ds-sync0 {
@@ -870,7 +919,11 @@ module srl_nokia-sync-ptp {
                 description
                   "The port number of this neighbor clock";
               }
+              description
+                "Enter the neighbor context";
             }
+            description
+              "Enter the port-ds-sync0 context";
           }
         }
         leaf recovery-state {
@@ -924,7 +977,9 @@ module srl_nokia-sync-ptp {
           srl_nokia-ext:stream-mode "sample=2";
           srl_nokia-ext:statistics-node "true";
           description
-            "Time recovery engine state statistics for the PTP clock";
+            "Enter the statistics context
+
+             Time recovery engine state statistics for the PTP clock";
           leaf time-in-initial {
             type uint32;
             units "seconds";
@@ -960,6 +1015,8 @@ module srl_nokia-sync-ptp {
               "The number of events with high PDV for delay request/response packets for time recovery";
           }
         }
+        description
+          "Enter the time-recovery-engine context";
       }
       container freq-recovery-engine {
         if-feature "srl_nokia-feat:sync-ptp-freq";
@@ -1026,7 +1083,9 @@ module srl_nokia-sync-ptp {
           srl_nokia-ext:statistics-node "true";
           config false;
           description
-            "Freq recovery engine state statistics for the PTP clock";
+            "Enter the statistics context
+
+             Freq recovery engine state statistics for the PTP clock";
           leaf time-in-initial {
             type uint32;
             units "seconds";
@@ -1078,6 +1137,8 @@ module srl_nokia-sync-ptp {
               "The number of events with high PDV for delay req packets for frequency recovery";
           }
         }
+        description
+          "Enter the freq-recovery-engine context";
       }
     }
   }
@@ -1085,7 +1146,9 @@ module srl_nokia-sync-ptp {
   grouping ptp-current-ds-top {
     container current-ds {
       description
-        "Provides current data from operation of the protocol";
+        "Enter the current-ds context
+
+         Provides current data from operation of the protocol";
       config false;
       leaf steps-removed {
         type uint16;
@@ -1113,13 +1176,17 @@ module srl_nokia-sync-ptp {
       "Grouping for ptp parent data set configuration";
     container parent-ds {
       description
-        "The parent data set of the clock";
+        "Enter the parent-ds context
+
+         The parent data set of the clock";
       reference
         "IEEE Std 1588-2008: 8.2.3";
       config false;
       container parent-port-identity {
         description
-          "The portIdentity of the port on the master";
+          "Enter the parent-port-identity context
+
+           The portIdentity of the port on the master";
         reference
           "IEEE Std 1588-2008: 5.3.5";
         config false;
@@ -1144,7 +1211,9 @@ module srl_nokia-sync-ptp {
       }
       container grandmaster-clock-quality {
         description
-          "The clockQuality of the grandmaster clock";
+          "Enter the grandmaster-clock-quality context
+
+           The clockQuality of the grandmaster clock";
         config false;
         uses clock-quality-grouping;
       }
@@ -1163,7 +1232,9 @@ module srl_nokia-sync-ptp {
       container protocol-address {
         config false;
         description
-          "The protocol address of the PTP Port that issues the Sync messages";
+          "Enter the protocol-address context
+
+           The protocol address of the PTP Port that issues the Sync messages";
         uses port-address;
       }
     }
@@ -1174,7 +1245,9 @@ module srl_nokia-sync-ptp {
       "Grouping for ptp data set configuration";
     container time-properties-ds {
       description
-        "The timeProperties data set of the clock";
+        "Enter the time-properties-ds context
+
+         The timeProperties data set of the clock";
       reference
         "IEEE Std 1588-2008: 8.2.4";
       config false;
@@ -1493,7 +1566,9 @@ module srl_nokia-sync-ptp {
         srl_nokia-ext:statistics-node "true";
         config false;
         description
-          "Total messages for a specific PTP port";
+          "Enter the statistics context
+
+           Total messages for a specific PTP port";
         uses ptp-message-counts;
       }
       leaf neighbor-count {
@@ -1629,6 +1704,8 @@ module srl_nokia-sync-ptp {
 
              Only Unicast addresses are supported";
         }
+        description
+          "Enter the peer context";
       }
       leaf best-master {
         config false;
@@ -1732,7 +1809,9 @@ module srl_nokia-sync-ptp {
       }
       container grandmaster-clock-quality {
         description
-          "The clock quality of the grandmaster clock in the last Announce message received from this peer";
+          "Enter the grandmaster-clock-quality context
+
+           The clock quality of the grandmaster clock in the last Announce message received from this peer";
         config false;
         uses clock-quality-grouping;
       }
@@ -1820,42 +1899,58 @@ module srl_nokia-sync-ptp {
         srl_nokia-ext:statistics-node "true";
         config false;
         description
-          "Total messages for a specific PTP port";
+          "Enter the statistics context
+
+           Total messages for a specific PTP port";
         uses ptp-message-counts;
         uses signaling-uni-neg-tlv-counts;
       }
       container unicast-negotiation {
         config false;
         description
-          "Details of each negotiation session";
+          "Enter the unicast-negotiation context
+
+           Details of each negotiation session";
         container rx-announce {
           description
-            "Statistics for receive announce sessions";
+            "Enter the rx-announce context
+
+             Statistics for receive announce sessions";
           uses unicast-negotiation-session-data;
         }
         container rx-sync {
           description
-            "Statistics for receive sync sessions";
+            "Enter the rx-sync context
+
+             Statistics for receive sync sessions";
           uses unicast-negotiation-session-data;
         }
         container rx-delay-resp {
           description
-            "Statistics for receive delay-resp sessions";
+            "Enter the rx-delay-resp context
+
+             Statistics for receive delay-resp sessions";
           uses unicast-negotiation-session-data;
         }
         container tx-announce {
           description
-            "Statistics for transmit announce sessions";
+            "Enter the tx-announce context
+
+             Statistics for transmit announce sessions";
           uses unicast-negotiation-session-data;
         }
         container tx-sync {
           description
-            "Statistics for transmit sync sessions";
+            "Enter the tx-sync context
+
+             Statistics for transmit sync sessions";
           uses unicast-negotiation-session-data;
         }
         container tx-delay-resp {
           description
-            "Statistics for transmit delay-resp sessions";
+            "Enter the tx-delay-resp context
+
+             Statistics for transmit delay-resp sessions";
           uses unicast-negotiation-session-data;
         }
       }
@@ -1926,6 +2021,8 @@ module srl_nokia-sync-ptp {
 
              Only Unicast addresses are supported";
         }
+        description
+          "Enter the peer context";
       }
       leaf log-min-delay-req-interval {
         config false;
@@ -2009,7 +2106,9 @@ module srl_nokia-sync-ptp {
         srl_nokia-ext:statistics-node "true";
         config false;
         description
-          "Total messages for a specific PTP port
+          "Enter the statistics context
+
+           Total messages for a specific PTP port
 
            This container is not used with PTP special ports (gnss).";
         uses ptp-message-counts;
@@ -2018,35 +2117,49 @@ module srl_nokia-sync-ptp {
       container unicast-negotiation {
         config false;
         description
-          "Details of each negotiation session";
+          "Enter the unicast-negotiation context
+
+           Details of each negotiation session";
         container rx-announce {
           description
-            "Statistics for receive announce sessions";
+            "Enter the rx-announce context
+
+             Statistics for receive announce sessions";
           uses unicast-negotiation-session-data;
         }
         container rx-sync {
           description
-            "Statistics for receive sync sessions";
+            "Enter the rx-sync context
+
+             Statistics for receive sync sessions";
           uses unicast-negotiation-session-data;
         }
         container rx-delay-resp {
           description
-            "Statistics for receive delay-resp sessions";
+            "Enter the rx-delay-resp context
+
+             Statistics for receive delay-resp sessions";
           uses unicast-negotiation-session-data;
         }
         container tx-announce {
           description
-            "Statistics for transmit announce sessions";
+            "Enter the tx-announce context
+
+             Statistics for transmit announce sessions";
           uses unicast-negotiation-session-data;
         }
         container tx-sync {
           description
-            "Statistics for transmit sync sessions";
+            "Enter the tx-sync context
+
+             Statistics for transmit sync sessions";
           uses unicast-negotiation-session-data;
         }
         container tx-delay-resp {
           description
-            "Statistics for transmit delay-resp sessions";
+            "Enter the tx-delay-resp context
+
+             Statistics for transmit delay-resp sessions";
           uses unicast-negotiation-session-data;
         }
       }
@@ -2208,7 +2321,9 @@ module srl_nokia-sync-ptp {
           srl_nokia-ext:statistics-node "true";
           config false;
           description
-            "Total messages for a specific PTP port";
+            "Enter the statistics context
+
+             Total messages for a specific PTP port";
           uses ptp-message-counts;
         }
         leaf neighbor-count {
@@ -2270,7 +2385,9 @@ module srl_nokia-sync-ptp {
     container port-ds-gnss {
       if-feature "srl_nokia-feat:sync-gnss";
       description
-        "List of port data sets for the GNSS special PTP port";
+        "Enter the port-ds-gnss context
+
+         List of port data sets for the GNSS special PTP port";
       reference
         "IEEE Std 1588-2008: 8.2.5";
       list module {

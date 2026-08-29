@@ -18,6 +18,10 @@ module srl_nokia-tools-platform-attestation {
   description
     "Model for operational commands for platform Trust TPM Attestation related functions";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -63,7 +67,9 @@ module srl_nokia-tools-platform-attestation {
   grouping pcr-quote {
     container pcr-quote {
       description
-        "Tools commands input parameter to retrieve TPM PCR Quote
+        "Enter the pcr-quote context
+
+         Tools commands input parameter to retrieve TPM PCR Quote
          This container includes every information element defined in the reference challenge-response interaction model for remote attestation. Corresponding values are based on TPM 2.0 structure definitions.";
       leaf nonce {
         type binary;
@@ -86,7 +92,9 @@ module srl_nokia-tools-platform-attestation {
   grouping pcr-read {
     container pcr-read {
       description
-        "Tools commands input parameter to retrieve TPM PCR values
+        "Enter the pcr-read context
+
+         Tools commands input parameter to retrieve TPM PCR values
          Without pcr-selection, the command outputs all PCRs and their hash banks.";
       leaf pcr-selection {
         type string;
@@ -123,6 +131,8 @@ module srl_nokia-tools-platform-attestation {
           "limit display to entries associated with a specific PCR. A value of -1 shows all PCRs";
         default "-1";
       }
+      description
+        "Enter the display context";
     }
   }
 
@@ -130,7 +140,9 @@ module srl_nokia-tools-platform-attestation {
     container log-retrieval {
       if-feature "srl-feat:measured-boot";
       description
-        "Tools commands to retrieve BIOS and IMA Log";
+        "Enter the log-retrieval context
+
+         Tools commands to retrieve BIOS and IMA Log";
       container bios {
         description
           "TCG BIOS log retrieval commands";
@@ -150,7 +162,9 @@ module srl_nokia-tools-platform-attestation {
     container attestation {
       if-feature "srl-feat:measured-boot";
       description
-        "Tools commands input parameter for attestation to retrieve TCG BIOS Logs, IMA Logs";
+        "Enter the attestation context
+
+         Tools commands input parameter for attestation to retrieve TCG BIOS Logs, IMA Logs";
       list control {
         description
           "Operational commands related to log retrieval for control modules";

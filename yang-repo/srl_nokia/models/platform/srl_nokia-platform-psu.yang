@@ -24,6 +24,10 @@ module srl_nokia-platform-psu {
   description
     "This module defines configuration and operational state data related to power supplies.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -104,7 +108,9 @@ module srl_nokia-platform-psu {
     container fan {
       if-feature "srl-feat:platform-7250-ixr or srl-feat:platform-7250-ixr-e-unified or srl-feat:platform-7250-ixr-18e-unified";
       description
-        "Top-level container for state relating to fans";
+        "Enter the fan context
+
+         Top-level container for state relating to fans";
       leaf speed {
         type srl-comm:percentage;
         description
@@ -120,7 +126,9 @@ module srl_nokia-platform-psu {
       srl-ext:delivery-node-override "true";
       srl-ext:stream-mode "sample=5";
       description
-        "Top-level container for power-supply input state";
+        "Enter the input context
+
+         Top-level container for power-supply input state";
       uses psu-input-output-common;
     }
     container output {
@@ -128,7 +136,9 @@ module srl_nokia-platform-psu {
       srl-ext:delivery-node-override "true";
       srl-ext:stream-mode "sample=5";
       description
-        "Top-level container for power-supply output state";
+        "Enter the output context
+
+         Top-level container for power-supply output state";
       uses psu-input-output-common;
     }
     list feed {

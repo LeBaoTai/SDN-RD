@@ -24,6 +24,10 @@ module srl_nokia-bridge-table-mac-table {
   description
     "This yang file gives a description of bridge table configuration.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -118,6 +122,8 @@ module srl_nokia-bridge-table-mac-table {
             "The group-based-policy tag value associated to this mac address";
         }
       }
+      description
+        "Enter the mac-table context";
     }
   }
 
@@ -169,6 +175,8 @@ module srl_nokia-bridge-table-mac-table {
           srl_nokia-ext:show-importance "high";
         }
       }
+      description
+        "Enter the statistics context";
     }
   }
 

@@ -21,6 +21,10 @@ module srl_nokia-tools-ldp {
   description
     "Model for LDP operational commands";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-10-31 {
     description
       "SRLinux 24.10.1";
@@ -60,7 +64,11 @@ module srl_nokia-tools-ldp {
                   description
                     "Resets all the LDP instance state counters to zero";
                 }
+                description
+                  "Enter the statistics context";
               }
+              description
+                "Enter the ipv4 context";
             }
             container ipv6 {
               if-feature "srl_nokia-feat:ldp-ipv6";
@@ -70,9 +78,15 @@ module srl_nokia-tools-ldp {
                   description
                     "Resets all the LDP instance state counters to zero";
                 }
+                description
+                  "Enter the statistics context";
               }
+              description
+                "Enter the ipv6 context";
             }
           }
+          description
+            "Enter the interfaces context";
         }
         container targeted {
           if-feature "srl_nokia-feat:ldp-targeted";
@@ -90,8 +104,12 @@ module srl_nokia-tools-ldp {
                   description
                     "Resets all the LDP target counters to zero";
                 }
+                description
+                  "Enter the statistics context";
               }
             }
+            description
+              "Enter the ipv4 context";
           }
           container ipv6 {
             if-feature "srl_nokia-feat:ldp-ipv6";
@@ -108,10 +126,18 @@ module srl_nokia-tools-ldp {
                   description
                     "Resets all the LDP target counters to zero";
                 }
+                description
+                  "Enter the statistics context";
               }
             }
+            description
+              "Enter the ipv6 context";
           }
+          description
+            "Enter the targeted context";
         }
+        description
+          "Enter the discovery context";
       }
       container peers {
         list peer {
@@ -139,8 +165,12 @@ module srl_nokia-tools-ldp {
               description
                 "Resets all the LDP instance state counters to zero";
             }
+            description
+              "Enter the statistics context";
           }
         }
+        description
+          "Enter the peers context";
       }
       container reset-overload {
         presence "Reset the overload state of LDP";
@@ -151,6 +181,8 @@ module srl_nokia-tools-ldp {
           description
             "Resets all the LDP instance state counters to zero";
         }
+        description
+          "Enter the statistics context";
       }
       container targeted-auto-rx {
         if-feature "srl_nokia-feat:ldp-ipv4-auto-rx-tx-targeted";
@@ -162,6 +194,8 @@ module srl_nokia-tools-ldp {
           description
             "Hold-time during which new auto-rx targeted peers will not be generated";
         }
+        description
+          "Enter the targeted-auto-rx context";
       }
     }
   }

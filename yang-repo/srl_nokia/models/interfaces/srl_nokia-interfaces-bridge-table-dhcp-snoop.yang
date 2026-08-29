@@ -24,6 +24,10 @@ module srl_nokia-interfaces-bridge-table-dhcp-snoop {
   description
     "Model for managing DHCPv4 and DHCPv6 Snooping on IP subinterfaces";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -84,6 +88,8 @@ module srl_nokia-interfaces-bridge-table-dhcp-snoop {
         description
           "Total discarded DHCP packets from DHCP server(s) towards dhcp client(s)";
       }
+      description
+        "Enter the statistics context";
     }
   }
 
@@ -133,7 +139,9 @@ module srl_nokia-interfaces-bridge-table-dhcp-snoop {
       }
       container trace-options {
         description
-          "Container for tracing DHCPv4 Snoop operations on the subinterface";
+          "Enter the trace-options context
+
+           Container for tracing DHCPv4 Snoop operations on the subinterface";
         leaf-list trace {
           type enumeration {
             enum messages {
@@ -199,7 +207,9 @@ module srl_nokia-interfaces-bridge-table-dhcp-snoop {
       }
       container trace-options {
         description
-          "Container for tracing DHCPv6 Snoop operations on the subinterface";
+          "Enter the trace-options context
+
+           Container for tracing DHCPv6 Snoop operations on the subinterface";
         leaf-list trace {
           type enumeration {
             enum messages {

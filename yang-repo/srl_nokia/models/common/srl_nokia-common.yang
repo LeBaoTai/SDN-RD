@@ -19,6 +19,10 @@ module srl_nokia-common {
     "This module contains a set of Internet address related
      types for use in OpenConfig modules.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -299,6 +303,19 @@ module srl_nokia-common {
             + '((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|'
             + '(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.){3}'
             + '(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))';
+    }
+  }
+
+  typedef ipv6-ietf {
+    type string {
+      pattern '((:|[0-9a-fA-F]{0,4}):)([0-9a-fA-F]{0,4}:){0,5}'
+            + '((([0-9a-fA-F]{0,4}:)?(:|[0-9a-fA-F]{0,4}))|'
+            + '(((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.){3}'
+            + '(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])))'
+            + '(%[\p{N}\p{L}]+)?';
+      pattern '(([^:]+:){6}(([^:]+:[^:]+)|(.*\..*)))|'
+            + '((([^:]+:)*[^:]+)?::(([^:]+:)*[^:]+)?)'
+            + '(%.+)?';
     }
   }
 
@@ -702,6 +719,16 @@ module srl_nokia-common {
     type union {
       type ipv4;
       type ipv6;
+      type domain-name;
+    }
+    description
+      "The host type represents either an IP address or a DNS domain name.";
+  }
+
+  typedef host-ietf {
+    type union {
+      type ipv4;
+      type ipv6-ietf;
       type domain-name;
     }
     description
@@ -1531,7 +1558,12 @@ module srl_nokia-common {
 
   identity routing-policy-protocol-match-type {
     description
-      "Base type for the types of routes and tunnels that can be matched by a route policy statement";
+      "Base type for the types of routes that can be matched by a route policy statement";
+  }
+
+  identity routing-policy-tunnel-match-type {
+    description
+      "Base type for the types of tunnels that can be matched by a route policy statement";
   }
 
   identity table-connection-protocol {
@@ -1564,6 +1596,7 @@ module srl_nokia-common {
     base tunnel-type;
     base bgp-next-hop-resolution-tunnel-type;
     base routing-policy-protocol-match-type;
+    base routing-policy-tunnel-match-type;
     base table-connection-protocol;
     description
       "Border Gateway Protocol version 4";
@@ -1629,6 +1662,8 @@ module srl_nokia-common {
 
   identity gribi {
     base ip-route-type;
+    base table-connection-protocol;
+    base routing-policy-protocol-match-type;
     description
       "A gRIBI route";
   }
@@ -1680,6 +1715,7 @@ module srl_nokia-common {
     base mpls-label-entry-type;
     base tunnel-type;
     base bgp-next-hop-resolution-tunnel-type;
+    base routing-policy-tunnel-match-type;
     description
       "Label distribution protocol";
   }
@@ -1732,9 +1768,19 @@ module srl_nokia-common {
       "RFC 5340";
   }
 
+  identity rsvp-te {
+    if-feature "srl-feat:rsvp";
+    base mpls-label-entry-type;
+    base tunnel-type;
+    base bgp-next-hop-resolution-tunnel-type;
+    description
+      "Tunnel signaled using Resource Reservation Protocol with Traffic Engineering";
+  }
+
   identity sr-isis {
     base tunnel-type;
     base bgp-next-hop-resolution-tunnel-type;
+    base routing-policy-tunnel-match-type;
     base static-next-hop-group-tunnel;
     description
       "Segment routing using MPLS dataplane, programmed by IS-IS";
@@ -1769,7 +1815,7 @@ module srl_nokia-common {
   }
 
   identity srv6 {
-    if-feature "srl-feat:srv6";
+    if-feature "srl-feat:srv6 or srl-feat:srv6-usid-basic";
     base ip-route-type;
     description
       "Segment routing using IPv6 dataplane, SRv6, programmed by srv6 manager.";
@@ -1777,6 +1823,7 @@ module srl_nokia-common {
 
   identity srv6-isis {
     base tunnel-type;
+    base routing-policy-tunnel-match-type;
     description
       "Segment routing using IPv6 dataplane, SRv6";
   }
@@ -1786,6 +1833,7 @@ module srl_nokia-common {
     base tunnel-type;
     base bgp-next-hop-resolution-tunnel-type;
     base mpls-label-entry-type;
+    base routing-policy-tunnel-match-type;
     description
       "Tunnel setup with sr-mpls-colored type TE-Policy. Labeled Traffic Engineering Policy with color";
   }
@@ -1795,6 +1843,7 @@ module srl_nokia-common {
     base tunnel-type;
     base bgp-next-hop-resolution-tunnel-type;
     base mpls-label-entry-type;
+    base routing-policy-tunnel-match-type;
     description
       "Tunnel setup with sr-mpls-uncolored type TE-Policy. Labeled Traffic Engineering Policy with primary and secondary segment-lists.";
   }
@@ -1815,6 +1864,7 @@ module srl_nokia-common {
 
   identity vxlan {
     base tunnel-type;
+    base routing-policy-tunnel-match-type;
     description
       "Tunnels based on VXLAN encapsulation";
   }
@@ -1937,7 +1987,7 @@ module srl_nokia-common {
   }
 
   identity fc-policers {
-    if-feature "srl-feat:platform-counter-bank-allocation-subintf-policers-and-stats";
+    if-feature "srl-feat:platform-counter-bank-allocation-subintf-fc-policers-and-stats";
     base applications-utilizing-banks;
     base applications-utilizing-banks-state;
     description
@@ -1945,7 +1995,7 @@ module srl_nokia-common {
   }
 
   identity parent-policers {
-    if-feature "srl-feat:platform-counter-bank-allocation-subintf-policers-and-stats";
+    if-feature "srl-feat:platform-counter-bank-allocation-subintf-parent-policers-and-stats";
     base applications-utilizing-banks;
     base applications-utilizing-banks-state;
     description
@@ -1953,7 +2003,7 @@ module srl_nokia-common {
   }
 
   identity fc-policer-stats {
-    if-feature "srl-feat:platform-counter-bank-allocation-subintf-policers-and-stats";
+    if-feature "srl-feat:platform-counter-bank-allocation-subintf-fc-policers-and-stats";
     base applications-utilizing-banks;
     base applications-utilizing-banks-state;
     description
@@ -1961,7 +2011,7 @@ module srl_nokia-common {
   }
 
   identity parent-policer-stats {
-    if-feature "srl-feat:platform-counter-bank-allocation-subintf-policers-and-stats";
+    if-feature "srl-feat:platform-counter-bank-allocation-subintf-parent-policers-and-stats";
     base applications-utilizing-banks;
     base applications-utilizing-banks-state;
     description
@@ -2012,10 +2062,33 @@ module srl_nokia-common {
       "IP-n-IP tunnel stats bank allocation which dictates IP-n-IP tunnel stats scale";
   }
 
+  identity ip-tunnel-encap-stats {
+    if-feature "srl-feat:platform-counter-bank-allocation-ip-tunnel-encap";
+    base applications-utilizing-banks;
+    base applications-utilizing-banks-state;
+  }
+
   identity unallocated {
     base applications-utilizing-banks-state;
     description
       "A bank that is not allocated to a given application. This bank can be assigned to an application that supports dynamic bank allocation";
+  }
+
+  identity address-family {
+    description
+      "Base type for address families.";
+  }
+
+  identity ipv4 {
+    base address-family;
+    description
+      "IPv4 address family (AFI = 1)";
+  }
+
+  identity ipv6 {
+    base address-family;
+    description
+      "IPv6 address family (AFI = 2)";
   }
 
   typedef queue-index {
@@ -2237,7 +2310,7 @@ module srl_nokia-common {
       }
       enum multicast {
         value 3;
-        if-feature "srl-feat:trident3 or srl-feat:fpcx or srl-feat:future-0-0";
+        if-feature "srl-feat:trident3 or srl-feat:fpcx";
         description
           "A packet is 'multicast' if the destination address is a multicast address
 
@@ -2450,6 +2523,14 @@ module srl_nokia-common {
     }
   }
 
+  typedef te-policy-template-type {
+    type enumeration {
+      enum pce-init {
+        if-feature "srl-feat:pcep-pcc-pce-init";
+      }
+    }
+  }
+
   typedef chassis-mode-options {
     description
       "Defines chassis mode type";
@@ -2469,6 +2550,19 @@ module srl_nokia-common {
         value 3;
         description
           "The chassis will be running in both j2cp and j3 mode";
+      }
+    }
+  }
+
+  grouping srl-unstructured-output {
+    list srl-unstructured-output {
+      description
+        "Unstructured output from a YANG modelled action.";
+      key "line";
+      leaf line {
+        description
+          "Line of unstructured output.";
+        type alphanumeric;
       }
     }
   }

@@ -15,6 +15,10 @@ module srl_nokia-tools-system-network-instance-protocols {
   description
     "Tools related to the System Network Instance protocols";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -27,7 +31,9 @@ module srl_nokia-tools-system-network-instance-protocols {
         "Enclosing container for system network-instance";
       container protocols {
         description
-          "Enclosing container for system network-instance protocols";
+          "Enter the protocols context
+
+           Enclosing container for system network-instance protocols";
       }
     }
   }

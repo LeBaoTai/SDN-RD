@@ -21,6 +21,10 @@ module srl_nokia-tools-vxlan-tunnel {
   description
     "Model for operational commands on vxlan tunnels.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -46,6 +50,8 @@ module srl_nokia-tools-vxlan-tunnel {
         leaf clear {
           type empty;
         }
+        description
+          "Enter the statistics context";
       }
     }
   }
@@ -59,8 +65,12 @@ module srl_nokia-tools-vxlan-tunnel {
         leaf clear {
           type empty;
         }
+        description
+          "Enter the statistics context";
       }
       uses tools-vxlan-tunnel-vtep-top;
+      description
+        "Enter the vxlan-tunnel context";
     }
   }
 

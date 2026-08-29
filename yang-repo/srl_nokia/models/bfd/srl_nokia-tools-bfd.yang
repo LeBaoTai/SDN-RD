@@ -18,6 +18,10 @@ module srl_nokia-tools-bfd {
   description
     "Model for operational commands on BFD sessions and statstics";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-10-31 {
     description
       "SRLinux 24.10.1";
@@ -41,7 +45,9 @@ module srl_nokia-tools-bfd {
     container bfd {
       if-feature "srl_nokia-feat:bfd";
       description
-        "Top-level grouping for bfd operational commands";
+        "Enter the bfd context
+
+         Top-level grouping for bfd operational commands";
       list peer {
         key "local-discriminator";
         description
@@ -75,6 +81,8 @@ module srl_nokia-tools-bfd {
               "Clear the BFD statistics associated with the BFD sessions";
           }
         }
+        description
+          "Enter the statistics context";
       }
       container micro-bfd-sessions {
         if-feature "srl_nokia-feat:lag";
@@ -147,7 +155,11 @@ module srl_nokia-tools-bfd {
               }
             }
           }
+          description
+            "Enter the statistics context";
         }
+        description
+          "Enter the micro-bfd-sessions context";
       }
     }
   }

@@ -27,6 +27,10 @@ module srl_nokia-interfaces-dco {
   description
     "Model for digital coherent optics aspects of an interface";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -204,6 +208,46 @@ module srl_nokia-interfaces-dco {
         value 1169;
         description
           "1xCAUI4, 100G, DQPSK, SCFEC, 27.95 Gbd, OTU4";
+      }
+      enum 1210 {
+        value 1210;
+        description
+          "800GAUI-8, 800G, PCS-16QAM, OFEC, 131.34 Gbd, Open-ROADM";
+      }
+      enum 1211 {
+        value 1211;
+        description
+          "800GAUI-8, 800G, DP-16QAM, OFEC, 118.20 Gbd, OIF-ZR";
+      }
+      enum 1220 {
+        value 1220;
+        description
+          "8x100GAUI-1, 800G, PCS-16QAM, OFEC, 131.34 Gbd, Open-ROADM";
+      }
+      enum 1221 {
+        value 1221;
+        description
+          "8x100GAUI-1, 800G, DP-16QAM, OFEC, 118.20 Gbd, OIF-ZR";
+      }
+      enum 1240 {
+        value 1240;
+        description
+          "2x400GAUI4, 800G, PCS-16QAM, OFEC, 131.34 Gbd, Open-ROADM";
+      }
+      enum 1241 {
+        value 1241;
+        description
+          "2x400GAUI4, 800G, DP-16QAM, OFEC, 118.20 Gbd, OIF-ZR";
+      }
+      enum 2001 {
+        value 2001;
+        description
+          "800GAUI-8, 800G, MPCS, OFEC, 131.34 Gbd, FlexO, Enh Const";
+      }
+      enum 2007 {
+        value 2007;
+        description
+          "2x400GAUI4, 800G, MPCS, OFEC, 131.34 Gbd, FlexO, Enh Const";
       }
     }
     description
@@ -578,6 +622,8 @@ module srl_nokia-interfaces-dco {
 
              This has different defaults based on the setting of the operational-mode.";
         }
+        description
+          "Enter the chromatic-dispersion-range context";
       }
       leaf target-power {
         type decimal64 {
@@ -675,7 +721,9 @@ module srl_nokia-interfaces-dco {
       container fine-tuning {
         config false;
         description
-          "State related to fine-tuning";
+          "Enter the fine-tuning context
+
+           State related to fine-tuning";
         leaf range {
           type uint32;
           units "megahertz";
@@ -1417,6 +1465,8 @@ module srl_nokia-interfaces-dco {
               description
                 "The current value of the laser bias current in mA";
             }
+            description
+              "Enter the laser-bias-current context";
           }
         }
       }
@@ -1559,6 +1609,8 @@ module srl_nokia-interfaces-dco {
 
                Read from the installed transceiver";
           }
+          description
+            "Enter the egress-pump-temperature context";
         }
         container ingress-pump-temperature {
           config false;
@@ -1638,6 +1690,8 @@ module srl_nokia-interfaces-dco {
 
                Read from the installed transceiver";
           }
+          description
+            "Enter the ingress-pump-temperature context";
         }
         container egress-amplifier-gain {
           config false;
@@ -1717,6 +1771,8 @@ module srl_nokia-interfaces-dco {
 
                Read from the installed transceiver";
           }
+          description
+            "Enter the egress-amplifier-gain context";
         }
         container egress-amplifier-output-power {
           config false;
@@ -1796,6 +1852,8 @@ module srl_nokia-interfaces-dco {
 
                Read from the installed transceiver";
           }
+          description
+            "Enter the egress-amplifier-output-power context";
         }
         container egress-amplifier-input-power {
           config false;
@@ -1875,6 +1933,8 @@ module srl_nokia-interfaces-dco {
 
                Read from the installed transceiver";
           }
+          description
+            "Enter the egress-amplifier-input-power context";
         }
         container ingress-amplifier-gain {
           config false;
@@ -1954,6 +2014,8 @@ module srl_nokia-interfaces-dco {
 
                Read from the installed transceiver";
           }
+          description
+            "Enter the ingress-amplifier-gain context";
         }
         container ingress-amplifier-output-power {
           config false;
@@ -2033,6 +2095,8 @@ module srl_nokia-interfaces-dco {
 
                Read from the installed transceiver";
           }
+          description
+            "Enter the ingress-amplifier-output-power context";
         }
         container ingress-amplifier-input-power {
           config false;
@@ -2112,7 +2176,11 @@ module srl_nokia-interfaces-dco {
 
                Read from the installed transceiver";
           }
+          description
+            "Enter the ingress-amplifier-input-power context";
         }
+        description
+          "Enter the digital-diagnostic-monitoring context";
       }
     }
   }
@@ -2120,6 +2188,68 @@ module srl_nokia-interfaces-dco {
   augment "/srl_nokia-if:interface/srl_nokia-if:transceiver" {
     if-feature "srl_nokia-feat:optical-line-system";
     uses optical-line-system-top;
+  }
+
+  grouping transceiver-loopback-capabilities {
+    container loopback-capabilities {
+      config false;
+      description
+        "Enter the loopback-capabilities context
+
+         Loopback capabilities reported by the installed transceiver
+
+         These capabilities are only reported if the transceiver functional type is DCO.
+         Transceiver loopbacks are applied through the terminal-device/logical-channel model";
+      leaf media-side-output {
+        type boolean;
+        config false;
+        description
+          "Transceiver supports the media side output loopback";
+      }
+      leaf media-side-input {
+        type boolean;
+        config false;
+        description
+          "Transceiver supports the media side input loopback";
+      }
+      leaf host-side-output {
+        type boolean;
+        config false;
+        description
+          "Transceiver supports the host side output loopback";
+      }
+      leaf host-side-input {
+        type boolean;
+        config false;
+        description
+          "Transceiver supports the host side input loopback";
+      }
+      leaf media-side-per-lane {
+        type boolean;
+        config false;
+        description
+          "Transceiver supports the media side per-lane loopbacks";
+      }
+      leaf host-side-per-lane {
+        type boolean;
+        config false;
+        description
+          "Transceiver supports the host side per-lane loopbacks
+
+           If this reports false then for a transceiver using breakout-mode for its host side, the application of a loopback to one of the ethernet logical channels shall apply that loopback to all the other ethernet logical channels of this transceiver.";
+      }
+      leaf simultaneous-host-and-media {
+        type boolean;
+        config false;
+        description
+          "Transceiver supports simultaneous host and media side loopbacks";
+      }
+    }
+  }
+
+  augment "/srl_nokia-if:interface/srl_nokia-if:transceiver" {
+    if-feature "srl_nokia-feat:dco-loopback";
+    uses transceiver-loopback-capabilities;
   }
 
   grouping transceiver-application-descriptors {

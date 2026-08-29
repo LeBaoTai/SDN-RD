@@ -27,6 +27,10 @@ module srl_nokia-lawful-intercept {
   description
     "This module defines configuration and operational state data for lawful intercept (LI).";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -82,7 +86,9 @@ module srl_nokia-lawful-intercept {
       "Grouping of reusable elements";
     container system {
       description
-        "Properties of the LI system";
+        "Enter the system context
+
+         Properties of the LI system";
       leaf name {
         type string {
           length "1..64";
@@ -148,7 +154,9 @@ module srl_nokia-lawful-intercept {
       "Grouping of reusable elements";
     container targets {
       description
-        "Properties of LI targets on the local system";
+        "Enter the targets context
+
+         Properties of LI targets on the local system";
       list subscriber {
         key "subscriber-name";
         max-elements 32768;
@@ -208,12 +216,16 @@ module srl_nokia-lawful-intercept {
       container statistics {
         config false;
         description
-          "LI statistics";
+          "Enter the statistics context
+
+           LI statistics";
         srl-ext:delivery-node-override "true";
         srl-ext:statistics-node "true";
         container subscribers {
           description
-            "Subscriber statistics";
+            "Enter the subscribers context
+
+             Subscriber statistics";
           leaf total-configured {
             type srl-comm:zero-based-counter64;
             description

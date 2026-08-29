@@ -18,6 +18,10 @@ module srl_nokia-tcp-udp {
   description
     "A model for TCP and UDP statistics of a network instance.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2019-11-30 {
     description
       "SRLinux 19.11.1";
@@ -27,7 +31,9 @@ module srl_nokia-tcp-udp {
     container tcp {
       config false;
       description
-        "State for TCP connections that have been established or could be established using the route tables of this network instance.";
+        "Enter the tcp context
+
+         State for TCP connections that have been established or could be established using the route tables of this network instance.";
       container statistics {
         leaf active-opens {
           type srl_nokia-comm:zero-based-counter64;
@@ -79,6 +85,8 @@ module srl_nokia-tcp-udp {
           description
             "The total number of segments that are received as bad TCP checksum errors.";
         }
+        description
+          "Enter the statistics context";
       }
       list connection {
         description
@@ -176,7 +184,9 @@ module srl_nokia-tcp-udp {
     container udp {
       config false;
       description
-        "State for UDP datagrams routed using the route tables of this network instance.";
+        "Enter the udp context
+
+         State for UDP datagrams routed using the route tables of this network instance.";
       container statistics {
         leaf in-packets {
           type srl_nokia-comm:zero-based-counter64;
@@ -218,6 +228,8 @@ module srl_nokia-tcp-udp {
           description
             "The total number of ignored multicast UDP datagrams.";
         }
+        description
+          "Enter the statistics context";
       }
       list listening-application {
         description

@@ -24,6 +24,10 @@ module srl_nokia-tools-gnsi-certz {
   description
     "This module defines operational commands related to Certz.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -40,7 +44,9 @@ module srl_nokia-tools-gnsi-certz {
   grouping certz-top {
     container certz {
       description
-        "Information relating to the active certificates and bundles as provided via Certz
+        "Enter the certz context
+
+         Information relating to the active certificates and bundles as provided via Certz
 
          State is provided by the gNSI Certz service, and can be changed using the gNSI.Certz.Rotate RPC";
       container rotate {

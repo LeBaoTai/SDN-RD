@@ -45,6 +45,10 @@ module srl_nokia-system-network-instance-bgp-evpn-ethernet-segments {
   description
     "This yang file models configuration and state of the bgp-evpn ethernet segments.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -129,13 +133,40 @@ module srl_nokia-system-network-instance-bgp-evpn-ethernet-segments {
        an IP-VRF network-instance.";
   }
 
+  grouping anycast-eth-segments {
+    description
+      "Grouping containing the configuration of anycast ethernet segments";
+    container anycast-multi-homing {
+      if-feature "srl_nokia-feat:evpn-mh-anycast";
+      presence "Enables the configuration of anycast ethernet segments";
+      must "../multi-homing-mode = 'all-active'" {
+        error-message "Anycast-multi-homing is only supported when multi-homing-mode is all-active";
+      }
+      must "../type = 'none'" {
+        srl_nokia-ext:if-feature "not srl_nokia-feat:evpn-anycast-l3-subnet";
+        error-message "Anycast-multi-homing is only supported when ethernet segment type is none";
+      }
+      description
+        "Configuration of anycast ethernet segments";
+      leaf ip-address {
+        type union {
+          type srl_nokia-comm:ipv4-address-excluding-all-zero;
+        }
+        description
+          "The anycast IP address of the anycast ethernet segment";
+      }
+    }
+  }
+
   grouping route-internal-tags {
     description
       "Grouping containing the configuration of internal tags";
     container internal-tags {
       if-feature "srl_nokia-feat:internal-tags";
       description
-        "Configuration and state of internal tags";
+        "Enter the internal-tags context
+
+         Configuration and state of internal tags";
       leaf-list set-tag-set {
         max-elements 1;
         type leafref {
@@ -195,6 +226,8 @@ module srl_nokia-system-network-instance-bgp-evpn-ethernet-segments {
             error-message "The originating ip-address must be the system ipv4 address";
           }
         }
+        description
+          "Enter the ethernet-segment context";
       }
       leaf next-hop {
         type srl_nokia-comm:next-hop-type;
@@ -206,6 +239,8 @@ module srl_nokia-system-network-instance-bgp-evpn-ethernet-segments {
           error-message "The next-hop must be the system ipv4 address";
         }
       }
+      description
+        "Enter the routes context";
     }
   }
 
@@ -246,6 +281,8 @@ module srl_nokia-system-network-instance-bgp-evpn-ethernet-segments {
           "Indicates the time at which the boot timer started.";
         srl_nokia-ext:show-importance "high";
       }
+      description
+        "Enter the timers context";
     }
   }
 
@@ -261,6 +298,8 @@ module srl_nokia-system-network-instance-bgp-evpn-ethernet-segments {
           description
             "Remaining activation timer per Ethernet segment";
         }
+        description
+          "Enter the timers context";
       }
       container interface-standby-signaling-on-non-df {
         presence "Enables standby signaling on a non-Designated Forwarder node";
@@ -328,6 +367,10 @@ module srl_nokia-system-network-instance-bgp-evpn-ethernet-segments {
                 enum exclude;
               }
               default "include";
+              must "not(. = 'include' and ../../../../../anycast-multi-homing)" {
+                srl_nokia-ext:if-feature "srl_nokia-feat:evpn-mh-anycast";
+                error-message "AC-DF include is not supported when anycast-multi-homing is configured";
+              }
               description
                 "Attachment Circuit influenced DF Election.";
               srl_nokia-ext:show-importance "high";
@@ -343,6 +386,8 @@ module srl_nokia-system-network-instance-bgp-evpn-ethernet-segments {
               reference
                 "draft-ietf-bess-evpn-pref-df";
             }
+            description
+              "Enter the capabilities context";
           }
         }
         container manual-alg {
@@ -372,7 +417,11 @@ module srl_nokia-system-network-instance-bgp-evpn-ethernet-segments {
             }
           }
         }
+        description
+          "Enter the algorithm context";
       }
+      description
+        "Enter the df-election context";
     }
   }
 
@@ -402,6 +451,8 @@ module srl_nokia-system-network-instance-bgp-evpn-ethernet-segments {
             "RFC8584";
         }
       }
+      description
+        "Enter the computed-designated-forwarder-candidates context";
     }
   }
 
@@ -624,16 +675,34 @@ module srl_nokia-system-network-instance-bgp-evpn-ethernet-segments {
             reference
               "RFC7432";
           }
+          leaf layer-3-neighbor-synchronization {
+            if-feature "srl_nokia-feat:evpn-neighbor-synchronization";
+            type boolean;
+            default "false";
+            must "not(. = true() and ../type != 'none')" {
+              error-message "layer-3-neighbor-synchronization true is only supported when the ethernet segment type is none";
+            }
+            description
+              "Enables the layer-3 ARP and ND synchronization across PEs
+
+               When set to true, the Ethernet Segment is used to synchronize ARP and/or Neighbor Discovery entries on non-IRB subinterfaces
+               across all the PEs attached to the same CE that uses a single LAG.";
+          }
           uses ifl-host-ip-aliasing;
           uses designated-forwarder-election-top;
+          uses anycast-eth-segments;
           uses es-and-ad-es-routes;
           container autodiscovery-per-ethernet-segment-routes {
             config false;
             uses srl_nokia-rib-bgp-routes:evpn-ethernet-ad-common;
+            description
+              "Enter the autodiscovery-per-ethernet-segment-routes context";
           }
           container ethernet-segment-routes {
             config false;
             uses srl_nokia-rib-bgp-routes:evpn-es-common;
+            description
+              "Enter the ethernet-segment-routes context";
           }
           leaf oper-down-reason {
             config false;
@@ -653,6 +722,8 @@ module srl_nokia-system-network-instance-bgp-evpn-ethernet-segments {
           container association {
             config false;
             uses association-info;
+            description
+              "Enter the association context";
           }
         }
       }

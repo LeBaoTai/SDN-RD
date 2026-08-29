@@ -21,6 +21,10 @@ module srl_nokia-tools-segment-routing {
   description
     "Model for Segment routing operational commands";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -36,6 +40,8 @@ module srl_nokia-tools-segment-routing {
           description
             "Reset SID statistics to zero.";
         }
+        description
+          "Enter the statistics context";
       }
     }
   }

@@ -30,6 +30,10 @@ module srl_nokia-mcast-cac {
   description
     "This yang file contains common Multicast Connection Access Control (MCAC) types and identities";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -80,6 +84,8 @@ module srl_nokia-mcast-cac {
             "Reserved bandwidth for all best effort channels.  The best effort bandwidth is automatically calulated from the difference between total allocated bandwidth minus reversed guaranteed bandwidth";
           type srl_nokia-mcac-types:bandwidth-limit;
         }
+        description
+          "Enter the bandwidth-limit context";
       }
       leaf guaranteed-bw-use {
         config false;
@@ -109,6 +115,8 @@ module srl_nokia-mcast-cac {
           "Bandwidth remaining for best effort channels";
         type srl_nokia-mcac-types:bandwidth;
       }
+      description
+        "Enter the mcac context";
     }
   }
 

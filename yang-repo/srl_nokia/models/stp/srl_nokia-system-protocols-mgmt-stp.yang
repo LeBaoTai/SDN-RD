@@ -27,6 +27,9 @@ module srl_nokia-system-protocols-mgmt-stp {
   import srl_nokia-interfaces-bridge-table-stp {
     prefix srl_nokia-if-stp;
   }
+  import srl_nokia-interfaces-l2cp {
+    prefix srl_nokia-if-l2cp;
+  }
 
   organization
     "Nokia";
@@ -36,6 +39,10 @@ module srl_nokia-system-protocols-mgmt-stp {
   description
     "This yang file provides Mgmt-Stp configuration under system protocols";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -157,10 +164,18 @@ module srl_nokia-system-protocols-mgmt-stp {
       container interface-ref {
         if-feature "srl_nokia-feat:interface-references";
         description
-          "Reference to an interface";
+          "Enter the interface-ref context
+
+           Reference to an interface";
         leaf interface {
           type leafref {
             path "/srl_nokia-if:interface/srl_nokia-if:name";
+          }
+          must 'not(/srl_nokia-if:interface[srl_nokia-if:name=current()]/srl_nokia-if:ethernet/srl_nokia-if:l2cp-transparency/srl_nokia-if-l2cp:tunnel-all-l2cp)' {
+            error-message "STP and tunnel-all-l2cp cannot be enabled on the same interface";
+          }
+          must 'not(/srl_nokia-if:interface[srl_nokia-if:name=current()]/srl_nokia-if:ethernet/srl_nokia-if:l2cp-transparency/srl_nokia-if-l2cp:xstp/srl_nokia-if-l2cp:tunnel)' {
+            error-message "STP and xSTP tunnel cannot be enabled on the same interface";
           }
           must 'not (/srl_nokia-if:interface[srl_nokia-if:name=current()]/srl_nokia-if:ethernet/srl_nokia-if:aggregate-id)' {
             error-message "Lag interfaces are not supported as mgmt-stp interfaces";

@@ -28,6 +28,10 @@ module srl_nokia-acl-policers {
     "Nokia SR Linux Support
      Web: <http://www.nokia.com>";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -152,7 +156,9 @@ module srl_nokia-acl-policers {
         }
         container exceed-action {
           description
-            "Container with options that specify the handling of packets that the policer has determined are exceeding (yellow)";
+            "Enter the exceed-action context
+
+             Container with options that specify the handling of packets that the policer has determined are exceeding (yellow)";
           leaf drop-probability {
             description
               "Recolor exceeding packets to the specified drop-probability level";
@@ -162,7 +168,9 @@ module srl_nokia-acl-policers {
         }
         container violate-action {
           description
-            "Container with options that specify the handling of packets that the policer has determined are violating (red)";
+            "Enter the violate-action context
+
+             Container with options that specify the handling of packets that the policer has determined are violating (red)";
           choice violate-handling {
             default "re-color";
             case drop {
@@ -295,6 +303,12 @@ module srl_nokia-acl-policers {
         description
           "Time of the last clear command performed by the user at this level";
       }
+      description
+        "Enter the statistics context";
+    }
+    action clear {
+      description
+        "Reset all statistics associated with this particular policer to zero";
     }
   }
 
@@ -320,6 +334,10 @@ module srl_nokia-acl-policers {
           path "/srl_nokia-qos:qos/srl_nokia-acl-policers:policer-templates/srl_nokia-acl-policers:policer-template/name";
         }
       }
+      action clear {
+        description
+          "Reset all statistics of all policers to zero";
+      }
       list policer {
         if-feature "not srl_nokia-feat:fpcx";
         config false;
@@ -342,6 +360,8 @@ module srl_nokia-acl-policers {
     container policer-templates {
       if-feature "srl_nokia-feat:subif-policer";
       uses acl-managed-policer-templates;
+      description
+        "Enter the policer-templates context";
     }
   }
 

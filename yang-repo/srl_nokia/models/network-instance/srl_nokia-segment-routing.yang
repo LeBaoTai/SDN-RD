@@ -27,6 +27,10 @@ module srl_nokia-segment-routing {
   description
     "This YANG file covers segment routing configuration and state at the network-instance level.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -60,7 +64,9 @@ module srl_nokia-segment-routing {
     container sid-database {
       config false;
       description
-        "Database of all known prefix SIDs, local and remote.";
+        "Enter the sid-database context
+
+         Database of all known prefix SIDs, local and remote.";
       list prefix-sid {
         description
           "List of prefix SIDs";
@@ -81,6 +87,7 @@ module srl_nokia-segment-routing {
           type enumeration {
             enum isis;
             enum direct;
+            enum bgp;
           }
         }
         leaf protocol-instance {
@@ -124,7 +131,9 @@ module srl_nokia-segment-routing {
   grouping segment-routing-top {
     container segment-routing {
       description
-        "Container with segment routing configuration options";
+        "Enter the segment-routing context
+
+         Container with segment routing configuration options";
       container mpls {
         presence "Enable segment routing based on the MPLS dataplane";
         description
@@ -138,7 +147,9 @@ module srl_nokia-segment-routing {
         container global-block {
           if-feature "srl-feat:label-management";
           description
-            "Container with SRGB configuration that is applicable to all IGP protocol instances";
+            "Enter the global-block context
+
+             Container with SRGB configuration that is applicable to all IGP protocol instances";
           leaf label-range {
             mandatory true;
             type leafref {
@@ -172,7 +183,9 @@ module srl_nokia-segment-routing {
           if-feature "srl-feat:segment-routing-shared-sid-lsp-stats";
           config false;
           description
-            "Shared SID statistics";
+            "Enter the sid-statistics context
+
+             Shared SID statistics";
           list label {
             key "label";
             description

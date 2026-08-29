@@ -42,6 +42,15 @@ module srl_nokia-bgp-evpn {
   import srl_nokia-group-based-policy {
     prefix srl_nokia-gbp;
   }
+  import srl_nokia-pim {
+    prefix srl_nokia-pim;
+  }
+  import srl_nokia-igmp {
+    prefix srl_nokia-igmp;
+  }
+  import srl_nokia-mld {
+    prefix srl_nokia-mld;
+  }
 
   organization
     "Nokia";
@@ -51,6 +60,14 @@ module srl_nokia-bgp-evpn {
   description
     "This yang file models configuration and state of the bgp-evpn protocol";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
+  revision 2026-04-30 {
+    description
+      "SRLinux 26.3.2";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -145,13 +162,17 @@ module srl_nokia-bgp-evpn {
           srl_nokia-ext:show-importance "high";
         }
       }
+      description
+        "Enter the computed-designated-router-candidates context";
     }
   }
 
   grouping multicast-evpn-gateway-dr-election {
     container dr-election {
       description
-        "DR election configuration and state";
+        "Enter the dr-election context
+
+         DR election configuration";
       container timers {
         leaf dr-activation-timer {
           type uint32 {
@@ -167,40 +188,8 @@ module srl_nokia-bgp-evpn {
              Inclusive Multicast Ethernet Tag routes from other MEG/PEG gateways to avoid running
              the DR election multiple times.";
         }
-      }
-      container algorithm {
-        leaf oper-type {
-          type srl_nokia-system-bgp-evpn-ethernet-segments:df-algorithm-type;
-          srl_nokia-ext:show-importance "high";
-          config false;
-          description
-            "Operational designated router election algorithm type for this PEG/MEG gateway";
-        }
-      }
-      container dr-info {
-        srl_nokia-ext:show-importance "high";
-        config false;
         description
-          "DR information for this PEG/MEG gateway";
-        leaf designated-router-role-last-change {
-          type srl_nokia-comm:date-and-time-delta;
-          description
-            "Indicates the time at which the designated-router role was changed";
-        }
-        leaf designated-router-activation-start-time {
-          type srl_nokia-comm:date-and-time-delta;
-          description
-            "Indicates the time at which the designated-router activation timer started";
-          srl_nokia-ext:show-importance "high";
-        }
-        leaf designated-router-activation-time {
-          type uint32;
-          units "seconds";
-          description
-            "Indicates the number of seconds for the activation timer to run, for this node to become the designated router";
-          srl_nokia-ext:show-importance "high";
-        }
-        uses multicast-evpn-gateway-dr-candidates-info;
+          "Enter the timers context";
       }
     }
   }
@@ -229,6 +218,7 @@ module srl_nokia-bgp-evpn {
         type evpn-multicast-gateway-type;
         description
           "Type of EVPN multicast gateway";
+        mandatory true;
       }
       leaf non-dr-attract-traffic {
         type boolean;
@@ -241,6 +231,31 @@ module srl_nokia-bgp-evpn {
            This can be used to speed up the convergence of the network in case of a DR change.";
       }
       uses multicast-evpn-gateway-dr-election;
+    }
+  }
+
+  grouping bgp-evpn-oism {
+    description
+      "Grouping containing the configuration and state for the use of EVPN OISM in 7250 IXR platforms";
+    container optimized-inter-subnet-multicast-forwarding {
+      if-feature "srl_nokia-feat:ixr-dnx and srl_nokia-feat:evpn-vxlan-oism";
+      presence "Configure EVPN OISM functionality";
+      must '(/srl_nokia-netinst:network-instance[srl_nokia-netinst:name = current()/../../../srl_nokia-netinst:name]/srl_nokia-netinst:type = "srl_nokia-netinst:ip-vrf")' {
+        error-message "The optimized-inter-subnet-multicast-forwarding command can only be enabled on network-instances of type ip-vrf";
+      }
+      must '(/srl_nokia-netinst:network-instance[srl_nokia-netinst:name = current()/../../../srl_nokia-netinst:name]/srl_nokia-netinst:protocols/srl_nokia-pim:pim/srl_nokia-pim:admin-state = "enable")' {
+        error-message "The optimized-inter-subnet-multicast-forwarding command can only be enabled when PIM is enabled on the ip-vrf network-instance";
+      }
+      must '(/srl_nokia-netinst:network-instance[srl_nokia-netinst:name = current()/../../../srl_nokia-netinst:name]/srl_nokia-netinst:protocols/srl_nokia-igmp:igmp/srl_nokia-igmp:admin-state = "enable" or /srl_nokia-netinst:network-instance[srl_nokia-netinst:name = current()/../../../srl_nokia-netinst:name]/srl_nokia-netinst:protocols/srl_nokia-mld:mld/srl_nokia-mld:admin-state = "enable")' {
+        error-message "The optimized-inter-subnet-multicast-forwarding command can only be enabled when IGMP or MLD is enabled on the ip-vrf network-instance";
+      }
+      description
+        "Configuration for EVPN OISM functionality in 7250 IXR platforms
+
+         This command enables the use of the optimized inter-subnet multicast forwarding functionality
+         in 7250 IXR platforms. An multicast-enabled SBD IRB interface cannot be attached to the IP-VRF network-instance
+         unless this command is enabled. This command can only be enabled when PIM and IGMP or MLD are enabled on the IP-VRF
+         network-instance.";
     }
   }
 
@@ -315,7 +330,11 @@ module srl_nokia-bgp-evpn {
             srl_nokia-ext:if-feature "srl_nokia-feat:ixr-dnx";
           }
         }
+        description
+          "Enter the resolve context";
       }
+      description
+        "Enter the evpn-interface-less-gateway-ip context";
     }
   }
 
@@ -394,6 +413,34 @@ module srl_nokia-bgp-evpn {
             srl_nokia-ext:if-feature "srl_nokia-feat:ixr-dnx";
           }
         }
+        description
+          "Enter the weighted-ecmp context";
+      }
+      description
+        "Enter the evpn-link-bandwidth context";
+    }
+  }
+
+  grouping evpn-anycast-l3-subnet {
+    description
+      "Grouping containing the configuration and state for EVPN Anycast for multi-homing L3 subnets";
+    container anycast-multi-homing {
+      if-feature "srl_nokia-feat:evpn-anycast-l3-subnet";
+      presence "Enabled EVPN Anycast for multi-homing L3 subnets";
+      must '(/srl_nokia-netinst:network-instance[srl_nokia-netinst:name = current()/../../../../../../../srl_nokia-netinst:name]/srl_nokia-netinst:type = "srl_nokia-netinst:ip-vrf")' {
+        error-message "The anycast multi-homing L3 subnet configuration is possible only on network-instances of type ip-vrf";
+      }
+      must "../../../../encapsulation-type = 'vxlan'" {
+        error-message "The anycast multi-homing L3 subnet configuration is possible only when encapsulation-type is vxlan";
+      }
+      description
+        "Configuration for EVPN Anycast for multi-homing L3 subnets";
+      leaf ip-address {
+        type union {
+          type srl_nokia-comm:ipv4-address-unicast;
+        }
+        description
+          "The IP address of the Anycast VTEP for multi-homing L3 subnets";
       }
     }
   }
@@ -448,6 +495,10 @@ module srl_nokia-bgp-evpn {
             srl_nokia-ext:if-feature "not srl_nokia-feat:evpn-mh-non-system-ipv4-address";
             error-message "The next-hop ip-address must not be the system ipv6 address";
           }
+          must "(../../../encapsulation-type != 'vxlan') or (not(contains(., ':')) and not(. = 'use-system-ipv6-address'))" {
+            srl_nokia-ext:if-feature "not srl_nokia-feat:vxlan-v6";
+            error-message "IPv6 next-hop address is not supported when encapsulation-type is vxlan";
+          }
           default "use-system-ipv4-address";
           description
             "The ip-address that will be used as the bgp next-hop for all routes advertised in this evpn instance.";
@@ -488,6 +539,8 @@ module srl_nokia-bgp-evpn {
                network-instance. This advertisement is needed so that the EVPN IFL (Interface-Less) model in the
                ip-vrf can interoperate with a remote system working in EVPN IFF (Interface-ful) Unnumbered mode.";
           }
+          description
+            "Enter the mac-ip context";
         }
         container ip-prefix {
           leaf advertise-interface-ful {
@@ -505,8 +558,13 @@ module srl_nokia-bgp-evpn {
           }
           uses evpn-unequal-ecmp;
           uses evpn-ifl-gw-ip;
+          uses evpn-anycast-l3-subnet;
+          description
+            "Enter the ip-prefix context";
         }
       }
+      description
+        "Enter the routes context";
     }
   }
 
@@ -515,7 +573,9 @@ module srl_nokia-bgp-evpn {
       "Options for controlling next-hop resolution procedures for VPN families";
     container next-hop-resolution {
       description
-        "Options related to the resolution of IPv4 or IPv6 BGP next-hops to Tunnels";
+        "Enter the next-hop-resolution context
+
+         Options related to the resolution of IPv4 or IPv6 BGP next-hops to Tunnels";
       leaf-list allowed-tunnel-types {
         min-elements 1;
         type identityref {
@@ -599,7 +659,9 @@ module srl_nokia-bgp-evpn {
       }
       container local {
         description
-          "The local parameters of the VPWS";
+          "Enter the local context
+
+           The local parameters of the VPWS";
         list local-attachment-circuit {
           key "name";
           min-elements 1;
@@ -671,7 +733,9 @@ module srl_nokia-bgp-evpn {
       }
       container remote {
         description
-          "The remote parameters of the VPWS";
+          "Enter the remote context
+
+           The remote parameters of the VPWS";
         list remote-attachment-circuit {
           key "name";
           min-elements 1;
@@ -719,7 +783,9 @@ module srl_nokia-bgp-evpn {
     container internal-tags {
       if-feature "srl_nokia-feat:internal-tags and srl_nokia-feat:evpn-route-internal-tags";
       description
-        "Configuration and state of internal tags";
+        "Enter the internal-tags context
+
+         Configuration and state of internal tags";
       leaf-list set-tag-set {
         max-elements 1;
         type leafref {
@@ -792,6 +858,9 @@ module srl_nokia-bgp-evpn {
         must "(not(.='mpls') and not(../mpls)) or ((.='mpls') and (../mpls))" {
           error-message "encapsulation-type mpls and mpls next-hop-resolution with at least one allowed-tunnel-type must be configured together";
         }
+        must 'not(/srl_nokia-netinst:network-instance[srl_nokia-netinst:name = current()/../../../../srl_nokia-netinst:name]/srl_nokia-netinst:type = "srl_nokia-netinst:mac-vrf") or not(. = "srv6")' {
+          error-message "encapsulation-type srv6 not supported on network-instances of type mac-vrf";
+        }
         type enumeration {
           enum vxlan {
             value 1;
@@ -849,6 +918,10 @@ module srl_nokia-bgp-evpn {
            instances)";
         must '(. <= 8) or (/srl_nokia-netinst:network-instance[srl_nokia-netinst:name = current()/../../../../srl_nokia-netinst:name]/srl_nokia-netinst:type = "srl_nokia-netinst:ip-vrf")' {
           error-message "The valid range for ecmp paths with the configured network-instance type is 1..8";
+        }
+        must '(. <= 1) or (/srl_nokia-netinst:network-instance[srl_nokia-netinst:name = current()/../../../../srl_nokia-netinst:name]/srl_nokia-netinst:type = "srl_nokia-netinst:ip-vrf")' {
+          srl_nokia-ext:if-feature "not srl_nokia-feat:evpn-layer-2-ecmp";
+          error-message "The valid range for ecmp paths with the configured network-instance type is 1..1";
         }
       }
       leaf dpath-domain-id {
@@ -962,6 +1035,7 @@ module srl_nokia-bgp-evpn {
   }
 
   augment "/srl_nokia-netinst:network-instance/srl_nokia-netinst:protocols/srl_nokia-netinst:bgp-evpn" {
+    uses bgp-evpn-oism;
     uses bgp-evpn-top;
   }
 }

@@ -21,6 +21,10 @@ module srl_nokia-platform-tpm {
   description
     "This module defines operational state data related to TPMs";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-07-31 {
     description
       "SRLinux 24.7.1";
@@ -125,6 +129,8 @@ module srl_nokia-platform-tpm {
           }
         }
       }
+      description
+        "Enter the tpm context";
     }
   }
 }

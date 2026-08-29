@@ -27,6 +27,10 @@ module srl_nokia-connection-point-pseudowires {
   description
     "This yang file models configuration and state of the connection endpoints";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -198,6 +202,8 @@ module srl_nokia-connection-point-pseudowires {
         description
           "Timestamp of the last time the MAC counters were cleared.";
       }
+      description
+        "Enter the statistics context";
     }
   }
 
@@ -403,7 +409,9 @@ module srl_nokia-connection-point-pseudowires {
       uses pseudowire-common-fields;
       container signaling {
         description
-          "Signaling configuration for the pseudowire";
+          "Enter the signaling context
+
+           Signaling configuration for the pseudowire";
         leaf virtual-circuit-identifier {
           mandatory true;
           type vc-id;
@@ -415,7 +423,9 @@ module srl_nokia-connection-point-pseudowires {
           case static {
             container static {
               description
-                "Static pseudowire parameters
+                "Enter the static context
+
+                 Static pseudowire parameters
 
                  The virtual circuit labels are configured on both ends of the
                  pseudowire.";
@@ -441,7 +451,9 @@ module srl_nokia-connection-point-pseudowires {
           case tldp {
             container tldp {
               description
-                "Targeted Label Distribution Protocol pseudowire signaling parameters
+                "Enter the tldp context
+
+                 Targeted Label Distribution Protocol pseudowire signaling parameters
 
                  When the network instance is of type vpws, the use of TLDP is
                  specified in RFC4447. When the network instance is of type mac-vrf,
@@ -487,7 +499,9 @@ module srl_nokia-connection-point-pseudowires {
       container local {
         config false;
         description
-          "The local parameters of the pseudowire";
+          "Enter the local context
+
+           The local parameters of the pseudowire";
         leaf-list pseudowire-status {
           type pseudowire-status-bits;
           description
@@ -509,7 +523,9 @@ module srl_nokia-connection-point-pseudowires {
       container remote {
         config false;
         description
-          "The remote parameters of the pseudowire";
+          "Enter the remote context
+
+           The remote parameters of the pseudowire";
         leaf-list pseudowire-status {
           type pseudowire-status-bits;
           description

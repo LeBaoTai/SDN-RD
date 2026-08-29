@@ -18,6 +18,10 @@ module srl_nokia-tools-interfaces-bridge-table-mac-learning {
   description
     "Model for interface bridge-table mac learning operational commands";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2020-06-30 {
     description
       "SRLinux 20.6.1";
@@ -45,6 +49,8 @@ module srl_nokia-tools-interfaces-bridge-table-mac-learning {
               "delete the learnt mac address.";
           }
         }
+        description
+          "Enter the learnt-entries context";
       }
     }
   }

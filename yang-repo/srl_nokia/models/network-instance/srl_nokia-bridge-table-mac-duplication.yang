@@ -15,6 +15,10 @@ module srl_nokia-bridge-table-mac-duplication {
   description
     "This yang file gives a description of bridge-table mac-duplication configuration.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2021-03-31 {
     description
       "SRLinux 21.3.1";
@@ -27,7 +31,9 @@ module srl_nokia-bridge-table-mac-duplication {
   grouping bridge-table-mac-duplication-top {
     container mac-duplication {
       description
-        "Configuration of the MAC duplication procedures.";
+        "Enter the mac-duplication context
+
+         Configuration of the MAC duplication procedures.";
       leaf admin-state {
         type srl_nokia-comm:admin-state;
         default "enable";

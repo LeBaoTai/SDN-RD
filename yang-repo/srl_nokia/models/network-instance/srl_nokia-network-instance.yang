@@ -45,6 +45,10 @@ module srl_nokia-network-instance {
   description
     "This yang file gives a description of a network-instance. This may be a Layer 3 forwarding construct such as a virtual routing and forwarding (VRF) instance, or a Layer 2 instance such as a virtual switch instance (VSI). Mixed Layer 2 and Layer 3 instances are also supported.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -284,6 +288,8 @@ module srl_nokia-network-instance {
 
              In the default network-instance the default is 'true'.";
         }
+        description
+          "Enter the mpls-forwarding context";
       }
       container ip-forwarding {
         if-feature "not srl-feat:vsrl";
@@ -337,12 +343,16 @@ module srl_nokia-network-instance {
 
                When fallback routing is active traffic is routed according to the longest prefix match route in the default network-instance if there is no matching route in this IP-VRF network-instance";
           }
+          description
+            "Enter the secondary-default-lookup context";
         }
       }
       container ip-load-balancing {
         if-feature "not (srl-feat:platform-7215-a1 or srl-feat:vsrl)";
         description
-          "Container for IP load-balancing options that are specific to the network-instance";
+          "Enter the ip-load-balancing context
+
+           Container for IP load-balancing options that are specific to the network-instance";
         container dynamic-load-balancing {
           if-feature "srl-feat:dynamic-load-balancing";
           list prefix {
@@ -355,9 +365,11 @@ module srl_nokia-network-instance {
                 "IPv4 or IPv6 prefix. Active routes in the FIB that are covered by this prefix are programmed with DLB if conditions permit";
             }
           }
+          description
+            "Enter the dynamic-load-balancing context";
         }
         list resilient-hash-prefix {
-          if-feature "not srl-feat:tomahawk3 and not srl-feat:tomahawk4 and not srl-feat:tomahawk5";
+          if-feature "not srl-feat:tomahawk3 and not srl-feat:tomahawk4 and not srl-feat:tomahawk5 and not srl-feat:tomahawk6";
           description
             "List of IPv4 and IPv6 prefixes which should be programmed for resilient ECMP hashing.";
           must "(../../type = 'srl_nokia-netinst:ip-vrf' or ../../type = 'srl_nokia-netinst:default')" {
@@ -442,10 +454,13 @@ module srl_nokia-network-instance {
       }
 
       container ip-tunnel-statistics {
-        if-feature "srl-feat:gribi-host-prefix-ip-tunnel-statistics";
+        if-feature "srl-feat:gribi-host-prefix-ip-tunnel-statistics or srl-feat:ip-tunnel-encap-stats";
         description
-          "Configuration options for controlling the collection of statistics for certain types of IP tunnels";
+          "Enter the ip-tunnel-statistics context
+
+           Configuration options for controlling the collection of statistics for certain types of IP tunnels";
         leaf ip-in-ip-forwarded {
+          if-feature "srl-feat:gribi-host-prefix-ip-tunnel-statistics";
           description
             "True enables the collection of per-prefix statistics for forwarded IP-in-IP tunnel packets
 
@@ -453,6 +468,42 @@ module srl_nokia-network-instance {
           type boolean;
           must "(../../type = 'srl_nokia-netinst:ip-vrf')" {
             error-message "ip-in-ip forwarded statistics are supported only by ip-vrf network-instances";
+          }
+        }
+        leaf udp-v4-encapsulation {
+          if-feature "srl-feat:ip-tunnel-encap-stats";
+          description
+            "True enables stats colletion for all GUEv4 tunnels (with udp-v4 as the only encap-header)";
+          type boolean;
+          must "../../type = 'srl_nokia-netinst:default'" {
+            error-message "udp-v4-encapsulation statistics are supported only by default network-instances";
+          }
+        }
+        leaf udp-v6-encapsulation {
+          if-feature "srl-feat:ip-tunnel-encap-stats";
+          description
+            "True enables stats colletion for all GUEv6 tunnels (with udp-v6 as the only encap-header)";
+          type boolean;
+          must "../../type = 'srl_nokia-netinst:default'" {
+            error-message "udp-v6-encapsulation statistics are supported only by default network-instances";
+          }
+        }
+        leaf mpls-in-udp-v6-encapsulation {
+          if-feature "srl-feat:ip-tunnel-encap-stats";
+          description
+            "True enables stats colletion for all MPLSoUDPv6 tunnels (with mpls and udp-v6 as the encap-headers)";
+          type boolean;
+          must "../../type = 'srl_nokia-netinst:default'" {
+            error-message "mpls-in-udp-v6-encapsulation statistics are supported only by default network-instances";
+          }
+        }
+        leaf mpls-in-gre-encapsulation {
+          if-feature "srl-feat:ip-tunnel-encap-stats";
+          description
+            "True enables stats colletion for all MPLSoGRE tunnels (with mpls and gre as the encap-headers)";
+          type boolean;
+          must "../../type = 'srl_nokia-netinst:default'" {
+            error-message "mpls-in-gre-encapsulation statistics are supported only by default network-instances";
           }
         }
       }
@@ -486,7 +537,9 @@ module srl_nokia-network-instance {
         container interface-ref {
           if-feature "srl-feat:interface-references";
           description
-            "Reference to a subinterface";
+            "Enter the interface-ref context
+
+             Reference to a subinterface";
           leaf interface {
             type leafref {
               path "/srl_nokia-if:interface/srl_nokia-if:name";
@@ -574,7 +627,9 @@ module srl_nokia-network-instance {
       container system-ipv4-address {
         config false;
         description
-          "Container for displaying information about the system IPv4 address of the default network-instance";
+          "Enter the system-ipv4-address context
+
+           Container for displaying information about the system IPv4 address of the default network-instance";
         leaf oper-state {
           description
             "The operational state of the system IPv4 address binding";
@@ -592,7 +647,9 @@ module srl_nokia-network-instance {
       container system-ipv6-address {
         config false;
         description
-          "Container for displaying information about the system IPv6 address of the default network-instance";
+          "Enter the system-ipv6-address context
+
+           Container for displaying information about the system IPv6 address of the default network-instance";
         leaf oper-state {
           description
             "The operational state of the system IPv6 address binding";
@@ -651,7 +708,9 @@ module srl_nokia-network-instance {
       uses srl_nokia-icmp:icmp6-top;
       container protocols {
         description
-          "The routing protocols that are enabled for this
+          "Enter the protocols context
+
+           The routing protocols that are enabled for this
            network-instance.";
         container bgp-evpn {
           if-feature "srl-feat:evpn";
@@ -674,7 +733,9 @@ module srl_nokia-network-instance {
         container directly-connected {
           if-feature "srl-feat:traffic-engineering-bgpls-directly-connected";
           description
-            "Container for handling directly connected routes as a pseudo-protocol";
+            "Enter the directly-connected context
+
+             Container for handling directly connected routes as a pseudo-protocol";
         }
       }
       container bridge-table {
@@ -691,12 +752,18 @@ module srl_nokia-network-instance {
       }
       container route-table {
         config false;
+        description
+          "Enter the route-table context";
       }
       container tunnel-table {
         config false;
+        description
+          "Enter the tunnel-table context";
       }
       container multicast-forwarding-information-base {
         config false;
+        description
+          "Enter the multicast-forwarding-information-base context";
       }
       grouping connection-point-oper-state-top {
         leaf oper-state {
@@ -752,7 +819,9 @@ module srl_nokia-network-instance {
           }
           container mac-limit {
             description
-              "Bridge Table size and thresholds";
+              "Enter the mac-limit context
+
+               Bridge Table size and thresholds";
             leaf maximum-entries {
               type int32 {
                 range "1..8192";
@@ -795,7 +864,11 @@ module srl_nokia-network-instance {
                    If disabled, dynamically learned mac entries will be programmed in the bridge table
                    until the network instance is disabled.";
               }
+              description
+                "Enter the aging context";
             }
+            description
+              "Enter the mac-learning context";
           }
           container mac-duplication {
             leaf action {
@@ -834,6 +907,8 @@ module srl_nokia-network-instance {
                    a different subinterface/pw with a source mac matching the duplicate mac will be dropped. Frames arriving to a different
                    subinterface/pw with a destination mac matching the duplicate mac will be forwarded normally.";
             }
+            description
+              "Enter the mac-duplication context";
           }
         }
       }

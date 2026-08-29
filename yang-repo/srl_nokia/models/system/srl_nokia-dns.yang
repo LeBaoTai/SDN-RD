@@ -27,6 +27,10 @@ module srl_nokia-dns {
   description
     "This module defines DNS configuration";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -136,7 +140,9 @@ module srl_nokia-dns {
         description
           "User-provided name for DNS instance";
       }
+      unique "network-instance";
       uses dns-instance-top;
+      max-elements 8;
     }
   }
 

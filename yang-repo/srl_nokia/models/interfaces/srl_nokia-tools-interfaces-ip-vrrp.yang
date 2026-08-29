@@ -18,6 +18,10 @@ module srl_nokia-tools-interfaces-ip-vrrp {
   description
     "Model for interface ip VRRP operational commands";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2022-11-30 {
     description
       "SRLinux 22.11.1";
@@ -50,6 +54,8 @@ module srl_nokia-tools-interfaces-ip-vrrp {
         leaf clear {
           type empty;
         }
+        description
+          "Enter the statistics context";
       }
     }
   }

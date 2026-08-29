@@ -76,8 +76,7 @@
     },
     {
       "oc": "/lacp/interfaces/interface/members/member/state/port-priority",
-      "srlinux": "/interface/srl_nokia-if-lag:lag/srl_nokia-if-lag:member/lacp/srl_nokia-lacp:lacp-port-priority",
-      "feature-flagged": true
+      "srlinux": "/interface/srl_nokia-if-lag:lag/srl_nokia-if-lag:member/lacp/srl_nokia-lacp:lacp-port-priority"
     },
     {
       "oc": "/lacp/interfaces/interface/members/member/state/partner-port-priority",

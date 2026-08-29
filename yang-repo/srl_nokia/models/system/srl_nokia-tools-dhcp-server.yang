@@ -18,6 +18,10 @@ module srl_nokia-tools-dhcp-server {
   description
     "Model for dhcp server operational commands";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2021-11-30 {
     description
       "SRLinux 21.11.1";
@@ -40,14 +44,22 @@ module srl_nokia-tools-dhcp-server {
             leaf clear {
               type empty;
             }
+            description
+              "Enter the statistics context";
           }
+          description
+            "Enter the dhcpv4 context";
         }
         container dhcpv6 {
           container statistics {
             leaf clear {
               type empty;
             }
+            description
+              "Enter the statistics context";
           }
+          description
+            "Enter the dhcpv6 context";
         }
       }
     }

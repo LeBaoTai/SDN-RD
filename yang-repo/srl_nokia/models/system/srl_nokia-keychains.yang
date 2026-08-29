@@ -24,6 +24,10 @@ module srl_nokia-keychains {
   description
     "This module defines configuration and operational state data for authentication keychains used by control plane protocols such as macsec,OSPF, ISIS and BGP.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -154,7 +158,9 @@ module srl_nokia-keychains {
       "Configuration and state related to authentication procedures";
     container authentication {
       description
-        "Container for protocol authentication options available system wide";
+        "Enter the authentication context
+
+         Container for protocol authentication options available system wide";
       list keychain {
         max-elements 1024;
         key "name";
@@ -303,7 +309,9 @@ module srl_nokia-keychains {
           container send-lifetime {
             if-feature "srl-feat:keychain";
             description
-              "Specifies the lifetime of the key for sending authentication information to the peer";
+              "Enter the send-lifetime context
+
+               Specifies the lifetime of the key for sending authentication information to the peer";
             leaf start-time {
               type srl_nokia-comm:date-and-time-delta;
               description
@@ -365,6 +373,8 @@ module srl_nokia-keychains {
                 error-message "receive-lifetime can not be configured when send-lifetime send-and-recive is true";
               }
             }
+            description
+              "Enter the receive-lifetime context";
           }
         }
       }

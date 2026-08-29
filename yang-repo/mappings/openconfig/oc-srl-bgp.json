@@ -97,8 +97,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/graceful-restart/{config,state}/restart-time",
-      "srlinux": "/network-instance/protocols/bgp/graceful-restart/requested-restart-time",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/graceful-restart/requested-restart-time"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/graceful-restart/{config,state}/stale-routes-time",
@@ -114,8 +113,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/route-selection-options",
-      "srlinux": "/network-instance/protocols/bgp/best-path-selection",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/best-path-selection"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/route-selection-options/{config,state}",
@@ -202,8 +200,7 @@
         {
           "<clear>": "ipv6-flowspec-v1"
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/{config,state}",
@@ -265,8 +262,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options",
-      "srlinux": "/network-instance/protocols/bgp/afi-safi/best-path-selection",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/afi-safi/best-path-selection"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options/{config,state}",
@@ -290,8 +286,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options/{config,state}/enable-aigp",
-      "srlinux": "/network-instance/protocols/bgp/afi-safi/best-path-selection/accumulated-igp",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/afi-safi/best-path-selection/accumulated-igp"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/route-selection-options/{config,state}/ignore-next-hop-igp-metric",
@@ -323,13 +318,11 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/use-multiple-paths/ebgp/{config,state}/maximum-paths",
-      "srlinux": "/network-instance/protocols/bgp/afi-safi/multipath/ebgp/maximum-paths",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/afi-safi/multipath/ebgp/maximum-paths"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/use-multiple-paths/ebgp/link-bandwidth-ext-community",
-      "srlinux": "/network-instance/protocols/bgp/afi-safi/multipath/ebgp/weighted-ecmp",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/afi-safi/multipath/ebgp/weighted-ecmp"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/use-multiple-paths/ebgp/link-bandwidth-ext-community/{config,state}",
@@ -338,8 +331,7 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/use-multiple-paths/ebgp/link-bandwidth-ext-community/{config,state}/enabled",
       "srlinux": "/network-instance/protocols/bgp/afi-safi/multipath/ebgp/weighted-ecmp/admin-state",
-      "transform": "bool-to-admin-state",
-      "feature-flagged": true
+      "transform": "bool-to-admin-state"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/use-multiple-paths/ibgp",
@@ -351,13 +343,11 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/use-multiple-paths/ibgp/{config,state}/maximum-paths",
-      "srlinux": "/network-instance/protocols/bgp/afi-safi/multipath/ibgp/maximum-paths",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/afi-safi/multipath/ibgp/maximum-paths"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/use-multiple-paths/ibgp/link-bandwidth-ext-community",
-      "srlinux": "/network-instance/protocols/bgp/afi-safi/multipath/ibgp/weighted-ecmp",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/afi-safi/multipath/ibgp/weighted-ecmp"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/use-multiple-paths/ibgp/link-bandwidth-ext-community/{config,state}",
@@ -366,8 +356,7 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/use-multiple-paths/ibgp/link-bandwidth-ext-community/{config,state}/enabled",
       "srlinux": "/network-instance/protocols/bgp/afi-safi/multipath/ibgp/weighted-ecmp/admin-state",
-      "transform": "bool-to-admin-state",
-      "feature-flagged": true
+      "transform": "bool-to-admin-state"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/add-paths",
@@ -391,8 +380,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/add-paths/{config,state}/eligible-prefix-policy",
-      "srlinux": "/network-instance/protocols/bgp/afi-safi/add-paths/eligible-prefix-policy",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/afi-safi/add-paths/eligible-prefix-policy"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/ipv4-unicast",
@@ -586,8 +574,7 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/{config,state}/auth-password",
       "srlinux": "/network-instance/protocols/bgp/neighbor/authentication/password",
-      "type": "srl_nokia-common:routing-password",
-      "feature-flagged": true
+      "type": "srl_nokia-common:routing-password"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/{config,state}/remove-private-as",
@@ -966,8 +953,7 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/state/last-prefix-limit-exceeded",
       "srlinux": "/network-instance/protocols/bgp/neighbor/last-prefix-limit-exceeded",
-      "transform": "timeticks-to-timestamp",
-      "feature-flagged": true
+      "transform": "timeticks-to-timestamp"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/timers",
@@ -1024,8 +1010,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/transport/{config,state}/mtu-discovery",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/transport/mtu-discovery",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/transport/mtu-discovery"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/transport/{config,state}/passive-mode",
@@ -1112,13 +1097,11 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/graceful-restart/state/local-restarting",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/graceful-restart/local-restarting",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/graceful-restart/local-restarting"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/graceful-restart/state/mode",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/graceful-restart/mode",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/graceful-restart/mode"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/logging-options",
@@ -1320,8 +1303,7 @@
         {
           "<clear>": "ipv6-flowspec-v1"
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/{config,state}",
@@ -1413,8 +1395,7 @@
     },
     {
       "srlinux": "/network-instance/protocols/bgp/neighbor/graceful-restart/local-capability/afi-safi",
-      "pretranslate-transform": "srl-bgp-neighbor-gr-afi-safi-transform",
-      "feature-flagged": true
+      "pretranslate-transform": "srl-bgp-neighbor-gr-afi-safi-transform"
     },
     {
       "srlinux": "/network-instance/protocols/bgp/neighbor/graceful-restart/neighbor-capability/afi-safi",
@@ -1463,7 +1444,6 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/apply-policy/{config,state}/default-import-policy",
       "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/default-import-policy",
-      "feature-flagged": true,
       "mapping": [
         {
           "ACCEPT_ROUTE": "accept"
@@ -1484,7 +1464,6 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/apply-policy/{config,state}/default-export-policy",
       "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/default-export-policy",
-      "feature-flagged": true,
       "mapping": [
         {
           "ACCEPT_ROUTE": "accept"
@@ -1509,33 +1488,27 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/ipv4-unicast/prefix-limit-accepted",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/ipv4-unicast/prefix-limit-accepted"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit/{config,state}/max-prefixes",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/ipv4-unicast/prefix-limit-accepted/max-received-routes",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/ipv4-unicast/prefix-limit-accepted/max-received-routes"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit/{config,state}/prevent-teardown",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/ipv4-unicast/prefix-limit-accepted/prevent-teardown",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/ipv4-unicast/prefix-limit-accepted/prevent-teardown"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit/{config,state}/warning-threshold-pct",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/ipv4-unicast/prefix-limit-accepted/warning-threshold-pct",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/ipv4-unicast/prefix-limit-accepted/warning-threshold-pct"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit/state/prefix-limit-exceeded",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/ipv4-unicast/prefix-limit-accepted/prefix-limit-exceeded",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/ipv4-unicast/prefix-limit-accepted/prefix-limit-exceeded"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received",
@@ -1592,33 +1565,27 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/ipv6-unicast/prefix-limit-accepted",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/ipv6-unicast/prefix-limit-accepted"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/{config,state}/max-prefixes",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/ipv6-unicast/prefix-limit-accepted/max-received-routes",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/ipv6-unicast/prefix-limit-accepted/max-received-routes"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/{config,state}/prevent-teardown",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/ipv6-unicast/prefix-limit-accepted/prevent-teardown",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/ipv6-unicast/prefix-limit-accepted/prevent-teardown"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/{config,state}/warning-threshold-pct",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/ipv6-unicast/prefix-limit-accepted/warning-threshold-pct",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/ipv6-unicast/prefix-limit-accepted/warning-threshold-pct"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit/state/prefix-limit-exceeded",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/ipv6-unicast/prefix-limit-accepted/prefix-limit-exceeded",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/ipv6-unicast/prefix-limit-accepted/prefix-limit-exceeded"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received",
@@ -1663,43 +1630,35 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast/prefix-limit-accepted",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast/prefix-limit-accepted"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/{config,state}/max-prefixes",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast/prefix-limit-accepted/max-received-routes",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast/prefix-limit-accepted/max-received-routes"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/{config,state}/prevent-teardown",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast/prefix-limit-accepted/prevent-teardown",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast/prefix-limit-accepted/prevent-teardown"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/{config,state}/warning-threshold-pct",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast/prefix-limit-accepted/warning-threshold-pct",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast/prefix-limit-accepted/warning-threshold-pct"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prefix-limit-exceeded",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast/prefix-limit-accepted/prefix-limit-exceeded",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast/prefix-limit-accepted/prefix-limit-exceeded"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/{config,state}",
@@ -1707,23 +1666,19 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/{config,state}/max-prefixes",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/max-received-routes",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/max-received-routes"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/{config,state}/prevent-teardown",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/prevent-teardown",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/prevent-teardown"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/{config,state}/warning-threshold-pct",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/warning-threshold-pct",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/warning-threshold-pct"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prefix-limit-exceeded",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/prefix-limit-exceeded",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/prefix-limit-exceeded"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/{config,state}",
@@ -1732,7 +1687,6 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv4-unicast/{config,state}/send-default-route",
       "pretranslate-transform": "oc-bgp-pg-afi-safi-send-default-route-transform",
-      "feature-flagged": true,
       "deviations": {
         "add": {
           "must": [
@@ -1749,43 +1703,35 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast/prefix-limit-accepted",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast/prefix-limit-accepted"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/{config,state}/max-prefixes",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast/prefix-limit-accepted/max-received-routes",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast/prefix-limit-accepted/max-received-routes"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/{config,state}/prevent-teardown",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast/prefix-limit-accepted/prevent-teardown",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast/prefix-limit-accepted/prevent-teardown"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/{config,state}/warning-threshold-pct",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast/prefix-limit-accepted/warning-threshold-pct",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast/prefix-limit-accepted/warning-threshold-pct"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/prefix-limit-exceeded",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast/prefix-limit-accepted/prefix-limit-exceeded",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast/prefix-limit-accepted/prefix-limit-exceeded"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/{config,state}",
@@ -1793,23 +1739,19 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/{config,state}/max-prefixes",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/max-received-routes",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/max-received-routes"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/{config,state}/prevent-teardown",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/prevent-teardown",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/prevent-teardown"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/{config,state}/warning-threshold-pct",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/warning-threshold-pct",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/warning-threshold-pct"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prefix-limit-exceeded",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/prefix-limit-exceeded",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/prefix-limit-exceeded"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/{config,state}",
@@ -1818,7 +1760,6 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/l3vpn-ipv6-unicast/{config,state}/send-default-route",
       "pretranslate-transform": "oc-bgp-pg-afi-safi-send-default-route-transform",
-      "feature-flagged": true,
       "deviations": {
         "add": {
           "must": [
@@ -1950,8 +1891,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/enable-bfd",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/failure-detection",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/failure-detection"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/enable-bfd/{config,state}",
@@ -1959,8 +1899,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/enable-bfd/{config,state}/enabled",
-      "srlinux": "/network-instance/protocols/bgp/neighbor/failure-detection/enable-bfd",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/neighbor/failure-detection/enable-bfd"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/enable-bfd/{config,state}/desired-minimum-tx-interval",
@@ -2010,8 +1949,7 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/{config,state}/auth-password",
       "srlinux": "/network-instance/protocols/bgp/group/authentication/password",
-      "type": "srl_nokia-common:routing-password",
-      "feature-flagged": true
+      "type": "srl_nokia-common:routing-password"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/{config,state}/remove-private-as",
@@ -2105,8 +2043,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/transport/{config,state}/mtu-discovery",
-      "srlinux": "/network-instance/protocols/bgp/group/transport/mtu-discovery",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/transport/mtu-discovery"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/transport/{config,state}/passive-mode",
@@ -2379,8 +2316,7 @@
         {
           "<clear>": "ipv6-flowspec-v1"
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/{config,state}",
@@ -2458,8 +2394,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/use-multiple-paths",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/multipath",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/multipath"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/use-multiple-paths/{config,state}",
@@ -2475,8 +2410,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/use-multiple-paths/ebgp/link-bandwidth-ext-community",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/multipath/ebgp/weighted-ecmp",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/multipath/ebgp/weighted-ecmp"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/use-multiple-paths/ebgp/link-bandwidth-ext-community/{config,state}",
@@ -2485,8 +2419,7 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/use-multiple-paths/ebgp/link-bandwidth-ext-community/{config,state}/enabled",
       "srlinux": "/network-instance/protocols/bgp/group/afi-safi/multipath/ebgp/weighted-ecmp/admin-state",
-      "transform": "bool-to-admin-state",
-      "feature-flagged": true
+      "transform": "bool-to-admin-state"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/use-multiple-paths/ibgp",
@@ -2498,8 +2431,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/use-multiple-paths/ibgp/link-bandwidth-ext-community",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/multipath/ibgp/weighted-ecmp",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/multipath/ibgp/weighted-ecmp"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/use-multiple-paths/ibgp/link-bandwidth-ext-community/{config,state}",
@@ -2508,8 +2440,7 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/use-multiple-paths/ibgp/link-bandwidth-ext-community/{config,state}/enabled",
       "srlinux": "/network-instance/protocols/bgp/group/afi-safi/multipath/ibgp/weighted-ecmp/admin-state",
-      "transform": "bool-to-admin-state",
-      "feature-flagged": true
+      "transform": "bool-to-admin-state"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy",
@@ -2530,7 +2461,6 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy/{config,state}/default-import-policy",
       "srlinux": "/network-instance/protocols/bgp/group/afi-safi/default-import-policy",
-      "feature-flagged": true,
       "mapping": [
         {
           "ACCEPT_ROUTE": "accept"
@@ -2551,7 +2481,6 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/apply-policy/{config,state}/default-export-policy",
       "srlinux": "/network-instance/protocols/bgp/group/afi-safi/default-export-policy",
-      "feature-flagged": true,
       "mapping": [
         {
           "ACCEPT_ROUTE": "accept"
@@ -2576,28 +2505,23 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv4-unicast/prefix-limit",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/ipv4-unicast/prefix-limit-accepted",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/ipv4-unicast/prefix-limit-accepted"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv4-unicast/prefix-limit/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv4-unicast/prefix-limit/{config,state}/max-prefixes",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/ipv4-unicast/prefix-limit-accepted/max-received-routes",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/ipv4-unicast/prefix-limit-accepted/max-received-routes"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv4-unicast/prefix-limit/{config,state}/prevent-teardown",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/ipv4-unicast/prefix-limit-accepted/prevent-teardown",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/ipv4-unicast/prefix-limit-accepted/prevent-teardown"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv4-unicast/prefix-limit/{config,state}/warning-threshold-pct",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/ipv4-unicast/prefix-limit-accepted/warning-threshold-pct",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/ipv4-unicast/prefix-limit-accepted/warning-threshold-pct"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv4-unicast/prefix-limit/state/prefix-limit-exceeded",
@@ -2617,8 +2541,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/{config,state}/prevent-teardown",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/ipv4-unicast/prefix-limit-received/prevent-teardown",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/ipv4-unicast/prefix-limit-received/prevent-teardown"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv4-unicast/prefix-limit-received/{config,state}/warning-threshold-pct",
@@ -2659,28 +2582,23 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv6-unicast/prefix-limit",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/ipv6-unicast/prefix-limit-accepted",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/ipv6-unicast/prefix-limit-accepted"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv6-unicast/prefix-limit/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv6-unicast/prefix-limit/{config,state}/max-prefixes",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/ipv6-unicast/prefix-limit-accepted/max-received-routes",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/ipv6-unicast/prefix-limit-accepted/max-received-routes"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv6-unicast/prefix-limit/{config,state}/prevent-teardown",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/ipv6-unicast/prefix-limit-accepted/prevent-teardown",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/ipv6-unicast/prefix-limit-accepted/prevent-teardown"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv6-unicast/prefix-limit/{config,state}/warning-threshold-pct",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/ipv6-unicast/prefix-limit-accepted/warning-threshold-pct",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/ipv6-unicast/prefix-limit-accepted/warning-threshold-pct"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv6-unicast/prefix-limit/state/prefix-limit-exceeded",
@@ -2700,8 +2618,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/{config,state}/prevent-teardown",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/ipv6-unicast/prefix-limit-received/prevent-teardown",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/ipv6-unicast/prefix-limit-received/prevent-teardown"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv6-unicast/prefix-limit-received/{config,state}/warning-threshold-pct",
@@ -2730,33 +2647,27 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv4-unicast",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv4-unicast"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv4-unicast/prefix-limit-accepted",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv4-unicast/prefix-limit-accepted"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/{config,state}/max-prefixes",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv4-unicast/prefix-limit-accepted/max-received-routes",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv4-unicast/prefix-limit-accepted/max-received-routes"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/{config,state}/prevent-teardown",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv4-unicast/prefix-limit-accepted/prevent-teardown",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv4-unicast/prefix-limit-accepted/prevent-teardown"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/{config,state}/warning-threshold-pct",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv4-unicast/prefix-limit-accepted/warning-threshold-pct",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv4-unicast/prefix-limit-accepted/warning-threshold-pct"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit/state/prefix-limit-exceeded",
@@ -2764,8 +2675,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/{config,state}",
@@ -2773,18 +2683,15 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/{config,state}/max-prefixes",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/max-received-routes",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/max-received-routes"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/{config,state}/prevent-teardown",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/prevent-teardown",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/prevent-teardown"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/{config,state}/warning-threshold-pct",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/warning-threshold-pct",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/warning-threshold-pct"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/prefix-limit-received/state/prefix-limit-exceeded",
@@ -2797,7 +2704,6 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv4-unicast/{config,state}/send-default-route",
       "pretranslate-transform": "oc-bgp-pg-afi-safi-send-default-route-transform",
-      "feature-flagged": true,
       "deviations": {
         "add": {
           "must": [
@@ -2814,33 +2720,27 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv6-unicast",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv6-unicast"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv6-unicast/prefix-limit-accepted",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv6-unicast/prefix-limit-accepted"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/{config,state}/max-prefixes",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv6-unicast/prefix-limit-accepted/max-received-routes",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv6-unicast/prefix-limit-accepted/max-received-routes"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/{config,state}/prevent-teardown",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv6-unicast/prefix-limit-accepted/prevent-teardown",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv6-unicast/prefix-limit-accepted/prevent-teardown"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/{config,state}/warning-threshold-pct",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv6-unicast/prefix-limit-accepted/warning-threshold-pct",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv6-unicast/prefix-limit-accepted/warning-threshold-pct"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit/state/prefix-limit-exceeded",
@@ -2848,8 +2748,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/{config,state}",
@@ -2857,18 +2756,15 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/{config,state}/max-prefixes",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/max-received-routes",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/max-received-routes"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/{config,state}/prevent-teardown",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/prevent-teardown",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/prevent-teardown"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/{config,state}/warning-threshold-pct",
-      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/warning-threshold-pct",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/warning-threshold-pct"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/prefix-limit-received/state/prefix-limit-exceeded",
@@ -2881,7 +2777,6 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/l3vpn-ipv6-unicast/{config,state}/send-default-route",
       "pretranslate-transform": "oc-bgp-pg-afi-safi-send-default-route-transform",
-      "feature-flagged": true,
       "deviations": {
         "add": {
           "must": [
@@ -3010,8 +2905,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/enable-bfd",
-      "srlinux": "/network-instance/protocols/bgp/group/failure-detection",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/failure-detection"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/enable-bfd/{config,state}",
@@ -3019,8 +2913,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/enable-bfd/{config,state}/enabled",
-      "srlinux": "/network-instance/protocols/bgp/group/failure-detection/enable-bfd",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/bgp/group/failure-detection/enable-bfd"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/enable-bfd/{config,state}/desired-minimum-tx-interval",
@@ -3192,14 +3085,12 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi",
       "srlinux": "/network-instance/bgp-rib/afi-safi",
-      "state-request-from-here": true,
-      "feature-flagged": true
+      "state-request-from-here": true
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/afi-safi-name",
@@ -3235,8 +3126,7 @@
         {
           "<clear>": "srte-policy-ipv6"
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/state",
@@ -3244,18 +3134,15 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/state/afi-safi-name",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-unicast",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-unicast/loc-rib",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-unicast/loc-rib/state",
@@ -3267,8 +3154,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-unicast/loc-rib/routes/route",
-      "srlinux": "/network-instance/bgp-rib/afi-safi/ipv4-unicast/local-rib/route",
-      "feature-flagged": true
+      "srlinux": "/network-instance/bgp-rib/afi-safi/ipv4-unicast/local-rib/route"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-unicast/loc-rib/routes/route/prefix",
@@ -3296,8 +3182,7 @@
     },
     {
       "srlinux": "/network-instance/bgp-rib/afi-safi/ipv4-unicast/local-rib/route/path-id",
-      "transform": "unused-key-transform",
-      "feature-flagged": true
+      "transform": "unused-key-transform"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-unicast/loc-rib/routes/route/state",
@@ -3309,8 +3194,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-unicast/loc-rib/routes/route/state/origin",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-unicast/loc-rib/routes/route/state/path-id",
@@ -3318,8 +3202,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-unicast/loc-rib/routes/route/state/attr-index",
-      "srlinux": "/network-instance/bgp-rib/afi-safi/ipv4-unicast/local-rib/route/attr-id",
-      "feature-flagged": true
+      "srlinux": "/network-instance/bgp-rib/afi-safi/ipv4-unicast/local-rib/route/attr-id"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-unicast/loc-rib/routes/route/state/community-index",
@@ -3332,13 +3215,11 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-unicast/loc-rib/routes/route/state/last-modified",
       "srlinux": "/network-instance/bgp-rib/afi-safi/ipv4-unicast/local-rib/route/last-modified",
-      "transform": "timeticks-to-timestamp",
-      "feature-flagged": true
+      "transform": "timeticks-to-timestamp"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-unicast/loc-rib/routes/route/state/valid-route",
-      "srlinux": "/network-instance/bgp-rib/afi-safi/ipv4-unicast/local-rib/route/valid-route",
-      "feature-flagged": true
+      "srlinux": "/network-instance/bgp-rib/afi-safi/ipv4-unicast/local-rib/route/valid-route"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv4-unicast/loc-rib/routes/route/state/invalid-reason",
@@ -3358,13 +3239,11 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/state",
@@ -3376,8 +3255,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route",
-      "srlinux": "/network-instance/bgp-rib/afi-safi/ipv6-unicast/local-rib/route",
-      "feature-flagged": true
+      "srlinux": "/network-instance/bgp-rib/afi-safi/ipv6-unicast/local-rib/route"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/prefix",
@@ -3405,8 +3283,7 @@
     },
     {
       "srlinux": "/network-instance/bgp-rib/afi-safi/ipv6-unicast/local-rib/route/path-id",
-      "transform": "unused-key-transform",
-      "feature-flagged": true
+      "transform": "unused-key-transform"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state",
@@ -3418,8 +3295,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/origin",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/path-id",
@@ -3427,8 +3303,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/attr-index",
-      "srlinux": "/network-instance/bgp-rib/afi-safi/ipv6-unicast/local-rib/route/attr-id",
-      "feature-flagged": true
+      "srlinux": "/network-instance/bgp-rib/afi-safi/ipv6-unicast/local-rib/route/attr-id"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/community-index",
@@ -3441,13 +3316,11 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/last-modified",
       "srlinux": "/network-instance/bgp-rib/afi-safi/ipv6-unicast/local-rib/route/last-modified",
-      "transform": "timeticks-to-timestamp",
-      "feature-flagged": true
+      "transform": "timeticks-to-timestamp"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/valid-route",
-      "srlinux": "/network-instance/bgp-rib/afi-safi/ipv6-unicast/local-rib/route/valid-route",
-      "feature-flagged": true
+      "srlinux": "/network-instance/bgp-rib/afi-safi/ipv6-unicast/local-rib/route/valid-route"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/bgp/rib/afi-safis/afi-safi/ipv6-unicast/loc-rib/routes/route/state/invalid-reason",

@@ -24,6 +24,10 @@ module srl_nokia-bgp-evpn-bgp-instance-vpws-destinations-remote-ac {
   description
     "Model for vpws destinations on the bgp-evpn mpls instance";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -214,11 +218,17 @@ module srl_nokia-bgp-evpn-bgp-instance-vpws-destinations-remote-ac {
       container mpls {
         uses evpn-mpls-vpws-destinations-destination-top;
         uses evpn-mpls-vpws-destinations-es-destination-top;
+        description
+          "Enter the mpls context";
       }
       container srv6 {
         uses evpn-srv6-vpws-destinations-destination-top;
         uses evpn-srv6-vpws-destinations-es-destination-top;
+        description
+          "Enter the srv6 context";
       }
+      description
+        "Enter the destinations context";
     }
   }
 

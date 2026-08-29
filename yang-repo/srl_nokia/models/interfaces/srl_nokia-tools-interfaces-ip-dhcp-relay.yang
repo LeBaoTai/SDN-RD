@@ -15,6 +15,10 @@ module srl_nokia-tools-interfaces-ip-dhcp-relay {
   description
     "Model for interface ip dhcp relay operational commands";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2021-06-30 {
     description
       "SRLinux 21.6.1";
@@ -35,6 +39,8 @@ module srl_nokia-tools-interfaces-ip-dhcp-relay {
         leaf clear {
           type empty;
         }
+        description
+          "Enter the statistics context";
       }
     }
   }

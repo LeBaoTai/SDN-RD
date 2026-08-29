@@ -31,6 +31,10 @@ module srl_nokia-interfaces-ip-vrrp {
      management described by RFC 8347.  The primary differences are
      in the structure of configuration and state data.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -188,7 +192,9 @@ module srl_nokia-interfaces-ip-vrrp {
     }
     container authentication {
       description
-        "Context to configure authentication keychain";
+        "Enter the authentication context
+
+         Context to configure authentication keychain";
       leaf keychain {
         description
           "Reference to a keychain. The keychain type must be md5 or clear-text";
@@ -206,7 +212,9 @@ module srl_nokia-interfaces-ip-vrrp {
     }
     container interface-tracking {
       description
-        "Interface reference for interface tracking";
+        "Enter the interface-tracking context
+
+         Interface reference for interface tracking";
       list track-interface {
         key "interface";
         description
@@ -362,6 +370,8 @@ module srl_nokia-interfaces-ip-vrrp {
           "Counter for the total numebr fo VRRP advertisement messages dicarded";
         type srl_nokia-comm:zero-based-counter64;
       }
+      description
+        "Enter the statistics context";
     }
   }
 

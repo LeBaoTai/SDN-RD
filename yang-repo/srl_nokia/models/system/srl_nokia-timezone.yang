@@ -1717,6 +1717,90 @@ module srl_nokia-timezone {
       enum UTC {
         value 425;
       }
+      enum Africa/Timbuktu {
+        value 426;
+      }
+      enum America/Atka {
+        value 427;
+      }
+      enum America/Ciudad_Juarez {
+        value 428;
+      }
+      enum America/Coral_Harbour {
+        value 429;
+      }
+      enum America/Coyhaique {
+        value 430;
+      }
+      enum America/Ensenada {
+        value 431;
+      }
+      enum America/Montreal {
+        value 432;
+      }
+      enum America/Nuuk {
+        value 433;
+      }
+      enum America/Porto_Acre {
+        value 434;
+      }
+      enum America/Santa_Isabel {
+        value 435;
+      }
+      enum America/Shiprock {
+        value 436;
+      }
+      enum America/Virgin {
+        value 437;
+      }
+      enum Asia/Chongqing {
+        value 438;
+      }
+      enum Asia/Harbin {
+        value 439;
+      }
+      enum Asia/Istanbul {
+        value 440;
+      }
+      enum Asia/Kashgar {
+        value 441;
+      }
+      enum Asia/Tel_Aviv {
+        value 442;
+      }
+      enum Atlantic/Jan_Mayen {
+        value 443;
+      }
+      enum Australia/Canberra {
+        value 444;
+      }
+      enum Australia/Yancowinna {
+        value 445;
+      }
+      enum Europe/Belfast {
+        value 446;
+      }
+      enum Europe/Kyiv {
+        value 447;
+      }
+      enum Europe/Nicosia {
+        value 448;
+      }
+      enum Europe/Tiraspol {
+        value 449;
+      }
+      enum Pacific/Johnston {
+        value 450;
+      }
+      enum Pacific/Kanton {
+        value 451;
+      }
+      enum Pacific/Samoa {
+        value 452;
+      }
+      enum Pacific/Yap {
+        value 453;
+      }
     }
   }
 }

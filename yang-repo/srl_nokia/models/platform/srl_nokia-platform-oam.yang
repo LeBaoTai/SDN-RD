@@ -21,6 +21,10 @@ module srl_nokia-platform-oam {
   description
     "This module defines operational state related to OAM resources in the system";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -70,13 +74,17 @@ module srl_nokia-platform-oam {
     container oam {
       config false;
       description
-        "Enter the OAM context";
+        "Enter the oam context";
       container resources {
         description
-          "OAM resources usage and allocation";
+          "Enter the resources context
+
+           OAM resources usage and allocation";
         container service-activation-testhead {
           description
-            "Service activation generator stream and bandwidth resources";
+            "Enter the service-activation-testhead context
+
+             Service activation generator stream and bandwidth resources";
           uses sat-generator-stream-resources;
           uses sat-generator-bandwidth-resources;
         }

@@ -6,6 +6,9 @@ module srl_nokia-interfaces-dynamic-subinterfaces {
   import srl_nokia-interfaces {
     prefix srl_nokia-if;
   }
+  import srl_nokia-interfaces-vlans {
+    prefix srl_nokia-if-vlans;
+  }
   import srl_nokia-features {
     prefix srl_nokia-feat;
   }
@@ -21,6 +24,10 @@ module srl_nokia-interfaces-dynamic-subinterfaces {
   description
     "This yang file models configuration and state of the active VLAN detection and dynamic subinterfaces";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -39,21 +46,24 @@ module srl_nokia-interfaces-dynamic-subinterfaces {
       "Specifies a range of VLAN identifiers for dynamic subinterfaces";
     container vlan-range {
       description
-        "Specifies a range of VLAN identifiers for dynamic subinterfaces";
+        "Enter the vlan-range context
+
+         Specifies a range of VLAN identifiers for dynamic subinterfaces";
       container untagged {
+        if-feature "srl_nokia-feat:bridged";
         presence "Match untagged packets";
         description
           "Match untagged packets for the creation of dynamic subinterfaces";
-        must 'not(../single-tagged)' {
-          error-message "untagged and single-tagged cannot be configured together";
+        must '(../../../srl_nokia-if-vlans:vlan-tagging = true())' {
+          error-message "untagged only configurable if vlan-tagging enabled on parent interface";
         }
       }
       container single-tagged {
         presence "Match single-tagged packets";
         description
           "Match single-tagged packets for the creation of dynamic subinterfaces";
-        must '(../../../vlan-tagging = true())' {
-          error-message "single-tagged  only configurable if vlan-tagging enabled on parent interface";
+        must '(../../../srl_nokia-if-vlans:vlan-tagging = true())' {
+          error-message "single-tagged only configurable if vlan-tagging enabled on parent interface";
         }
         list low-vlan-id {
           min-elements 1;
@@ -102,6 +112,41 @@ module srl_nokia-interfaces-dynamic-subinterfaces {
         default "240";
         description
           "The inactivity period after which the configuration for the corresponding VLAN is removed";
+      }
+      action clear-retention-timer {
+        if-feature "srl_nokia-feat:tools-as-modeled-actions-different-output";
+        description
+          "Clear the retention-timer for the VLAN scope selected (a specific VLAN, untagged traffic, or all VLANs)
+
+           Normally, a VLAN remains in the active-vlans list until its retention timer expires after traffic
+           ceases. This action clears that timer, causing any VLAN currently marked as active, due to
+           frames observed on the interface, to be removed from active-vlans immediately. This command does
+           not remove a VLAN from the active-vlans list if it was created as a result of the existence of
+           an Ethernet Segment destination.";
+        input {
+          leaf active-vlan-id {
+            description
+              "The active vlan-id(s) on the interface configured for dynamic subinterfaces";
+            mandatory true;
+            type union {
+              type uint16 {
+                range "1..4094";
+              }
+              type enumeration {
+                enum untagged {
+                  value 0;
+                  description
+                    "Untagged traffic";
+                }
+                enum all {
+                  value 4095;
+                  description
+                    "All VLANs on vlan-range configured for dynamic subinterfaces";
+                }
+              }
+            }
+          }
+        }
       }
       leaf-list active-vlans {
         config false;

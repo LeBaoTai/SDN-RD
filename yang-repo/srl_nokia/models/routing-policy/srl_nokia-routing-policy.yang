@@ -45,6 +45,10 @@ module srl_nokia-routing-policy {
   description
     "YANG model for route policies. It supports widely used constructs for managing how routes are imported, exported, and modified across different routing protocols.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -342,7 +346,9 @@ module srl_nokia-routing-policy {
     container internal-tags {
       if-feature "srl_nokia-feat:internal-tags";
       description
-        "Configuration of internal tags";
+        "Enter the internal-tags context
+
+         Configuration of internal tags";
       leaf-list set-tag-set {
         max-elements 1;
         type leafref {
@@ -358,7 +364,9 @@ module srl_nokia-routing-policy {
     container route-preference {
       if-feature "srl_nokia-feat:routing-policy-preference-action";
       description
-        "Options for modifying route preference";
+        "Enter the route-preference context
+
+         Options for modifying route preference";
       leaf set {
         type uint8;
         description
@@ -373,9 +381,10 @@ module srl_nokia-routing-policy {
 
   grouping resilient-hash-action {
     container resilient-hash {
-      if-feature "not srl_nokia-feat:tomahawk3 and not srl_nokia-feat:tomahawk4 and not srl_nokia-feat:tomahawk5";
       description
-        "Options for controlling ECMP resilient hashing behavior";
+        "Enter the resilient-hash context
+
+         Options for controlling ECMP resilient hashing behavior";
       leaf apply {
         description
           "When set true, resilient hashing is enabled if the accepted route becomes the best BGP path
@@ -421,7 +430,9 @@ module srl_nokia-routing-policy {
   grouping bgp-as-path-actions {
     container as-path {
       description
-        "Modify AS Path attribute of routes";
+        "Enter the as-path context
+
+         Modify AS Path attribute of routes";
       leaf remove {
         description
           "Clear the AS path to make it empty.";
@@ -438,7 +449,9 @@ module srl_nokia-routing-policy {
       }
       container prepend {
         description
-          "Prepend a BGP AS number to the AS Path attribute of routes";
+          "Enter the prepend context
+
+           Prepend a BGP AS number to the AS Path attribute of routes";
         leaf as-number {
           type union {
             type srl_nokia-pol-types:as-number;
@@ -467,7 +480,9 @@ module srl_nokia-routing-policy {
   grouping bgp-community-actions {
     container communities {
       description
-        "Modify BGP communities attached to routes";
+        "Enter the communities context
+
+         Modify BGP communities attached to routes";
       leaf add {
         type leafref {
           path "/srl_rpol:routing-policy/srl_rpol:community-set/name";
@@ -522,6 +537,8 @@ module srl_nokia-routing-policy {
         description
           "Indicates the method used to specify the standard communities for the action";
       }
+      description
+        "Enter the standard-community context";
     }
     container extended-community {
       if-feature "srl_nokia-feat:routing-policy-extended-community-actions";
@@ -548,6 +565,8 @@ module srl_nokia-routing-policy {
         description
           "Indicates the method used to specify the extended communities for the action";
       }
+      description
+        "Enter the extended-community context";
     }
   }
 
@@ -563,7 +582,9 @@ module srl_nokia-routing-policy {
   grouping bgp-local-pref-actions {
     container local-preference {
       description
-        "Options for modifying the BGP local preference attribute value";
+        "Enter the local-preference context
+
+         Options for modifying the BGP local preference attribute value";
       leaf value {
         if-feature "srl_nokia-feat:routing-policy-bgp-local-pref-set";
         type uint32;
@@ -629,13 +650,17 @@ module srl_nokia-routing-policy {
         description
           "The operation to use when applying the configured value to the existing MED";
       }
+      description
+        "Enter the med context";
     }
   }
 
   grouping bgp-next-hop-actions {
     container next-hop {
       description
-        "Container for BGP next-hop modifications";
+        "Enter the next-hop context
+
+         Container for BGP next-hop modifications";
       leaf set {
         if-feature "srl_nokia-feat:routing-policy-bgp-next-hop-set-action";
         description
@@ -649,7 +674,9 @@ module srl_nokia-routing-policy {
     container next-hop-resolution {
       if-feature "srl_nokia-feat:internal-tags and srl_nokia-feat:routing-policy-bgp-next-hop-resolution-action";
       description
-        "Actions related to next-hop resolution of matched BGP routes";
+        "Enter the next-hop-resolution context
+
+         Actions related to next-hop resolution of matched BGP routes";
       leaf set-tag-set {
         type leafref {
           path "/srl_rpol:routing-policy/srl_rpol:tag-set/srl_rpol:name";
@@ -677,6 +704,8 @@ module srl_nokia-routing-policy {
         description
           "The new value of the ORIGIN attribute to write into the matching BGP routes";
       }
+      description
+        "Enter the origin context";
     }
   }
 
@@ -684,13 +713,17 @@ module srl_nokia-routing-policy {
     container label-allocation {
       if-feature "srl_nokia-feat:bgp-labeled-unicast";
       description
-        "Actions that determine the method used to assign labels to BGP LU routes matched and accepted by route-table-import policies";
+        "Enter the label-allocation context
+
+         Actions that determine the method used to assign labels to BGP LU routes matched and accepted by route-table-import policies";
       choice label-allocation-method {
         case prefix-sid {
           container prefix-sid {
             if-feature "srl_nokia-feat:bgp-labeled-unicast-prefix-sid";
             description
-              "RIB-OUT label is based on prefix SID configuration";
+              "Enter the prefix-sid context
+
+               RIB-OUT label is based on prefix SID configuration";
             leaf reuse-igp {
               description
                 "When true use the programmed SR-IGP label index for the matching prefix, resulting in a stitch to the IGP segment routing tunnel";
@@ -706,11 +739,15 @@ module srl_nokia-routing-policy {
     container statistics {
       if-feature "srl_nokia-feat:bgp-labeled-unicast-tunnel-statistics or srl_nokia-feat:te-policy-colored-statistics";
       description
-        "Policy actions related to statistics collection";
+        "Enter the statistics context
+
+         Policy actions related to statistics collection";
       container labeled-unicast {
         if-feature "srl_nokia-feat:bgp-labeled-unicast-tunnel-statistics";
         description
-          "Policy actions related to statistics collection of BGP-LU routes and tunnels";
+          "Enter the labeled-unicast context
+
+           Policy actions related to statistics collection of BGP-LU routes and tunnels";
         leaf ingress {
           description
             "Set true to enable statistics collection for ILM forwarding entries associated with BGP-LU routes";
@@ -725,7 +762,9 @@ module srl_nokia-routing-policy {
       container srte-policy {
         if-feature "srl_nokia-feat:te-policy-colored-statistics";
         description
-          "Policy actions related to statistics collection of BGP-signaled SR policies";
+          "Enter the srte-policy context
+
+           Policy actions related to statistics collection of BGP-signaled SR policies";
         leaf ingress {
           description
             "Set true to enable statistics collection for ILM forwarding entries associated with BGP SR policies";
@@ -743,14 +782,20 @@ module srl_nokia-routing-policy {
   grouping bgp-protection-actions {
     container protection {
       description
-        "Policy actions related to protection and maintenance of BGP tunnels";
+        "Enter the protection context
+
+         Policy actions related to protection and maintenance of BGP tunnels";
       container srte-policy {
         description
-          "Policy actions related to protection and maintenance of BGP SRTE policy tunnels";
+          "Enter the srte-policy context
+
+           Policy actions related to protection and maintenance of BGP SRTE policy tunnels";
         container return-path {
           if-feature "srl_nokia-feat:bgp-srte-policy-sbfd-return-label";
           description
-            "In case of Colored TE-Policy, BGP signalled, return label or SID used by sBFD reflector for return path selection";
+            "Enter the return-path context
+
+             In case of Colored TE-Policy, BGP signalled, return label or SID used by sBFD reflector for return path selection";
           leaf mpls-label {
             description
               "MPLS label that is used by reflector while responding to the sBFD request. Assigned value should uniquely identify the sender. Binding-SID or a Node-SID are commonly used options";
@@ -795,7 +840,9 @@ module srl_nokia-routing-policy {
     }
     container metric {
       description
-        "Policy actions related to ISIS metrics";
+        "Enter the metric context
+
+         Policy actions related to ISIS metrics";
       leaf set-style {
         type enumeration {
           enum wide {
@@ -817,7 +864,9 @@ module srl_nokia-routing-policy {
   grouping ospf-actions {
     container metric {
       description
-        "Policy actions related to OSPF metrics";
+        "Enter the metric context
+
+         Policy actions related to OSPF metrics";
       leaf set-external-type {
         type enumeration {
           enum type-1;
@@ -849,14 +898,20 @@ module srl_nokia-routing-policy {
       uses bgp-statistics-actions;
       uses bgp-protection-actions;
       uses bgp-srv6-actions;
+      description
+        "Enter the bgp context";
     }
     container isis {
       if-feature "srl_nokia-feat:routing-policy-isis-actions";
       uses isis-actions;
+      description
+        "Enter the isis context";
     }
     container ospf {
       if-feature "srl_nokia-feat:routing-policy-ospf-actions";
       uses ospf-actions;
+      description
+        "Enter the ospf context";
     }
     uses route-preference-action;
     uses resilient-hash-action {
@@ -868,7 +923,9 @@ module srl_nokia-routing-policy {
   grouping default-action-top {
     container default-action {
       description
-        "Actions for routes that do not match any policy statement";
+        "Enter the default-action context
+
+         Actions for routes that do not match any policy statement";
       leaf policy-result {
         type srl_nokia-pol-types:default-policy-result;
         description
@@ -886,14 +943,20 @@ module srl_nokia-routing-policy {
         uses bgp-origin-actions;
         uses bgp-label-allocation-actions;
         uses bgp-srv6-actions;
+        description
+          "Enter the bgp context";
       }
       container isis {
         if-feature "srl_nokia-feat:routing-policy-isis-actions";
         uses isis-actions;
+        description
+          "Enter the isis context";
       }
       container ospf {
         if-feature "srl_nokia-feat:routing-policy-ospf-actions";
         uses ospf-actions;
+        description
+          "Enter the ospf context";
       }
       uses route-preference-action;
       uses tags-action;
@@ -926,13 +989,17 @@ module srl_nokia-routing-policy {
         }
         default "any";
       }
+      description
+        "Enter the prefix context";
     }
   }
 
   grouping match-bgp-evpn {
     container evpn {
       description
-        "Container for match conditions that are specific to BGP EVPN routes.";
+        "Enter the evpn context
+
+         Container for match conditions that are specific to BGP EVPN routes.";
       leaf-list route-type {
         type uint8 {
           range "1..8";
@@ -965,13 +1032,17 @@ module srl_nokia-routing-policy {
           error-message "Not a valid unicast address";
         }
       }
+      description
+        "Enter the srte-policy context";
     }
   }
 
   grouping match-bgp {
     container bgp {
       description
-        "Configuration for BGP-specific policy match criteria";
+        "Enter the bgp context
+
+         Configuration for BGP-specific policy match criteria";
       container as-path {
         leaf as-path-set {
           description
@@ -985,10 +1056,14 @@ module srl_nokia-routing-policy {
         uses srl_nokia-pol-types:match-set-options {
           if-feature "srl_nokia-feat:routing-policy-enhanced-as-path-set";
         }
+        description
+          "Enter the as-path context";
       }
       container as-path-length {
         description
-          "A BGP route matches this condition if the number of (unique) AS numbers in its AS_PATH matches this value or the range implied by the value+operator.";
+          "Enter the as-path-length context
+
+           A BGP route matches this condition if the number of (unique) AS numbers in its AS_PATH matches this value or the range implied by the value+operator.";
         leaf value {
           type uint8 {
             range "0..255";
@@ -1028,6 +1103,8 @@ module srl_nokia-routing-policy {
           }
         }
         uses srl_nokia-pol-types:match-set-options;
+        description
+          "Enter the standard-community context";
       }
       container extended-community {
         if-feature "srl_nokia-feat:routing-policy-extended-community-sets";
@@ -1041,6 +1118,8 @@ module srl_nokia-routing-policy {
           }
         }
         uses srl_nokia-pol-types:match-set-options;
+        description
+          "Enter the extended-community context";
       }
       uses match-bgp-evpn;
       uses match-bgp-srte-policy;
@@ -1064,6 +1143,26 @@ module srl_nokia-routing-policy {
       }
       description
         "The route type to match";
+      must ". != 'gribi'" {
+        error-message "Protocol value \"gribi\" is not supported on this release";
+        srl_nokia-ext:if-feature "not srl_nokia-feat:routing-policy-gribi-route-type";
+      }
+    }
+    leaf tunnel {
+      if-feature "srl_nokia-feat:bgp-next-hop-resolution-policy";
+      type boolean;
+      description
+        "When true, only match tunnels and when false, only match IP routes
+
+         When unconfigured, match both routes and tunnels";
+    }
+    leaf tunnel-type {
+      if-feature "srl_nokia-feat:bgp-next-hop-resolution-policy";
+      type identityref {
+        base srl_nokia-comm:routing-policy-tunnel-match-type;
+      }
+      description
+        "The tunnel type to match";
     }
     leaf-list call-policy {
       if-feature "srl_nokia-feat:routing-policy-subroutines";
@@ -1100,15 +1199,17 @@ module srl_nokia-routing-policy {
     container isis {
       srl_nokia-ext:first-released "20.12.1";
       description
-        "Configuration for ISIS-specific policy match criteria";
+        "Enter the isis context
+
+         Configuration for ISIS-specific policy match criteria";
       leaf level {
         description
           "Match an IS-IS route based on its level";
         type uint8 {
           range "1..2";
         }
-        must "../../protocol = 'isis'" {
-          error-message "Protocol must be isis";
+        must "../../protocol = 'isis' or ../../tunnel-type = 'sr-isis' or ../../tunnel-type = 'srv6-isis'" {
+          error-message "Protocol must be isis or tunnel-type must be either sr-isis or srv6-isis";
         }
       }
       leaf route-type {
@@ -1134,7 +1235,9 @@ module srl_nokia-routing-policy {
     container ospf {
       srl_nokia-ext:first-released "20.12.1";
       description
-        "Configuration for OSPF-specific policy match criteria";
+        "Enter the ospf context
+
+         Configuration for OSPF-specific policy match criteria";
       leaf area-id {
         type srl_nokia-ospf-types:ospf-area-identifier;
         description
@@ -1175,7 +1278,9 @@ module srl_nokia-routing-policy {
       if-feature "srl_nokia-feat:mcast-route-policy";
       container group-address {
         description
-          "Multicast group IP address
+          "Enter the group-address context
+
+           Multicast group IP address
 
            To match a <S,G> the source needs to be present in the multicast source-address leafref and the group needs to present in the group-address leafref.
            To match a <*,G> the group has to be programmed in the group-address leafref and no source in the source-address leafref.
@@ -1188,7 +1293,9 @@ module srl_nokia-routing-policy {
       }
       container source-address {
         description
-          "Multicast Source IP address
+          "Enter the source-address context
+
+           Multicast Source IP address
 
            Source address can be configured as a prefix.";
         leaf prefix-set {
@@ -1197,6 +1304,8 @@ module srl_nokia-routing-policy {
           }
         }
       }
+      description
+        "Enter the multicast context";
     }
   }
 
@@ -1231,7 +1340,9 @@ module srl_nokia-routing-policy {
     container internal-tags {
       if-feature "srl_nokia-feat:internal-tags";
       description
-        "Configuration and state of internal tags";
+        "Enter the internal-tags context
+
+         Configuration and state of internal tags";
       leaf-list tag-set {
         max-elements 1;
         type leafref {
@@ -1251,7 +1362,9 @@ module srl_nokia-routing-policy {
       "Top-level grouping for match criteria";
     container match {
       description
-        "Match conditions of the policy statement";
+        "Enter the match context
+
+         Match conditions of the policy statement";
       uses match-prefix-set;
       uses match-general;
       uses match-tags;
@@ -1266,7 +1379,9 @@ module srl_nokia-routing-policy {
     container action {
       srl_nokia-ext:first-released "19.11.1";
       description
-        "Actions for routes that match the policy statement";
+        "Enter the action context
+
+         Actions for routes that match the policy statement";
       leaf policy-result {
         type srl_nokia-pol-types:statement-policy-result;
         description
@@ -1275,6 +1390,72 @@ module srl_nokia-routing-policy {
            If no value is configured for the policy-result then the implicit default is a next-statement behavior.";
       }
       uses statement-action-top;
+    }
+  }
+
+  grouping condition-top {
+    description
+      "Top level grouping for policy statemene conditions";
+    container condition {
+      description
+        "Enter the condition context
+
+         Conditions that must be met for the policy statement to be evaluated";
+      leaf evaluation-result {
+        config false;
+        description
+          "Reads true when the condition is fulfilled, resulting in evaluation of the statement";
+        type boolean;
+      }
+      container route-table {
+        description
+          "Enter the route-table context
+
+           Conditions related to the presence of routes in the route-table";
+        leaf network-instance {
+          description
+            "Reference to the network-instance with the route-table to be analyzed";
+          type leafref {
+            path "/srl_nokia-netinst:network-instance/srl_nokia-netinst:name";
+          }
+          must '../prefix-set' {
+            error-message "network-instance requires prefix-set as well";
+          }
+          must '(/srl_nokia-netinst:network-instance[srl_nokia-netinst:name=current()]/srl_nokia-netinst:type = "srl_nokia-netinst:ip-vrf") or (/srl_nokia-netinst:network-instance[srl_nokia-netinst:name=current()]/srl_nokia-netinst:type = "srl_nokia-netinst:default")' {
+            error-message "origin-network-instance match is only supported in the default and ip-vrf network-instances";
+          }
+        }
+        leaf prefix-set {
+          description
+            "Reference to a prefix set name";
+          type leafref {
+            path "/srl_rpol:routing-policy/srl_rpol:prefix-set/name";
+          }
+          must '../network-instance' {
+            error-message "prefix-set requires a network-instance to be specified";
+          }
+        }
+        leaf match-set-options {
+          type enumeration {
+            enum any {
+              description
+                "Condition is true if any element in the prefix set matches at least one active route in the route-table";
+            }
+            enum all {
+              description
+                "Match is true if every element in the prefix set matches at least one active route in the route-table";
+            }
+            enum invert {
+              description
+                "Match is true if there is no element in the prefix set that matches at least one route in the route-table";
+            }
+          }
+          description
+            "Options that determine the matching criteria that applies to the list of prefixes
+
+             The implicit default behavior is any";
+        }
+      }
     }
   }
 
@@ -1291,6 +1472,9 @@ module srl_nokia-routing-policy {
         type srl_nokia-comm:name;
         description
           "Name given to the policy statement (rule).";
+      }
+      uses condition-top {
+        if-feature "srl_nokia-feat:routing-policy-conditional-statements";
       }
       uses match-top;
       uses action-top;
@@ -1321,7 +1505,9 @@ module srl_nokia-routing-policy {
       "Top level container for route policies";
     container routing-policy {
       description
-        "Top-level container for all routing policy configuration";
+        "Enter the routing-policy context
+
+         Top-level container for all routing policy configuration";
       uses as-path-set-top;
       uses community-set-top;
       uses standard-community-set-top {

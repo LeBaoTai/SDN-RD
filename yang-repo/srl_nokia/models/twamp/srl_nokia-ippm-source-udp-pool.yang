@@ -22,6 +22,10 @@ module srl_nokia-ippm-source-udp-pool {
     "This module contains configuration and state data for the IP PM reserved source UDP pool.  This pool is available to multiple IP PM
      features.  The ports must be allocated to a function prior to that port being configurable under a specific function.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-07-31 {
     description
       "SRLinux 24.7.1";
@@ -83,7 +87,9 @@ module srl_nokia-ippm-source-udp-pool {
         "Context for IP Performance Measurement shared elements";
       container source-udp-port-pools {
         description
-          "Context for source UDP port allocation to IPPM application";
+          "Enter the source-udp-port-pools context
+
+           Context for source UDP port allocation to IPPM application";
         uses source-udp-allocation-configuration;
       }
     }

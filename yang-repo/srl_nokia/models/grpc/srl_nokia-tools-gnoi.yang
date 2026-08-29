@@ -6,6 +6,9 @@ module srl_nokia-tools-gnoi {
   import srl_nokia-features {
     prefix srl-feat;
   }
+  import srl_nokia-tools-gnoi-containerz {
+    prefix srl-tools-gnoi-containerz;
+  }
   import srl_nokia-tools-gnoi-healthz {
     prefix srl-tools-gnoi-healthz;
   }
@@ -18,6 +21,10 @@ module srl_nokia-tools-gnoi {
   description
     "Model for managing gNOI";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -36,6 +43,9 @@ module srl_nokia-tools-gnoi {
       presence "Configure tools gNOI";
       description
         "Top-level container for operational commands related to gNOI";
+      uses srl-tools-gnoi-containerz:tools-gnoi-containerz-top {
+        if-feature "srl-feat:gnoi-containerz and srl-feat:containerz-location";
+      }
       uses srl-tools-gnoi-healthz:tools-gnoi-healthz-top;
     }
   }

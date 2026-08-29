@@ -18,13 +18,20 @@ module srl_nokia-tools-group-based-policy {
   description
     "A model tools for Group Based Policy of a network instance";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
   }
 
   grouping gbp-tools-top {
-    container group-based-policy;
+    container group-based-policy {
+      description
+        "Enter the group-based-policy context";
+    }
   }
 
   augment "/srl_nokia-tools-netinst:network-instance" {

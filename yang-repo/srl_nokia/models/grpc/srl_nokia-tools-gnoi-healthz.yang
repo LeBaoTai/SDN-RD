@@ -18,6 +18,10 @@ module srl_nokia-tools-gnoi-healthz {
   description
     "Model for managing gNOI Healthz";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-03-31 {
     description
       "SRLinux 25.3.1";
@@ -40,7 +44,9 @@ module srl_nokia-tools-gnoi-healthz {
   grouping tools-gnoi-healthz-top {
     container healthz {
       description
-        "gNOI Healthz tools commands";
+        "Enter the healthz context
+
+         gNOI Healthz tools commands";
       leaf clear {
         description
           "Clear all healthz events";
@@ -50,14 +56,18 @@ module srl_nokia-tools-gnoi-healthz {
         case chassis {
           container chassis {
             description
-              "Chassis component";
+              "Enter the chassis context
+
+               Chassis component";
             uses common-tools-clear;
           }
         }
         case control {
           container control {
             description
-              "Control module component";
+              "Enter the control context
+
+               Control module component";
             leaf slot {
               mandatory true;
               type string {
@@ -72,7 +82,9 @@ module srl_nokia-tools-gnoi-healthz {
         case fabric {
           container fabric {
             description
-              "Fabric module component";
+              "Enter the fabric context
+
+               Fabric module component";
             leaf slot {
               mandatory true;
               type uint8;
@@ -85,7 +97,9 @@ module srl_nokia-tools-gnoi-healthz {
         case fan-tray {
           container fan-tray {
             description
-              "Fan component";
+              "Enter the fan-tray context
+
+               Fan component";
             leaf id {
               mandatory true;
               type uint8;
@@ -98,7 +112,9 @@ module srl_nokia-tools-gnoi-healthz {
         case linecard {
           container linecard {
             description
-              "Line card component
+              "Enter the linecard context
+
+               Line card component
 
                Clearing a slot component will not clear it's corresponding forwarding-complex components.
                Similarly, clearing a forwarding-complex component will not clear the slot component.";
@@ -125,7 +141,9 @@ module srl_nokia-tools-gnoi-healthz {
         case power-supply {
           container power-supply {
             description
-              "Power supply component";
+              "Enter the power-supply context
+
+               Power supply component";
             leaf id {
               mandatory true;
               type uint8;
@@ -138,7 +156,9 @@ module srl_nokia-tools-gnoi-healthz {
         case transceiver {
           container transceiver {
             description
-              "Transceiver component";
+              "Enter the transceiver context
+
+               Transceiver component";
             leaf interface {
               mandatory true;
               type srl-comm:name;

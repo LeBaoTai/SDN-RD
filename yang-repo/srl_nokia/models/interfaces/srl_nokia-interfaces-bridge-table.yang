@@ -18,6 +18,10 @@ module srl_nokia-interfaces-bridge-table {
   description
     "Model for managing aspects related to the bridge-table on the subinterface";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2021-06-30 {
     description
       "SRLinux 21.6.1";
@@ -44,7 +48,9 @@ module srl_nokia-interfaces-bridge-table {
       }
       container mac-limit {
         description
-          "Bridge Table size and thresholds.";
+          "Enter the mac-limit context
+
+           Bridge Table size and thresholds.";
         leaf maximum-entries {
           type int32 {
             range "1..8192";
@@ -84,7 +90,11 @@ module srl_nokia-interfaces-bridge-table {
                If disabled, dynamically learned mac entries will be programmed in the bridge table
                until the network instance is disabled.";
           }
+          description
+            "Enter the aging context";
         }
+        description
+          "Enter the mac-learning context";
       }
       container mac-duplication {
         leaf action {
@@ -122,6 +132,8 @@ module srl_nokia-interfaces-bridge-table {
                a different subinterface with a source mac matching the duplicate mac will be dropped. Frames arriving to a different
                subinterface with a destination mac matching the duplicate mac will be forwarded normally.";
         }
+        description
+          "Enter the mac-duplication context";
       }
     }
   }

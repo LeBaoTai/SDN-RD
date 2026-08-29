@@ -21,6 +21,10 @@ module srl_nokia-ospfv3-lsas {
   description
     "This yang file models configuration and state of the OSPFv2 protocol";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -52,7 +56,9 @@ module srl_nokia-ospfv3-lsas {
            set for the LSA.";
       }
       description
-        "OSPFv3 LSA options.";
+        "Enter the lsa-options context
+
+         OSPFv3 LSA options.";
     }
   }
 
@@ -75,7 +81,9 @@ module srl_nokia-ospfv3-lsas {
            that are set for the OSPFv3 prefix.";
       }
       description
-        "Prefix options.";
+        "Enter the prefix-options context
+
+         Prefix options.";
     }
   }
 
@@ -119,6 +127,8 @@ module srl_nokia-ospfv3-lsas {
             "Link Metric.";
         }
       }
+      description
+        "Enter the ospfv3-router-lsa context";
     }
   }
 
@@ -127,13 +137,17 @@ module srl_nokia-ospfv3-lsas {
       uses ospfv3-lsdb-lsa-options;
       container attached-routers {
         description
-          "All attached routers.";
+          "Enter the attached-routers context
+
+           All attached routers.";
         leaf-list attached-router {
           type yang:dotted-quad;
           description
             "List of the routers attached to the network.";
         }
       }
+      description
+        "Enter the ospfv3-network-lsa context";
     }
   }
 
@@ -146,7 +160,9 @@ module srl_nokia-ospfv3-lsas {
       }
       uses ospfv3-lsdb-lsa-prefix;
       description
-        "Prefix LSA.";
+        "Enter the ospfv3-inter-area-prefix-lsa context
+
+         Prefix LSA.";
     }
   }
 
@@ -164,14 +180,18 @@ module srl_nokia-ospfv3-lsas {
           "The Router ID of the ASBR described by the LSA.";
       }
       description
-        "Inter-Area-Router LSA.";
+        "Enter the ospfv3-inter-area-router-lsa context
+
+         Inter-Area-Router LSA.";
     }
   }
 
   grouping ospfv3-lsdb-external-lsa-structure {
     container ospfv3-external-lsa {
       description
-        "AS-External and NSSA LSA.";
+        "Enter the ospfv3-external-lsa context
+
+         AS-External and NSSA LSA.";
       leaf metric {
         type srl_nokia-ospf-types:ospf-metric-large;
         description
@@ -262,14 +282,18 @@ module srl_nokia-ospfv3-lsas {
         uses ospfv3-lsdb-lsa-prefix;
       }
       description
-        "Link LSA.";
+        "Enter the ospfv3-link-lsa context
+
+         Link LSA.";
     }
   }
 
   grouping ospfv3-lsdb-intra-area-prefix-lsa-structure {
     container ospfv3-intra-area-prefix-lsa {
       description
-        "Intra-Area-Prefix LSA.";
+        "Enter the ospfv3-intra-area-prefix-lsa context
+
+         Intra-Area-Prefix LSA.";
       leaf referenced-ls-type {
         type identityref {
           base srl_nokia-ospf-types:ospfv3-lsa-type;

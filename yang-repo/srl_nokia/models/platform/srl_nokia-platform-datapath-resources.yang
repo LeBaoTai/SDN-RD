@@ -36,6 +36,10 @@ module srl_nokia-platform-datapath-resources {
   description
     "This module defines configuration and operational state related to datapath resources in the system";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -148,7 +152,7 @@ module srl_nokia-platform-datapath-resources {
   identity mac-addresses {
     base xdp-datapath-resources;
     base xdp-cpm-datapath-resources;
-    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:vsrl or srl_nokia-feat:fpcx or srl_nokia-feat:ixr-dnx or srl_nokia-feat:ac5x or srl_nokia-feat:future-0-0 or srl_nokia-feat:tomahawk4 or srl_nokia-feat:tomahawk5";
+    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:vsrl or srl_nokia-feat:fpcx or srl_nokia-feat:ixr-dnx or srl_nokia-feat:ac5x or srl_nokia-feat:tomahawk4 or srl_nokia-feat:tomahawk5 or srl_nokia-feat:tomahawk6";
     description
       "MAC lookup table resources
 
@@ -185,7 +189,7 @@ module srl_nokia-platform-datapath-resources {
 
   identity multicast-route {
     base xdp-datapath-resources;
-    if-feature "(srl_nokia-feat:ixr-dnx-gen2 or srl_nokia-feat:ixr-dnx-gen2cp) and not srl_nokia-feat:ixr-dnx-gen2cp-gen3-mixed-system";
+    if-feature "(srl_nokia-feat:ixr-dnx-gen2 or srl_nokia-feat:ixr-dnx-gen2cp or srl_nokia-feat:ixr-dnx-gen3) and not srl_nokia-feat:ixr-dnx-gen2cp-gen3-mixed-system";
     description
       "multicast route resources
 
@@ -196,7 +200,7 @@ module srl_nokia-platform-datapath-resources {
   identity tunnel-next-hops {
     base xdp-datapath-resources;
     base xdp-cpm-datapath-resources;
-    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:vsrl or srl_nokia-feat:fpcx or srl_nokia-feat:ixr-dnx or srl_nokia-feat:future-0-0";
+    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:vsrl or srl_nokia-feat:fpcx or srl_nokia-feat:ixr-dnx";
     description
       "Tunnel next-hop resources
 
@@ -237,7 +241,7 @@ module srl_nokia-platform-datapath-resources {
 
   identity egress-next-hops {
     base xdp-datapath-resources;
-    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:tomahawk3 or srl_nokia-feat:tomahawk4 or srl_nokia-feat:tomahawk5 or srl_nokia-feat:future-0-0 or srl_nokia-feat:ac5x";
+    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:tomahawk3 or srl_nokia-feat:tomahawk4 or srl_nokia-feat:tomahawk5 or srl_nokia-feat:tomahawk6 or srl_nokia-feat:ac5x";
     description
       "Egress next-hop resources
 
@@ -253,7 +257,7 @@ module srl_nokia-platform-datapath-resources {
 
   identity lag-groups {
     base xdp-datapath-resources;
-    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:vsrl or srl_nokia-feat:future-0-0";
+    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:vsrl";
     description
       "LAG group resources
 
@@ -262,7 +266,7 @@ module srl_nokia-platform-datapath-resources {
 
   identity lag-members {
     base xdp-datapath-resources;
-    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:vsrl or srl_nokia-feat:future-0-0";
+    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:vsrl";
     description
       "LAG member resources
 
@@ -301,7 +305,7 @@ module srl_nokia-platform-datapath-resources {
   identity originating-tunnels {
     base xdp-datapath-resources;
     base xdp-cpm-datapath-resources;
-    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:vsrl or srl_nokia-feat:ixr-dnx or srl_nokia-feat:fpcx or srl_nokia-feat:future-0-0";
+    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:vsrl or srl_nokia-feat:ixr-dnx or srl_nokia-feat:fpcx";
     description
       "Originating tunnel resources
 
@@ -329,7 +333,7 @@ module srl_nokia-platform-datapath-resources {
 
   identity ip-lpm-ipv4-routes {
     base asic-datapath-resources;
-    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:tomahawk3 or srl_nokia-feat:tomahawk4 or srl_nokia-feat:tomahawk5 or srl_nokia-feat:future-0-0";
+    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:tomahawk3 or srl_nokia-feat:tomahawk4 or srl_nokia-feat:tomahawk5 or srl_nokia-feat:tomahawk6";
     description
       "IPv4 longest prefix match route resources
 
@@ -342,7 +346,7 @@ module srl_nokia-platform-datapath-resources {
 
   identity ip-lpm-ipv6-routes {
     base asic-datapath-resources;
-    if-feature "srl_nokia-feat:trident4 or srl_nokia-feat:tomahawk4 or srl_nokia-feat:tomahawk5 or srl_nokia-feat:future-0-0";
+    if-feature "srl_nokia-feat:trident4 or srl_nokia-feat:tomahawk4 or srl_nokia-feat:tomahawk5 or srl_nokia-feat:tomahawk6";
     description
       "IPv6 longest prefix match route resources
 
@@ -351,7 +355,7 @@ module srl_nokia-platform-datapath-resources {
 
   identity ip-lpm-ipv6-shorter-routes {
     base asic-datapath-resources;
-    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:tomahawk3 or srl_nokia-feat:future-0-0";
+    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:tomahawk3";
     description
       "IPv6 longest prefix match route resources when the prefix length is less than or equal to 64
 
@@ -364,7 +368,7 @@ module srl_nokia-platform-datapath-resources {
 
   identity ip-lpm-ipv6-longer-routes {
     base asic-datapath-resources;
-    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:tomahawk3 or srl_nokia-feat:future-0-0";
+    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:tomahawk3";
     description
       "IPv6 longest prefix match route resources when the prefix length is greater than 64
 
@@ -379,9 +383,81 @@ module srl_nokia-platform-datapath-resources {
     base asic-datapath-resources;
     if-feature "srl_nokia-feat:ixr-dnx";
     description
-      "IP exact match lookup table resources
+      "Exact match lookup table resources
 
-       Reports the number of half-wide entries used in the LEM table. Each MPLS ILM record uses one half-wide entry. Each IPv4 address used as a host route, ARP entry or subnet broadcast address requires a half-wide entry. An IPv6 address used as a host route, or ND entry requires a single-wide entry (2 half-wide entries). Free entries is the remaining number of half-wide entries.";
+       Reports the total number of full-width entries occupied in the LEM tables of both forwarding stages (as a sum)";
+  }
+
+  identity exact-match-entries-1 {
+    base asic-datapath-resources;
+    if-feature "(srl_nokia-feat:ixr-dnx-gen2cp or srl_nokia-feat:ixr-dnx-gen3) and srl_nokia-feat:ipv4-ipv6-routes-lem-optimization-resources";
+    description
+      "Exact match lookup table resources, main table
+
+       Counts 30-bit entries in the main LEM table";
+  }
+
+  identity exact-match-entries-2 {
+    base asic-datapath-resources;
+    if-feature "srl_nokia-feat:ixr-dnx-gen3 and srl_nokia-feat:ipv4-ipv6-routes-lem-optimization-resources";
+    description
+      "Exact match lookup table resources, secondary table
+
+       Counts 30-bit entries in the secondary LEM table";
+  }
+
+  identity exact-match-entries-mac-da {
+    base asic-datapath-resources;
+    if-feature "(srl_nokia-feat:ixr-dnx-gen2cp or srl_nokia-feat:ixr-dnx-gen3) and srl_nokia-feat:ipv4-ipv6-routes-lem-optimization-resources";
+    description
+      "Exact match lookup table resources used for MAC destination address FDB lookup
+
+       Counts 30-bit entries";
+  }
+
+  identity exact-match-entries-mac-sa {
+    base asic-datapath-resources;
+    if-feature "(srl_nokia-feat:ixr-dnx-gen2cp or srl_nokia-feat:ixr-dnx-gen3) and srl_nokia-feat:ipv4-ipv6-routes-lem-optimization-resources";
+    description
+      "Exact match lookup table resources used for MAC source address FDB lookup
+
+       Counts 30-bit entries";
+  }
+
+  identity exact-match-entries-mpls-label {
+    base asic-datapath-resources;
+    if-feature "(srl_nokia-feat:ixr-dnx-gen2cp or srl_nokia-feat:ixr-dnx-gen3) and srl_nokia-feat:ipv4-ipv6-routes-lem-optimization-resources";
+    description
+      "Exact match lookup table resources used for MPLS incoming label lookup
+
+       Counts 30-bit entries";
+  }
+
+  identity exact-match-entries-ipv4-route {
+    base asic-datapath-resources;
+    if-feature "srl_nokia-feat:ixr-dnx-gen3 and srl_nokia-feat:ipv4-ipv6-routes-lem-optimization-resources";
+    description
+      "Exact match lookup table resources used for IPv4 compressed route lookup
+
+       Counts 30-bit entries";
+  }
+
+  identity exact-match-entries-ipv6-route {
+    base asic-datapath-resources;
+    if-feature "srl_nokia-feat:ixr-dnx-gen3 and srl_nokia-feat:ipv4-ipv6-routes-lem-optimization-resources";
+    description
+      "Exact match lookup table resources used for IPv6 compressed route lookup
+
+       Counts 30-bit entries";
+  }
+
+  identity exact-match-entries-next-hop {
+    base asic-datapath-resources;
+    if-feature "srl_nokia-feat:ixr-dnx-gen3 and srl_nokia-feat:ipv4-ipv6-routes-lem-optimization-resources";
+    description
+      "Exact match lookup table resources used for compressed route next-hop lookup
+
+       Counts 30-bit entries";
   }
 
   identity ip-tunnel-source-ipv4-addresses {
@@ -404,7 +480,7 @@ module srl_nokia-platform-datapath-resources {
 
   identity underlay-ecmp-groups {
     base asic-datapath-resources;
-    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:vsrl or srl_nokia-feat:future-0-0";
+    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:tomahawk5 or srl_nokia-feat:vsrl";
     description
       "Underlay ECMP group resources
 
@@ -422,7 +498,7 @@ module srl_nokia-platform-datapath-resources {
 
   identity vp-lag-groups {
     base asic-datapath-resources;
-    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4";
+    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:tomahawk5";
     description
       "VP LAG group resources
 
@@ -431,7 +507,7 @@ module srl_nokia-platform-datapath-resources {
 
   identity overlay-ecmp-groups {
     base asic-datapath-resources;
-    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:vsrl or srl_nokia-feat:future-0-0";
+    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:tomahawk5 or srl_nokia-feat:vsrl";
     description
       "Overlay ECMP group resources
 
@@ -440,7 +516,7 @@ module srl_nokia-platform-datapath-resources {
 
   identity underlay-ecmp-members {
     base asic-datapath-resources;
-    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:vsrl or srl_nokia-feat:future-0-0";
+    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:tomahawk5 or srl_nokia-feat:vsrl";
     description
       "Underlay ECMP member resources
 
@@ -449,7 +525,7 @@ module srl_nokia-platform-datapath-resources {
 
   identity overlay-ecmp-members {
     base asic-datapath-resources;
-    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:vsrl or srl_nokia-feat:future-0-0";
+    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:tomahawk5 or srl_nokia-feat:vsrl";
     description
       "Overlay ECMP member resources
 
@@ -458,7 +534,7 @@ module srl_nokia-platform-datapath-resources {
 
   identity underlay-egress-next-hops {
     base asic-datapath-resources;
-    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:vsrl or srl_nokia-feat:future-0-0";
+    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:tomahawk5 or srl_nokia-feat:vsrl";
     description
       "Underlay egress next-hop resources
 
@@ -467,7 +543,7 @@ module srl_nokia-platform-datapath-resources {
 
   identity overlay-egress-next-hops {
     base asic-datapath-resources;
-    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:vsrl or srl_nokia-feat:future-0-0";
+    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:trident4 or srl_nokia-feat:tomahawk5 or srl_nokia-feat:vsrl";
     description
       "Overlay egress next-hop resources
 
@@ -476,7 +552,7 @@ module srl_nokia-platform-datapath-resources {
 
   identity dgpp-module-ids {
     base asic-datapath-resources;
-    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:future-0-0";
+    if-feature "srl_nokia-feat:trident3";
     description
       "DGPP module ID resources
 
@@ -485,7 +561,7 @@ module srl_nokia-platform-datapath-resources {
 
   identity egress-vlan-translate-egress-vnis {
     base asic-datapath-resources;
-    if-feature "srl_nokia-feat:trident3 or srl_nokia-feat:future-0-0";
+    if-feature "srl_nokia-feat:trident3";
     description
       "EGR_VLAN_XLATE_1 resources
 
@@ -733,10 +809,14 @@ module srl_nokia-platform-datapath-resources {
   grouping datapath-resource-monitoring {
     container datapath {
       description
-        "Container for monitoring datapath resources system-wide";
+        "Enter the datapath context
+
+         Container for monitoring datapath resources system-wide";
       container xdp {
         description
-          "Container for monitoring datapath resources that are generic in concept.";
+          "Enter the xdp context
+
+           Container for monitoring datapath resources that are generic in concept.";
         list resource {
           description
             "List of generic datapath resources";
@@ -768,7 +848,9 @@ module srl_nokia-platform-datapath-resources {
       }
       container asic {
         description
-          "Container for monitoring datapath resources that are specific to a subset of the chipsets supported by SRLinux.";
+          "Enter the asic context
+
+           Container for monitoring datapath resources that are specific to a subset of the chipsets supported by SRLinux.";
         list resource {
           description
             "List of ASIC-specific datapath resources";
@@ -854,13 +936,17 @@ module srl_nokia-platform-datapath-resources {
   grouping forwarding-complex-utilization {
     container datapath {
       description
-        "Container for monitoring datapath resources of a particular forwarding complex";
+        "Enter the datapath context
+
+         Container for monitoring datapath resources of a particular forwarding complex";
       config false;
       container xdp {
         srl_nokia-ext:delivery-node-override "true";
         srl_nokia-ext:stream-mode "sample=5";
         description
-          "Container for monitoring datapath resources that are generic in concept.";
+          "Enter the xdp context
+
+           Container for monitoring datapath resources that are generic in concept.";
         list resource {
           description
             "List of generic datapath resources.";
@@ -879,7 +965,9 @@ module srl_nokia-platform-datapath-resources {
         srl_nokia-ext:delivery-node-override "true";
         srl_nokia-ext:stream-mode "sample=5";
         description
-          "Container for monitoring ASIC-specific datapath resources";
+          "Enter the asic context
+
+           Container for monitoring ASIC-specific datapath resources";
         list resource {
           description
             "List of ASIC-specific datapath resources.";
@@ -900,11 +988,15 @@ module srl_nokia-platform-datapath-resources {
   grouping pipeline-utilization {
     container datapath {
       description
-        "Container for monitoring datapath resources of a particular pipeline";
+        "Enter the datapath context
+
+         Container for monitoring datapath resources of a particular pipeline";
       config false;
       container xdp {
         description
-          "Container for monitoring datapath resources that are generic in concept.
+          "Enter the xdp context
+
+           Container for monitoring datapath resources that are generic in concept.
 
            At the pipeline level only one XDP resource is currently reported:
            - subinterfaces";
@@ -928,13 +1020,17 @@ module srl_nokia-platform-datapath-resources {
   grouping cpm-datapath-utilization {
     container datapath {
       description
-        "Container for monitoring datapath resources of XDP CPM";
+        "Enter the datapath context
+
+         Container for monitoring datapath resources of XDP CPM";
       config false;
       container xdp {
         srl_nokia-ext:delivery-node-override "true";
         srl_nokia-ext:stream-mode "sample=5";
         description
-          "Container for monitoring datapath resources that typically generic";
+          "Enter the xdp context
+
+           Container for monitoring datapath resources that typically generic";
         list resource {
           description
             "List of generic datapath resources.";
@@ -953,7 +1049,9 @@ module srl_nokia-platform-datapath-resources {
         srl_nokia-ext:delivery-node-override "true";
         srl_nokia-ext:stream-mode "sample=5";
         description
-          "Container for monitoring datapath resources that are typically ASIC specific";
+          "Enter the asic context
+
+           Container for monitoring datapath resources that are typically ASIC specific";
         list resource {
           description
             "List of ASIC-specific datapath resources.";

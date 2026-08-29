@@ -42,6 +42,10 @@ module srl_nokia-te-policies {
   description
     "Configuration and state for traffic engineering policies.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -511,6 +515,7 @@ module srl_nokia-te-policies {
         "Container with traffic engineering policies";
       uses binding-sid-label-blocks;
       uses explicit-paths;
+      uses policy-template;
       uses te-policies;
       uses policy-database;
     }
@@ -520,7 +525,9 @@ module srl_nokia-te-policies {
     container binding-sid {
       if-feature "srl_nokia-feat:label-management";
       description
-        "Configuration and state related to the label block(s) used for the binding SIDs associated with TE policies";
+        "Enter the binding-sid context
+
+         Configuration and state related to the label block(s) used for the binding SIDs associated with TE policies";
       leaf static-label-block {
         type leafref {
           path "/srl_nokia-system:system/srl_nokia-mplslbl:mpls/srl_nokia-mplslbl:label-ranges/srl_nokia-mplslbl:static/srl_nokia-mplslbl:name";
@@ -542,13 +549,35 @@ module srl_nokia-te-policies {
 
            \t\t\t  The label block may show as unavailable if there is pending cleanup.";
       }
+      leaf dynamic-label-block {
+        if-feature "srl_nokia-feat:pcep-pcc-pce-init";
+        type leafref {
+          path "/srl_nokia-system:system/srl_nokia-mplslbl:mpls/srl_nokia-mplslbl:label-ranges/srl_nokia-mplslbl:dynamic/srl_nokia-mplslbl:name";
+        }
+        description
+          "Reference to a dynamic label block";
+      }
+      leaf dynamic-label-block-status {
+        config false;
+        if-feature "srl_nokia-feat:pcep-pcc-pce-init";
+        type enumeration {
+          enum available;
+          enum unavailable;
+        }
+        description
+          "Status of the label block
+
+           The label block may show as unavailable if there is pending cleanup";
+      }
     }
   }
 
   grouping explicit-paths {
     container explicit-paths {
       description
-        "Named paths used to specify SR policy segment lists";
+        "Enter the explicit-paths context
+
+         Named paths used to specify SR policy segment lists";
       list path {
         key "explicit-path-name";
         leaf explicit-path-name {
@@ -610,10 +639,9 @@ module srl_nokia-te-policies {
     container entropy-label {
       if-feature "srl_nokia-feat:te-policies-entropy-label";
       description
-        "Options for configuring control and data plane aspects of entropy label";
-      must "../policy-type = 'sr-mpls-uncolored' or ./transmit = 'disable'" {
-        error-message "Entropy label is supported only for sr-mpls-uncolored TE policies";
-      }
+        "Enter the entropy-label context
+
+         Options for configuring control and data plane aspects of entropy label";
       leaf transmit {
         description
           "Specify conditions for adding ELI/EL under the stack of labels comprising the segment-list";
@@ -644,6 +672,106 @@ module srl_nokia-te-policies {
       }
       description
         "Indication whether resource allocation succeeded or failed for the set of counters";
+    }
+  }
+
+  grouping policy-template {
+    list template {
+      if-feature "srl_nokia-feat:pcep-pcc-pce-init";
+      description
+        "List of traffic engineering policy templates";
+      key "template-name";
+      leaf template-name {
+        description
+          "The name of the traffic engineering policy template";
+        type srl_nokia-comm:name;
+      }
+      leaf template-type {
+        mandatory true;
+        description
+          "Specifies the TE policy template type
+
+           TE Policy can be of type sr-mpls-colored where label based segment-list or segment-lists constitute a candidate path and color with endpoint is used to configure a path. TE Policy can be of type uncolored in which case a single primary LSP can be backed by one or more secondary LSPs";
+        type srl_nokia-comm:te-policy-template-type;
+      }
+      leaf template-id {
+        description
+          "Unique identifier for the TE Policy template
+
+           Identifier is used by PCE as an unique identifier of the Segment List";
+        type union {
+          type uint32 {
+            range "1..4294967295";
+          }
+          type enumeration {
+            enum default {
+              value -1;
+            }
+          }
+        }
+        default "default";
+      }
+      uses entropy-label;
+      leaf tag-set {
+        if-feature "srl_nokia-feat:internal-tags and srl_nokia-feat:te-policies-tag-set";
+        description
+          "Tag set to associate with an sr-mpls-uncolored TE policy template";
+        type leafref {
+          path "/srl_nokia-routing-pol:routing-policy/srl_nokia-routing-pol:tag-set/srl_nokia-routing-pol:name";
+        }
+      }
+      leaf metric {
+        description
+          "Metric for the TE Policy template";
+        type uint32 {
+          range "1..16777215";
+        }
+      }
+      container statistics {
+        if-feature "srl_nokia-feat:te-policy-statistics";
+        description
+          "Enter the statistics context
+
+           Traffic Statistics";
+        container ingress {
+          description
+            "Enter the ingress context
+
+             Ingress statistics context";
+          leaf admin-state {
+            type srl_nokia-comm:admin-state;
+            default "disable";
+            description
+              "Administrative state of the traffic statistics";
+          }
+        }
+        container egress {
+          description
+            "Enter the egress context
+
+             Egress-statistics context";
+          leaf admin-state {
+            type srl_nokia-comm:admin-state;
+            default "disable";
+            description
+              "Administrative state of the traffic statistics";
+          }
+        }
+      }
+      container protection {
+        description
+          "Enter the protection context
+
+           Protection context for TE Policy template, hold and wait timers, sBFD, revertive behavior and alike available under this context";
+        leaf protection-policy {
+          if-feature "srl_nokia-feat:protection-policies";
+          description
+            "The protection policy for the TE policy template";
+          type leafref {
+            path "/srl_nokia-system:system/srl_nokia-prot-pol:protection-policies/srl_nokia-prot-pol:policy/srl_nokia-prot-pol:protection-policy-name";
+          }
+        }
+      }
     }
   }
 
@@ -682,7 +810,9 @@ module srl_nokia-te-policies {
       }
       container binding-sid {
         description
-          "Identifier that opaquely represents the Uncolored Traffic Engineering Policy (a.k.a. SR-TE LSP) to upstream routers";
+          "Enter the binding-sid context
+
+           Identifier that opaquely represents the Uncolored Traffic Engineering Policy (a.k.a. SR-TE LSP) to upstream routers";
         leaf mpls-label {
           description
             "MPLS label that represents the Uncolored Traffic Engineering Policy to upstream routers";
@@ -723,6 +853,10 @@ module srl_nokia-te-policies {
         must "../policy-type = 'sr-mpls-colored'" {
           error-message "Discriminator is specific to sr-mpls-colored TE policies";
         }
+      }
+      must "./policy-type = 'sr-mpls-uncolored' or ./entropy-label/transmit = 'disable'" {
+        srl_nokia-ext:if-feature "srl_nokia-feat:te-policies-entropy-label";
+        error-message "Entropy label is supported only for sr-mpls-uncolored TE policies";
       }
       uses entropy-label;
       leaf head-end {
@@ -801,14 +935,18 @@ module srl_nokia-te-policies {
       container statistics {
         if-feature "srl_nokia-feat:te-policy-statistics";
         description
-          "Traffic Statistics";
+          "Enter the statistics context
+
+           Traffic Statistics";
         container ingress {
           must "../../policy-type = 'sr-mpls-uncolored' or ./admin-state = 'disable'" {
             error-message "Statistics are supported only for uncolored type policies";
             srl_nokia-ext:if-feature "not srl_nokia-feat:te-policy-colored-statistics";
           }
           description
-            "Ingress statistics context";
+            "Enter the ingress context
+
+             Ingress statistics context";
           leaf admin-state {
             type srl_nokia-comm:admin-state;
             default "disable";
@@ -818,7 +956,9 @@ module srl_nokia-te-policies {
         }
         container egress {
           description
-            "Egress-statistics context";
+            "Enter the egress context
+
+             Egress-statistics context";
           must "../../policy-type = 'sr-mpls-uncolored' or ./admin-state = 'disable'" {
             error-message "Statistics are supported only for uncolored type policies";
             srl_nokia-ext:if-feature "not srl_nokia-feat:te-policy-colored-statistics";
@@ -833,7 +973,9 @@ module srl_nokia-te-policies {
       }
       container protection {
         description
-          "Protection context for TE Policy, hold and wait timers, sBFD, revertive behavior and alike available under this context";
+          "Enter the protection context
+
+           Protection context for TE Policy, hold and wait timers, sBFD, revertive behavior and alike available under this context";
         leaf protection-policy {
           if-feature "srl_nokia-feat:protection-policies";
           description
@@ -848,7 +990,9 @@ module srl_nokia-te-policies {
         container return-path {
           if-feature "srl_nokia-feat:sbfd-return-label";
           description
-            "Context for defining return path identifier";
+            "Enter the return-path context
+
+             Context for defining return path identifier";
           leaf mpls-label {
             must 'boolean(../../protection-policy)' {
               error-message "Return path label is only applicable when protection policy is configured";
@@ -867,7 +1011,9 @@ module srl_nokia-te-policies {
     container pce-associations {
       if-feature "srl_nokia-feat:pcep-pcc and srl_nokia-feat:pcep-pcc-pce-association";
       description
-        "PCE association policy and diversity ";
+        "Enter the pce-associations context
+
+         PCE association policy and diversity ";
       leaf-list diversity {
         max-elements 5;
         description
@@ -891,7 +1037,9 @@ module srl_nokia-te-policies {
     container pce-associations {
       if-feature "srl_nokia-feat:pcep-pcc and srl_nokia-feat:pcep-pcc-pce-association";
       description
-        "PCE association policy and diversity ";
+        "Enter the pce-associations context
+
+         PCE association policy and diversity ";
       leaf-list diversity {
         max-elements 5;
         description
@@ -982,7 +1130,9 @@ module srl_nokia-te-policies {
       }
       container priority {
         description
-          "Configure setup and hold priorities to be conveyed to the PCE for preemption purposes";
+          "Enter the priority context
+
+           Configure setup and hold priorities to be conveyed to the PCE for preemption purposes";
         leaf hold-priority {
           description
             "Hold priority of a TE policy in relation to preemption action";
@@ -1083,7 +1233,9 @@ module srl_nokia-te-policies {
           }
           container segment-depth {
             description
-              "Configuration for the maximum number of SIDs/segments";
+              "Enter the segment-depth context
+
+               Configuration for the maximum number of SIDs/segments";
             leaf segment-limit {
               description
                 "The maximum number of segments in the segment-list";
@@ -1155,6 +1307,8 @@ module srl_nokia-te-policies {
             }
           }
           uses pce-associations-config;
+          description
+            "Enter the te-constraints context";
         }
       }
     }
@@ -1164,11 +1318,15 @@ module srl_nokia-te-policies {
     container policy-database {
       config false;
       description
-        "Traffic Engineering Policy Database";
+        "Enter the policy-database context
+
+         Traffic Engineering Policy Database";
       container sr-colored {
         if-feature "srl_nokia-feat:segment-routing-colored-te-policies";
         description
-          "SR MPLS Policy colored Traffic Engineering Paths";
+          "Enter the sr-colored context
+
+           SR MPLS Policy colored Traffic Engineering Paths";
         list policy {
           key "color endpoint";
           leaf color {
@@ -1226,7 +1384,9 @@ module srl_nokia-te-policies {
       }
       container sr-uncolored {
         description
-          "Uncolored Traffic Engineering Policy Paths. Also referred to as SR-TE LSPs";
+          "Enter the sr-uncolored context
+
+           Uncolored Traffic Engineering Policy Paths. Also referred to as SR-TE LSPs";
         list policy {
           key "policy-name protocol-origin";
           description
@@ -1362,6 +1522,8 @@ module srl_nokia-te-policies {
           "Number of octets received by the TE policy";
       }
       uses stats-resource-allocation-status;
+      description
+        "Enter the ingress context";
     }
   }
 
@@ -1381,6 +1543,8 @@ module srl_nokia-te-policies {
           "Number of octets transmitted by the TE policy";
       }
       uses stats-resource-allocation-status;
+      description
+        "Enter the egress context";
     }
   }
 
@@ -1390,6 +1554,8 @@ module srl_nokia-te-policies {
       config false;
       uses ingress-statistics-state;
       uses egress-statistics-state;
+      description
+        "Enter the statistics context";
     }
   }
 
@@ -1398,6 +1564,8 @@ module srl_nokia-te-policies {
       if-feature "srl_nokia-feat:te-policy-colored-statistics";
       config false;
       uses ingress-statistics-state;
+      description
+        "Enter the statistics context";
     }
   }
 
@@ -1405,7 +1573,9 @@ module srl_nokia-te-policies {
     container statistics {
       if-feature "srl_nokia-feat:te-policy-colored-statistics";
       description
-        "Segment-list egress statistics";
+        "Enter the statistics context
+
+         Segment-list egress statistics";
       uses egress-statistics-state;
     }
   }
@@ -1449,7 +1619,9 @@ module srl_nokia-te-policies {
     container dynamic {
       config false;
       description
-        "Dynamic Segment List";
+        "Enter the dynamic context
+
+         Dynamic Segment List";
       leaf path-algorithm {
         description
           "Algorithm used for computation of the Segment List";
@@ -1457,7 +1629,9 @@ module srl_nokia-te-policies {
       }
       container te-constraints {
         description
-          "Traffic Engineering constraints for dynamic segment-lists";
+          "Enter the te-constraints context
+
+           Traffic Engineering constraints for dynamic segment-lists";
         leaf metric-type {
           description
             "Metric type used for segment-list computation";
@@ -1514,7 +1688,9 @@ module srl_nokia-te-policies {
         }
         container segment-depth {
           description
-            "Configuration for the maximum number of SIDs/segments";
+            "Enter the segment-depth context
+
+             Configuration for the maximum number of SIDs/segments";
           leaf segment-limit {
             description
               "The maximum number of segments in the segment-list";
@@ -1531,7 +1707,9 @@ module srl_nokia-te-policies {
     container protection {
       if-feature "srl_nokia-feat:protection-policies";
       description
-        "Protection context for TE Policy, hold and wait timers, sBFD, revertive behavior and alike available under this context";
+        "Enter the protection context
+
+         Protection context for TE Policy, hold and wait timers, sBFD, revertive behavior and alike available under this context";
       leaf protection-policy {
         srl_nokia-ext:show-importance "high";
         description
@@ -1547,7 +1725,9 @@ module srl_nokia-te-policies {
       container return-path {
         if-feature "srl_nokia-feat:sbfd-return-label";
         description
-          "Context for defining return path identifier";
+          "Enter the return-path context
+
+           Context for defining return path identifier";
         leaf mpls-label {
           description
             "MPLS label that is used by reflector while responding to the sBFD request. Assigned value should uniquely identify the sender. Binding-SID or a Node-SID are commonly used options";
@@ -1591,6 +1771,8 @@ module srl_nokia-te-policies {
           "Indicates the reason code for last MBB failure.";
         type segment-list-failure-reason-type;
       }
+      description
+        "Enter the last-pce-update context";
     }
   }
 
@@ -1647,6 +1829,8 @@ module srl_nokia-te-policies {
           "The time in seconds left to wait for the bfd session to be up.";
         type srl_nokia-comm:date-and-time-delta;
       }
+      description
+        "Enter the bfd context";
     }
   }
 
@@ -1705,6 +1889,8 @@ module srl_nokia-te-policies {
               "Label recorded for this hop.";
             type uint32;
           }
+          description
+            "Enter the sid-value context";
         }
         leaf sid-type {
           config false;
@@ -1723,13 +1909,17 @@ module srl_nokia-te-policies {
           }
         }
       }
+      description
+        "Enter the computed-segments context";
     }
   }
 
   grouping binding-sid-state {
     container binding-sid {
       description
-        "Identifier that opaquely represents the Colored Traffic Engineering Policy to upstream routers";
+        "Enter the binding-sid context
+
+         Identifier that opaquely represents the Colored Traffic Engineering Policy to upstream routers";
       leaf mpls-label {
         srl_nokia-ext:show-importance "high";
         description
@@ -1753,7 +1943,9 @@ module srl_nokia-te-policies {
     }
     container bfd {
       description
-        "BFD hold timer";
+        "Enter the bfd context
+
+         BFD hold timer";
       leaf hold-down-timer-expiry {
         config false;
         type srl_nokia-comm:date-and-time-delta;
@@ -2079,10 +2271,14 @@ module srl_nokia-te-policies {
     container mbb {
       config false;
       description
-        "The make-before-break operational information.";
+        "Enter the mbb context
+
+         The make-before-break operational information.";
       container last-mbb {
         description
-          "The last make-before-break operational information.";
+          "Enter the last-mbb context
+
+           The last make-before-break operational information.";
         leaf type {
           description
             "Indicates the type of the make-before-break (MBB) that is in progress.";
@@ -2134,7 +2330,9 @@ module srl_nokia-te-policies {
       }
       container in-progress-mbb {
         description
-          "The in progress make-before-break operational information.";
+          "Enter the in-progress-mbb context
+
+           The in progress make-before-break operational information.";
         leaf type {
           description
             "Indicates the type of the make-before-break (MBB) that is in progress.";

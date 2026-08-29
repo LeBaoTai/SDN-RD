@@ -25,6 +25,10 @@ module srl_nokia-stamp {
     "Nokia SR Linux Support
      Web: <http://www.nokia.com>";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-10-31 {
     description
       "SRLinux 24.10.1";
@@ -164,6 +168,8 @@ module srl_nokia-stamp {
           config false;
           uses session-reflector-statistics-common;
           uses reflector-top-level-statistics;
+          description
+            "Enter the statistics context";
         }
         list network-instance {
           description
@@ -205,6 +211,25 @@ module srl_nokia-stamp {
             }
             default "862";
           }
+          container twamp-light-extensions {
+            if-feature "srl_nokia-feat:link-measurement-lag-micro-sessions";
+            description
+              "Enter the twamp-light-extensions context
+
+               Protocol specific configuration for TWAMP-Light PDU extensions";
+            leaf lag-micro-sessions {
+              if-feature "srl_nokia-feat:link-measurement-lag-micro-sessions";
+              type boolean;
+              default "false";
+              must "not(.) or (/srl_nokia-netinst:network-instance[srl_nokia-netinst:name = current()/../../srl_nokia-stamp:name]/srl_nokia-netinst:type = 'srl_nokia-netinst:default')" {
+                error-message "lag-micro-sessions is only allowed on default network instance";
+              }
+              description
+                "Enable checking for micro-session identifiers in TWAMP-Light PDU";
+              reference
+                "RFC9533 Section 4.2";
+            }
+          }
           leaf oper-state {
             config false;
             type srl_nokia-comm:oper-state;
@@ -215,6 +240,8 @@ module srl_nokia-stamp {
             config false;
             uses session-reflector-statistics-common;
             uses reflector-network-instance-statistics;
+            description
+              "Enter the statistics context";
           }
           list test-session-statistics {
             srl_nokia-ext:delivery-node-override "true";

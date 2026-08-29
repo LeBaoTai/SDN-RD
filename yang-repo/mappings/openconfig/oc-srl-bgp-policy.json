@@ -10,13 +10,11 @@
     },
     {
       "oc": "/routing-policy/defined-sets/bgp-defined-sets/community-sets/community-set",
-      "srlinux": "/routing-policy/standard-community-set",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/standard-community-set"
     },
     {
       "oc": "/routing-policy/defined-sets/bgp-defined-sets/community-sets/community-set/community-set-name",
-      "srlinux": "/routing-policy/standard-community-set/name",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/standard-community-set/name"
     },
     {
       "oc": "/routing-policy/defined-sets/bgp-defined-sets/community-sets/community-set/{config,state}",
@@ -28,8 +26,7 @@
     },
     {
       "oc": "/routing-policy/defined-sets/bgp-defined-sets/community-sets/community-set/{config,state}/community-member",
-      "srlinux": "/routing-policy/standard-community-set/member",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/standard-community-set/member"
     },
     {
       "oc": "/routing-policy/defined-sets/bgp-defined-sets/community-sets/community-set/{config,state}/match-set-options",
@@ -51,8 +48,7 @@
         {
           "__number__": "__number__"
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/routing-policy/defined-sets/bgp-defined-sets/ext-community-sets",
@@ -60,13 +56,11 @@
     },
     {
       "oc": "/routing-policy/defined-sets/bgp-defined-sets/ext-community-sets/ext-community-set",
-      "srlinux": "/routing-policy/extended-community-set",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/extended-community-set"
     },
     {
       "oc": "/routing-policy/defined-sets/bgp-defined-sets/ext-community-sets/ext-community-set/ext-community-set-name",
-      "srlinux": "/routing-policy/extended-community-set/name",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/extended-community-set/name"
     },
     {
       "oc": "/routing-policy/defined-sets/bgp-defined-sets/ext-community-sets/ext-community-set/{config,state}",
@@ -78,8 +72,7 @@
     },
     {
       "oc": "/routing-policy/defined-sets/bgp-defined-sets/ext-community-sets/ext-community-set/{config,state}/ext-community-member",
-      "srlinux": "/routing-policy/extended-community-set/member",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/extended-community-set/member"
     },
     {
       "oc": "/routing-policy/defined-sets/bgp-defined-sets/ext-community-sets/ext-community-set/{config,state}/match-set-options",
@@ -88,8 +81,7 @@
     {
       "oc": "/routing-policy/defined-sets/bgp-defined-sets/ext-community-sets/ext-community-set/{config,state}/ext-community-member/ext-community-member",
       "srlinux": "/routing-policy/extended-community-set/member/member",
-      "transform": "bgp-policy-ext-community-member-transform",
-      "feature-flagged": true
+      "transform": "bgp-policy-ext-community-member-transform"
     },
     {
       "oc": "/routing-policy/defined-sets/bgp-defined-sets/as-path-sets",
@@ -206,13 +198,11 @@
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/{config,state}",
-      "srlinux": "/routing-policy/policy/statement/match/bgp/standard-community",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/policy/statement/match/bgp/standard-community"
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/{config,state}/community-set",
-      "srlinux": "/routing-policy/policy/statement/match/bgp/standard-community/standard-community-set",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/policy/statement/match/bgp/standard-community/standard-community-set"
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/{config,state}/match-set-options",
@@ -227,8 +217,7 @@
         {
           "INVERT": "invert"
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/{config,state}/ext-community-set",
@@ -240,13 +229,11 @@
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/{config,state}",
-      "srlinux": "/routing-policy/policy/statement/match/bgp/extended-community",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/policy/statement/match/bgp/extended-community"
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/{config,state}/ext-community-set",
-      "srlinux": "/routing-policy/policy/statement/match/bgp/extended-community/extended-community-set",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/policy/statement/match/bgp/extended-community/extended-community-set"
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/{config,state}/match-set-options",
@@ -261,8 +248,7 @@
         {
           "INVERT": "invert"
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/community-count",
@@ -342,8 +328,7 @@
         {
           "INVERT": "invert"
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-as-path-set/{config,state}/as-path-set",
@@ -375,13 +360,11 @@
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/{config,state}/set-local-pref",
       "srlinux": "/routing-policy/policy/statement/action/bgp/local-preference/value",
-      "finalize-transform": "srl-set-field-to-value{operation=set}",
-      "feature-flagged": true
+      "finalize-transform": "srl-set-field-to-value{operation=set}"
     },
     {
       "oc": "",
-      "srlinux": "/routing-policy/policy/statement/action/bgp/local-preference/operation",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/policy/statement/action/bgp/local-preference/operation"
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/{config,state}/set-next-hop",
@@ -488,8 +471,7 @@
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community",
-      "srlinux": "/routing-policy/policy/statement/action/bgp/standard-community",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/policy/statement/action/bgp/standard-community"
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community/config",
@@ -516,8 +498,7 @@
             }
           ]
         }
-      },
-      "feature-flagged": true
+      }
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community/{config,state}/options",
@@ -532,8 +513,7 @@
         {
           "REPLACE": "replace"
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community/inline",
@@ -565,13 +545,11 @@
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community/reference/{config,state}/community-set-refs",
-      "srlinux": "/routing-policy/policy/statement/action/bgp/standard-community/referenced-sets",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/policy/statement/action/bgp/standard-community/referenced-sets"
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community/reference/{config,state}/community-set-refs/community-set-refs",
-      "srlinux": "/routing-policy/policy/statement/action/bgp/standard-community/referenced-sets/referenced-sets",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/policy/statement/action/bgp/standard-community/referenced-sets/referenced-sets"
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community",
@@ -579,8 +557,7 @@
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/{config,state}",
-      "srlinux": "/routing-policy/policy/statement/action/bgp/extended-community",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/policy/statement/action/bgp/extended-community"
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/{config,state}/method",
@@ -599,8 +576,7 @@
             }
           ]
         }
-      },
-      "feature-flagged": true
+      }
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/{config,state}/options",
@@ -615,8 +591,7 @@
         {
           "REPLACE": "replace"
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/inline",
@@ -644,13 +619,11 @@
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/{config,state}/ext-community-set-refs",
-      "srlinux": "/routing-policy/policy/statement/action/bgp/extended-community/referenced-sets",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/policy/statement/action/bgp/extended-community/referenced-sets"
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/{config,state}/ext-community-set-refs/ext-community-set-refs",
-      "srlinux": "/routing-policy/policy/statement/action/bgp/extended-community/referenced-sets/referenced-sets",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/policy/statement/action/bgp/extended-community/referenced-sets/referenced-sets"
     }
   ]
 }

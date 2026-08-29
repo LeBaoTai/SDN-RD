@@ -21,6 +21,10 @@ module srl_nokia-interfaces-router-adv {
   description
     "Model for managing ICMPv6 router advertisement on IPv6 subinterfaces.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -45,10 +49,14 @@ module srl_nokia-interfaces-router-adv {
   grouping ipv6-ra-top {
     container router-advertisement {
       description
-        "Container for configuring IPv6 router discovery options";
+        "Enter the router-advertisement context
+
+         Container for configuring IPv6 router discovery options";
       container router-role {
         description
-          "IPv6 router advertisement options that apply when the role of the interface is a router interface.";
+          "Enter the router-role context
+
+           IPv6 router advertisement options that apply when the role of the interface is a router interface.";
         leaf admin-state {
           description
             "Administratively enable or disable the sending of router advertisements on the subinterface.";
@@ -180,7 +188,9 @@ module srl_nokia-interfaces-router-adv {
         }
         container dns-options {
           description
-            "IPv6 router advertisement options for DNS configuration (RDNSS). ";
+            "Enter the dns-options context
+
+             IPv6 router advertisement options for DNS configuration (RDNSS). ";
           if-feature "srl-feat:router-advertisement-rdnss-option";
           leaf rdnss-lifetime {
             description

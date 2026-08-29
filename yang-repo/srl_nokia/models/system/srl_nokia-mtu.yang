@@ -18,6 +18,10 @@ module srl_nokia-mtu {
   description
     "This module defines configuration and operational state data related to the system MTU";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -135,7 +139,9 @@ module srl_nokia-mtu {
   grouping mtu-top {
     container mtu {
       description
-        "Top-level container for configuration and state data related to the system MTU";
+        "Enter the mtu context
+
+         Top-level container for configuration and state data related to the system MTU";
       uses mtu-config-top;
     }
   }

@@ -18,6 +18,10 @@ module srl_nokia-system-name {
   description
     "This module defines configuration related to the name of the system";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2019-11-30 {
     description
       "SRLinux 19.11.1";
@@ -26,7 +30,9 @@ module srl_nokia-system-name {
   grouping name-config-top {
     container name {
       description
-        "Contains configuration and state related to system naming";
+        "Enter the name context
+
+         Contains configuration and state related to system naming";
       leaf domain-name {
         type srl-comm:domain-name;
         description

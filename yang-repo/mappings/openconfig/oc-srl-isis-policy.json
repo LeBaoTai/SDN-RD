@@ -2,8 +2,7 @@
   "mapping": [
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/isis-actions",
-      "srlinux": "/routing-policy/policy/statement/action/isis",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/policy/statement/action/isis"
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/isis-actions/{config,state}",
@@ -11,8 +10,7 @@
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/isis-actions/{config,state}/set-level",
-      "srlinux": "/routing-policy/policy/statement/action/isis/level",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/policy/statement/action/isis/level"
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/isis-actions/{config,state}/set-metric-type",
@@ -35,13 +33,11 @@
             }
           ]
         }
-      },
-      "feature-flagged": true
+      }
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/isis-actions/{config,state}/set-metric",
-      "srlinux": "/routing-policy/policy/statement/action/isis/metric/set-value",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/policy/statement/action/isis/metric/set-value"
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/isis-conditions",

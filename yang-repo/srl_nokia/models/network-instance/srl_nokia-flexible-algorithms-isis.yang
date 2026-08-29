@@ -45,6 +45,10 @@ module srl_nokia-flexible-algorithms-isis {
   description
     "This yang file models configuration and state of Segment Routing Flexible Algorithms";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -173,7 +177,9 @@ module srl_nokia-flexible-algorithms-isis {
     }
     container selected-fad {
       description
-        "Information about the selected FAD for this ISIS Level.";
+        "Enter the selected-fad context
+
+         Information about the selected FAD for this ISIS Level.";
       uses fad-info;
     }
     list other-fads {
@@ -316,14 +322,20 @@ module srl_nokia-flexible-algorithms-isis {
       }
       container level-1 {
         uses flex-algo-isis-level-state;
+        description
+          "Enter the level-1 context";
       }
       container level-2 {
         uses flex-algo-isis-level-state;
+        description
+          "Enter the level-2 context";
       }
       container topology {
         config false;
         description
-          "This context enters IS-IS topology state information.";
+          "Enter the topology context
+
+           This context enters IS-IS topology state information.";
         list path {
           key "topology isis-level system-id";
           description
@@ -444,6 +456,8 @@ module srl_nokia-flexible-algorithms-isis {
           }
           uses flex-algo-route-attributes;
         }
+        description
+          "Enter the route-table context";
       }
     }
   }
@@ -460,7 +474,7 @@ module srl_nokia-flexible-algorithms-isis {
     list flex-algo {
       description
         "List of Flexible Algorithms associated with this node";
-      must "(../../../srl_nokia-isis:interface-name = 'system0.0') or (starts-with(../../../srl_nokia-isis:interface-name, 'lo')) or (../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface = 'system0') or (starts-with(../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface, 'lo'))" {
+      must "(../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface and ((../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface = 'system0') or (starts-with(../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface, 'lo')))) or (not(../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface) and ((../../../srl_nokia-isis:interface-name = 'system0.0') or (starts-with(../../../srl_nokia-isis:interface-name, 'lo'))))" {
         error-message "The node SID can only be associated with the system0.0 or loopback subinterface";
       }
       key "flex-algo-id";

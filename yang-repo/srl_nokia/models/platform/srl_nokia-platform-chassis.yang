@@ -24,6 +24,10 @@ module srl_nokia-platform-chassis {
   description
     "This module defines configuration and operational state data related to chassis.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -88,7 +92,9 @@ module srl_nokia-platform-chassis {
     container crypto-module {
       if-feature "srl-feat:system-fips-mode";
       description
-        "Top level container for crypto module state";
+        "Enter the crypto-module context
+
+         Top level container for crypto module state";
       leaf entropy-provider-version {
         config false;
         type string;
@@ -110,7 +116,9 @@ module srl_nokia-platform-chassis {
     container mode {
       if-feature "srl-feat:chassis-mode";
       description
-        "Top level container for chassis mode state";
+        "Enter the mode context
+
+         Top level container for chassis mode state";
       leaf running {
         type srl-comm:chassis-mode-options;
         description
@@ -136,7 +144,9 @@ module srl_nokia-platform-chassis {
     container redundancy {
       if-feature "srl-feat:chassis and srl-feat:power-management";
       description
-        "Top-level container for power redundancy configuration and state";
+        "Enter the redundancy context
+
+         Top-level container for power redundancy configuration and state";
       leaf mode {
         config true;
         type enumeration {
@@ -252,6 +262,8 @@ module srl_nokia-platform-chassis {
           "The orientation of the chassis";
         default "horizontal";
       }
+      description
+        "Enter the environment context";
     }
   }
 
@@ -291,13 +303,17 @@ module srl_nokia-platform-chassis {
     }
     container power {
       description
-        "Top-level container for chassis-wide power state";
+        "Enter the power context
+
+         Top-level container for chassis-wide power state";
       container total {
         srl-ext:delivery-node-override "true";
         srl-ext:stream-mode "sample=5";
         config false;
         description
-          "Top-level container for total power usage and capacity";
+          "Enter the total context
+
+           Top-level container for total power usage and capacity";
         leaf capacity {
           type watts;
           description
@@ -311,7 +327,9 @@ module srl_nokia-platform-chassis {
         config false;
         if-feature "srl-feat:chassis";
         description
-          "Top-level container for power usage of fan-trays";
+          "Enter the fan-tray context
+
+           Top-level container for power usage of fan-trays";
         uses chassis-per-component-power;
       }
       container control {
@@ -320,7 +338,9 @@ module srl_nokia-platform-chassis {
         config false;
         if-feature "srl-feat:chassis";
         description
-          "Top-level container for power usage of control modules";
+          "Enter the control context
+
+           Top-level container for power usage of control modules";
         uses chassis-per-component-power;
       }
       container linecard {
@@ -329,7 +349,9 @@ module srl_nokia-platform-chassis {
         config false;
         if-feature "srl-feat:chassis";
         description
-          "Top-level container for power usage of linecard modules";
+          "Enter the linecard context
+
+           Top-level container for power usage of linecard modules";
         uses chassis-per-component-power;
       }
       container fabric {
@@ -338,7 +360,9 @@ module srl_nokia-platform-chassis {
         config false;
         if-feature "srl-feat:chassis";
         description
-          "Top-level container for power usage of fabric modules";
+          "Enter the fabric context
+
+           Top-level container for power usage of fabric modules";
         uses chassis-per-component-power;
       }
       uses chassis-power-redundancy;
@@ -352,7 +376,9 @@ module srl_nokia-platform-chassis {
       "Grouping for chassis configuration and state";
     container chassis {
       description
-        "Top-level container for chassis configuration and state";
+        "Enter the chassis context
+
+         Top-level container for chassis configuration and state";
       uses chassis-config-top;
       uses chassis-state-top;
       uses chassis-crypto-top;

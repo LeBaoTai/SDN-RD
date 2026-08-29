@@ -107,13 +107,11 @@
     },
     {
       "oc": "/components/component/healthz",
-      "pretranslate-transform": "oc-components-transform",
-      "feature-flagged": true
+      "pretranslate-transform": "oc-components-transform"
     },
     {
       "oc": "/components/component/healthz/state",
-      "pretranslate-transform": "oc-components-transform",
-      "feature-flagged": true
+      "pretranslate-transform": "oc-components-transform"
     },
     {
       "oc": "/components/component/chassis",
@@ -146,24 +144,20 @@
     {
       "oc": "/components/component/port/oc-port:breakout-mode/oc-port:groups/oc-port:group",
       "srlinux": "/interface/breakout-mode",
-      "ancestor-key-override-transform": "breakout-mode-ancestor-key-override",
-      "feature-flagged": true
+      "ancestor-key-override-transform": "breakout-mode-ancestor-key-override"
     },
     {
       "oc": "/components/component/port/oc-port:breakout-mode/oc-port:groups/oc-port:group/oc-port:index",
       "srlinux": "",
-      "transform": "null-key-transform",
-      "feature-flagged": true
+      "transform": "null-key-transform"
     },
     {
       "oc": "/components/component/port/oc-port:breakout-mode/oc-port:groups/oc-port:group/oc-port:{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/components/component/port/oc-port:breakout-mode/oc-port:groups/oc-port:group/oc-port:{config,state}/oc-port:index",
       "srlinux": "",
-      "feature-flagged": true,
       "deviations": {
         "add": {
           "must": [
@@ -178,7 +172,6 @@
     {
       "oc": "/components/component/port/oc-port:breakout-mode/oc-port:groups/oc-port:group/oc-port:{config,state}/oc-port:num-breakouts",
       "srlinux": "/interface/breakout-mode/num-breakout-ports",
-      "feature-flagged": true,
       "mapping": [
         {
           "1": "1"
@@ -200,7 +193,6 @@
     {
       "oc": "/components/component/port/oc-port:breakout-mode/oc-port:groups/oc-port:group/oc-port:{config,state}/oc-port:breakout-speed",
       "srlinux": "/interface/breakout-mode/breakout-port-speed",
-      "feature-flagged": true,
       "mapping": [
         {
           "SPEED_10MB": ""
@@ -242,7 +234,7 @@
           "SPEED_600GB": ""
         },
         {
-          "SPEED_800GB": ""
+          "SPEED_800GB": "800G"
         },
         {
           "SPEED_UNKNOWN": ""
@@ -251,8 +243,7 @@
     },
     {
       "oc": "/components/component/port/oc-port:breakout-mode/oc-port:groups/oc-port:group/oc-port:{config,state}/oc-port:num-physical-channels",
-      "srlinux": "/interface/breakout-mode/num-physical-channels",
-      "feature-flagged": true
+      "srlinux": "/interface/breakout-mode/num-physical-channels"
     },
     {
       "oc": "/components/component/power-supply",
@@ -586,18 +577,17 @@
       "oc": "/components/component/oc-transceiver:transceiver/oc-transceiver:physical-channels/oc-transceiver:channel",
       "srlinux": "/interface/transceiver/channel",
       "ancestor-key-override-transform": "transceiver-ancestor-key-override",
-      "feature-flagged": true
+      "srl-state-only": true
     },
     {
       "oc": "/components/component/oc-transceiver:transceiver/oc-transceiver:physical-channels/oc-transceiver:channel/oc-transceiver:index",
       "srlinux": "/interface/transceiver/channel/index",
       "transform": "0-to-1-based",
-      "feature-flagged": true
+      "srl-state-only": true
     },
     {
       "oc": "/components/component/oc-transceiver:transceiver/oc-transceiver:physical-channels/oc-transceiver:channel/oc-transceiver:{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/components/component/oc-transceiver:transceiver/oc-transceiver:physical-channels/oc-transceiver:channel/oc-transceiver:{config,state}/oc-transceiver:index",
@@ -609,8 +599,7 @@
     },
     {
       "oc": "/components/component/oc-transceiver:transceiver/oc-transceiver:physical-channels/oc-transceiver:channel/oc-transceiver:state/oc-transceiver:associated-optical-channel",
-      "finalize-transform": "oc-transceiver-set-och",
-      "feature-flagged": true
+      "finalize-transform": "oc-transceiver-set-och"
     },
     {
       "oc": "/components/component/oc-transceiver:transceiver/oc-transceiver:physical-channels/oc-transceiver:channel/oc-transceiver:{config,state}/oc-transceiver:description",
@@ -646,13 +635,11 @@
     },
     {
       "oc": "/components/component/oc-transceiver:transceiver/oc-transceiver:physical-channels/oc-transceiver:channel/oc-transceiver:state/oc-transceiver:output-power",
-      "srlinux": "/interface/transceiver/channel/output-power",
-      "feature-flagged": true
+      "srlinux": "/interface/transceiver/channel/output-power"
     },
     {
       "oc": "/components/component/oc-transceiver:transceiver/oc-transceiver:physical-channels/oc-transceiver:channel/oc-transceiver:state/oc-transceiver:output-power/oc-transceiver:instant",
-      "srlinux": "/interface/transceiver/channel/output-power/latest-value",
-      "feature-flagged": true
+      "srlinux": "/interface/transceiver/channel/output-power/latest-value"
     },
     {
       "oc": "/components/component/oc-transceiver:transceiver/oc-transceiver:physical-channels/oc-transceiver:channel/oc-transceiver:state/oc-transceiver:output-power/oc-transceiver:avg",
@@ -685,8 +672,7 @@
     },
     {
       "srlinux": "/interface/transceiver/channel/input-power",
-      "pretranslate-transform": "srl-transceiver-channel-input-power",
-      "feature-flagged": true
+      "pretranslate-transform": "srl-transceiver-channel-input-power"
     },
     {
       "srlinux": "/interface/transceiver/optical-channel/index",
@@ -710,14 +696,12 @@
     },
     {
       "oc": "/components/component/oc-transceiver:transceiver/oc-transceiver:physical-channels/oc-transceiver:channel/oc-transceiver:state/oc-transceiver:laser-bias-current",
-      "srlinux": "/interface/transceiver/channel/laser-bias-current",
-      "feature-flagged": true
+      "srlinux": "/interface/transceiver/channel/laser-bias-current"
     },
     {
       "oc": "/components/component/oc-transceiver:transceiver/oc-transceiver:physical-channels/oc-transceiver:channel/oc-transceiver:state/oc-transceiver:laser-bias-current/oc-transceiver:instant",
       "srlinux": "/interface/transceiver/channel/laser-bias-current/latest-value",
-      "transform": "mismatched-decimal-digits",
-      "feature-flagged": true
+      "transform": "mismatched-decimal-digits"
     },
     {
       "oc": "/components/component/oc-transceiver:transceiver/oc-transceiver:physical-channels/oc-transceiver:channel/oc-transceiver:state/oc-transceiver:laser-bias-current/oc-transceiver:avg",
@@ -793,63 +777,51 @@
     },
     {
       "srlinux": "/interface/transceiver/input-power/low-warning-threshold",
-      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform",
-      "feature-flagged": true
+      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform"
     },
     {
       "srlinux": "/interface/transceiver/input-power/high-warning-threshold",
-      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform",
-      "feature-flagged": true
+      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform"
     },
     {
       "srlinux": "/interface/transceiver/input-power/low-alarm-threshold",
-      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform",
-      "feature-flagged": true
+      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform"
     },
     {
       "srlinux": "/interface/transceiver/input-power/high-alarm-threshold",
-      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform",
-      "feature-flagged": true
+      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform"
     },
     {
       "srlinux": "/interface/transceiver/output-power/low-warning-threshold",
-      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform",
-      "feature-flagged": true
+      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform"
     },
     {
       "srlinux": "/interface/transceiver/output-power/high-warning-threshold",
-      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform",
-      "feature-flagged": true
+      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform"
     },
     {
       "srlinux": "/interface/transceiver/output-power/low-alarm-threshold",
-      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform",
-      "feature-flagged": true
+      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform"
     },
     {
       "srlinux": "/interface/transceiver/output-power/high-alarm-threshold",
-      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform",
-      "feature-flagged": true
+      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform"
     },
     {
       "srlinux": "/interface/transceiver/temperature/low-warning-threshold",
-      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform",
-      "feature-flagged": true
+      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform"
     },
     {
       "srlinux": "/interface/transceiver/temperature/high-warning-threshold",
-      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform",
-      "feature-flagged": true
+      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform"
     },
     {
       "srlinux": "/interface/transceiver/temperature/low-alarm-threshold",
-      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform",
-      "feature-flagged": true
+      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform"
     },
     {
       "srlinux": "/interface/transceiver/temperature/high-alarm-threshold",
-      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform",
-      "feature-flagged": true
+      "pretranslate-transform": "srl-interface-transceiver-threshold-leaf-transform"
     },
     {
       "oc": "/components/component/oc-opt-term:optical-channel",
@@ -1105,6 +1077,18 @@
       "supported": false
     },
     {
+      "oc": "/components/component/usb-port",
+      "pretranslate-transform": "oc-components-transform"
+    },
+    {
+      "srlinux": "/platform/control/interface",
+      "transform": "null-key-transform"
+    },
+    {
+      "oc": "/components/component/usb-port/{config,state}",
+      "pretranslate-transform": "oc-components-transform"
+    },
+    {
       "srlinux": "/platform/linecard/slot",
       "transform": "null-key-transform"
     },
@@ -1122,8 +1106,7 @@
     },
     {
       "oc": "/terminal-device",
-      "srlinux": "/terminal-device",
-      "feature-flagged": true
+      "srlinux": "/terminal-device"
     },
     {
       "oc": "/terminal-device/{config,state}",
@@ -1131,18 +1114,15 @@
     },
     {
       "oc": "/terminal-device/logical-channels",
-      "srlinux": "/terminal-device/logical-channels",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels"
     },
     {
       "oc": "/terminal-device/logical-channels/channel",
-      "srlinux": "/terminal-device/logical-channels/channel",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/index",
-      "srlinux": "/terminal-device/logical-channels/channel/index",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/index"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/{config,state}",
@@ -1154,8 +1134,7 @@
     },
     {
       "oc": "/terminal-device/logical-channels/channel/{config,state}/description",
-      "srlinux": "/terminal-device/logical-channels/channel/description",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/description"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/{config,state}/admin-state",
@@ -1170,8 +1149,7 @@
         {
           "MAINT": "maintenance"
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/terminal-device/logical-channels/channel/{config,state}/rate-class",
@@ -1378,8 +1356,7 @@
         {
           "TRIB_RATE_3200G": ""
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/terminal-device/logical-channels/channel/{config,state}/trib-protocol",
@@ -1472,8 +1449,7 @@
         {
           "PROT_ODUFLEX_GFP": ""
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/terminal-device/logical-channels/channel/{config,state}/logical-channel-type",
@@ -1485,8 +1461,7 @@
         {
           "PROT_OTN": "protocol-otn"
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/terminal-device/logical-channels/channel/{config,state}/loopback-mode",
@@ -1513,8 +1488,7 @@
         {
           "ASIC_MAC_REMOTE": ""
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/terminal-device/logical-channels/channel/{config,state}/test-signal",
@@ -1530,8 +1504,7 @@
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn",
-      "srlinux": "/terminal-device/logical-channels/channel/otn",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn/config",
@@ -1603,33 +1576,27 @@
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn/state/fec-uncorrectable-blocks",
-      "srlinux": "/terminal-device/logical-channels/channel/otn/fec-uncorrectable-blocks",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/otn/fec-uncorrectable-blocks"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn/state/pre-fec-ber",
-      "srlinux": "/terminal-device/logical-channels/channel/otn/pre-fec-ber",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/otn/pre-fec-ber"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn/state/pre-fec-ber/instant",
-      "srlinux": "/terminal-device/logical-channels/channel/otn/pre-fec-ber/current",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/otn/pre-fec-ber/current"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn/state/pre-fec-ber/avg",
-      "srlinux": "/terminal-device/logical-channels/channel/otn/pre-fec-ber/average",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/otn/pre-fec-ber/average"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn/state/pre-fec-ber/min",
-      "srlinux": "/terminal-device/logical-channels/channel/otn/pre-fec-ber/minimum",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/otn/pre-fec-ber/minimum"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn/state/pre-fec-ber/max",
-      "srlinux": "/terminal-device/logical-channels/channel/otn/pre-fec-ber/maximum",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/otn/pre-fec-ber/maximum"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn/state/pre-fec-ber/interval",
@@ -1649,28 +1616,23 @@
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn/state/q-value",
-      "srlinux": "/terminal-device/logical-channels/channel/otn/q-value",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/otn/q-value"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn/state/q-value/instant",
-      "srlinux": "/terminal-device/logical-channels/channel/otn/q-value/current",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/otn/q-value/current"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn/state/q-value/avg",
-      "srlinux": "/terminal-device/logical-channels/channel/otn/q-value/average",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/otn/q-value/average"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn/state/q-value/min",
-      "srlinux": "/terminal-device/logical-channels/channel/otn/q-value/minimum",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/otn/q-value/minimum"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn/state/q-value/max",
-      "srlinux": "/terminal-device/logical-channels/channel/otn/q-value/maximum",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/otn/q-value/maximum"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn/state/q-value/interval",
@@ -1686,28 +1648,23 @@
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn/state/esnr",
-      "srlinux": "/terminal-device/logical-channels/channel/otn/electrical-signal-to-noise-ratio",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/otn/electrical-signal-to-noise-ratio"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn/state/esnr/instant",
-      "srlinux": "/terminal-device/logical-channels/channel/otn/electrical-signal-to-noise-ratio/current",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/otn/electrical-signal-to-noise-ratio/current"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn/state/esnr/avg",
-      "srlinux": "/terminal-device/logical-channels/channel/otn/electrical-signal-to-noise-ratio/average",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/otn/electrical-signal-to-noise-ratio/average"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn/state/esnr/min",
-      "srlinux": "/terminal-device/logical-channels/channel/otn/electrical-signal-to-noise-ratio/minimum",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/otn/electrical-signal-to-noise-ratio/minimum"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn/state/esnr/max",
-      "srlinux": "/terminal-device/logical-channels/channel/otn/electrical-signal-to-noise-ratio/maximum",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/otn/electrical-signal-to-noise-ratio/maximum"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/otn/state/esnr/interval",
@@ -1727,8 +1684,7 @@
     },
     {
       "oc": "/terminal-device/logical-channels/channel/ingress",
-      "srlinux": "/terminal-device/logical-channels/channel/ingress",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/ingress"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/ingress/{config,state}",
@@ -1737,7 +1693,6 @@
     {
       "oc": "/terminal-device/logical-channels/channel/ingress/{config,state}/transceiver",
       "srlinux": "/terminal-device/logical-channels/channel/ingress/transceiver",
-      "feature-flagged": true,
       "transform": "transceiver-component-ref-to-interface-ref"
     },
     {
@@ -1746,8 +1701,7 @@
     },
     {
       "oc": "/terminal-device/logical-channels/channel/ingress/{config,state}/interface",
-      "srlinux": "/terminal-device/logical-channels/channel/ingress/interface",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/ingress/interface"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/logical-channel-assignments",
@@ -1755,13 +1709,11 @@
     },
     {
       "oc": "/terminal-device/logical-channels/channel/logical-channel-assignments/assignment",
-      "srlinux": "/terminal-device/logical-channels/channel/assignment",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/assignment"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/logical-channel-assignments/assignment/index",
-      "srlinux": "/terminal-device/logical-channels/channel/assignment/index",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/assignment/index"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/logical-channel-assignments/assignment/{config,state}",
@@ -1773,8 +1725,7 @@
     },
     {
       "oc": "/terminal-device/logical-channels/channel/logical-channel-assignments/assignment/{config,state}/description",
-      "srlinux": "/terminal-device/logical-channels/channel/assignment/description",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/assignment/description"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/logical-channel-assignments/assignment/{config,state}/assignment-type",
@@ -1786,24 +1737,20 @@
         {
           "OPTICAL_CHANNEL": "optical-channel"
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/terminal-device/logical-channels/channel/logical-channel-assignments/assignment/{config,state}/logical-channel",
-      "srlinux": "/terminal-device/logical-channels/channel/assignment/logical-channel",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/assignment/logical-channel"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/logical-channel-assignments/assignment/{config,state}/optical-channel",
       "srlinux": "/terminal-device/logical-channels/channel/assignment/optical-channel",
-      "transform": "component-och-to-interface",
-      "feature-flagged": true
+      "transform": "component-och-to-interface"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/logical-channel-assignments/assignment/{config,state}/allocation",
-      "srlinux": "/terminal-device/logical-channels/channel/assignment/allocation",
-      "feature-flagged": true
+      "srlinux": "/terminal-device/logical-channels/channel/assignment/allocation"
     },
     {
       "oc": "/terminal-device/logical-channels/channel/logical-channel-assignments/assignment/{config,state}/tributary-slot-index",

@@ -24,6 +24,10 @@ module srl_nokia-platform-cpu {
   description
     "This module defines configuration and operational state data related to CPU";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -113,46 +117,62 @@ module srl_nokia-platform-cpu {
       }
       container total {
         description
-          "Total CPU utilization";
+          "Enter the total context
+
+           Total CPU utilization";
         uses per-type-statistics;
       }
       container user {
         description
-          "Time spent executing at the user level
+          "Enter the user context
+
+           Time spent executing at the user level
 
            This can otherwise be known as application or user space time.";
         uses per-type-statistics;
       }
       container system {
         description
-          "Time spent executing at the system level
+          "Enter the system context
+
+           Time spent executing at the system level
 
            This can otherwise be known as kernel time, and does not include time spent servicing hardware and software interrupts.";
         uses per-type-statistics;
       }
       container nice {
         description
-          "Time spent running low-priority (niced) user processes";
+          "Enter the nice context
+
+           Time spent running low-priority (niced) user processes";
         uses per-type-statistics;
       }
       container idle {
         description
-          "Time spent idle";
+          "Enter the idle context
+
+           Time spent idle";
         uses per-type-statistics;
       }
       container iowait {
         description
-          "Time spent idle, waiting for an outstanding disk I/O request";
+          "Enter the iowait context
+
+           Time spent idle, waiting for an outstanding disk I/O request";
         uses per-type-statistics;
       }
       container hardware-interrupt {
         description
-          "Time spent servicing hardware interrupts";
+          "Enter the hardware-interrupt context
+
+           Time spent servicing hardware interrupts";
         uses per-type-statistics;
       }
       container software-interrupt {
         description
-          "Time spent servicing software interrupts";
+          "Enter the software-interrupt context
+
+           Time spent servicing software interrupts";
         uses per-type-statistics;
       }
     }

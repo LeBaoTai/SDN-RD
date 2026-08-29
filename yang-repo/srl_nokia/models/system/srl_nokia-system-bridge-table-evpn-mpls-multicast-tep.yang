@@ -31,6 +31,10 @@ module srl_nokia-system-bridge-table-evpn-mpls-multicast-tep {
     "This module defines system bridge-table proxy entry operational
      state data";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-07-31 {
     description
       "SRLinux 24.7.1";
@@ -57,6 +61,8 @@ module srl_nokia-system-bridge-table-evpn-mpls-multicast-tep {
         description
           "The total number of active BGP-EVPN MPLS multicast Termination Endpoints (TEPs)";
       }
+      description
+        "Enter the statistics context";
     }
   }
 
@@ -94,7 +100,9 @@ module srl_nokia-system-bridge-table-evpn-mpls-multicast-tep {
     container mpls-multicast-tep {
       if-feature "srl-feat:evpn-mpls";
       description
-        "System bridge-table BGP-EVPN MPLS multicast Termination Endpoint information";
+        "Enter the mpls-multicast-tep context
+
+         System bridge-table BGP-EVPN MPLS multicast Termination Endpoint information";
       uses bridge-table-evpn-mpls-multicast-tep-multicast-tep-statistics-top;
       uses bridge-table-evpn-mpls-multicast-tep-multicast-tep-top;
     }

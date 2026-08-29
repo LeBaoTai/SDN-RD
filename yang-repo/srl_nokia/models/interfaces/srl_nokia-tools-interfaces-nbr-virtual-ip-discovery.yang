@@ -24,6 +24,10 @@ module srl_nokia-tools-interfaces-nbr-virtual-ip-discovery {
   description
     "Model for interface ip Virtual IP discovery operational commands";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2022-06-30 {
     description
       "SRLinux 22.6.1";
@@ -46,6 +50,8 @@ module srl_nokia-tools-interfaces-nbr-virtual-ip-discovery {
           description
             "Clears the global statistics for all the Virtual IP addresses";
         }
+        description
+          "Enter the statistics context";
       }
       list address {
         key "ipv4-address";
@@ -62,8 +68,12 @@ module srl_nokia-tools-interfaces-nbr-virtual-ip-discovery {
             description
               "Clears the statistics for the Virtual IP addresses";
           }
+          description
+            "Enter the statistics context";
         }
       }
+      description
+        "Enter the virtual-ipv4-discovery context";
     }
   }
 
@@ -76,6 +86,8 @@ module srl_nokia-tools-interfaces-nbr-virtual-ip-discovery {
           description
             "Clears the global statistics for all the Virtual IP addresses";
         }
+        description
+          "Enter the statistics context";
       }
       list address {
         key "ipv6-address";
@@ -92,8 +104,12 @@ module srl_nokia-tools-interfaces-nbr-virtual-ip-discovery {
             description
               "Clears the statistics for the Virtual IP addresses";
           }
+          description
+            "Enter the statistics context";
         }
       }
+      description
+        "Enter the virtual-ipv6-discovery context";
     }
   }
 

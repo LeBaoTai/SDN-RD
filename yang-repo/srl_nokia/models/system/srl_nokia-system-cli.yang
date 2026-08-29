@@ -24,6 +24,10 @@ module srl_nokia-system-cli {
   description
     "This module defines configuration related to cli environment";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -309,16 +313,21 @@ module srl_nokia-system-cli {
              xpath_pwc       The present working context, formatted as a xpath path.
                              Example: /interface[name=mgmt0]/subinterface[index=0]
          To enter a keyword, enclose it with '{' and '}', e.g. '{pwc}'.
-         To create a multiline prompt, use '
-         ' for newlines.
+         To create a multiline prompt, use '\n' for newlines.
          To print a '{' or '}', use '{{' or '}}', respectively. e.g. '{{pwc}}'.
          In addition | can be used to separate left and right aligned part.
          Use || for literal '|'.";
     }
     uses cli-environment-cli-engine;
+    uses cli-environment-commit-options {
+      if-feature "srl-nokia-feat:cli-commit-discard-options";
+    }
+    uses cli-environment-discard-options {
+      if-feature "srl-nokia-feat:cli-commit-discard-options";
+    }
     leaf complete-on-enter {
       type boolean;
-      default true;
+      default "true";
       description
         "Trigger auto-completion whenever you type an Enter
 
@@ -326,7 +335,7 @@ module srl_nokia-system-cli {
     }
     leaf complete-on-space {
       type boolean;
-      default true;
+      default "true";
       description
         "Trigger auto-completion whenever you type a Space
 
@@ -503,8 +512,7 @@ module srl_nokia-system-cli {
              xpath_pwc       The present working context, formatted as a xpath path.
                              Example: /interface[name=mgmt0]/subinterface[index=0]
          To enter a keyword, enclose it with '{' and '}', e.g. '{pwc}'.
-         To create a multiline prompt, use '
-         ' for newlines.
+         To create a multiline prompt, use '\n' for newlines.
          To print a '{' or '}', use '{{' or '}}', respectively. e.g. '{{pwc}}'.
          In addition | can be used to separate left and right aligned part.
          Use || for literal '|'.";
@@ -540,7 +548,9 @@ module srl_nokia-system-cli {
       "Top-level grouping for cli-engine";
     container cli-engine {
       description
-        "CLI engine settings";
+        "Enter the cli-engine context
+
+         CLI engine settings";
       leaf completion-ignore-case {
         type boolean;
         default "false";
@@ -611,12 +621,62 @@ module srl_nokia-system-cli {
     }
   }
 
+  grouping cli-environment-commit-options {
+    description
+      "Top-level grouping for commit-options";
+    container commit-options {
+      description
+        "Enter the commit-options context
+
+         Commit options settings";
+      leaf confirmed {
+        type boolean;
+        default "false";
+        description
+          "Require a confirmed commit";
+      }
+      leaf default-operation {
+        type enumeration {
+          enum none;
+          enum now;
+          enum stay;
+        }
+        default "none";
+        description
+          "Sets the default commit operation";
+      }
+    }
+  }
+
+  grouping cli-environment-discard-options {
+    description
+      "Top-level grouping for discard-options";
+    container discard-options {
+      description
+        "Enter the discard-options context
+
+         Discard options settings";
+      leaf default-operation {
+        type enumeration {
+          enum none;
+          enum now;
+          enum stay;
+        }
+        default "none";
+        description
+          "Sets the default discard operation";
+      }
+    }
+  }
+
   grouping cli-environment-top {
     description
       "Top-level grouping for global environment data";
     container environment {
       description
-        "Top-level container for global environment data";
+        "Enter the environment context
+
+         Top-level container for global environment data";
       uses cli-environment-config;
     }
   }
@@ -626,7 +686,9 @@ module srl_nokia-system-cli {
       "Top-level grouping for CLI services";
     container cli {
       description
-        "Top-level container for CLI services";
+        "Enter the cli context
+
+         Top-level container for CLI services";
       uses cli-environment-top;
     }
   }

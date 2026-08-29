@@ -24,6 +24,10 @@ module srl_nokia-platform-disk {
   description
     "This module defines configuration and operational state data related to disks.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -128,7 +132,9 @@ module srl_nokia-platform-disk {
     container statistics {
       config false;
       description
-        "Top-level container for disk statistics";
+        "Enter the statistics context
+
+         Top-level container for disk statistics";
       leaf utilization {
         type srl-comm:percentage;
         description

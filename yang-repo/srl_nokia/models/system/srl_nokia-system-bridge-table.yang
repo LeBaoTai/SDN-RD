@@ -22,6 +22,10 @@ module srl_nokia-system-bridge-table {
     "This module defines system bridge-table configuration and operational
      state data.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2020-06-30 {
     description
       "SRLinux 20.6.1";
@@ -75,6 +79,8 @@ module srl_nokia-system-bridge-table {
           srl_nokia-ext:show-importance "high";
         }
       }
+      description
+        "Enter the statistics context";
     }
   }
 
@@ -88,13 +94,17 @@ module srl_nokia-system-bridge-table {
            learn any new mac addresses, but will relearn any that are already
            programmed";
       }
+      description
+        "Enter the mac-learning context";
     }
   }
 
   grouping bridge-table-mac-limit-top {
     container mac-limit {
       description
-        "Bridge Table size and thresholds.";
+        "Enter the mac-limit context
+
+         Bridge Table size and thresholds.";
       leaf maximum-entries {
         config false;
         type int32;
@@ -115,7 +125,9 @@ module srl_nokia-system-bridge-table {
   grouping bridge-table-top {
     container bridge-table {
       description
-        "system bridge-table information";
+        "Enter the bridge-table context
+
+         system bridge-table information";
       uses bridge-table-mac-learning-top;
       uses bridge-table-mac-limit-top;
       uses bridge-table-statistics-top;

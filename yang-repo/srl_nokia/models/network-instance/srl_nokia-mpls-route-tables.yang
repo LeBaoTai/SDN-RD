@@ -39,6 +39,10 @@ module srl_nokia-mpls-route-tables {
   description
     "A model describing the MPLS routing tables of a network instance.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -74,6 +78,8 @@ module srl_nokia-mpls-route-tables {
         enum pop;
         enum swap;
         enum swap-pop;
+        enum pop-xconnect-unicast;
+        enum pop-xconnect-multicast;
       }
       srl_nokia-ext:show-importance "high";
       description
@@ -134,13 +140,17 @@ module srl_nokia-mpls-route-tables {
         description
           "The total number of MPLS entries that are active in the FIB.";
       }
+      description
+        "Enter the statistics context";
     }
   }
 
   grouping mpls-tables-top {
     container mpls {
       description
-        "The container for the MPLS routing table of the network instance.";
+        "Enter the mpls context
+
+         The container for the MPLS routing table of the network instance.";
       list label-entry {
         key "label-value";
         leaf label-value {

@@ -33,6 +33,10 @@ module srl_nokia-ldp {
   description
     "This YANG module defines the configuration and state components for the management of the MPLS Label Distribution Protocol (LDP)";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -337,7 +341,9 @@ module srl_nokia-ldp {
     container hello-holdtime {
       config false;
       description
-        "Container for hello holdtime state information";
+        "Enter the hello-holdtime context
+
+         Container for hello holdtime state information";
       leaf neighbor-proposed {
         type uint16;
         units "seconds";
@@ -391,7 +397,9 @@ module srl_nokia-ldp {
     container hello-message-errors {
       config false;
       description
-        "Counters for received Hello message errors";
+        "Enter the hello-message-errors context
+
+         Counters for received Hello message errors";
       leaf bad-protocol-version {
         type srl_nokia-comm:zero-based-counter64;
         description
@@ -418,7 +426,9 @@ module srl_nokia-ldp {
   grouping graceful-restart-config {
     container graceful-restart {
       description
-        "Attributes for graceful restart";
+        "Enter the graceful-restart context
+
+         Attributes for graceful restart";
       leaf helper-enable {
         type boolean;
         default "false";
@@ -561,7 +571,9 @@ module srl_nokia-ldp {
     container end-of-lib {
       config false;
       description
-        "Container with state information pertaining to sent and received End of LIB markers";
+        "Enter the end-of-lib context
+
+         Container with state information pertaining to sent and received End of LIB markers";
       container ipv4-prefix-fecs {
         leaf sent {
           description
@@ -573,6 +585,8 @@ module srl_nokia-ldp {
             "When this is true, an End-of-LIB marker was received from the LDP peer";
           type boolean;
         }
+        description
+          "Enter the ipv4-prefix-fecs context";
       }
       container ipv6-prefix-fecs {
         if-feature "srl_nokia-feat:ldp-ipv6";
@@ -586,12 +600,16 @@ module srl_nokia-ldp {
             "When this is true, an End-of-LIB marker was received from the LDP peer";
           type boolean;
         }
+        description
+          "Enter the ipv6-prefix-fecs context";
       }
     }
     container label-advertisement-mode {
       config false;
       description
-        "Label advertisement mode state";
+        "Enter the label-advertisement-mode context
+
+         Label advertisement mode state";
       leaf negotiated {
         type label-adv-mode;
         description
@@ -601,7 +619,9 @@ module srl_nokia-ldp {
     container graceful-restart {
       config false;
       description
-        "Graceful restart operational state";
+        "Enter the graceful-restart context
+
+         Graceful restart operational state";
       leaf peer-reconnect-time {
         type uint16 {
           range "10..1800";
@@ -628,7 +648,9 @@ module srl_nokia-ldp {
     container overload {
       config false;
       description
-        "Overload state of the session";
+        "Enter the overload context
+
+         Overload state of the session";
       leaf peer-is-overloaded {
         description
           "The peer has sent an overload TLV to this router requesting that we stop advertising new FECs";
@@ -643,7 +665,9 @@ module srl_nokia-ldp {
     container received-capabilities {
       config false;
       description
-        "Capabilities signalled by the peer";
+        "Enter the received-capabilities context
+
+         Capabilities signalled by the peer";
       leaf graceful-restart-capability {
         description
           "Fault tolerance protection TLV 0x0503";
@@ -676,7 +700,9 @@ module srl_nokia-ldp {
       }
       container state-advertisement-control {
         description
-          "State advertisement control capability. TLV 0x050D";
+          "Enter the state-advertisement-control context
+
+           State advertisement control capability. TLV 0x050D";
         leaf ipv4-prefix-disable {
           description
             "Indicates desire to not receive IPv4 prefix FECs";
@@ -718,7 +744,9 @@ module srl_nokia-ldp {
     container session-holdtime {
       config false;
       description
-        "Session holdtime state";
+        "Enter the session-holdtime context
+
+         Session holdtime state";
       leaf peer-proposed {
         type uint16;
         units "seconds";
@@ -776,15 +804,21 @@ module srl_nokia-ldp {
     container statistics {
       config false;
       description
-        "Statistics objects";
+        "Enter the statistics context
+
+         Statistics objects";
       container received-messages {
         description
-          "Inbound statistics";
+          "Enter the received-messages context
+
+           Inbound statistics";
         uses statistics-peer-received-sent;
       }
       container sent-messages {
         description
-          "Outbound statistics";
+          "Enter the sent-messages context
+
+           Outbound statistics";
         uses statistics-peer-received-sent;
       }
       uses address-statistics;
@@ -837,6 +871,8 @@ module srl_nokia-ldp {
           description
             "The number of advertised IPv4 prefix FECs to a single peer or all peers. In the overall summary the same FEC prefix advertised to multiple peers counts as 1";
         }
+        description
+          "Enter the ipv4-prefix context";
       }
       container ipv6-prefix {
         if-feature "srl_nokia-feat:ldp-ipv6";
@@ -850,6 +886,8 @@ module srl_nokia-ldp {
           description
             "The number of advertised IPv6 prefix FECs to a single peer or all peers. In the overall summary the same FEC prefix advertised to multiple peers counts as 1";
         }
+        description
+          "Enter the ipv6-prefix context";
       }
       container ipv4-p2mp {
         if-feature "srl_nokia-feat:ldp-mcast-generic";
@@ -863,7 +901,11 @@ module srl_nokia-ldp {
           description
             "The number of advertised IPv4 P2MP FECs to a single peer or all peers";
         }
+        description
+          "Enter the ipv4-p2mp context";
       }
+      description
+        "Enter the fec-statistics context";
     }
   }
 
@@ -880,6 +922,8 @@ module srl_nokia-ldp {
           description
             "The number of IPv4 addresses advertised to a peer";
         }
+        description
+          "Enter the ipv4 context";
       }
       container ipv6 {
         if-feature "srl_nokia-feat:ldp-ipv6";
@@ -893,7 +937,11 @@ module srl_nokia-ldp {
           description
             "The number of IPv6 addresses advertised to a peer";
         }
+        description
+          "Enter the ipv6 context";
       }
+      description
+        "Enter the address-statistics context";
     }
   }
 
@@ -966,7 +1014,9 @@ module srl_nokia-ldp {
     container entropy-label {
       if-feature "srl_nokia-feat:ldp-entropy-label";
       description
-        "Options for configuring control and data plane aspects of entropy label";
+        "Enter the entropy-label context
+
+         Options for configuring control and data plane aspects of entropy label";
       leaf advertise-capability {
         description
           "Advertise the Entropy Label Capability";
@@ -1021,7 +1071,9 @@ module srl_nokia-ldp {
       }
       container advertised {
         description
-          "Configuration and state related to advertised service FECs";
+          "Enter the advertised context
+
+           Configuration and state related to advertised service FECs";
         leaf label {
           srl_nokia-ext:show-importance "high";
           type srl_nokia-comm:mpls-label-with-implicit-and-explicit-null;
@@ -1082,7 +1134,9 @@ module srl_nokia-ldp {
       }
       container received {
         description
-          "Configuration and state related to received service FECs";
+          "Enter the received context
+
+           Configuration and state related to received service FECs";
         leaf label {
           srl_nokia-ext:show-importance "high";
           type srl_nokia-comm:mpls-label-with-implicit-and-explicit-null;
@@ -1144,7 +1198,9 @@ module srl_nokia-ldp {
       if-feature "srl_nokia-feat:ldp-mcast-generic";
       config false;
       description
-        "Configuration and state for P2MP FECs";
+        "Enter the p2mp-fec context
+
+         Configuration and state for P2MP FECs";
       list type1 {
         key "root-address generic-id lsr-id label-space-id";
         description
@@ -1170,7 +1226,9 @@ module srl_nokia-ldp {
         }
         container advertised {
           description
-            "Configuration and state related to advertised P2MP FEC";
+            "Enter the advertised context
+
+             Configuration and state related to advertised P2MP FEC";
           leaf egress-lsr-fec {
             description
               "When set true, the router is the egress LSR for the FEC (the FEC is locally originated)";
@@ -1198,7 +1256,9 @@ module srl_nokia-ldp {
         }
         container received {
           description
-            "Configuration and state related to received P2MP FEC";
+            "Enter the received context
+
+             Configuration and state related to received P2MP FEC";
           leaf label {
             type srl_nokia-comm:mpls-label-with-implicit-and-explicit-null;
             description
@@ -1303,10 +1363,14 @@ module srl_nokia-ldp {
           description
             "Administratively enable or disable Loop Free Alternates";
         }
+        description
+          "Enter the loopfree-alternate context";
       }
       container fec-resolution {
         description
-          "Container with options for controlling IP prefix FEC resolution";
+          "Enter the fec-resolution context
+
+           Container with options for controlling IP prefix FEC resolution";
         leaf longest-prefix {
           type boolean;
           default "false";
@@ -1343,7 +1407,9 @@ module srl_nokia-ldp {
       uses prefix-policy-config;
       container multipath {
         description
-          "Container with options to configure load-balancing over equal-cost paths";
+          "Enter the multipath context
+
+           Container with options to configure load-balancing over equal-cost paths";
         leaf max-paths {
           type uint8 {
             range "1..64";
@@ -1367,7 +1433,9 @@ module srl_nokia-ldp {
       }
       container ipv4 {
         description
-          "Container for configuration and state related to the IPv4 address family";
+          "Enter the ipv4 context
+
+           Container for configuration and state related to the IPv4 address family";
         leaf oper-state {
           config false;
           description
@@ -1429,7 +1497,9 @@ module srl_nokia-ldp {
         container bindings {
           config false;
           description
-            "LDP address and label binding information";
+            "Enter the bindings context
+
+             LDP address and label binding information";
           container received-address {
             list peer {
               description
@@ -1442,6 +1512,8 @@ module srl_nokia-ldp {
                 type srl_nokia-comm:ipv4-address;
               }
             }
+            description
+              "Enter the received-address context";
           }
           container advertised-address {
             list peer {
@@ -1455,6 +1527,8 @@ module srl_nokia-ldp {
                 type srl_nokia-comm:ipv4-address;
               }
             }
+            description
+              "Enter the advertised-address context";
           }
           container received-prefix-fec {
             list prefix-fec {
@@ -1547,6 +1621,8 @@ module srl_nokia-ldp {
                 }
               }
             }
+            description
+              "Enter the received-prefix-fec context";
           }
           container advertised-prefix-fec {
             list prefix-fec {
@@ -1587,6 +1663,8 @@ module srl_nokia-ldp {
                 }
               }
             }
+            description
+              "Enter the advertised-prefix-fec context";
           }
           uses service-fec128-top;
           uses p2mp-fec-top;
@@ -1595,7 +1673,9 @@ module srl_nokia-ldp {
       container ipv6 {
         if-feature "srl_nokia-feat:ldp-ipv6";
         description
-          "Container for configuration and state related to the IPv6 address family";
+          "Enter the ipv6 context
+
+           Container for configuration and state related to the IPv6 address family";
         leaf oper-state {
           config false;
           description
@@ -1657,7 +1737,9 @@ module srl_nokia-ldp {
         container bindings {
           config false;
           description
-            "LDP address and label binding information";
+            "Enter the bindings context
+
+             LDP address and label binding information";
           container received-address {
             list peer {
               description
@@ -1670,6 +1752,8 @@ module srl_nokia-ldp {
                 type srl_nokia-comm:ipv6-address;
               }
             }
+            description
+              "Enter the received-address context";
           }
           container advertised-address {
             list peer {
@@ -1683,6 +1767,8 @@ module srl_nokia-ldp {
                 type srl_nokia-comm:ipv6-address;
               }
             }
+            description
+              "Enter the advertised-address context";
           }
           container received-prefix-fec {
             list prefix-fec {
@@ -1775,6 +1861,8 @@ module srl_nokia-ldp {
                 }
               }
             }
+            description
+              "Enter the received-prefix-fec context";
           }
           container advertised-prefix-fec {
             list prefix-fec {
@@ -1815,16 +1903,22 @@ module srl_nokia-ldp {
                 }
               }
             }
+            description
+              "Enter the advertised-prefix-fec context";
           }
           uses service-fec128-top;
         }
       }
       container discovery {
         description
-          "Neighbor discovery configuration and operational state";
+          "Enter the discovery context
+
+           Neighbor discovery configuration and operational state";
         container interfaces {
           description
-            "The complete set of interfaces used for LDP Basic Discovery";
+            "Enter the interfaces context
+
+             The complete set of interfaces used for LDP Basic Discovery";
           uses discovery-timers {
             refine "hello-holdtime" {
               default "15";
@@ -1835,7 +1929,9 @@ module srl_nokia-ldp {
           }
           container trace-options {
             description
-              "Configure event/packet tracing for all LDP interfaces";
+              "Enter the trace-options context
+
+               Configure event/packet tracing for all LDP interfaces";
             leaf-list trace {
               description
                 "Specifies the trace information to be captured";
@@ -1874,7 +1970,9 @@ module srl_nokia-ldp {
               container override-lsr-id {
                 if-feature "srl_nokia-feat:ldp-local-lsr-id";
                 description
-                  "Options to override the LSR ID";
+                  "Enter the override-lsr-id context
+
+                   Options to override the LSR ID";
                 leaf local-subinterface {
                   type enumeration {
                     enum ipv4 {
@@ -1896,7 +1994,9 @@ module srl_nokia-ldp {
               container hello-adjacencies {
                 config false;
                 description
-                  "Container with a list of hello adjacencies";
+                  "Enter the hello-adjacencies context
+
+                   Container with a list of hello adjacencies";
                 list adjacency {
                   description
                     "List of hello adjacencies";
@@ -1921,7 +2021,9 @@ module srl_nokia-ldp {
               container statistics {
                 config false;
                 description
-                  "Statistics objects";
+                  "Enter the statistics context
+
+                   Statistics objects";
                 leaf hello-received {
                   type srl_nokia-comm:zero-based-counter64;
                   description
@@ -1936,13 +2038,17 @@ module srl_nokia-ldp {
               }
               container trace-options {
                 description
-                  "Configure event/packet tracing for one specific LDP interface";
+                  "Enter the trace-options context
+
+                   Configure event/packet tracing for one specific LDP interface";
                 leaf-list trace {
                   description
                     "Specifies the trace information to be captured";
                   type interface-trace-option-flags;
                 }
               }
+              description
+                "Enter the ipv4 context";
             }
             container ipv6 {
               if-feature "srl_nokia-feat:ldp-ipv6";
@@ -1971,7 +2077,9 @@ module srl_nokia-ldp {
               container override-lsr-id {
                 if-feature "srl_nokia-feat:ldp-local-lsr-id";
                 description
-                  "Options to override the LSR ID";
+                  "Enter the override-lsr-id context
+
+                   Options to override the LSR ID";
                 leaf local-subinterface {
                   type enumeration {
                     enum ipv4 {
@@ -2000,7 +2108,9 @@ module srl_nokia-ldp {
               container hello-adjacencies {
                 config false;
                 description
-                  "Container with a list of hello adjacencies";
+                  "Enter the hello-adjacencies context
+
+                   Container with a list of hello adjacencies";
                 list adjacency {
                   description
                     "List of hello adjacencies";
@@ -2025,7 +2135,9 @@ module srl_nokia-ldp {
               container statistics {
                 config false;
                 description
-                  "Statistics objects";
+                  "Enter the statistics context
+
+                   Statistics objects";
                 leaf hello-received {
                   type srl_nokia-comm:zero-based-counter64;
                   description
@@ -2040,20 +2152,26 @@ module srl_nokia-ldp {
               }
               container trace-options {
                 description
-                  "Configure event/packet tracing for one specific LDP interface";
+                  "Enter the trace-options context
+
+                   Configure event/packet tracing for one specific LDP interface";
                 leaf-list trace {
                   description
                     "Specifies the trace information to be captured";
                   type interface-trace-option-flags;
                 }
               }
+              description
+                "Enter the ipv6 context";
             }
           }
         }
         container targeted {
           if-feature "srl_nokia-feat:ldp-targeted";
           description
-            "List of targeted peers for extended discovery";
+            "Enter the targeted context
+
+             List of targeted peers for extended discovery";
           uses discovery-timers {
             refine "hello-holdtime" {
               default "45";
@@ -2118,7 +2236,9 @@ module srl_nokia-ldp {
               container override-lsr-id {
                 if-feature "srl_nokia-feat:ldp-local-lsr-id";
                 description
-                  "Options to override the LSR ID";
+                  "Enter the override-lsr-id context
+
+                   Options to override the LSR ID";
                 leaf subinterface-ipv4 {
                   type srl_nokia-comm:subinterface-all;
                   description
@@ -2145,7 +2265,9 @@ module srl_nokia-ldp {
               container hello-adjacencies {
                 config false;
                 description
-                  "Container with a list of hello adjacencies";
+                  "Enter the hello-adjacencies context
+
+                   Container with a list of hello adjacencies";
                 list adjacency {
                   description
                     "List of hello adjacencies";
@@ -2170,14 +2292,18 @@ module srl_nokia-ldp {
               container statistics {
                 config false;
                 description
-                  "Statistics objects";
+                  "Enter the statistics context
+
+                   Statistics objects";
                 uses hello-message-error-stats;
               }
             }
             container auto-rx {
               if-feature "srl_nokia-feat:ldp-ipv4-auto-rx-tx-targeted";
               description
-                "Auto-rx targeted LDP";
+                "Enter the auto-rx context
+
+                 Auto-rx targeted LDP";
               leaf admin-state {
                 type srl_nokia-comm:admin-state;
                 default "disable";
@@ -2194,7 +2320,9 @@ module srl_nokia-ldp {
             container auto-tx {
               if-feature "srl_nokia-feat:ldp-ipv4-auto-rx-tx-targeted";
               description
-                "Auto-tx targeted LDP";
+                "Enter the auto-tx context
+
+                 Auto-tx targeted LDP";
               leaf admin-state {
                 type srl_nokia-comm:admin-state;
                 default "disable";
@@ -2208,6 +2336,8 @@ module srl_nokia-ldp {
                 default "false";
               }
             }
+            description
+              "Enter the ipv4 context";
           }
           container ipv6 {
             if-feature "srl_nokia-feat:ldp-targeted-static-ipv6";
@@ -2266,7 +2396,9 @@ module srl_nokia-ldp {
               container override-lsr-id {
                 if-feature "srl_nokia-feat:ldp-local-lsr-id";
                 description
-                  "Options to override the LSR ID";
+                  "Enter the override-lsr-id context
+
+                   Options to override the LSR ID";
                 leaf subinterface-ipv4 {
                   type srl_nokia-comm:subinterface-all;
                   description
@@ -2303,7 +2435,9 @@ module srl_nokia-ldp {
               container hello-adjacencies {
                 config false;
                 description
-                  "Container with a list of hello adjacencies";
+                  "Enter the hello-adjacencies context
+
+                   Container with a list of hello adjacencies";
                 list adjacency {
                   description
                     "List of hello adjacencies";
@@ -2328,20 +2462,28 @@ module srl_nokia-ldp {
               container statistics {
                 config false;
                 description
-                  "Statistics objects";
+                  "Enter the statistics context
+
+                   Statistics objects";
                 uses hello-message-error-stats;
               }
             }
+            description
+              "Enter the ipv6 context";
           }
         }
       }
       container peers {
         description
-          "Configuration and state related to peers";
+          "Enter the peers context
+
+           Configuration and state related to peers";
         uses session-timers;
         container trace-options {
           description
-            "Configure event/packet tracing for all sessions (configured and dynamic)";
+            "Enter the trace-options context
+
+             Configure event/packet tracing for all sessions (configured and dynamic)";
           leaf-list trace {
             description
               "Specifies the trace information to be captured";
@@ -2367,10 +2509,14 @@ module srl_nokia-ldp {
           }
           container tcp-transport {
             uses tcp-transport-state;
+            description
+              "Enter the tcp-transport context";
           }
           container trace-options {
             description
-              "Configure event/packet tracing for one specific session";
+              "Enter the trace-options context
+
+               Configure event/packet tracing for one specific session";
             leaf-list trace {
               description
                 "Specifies the trace information to be captured";
@@ -2402,7 +2548,9 @@ module srl_nokia-ldp {
           }
           container fec-type-capability {
             description
-              "Configuration of FEC type capability";
+              "Enter the fec-type-capability context
+
+               Configuration of FEC type capability";
             leaf p2mp {
               if-feature "srl_nokia-feat:ldp-mcast-generic";
               type boolean;
@@ -2418,12 +2566,18 @@ module srl_nokia-ldp {
       container statistics {
         config false;
         description
-          "LDP instance level statistics";
+          "Enter the statistics context
+
+           LDP instance level statistics";
         container ipv4 {
           uses instance-level-statistics;
+          description
+            "Enter the ipv4 context";
         }
         container ipv6 {
           uses instance-level-statistics;
+          description
+            "Enter the ipv6 context";
         }
         leaf sessions-terminated-holdtime-expiry {
           type uint16;
@@ -2507,6 +2661,8 @@ module srl_nokia-ldp {
             description
               "The number of notification messages sent to advise that a TCP connection was closed because the FEC type is not IPv4 or IPv6";
           }
+          description
+            "Enter the protocol-errors context";
         }
       }
     }
@@ -2542,7 +2698,9 @@ module srl_nokia-ldp {
     container ldp-synchronization {
       if-feature "srl_nokia-feat:ldp";
       description
-        "Container with configuration options and state that pertains to the operation of LDP-IGP synchronization on this interface";
+        "Enter the ldp-synchronization context
+
+         Container with configuration options and state that pertains to the operation of LDP-IGP synchronization on this interface";
       leaf disable {
         type empty;
         description

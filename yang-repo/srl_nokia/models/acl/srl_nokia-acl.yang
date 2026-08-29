@@ -36,6 +36,10 @@ module srl_nokia-acl {
   description
     "This module defines configuration and operational state data for access control lists (ACLs) and related objects.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -108,7 +112,9 @@ module srl_nokia-acl {
   grouping interface-filter-entry-tcam {
     container tcam-entries {
       description
-        "Information about the TCAM entries used to implement the ACL entry";
+        "Enter the tcam-entries context
+
+         Information about the TCAM entries used to implement the ACL entry";
       config false;
       list forwarding-complex {
         description
@@ -250,7 +256,9 @@ module srl_nokia-acl {
   grouping acl-policers-top {
     container policers {
       description
-        "Container for policer definitions used by ACL entries";
+        "Enter the policers context
+
+         Container for policer definitions used by ACL entries";
       list system-cpu-policer {
         description
           "List of system CPU policer templates. For each policer in this list one or more policer instances are implemented in the XDP-CPM software and these policer instances process the aggregate of terminating traffic received from all linecards.";
@@ -287,7 +295,9 @@ module srl_nokia-acl {
           srl_nokia-ext:delivery-node-override "true";
           config false;
           description
-            "Container for system CPU policer statistics
+            "Enter the statistics context
+
+             Container for system CPU policer statistics
 
              None of these statistics are populated if the policer is configured as entry-specific=true.";
           uses policer-stats;
@@ -295,6 +305,11 @@ module srl_nokia-acl {
             type srl_nokia-comm:date-and-time-delta;
             description
               "Time of the last clear command that applied to these statistics";
+          }
+          action clear {
+            if-feature "srl_nokia-feat:tools-as-modeled-actions-same-output";
+            description
+              "Reset all statistics associated with this particular policer to zero";
           }
         }
       }
@@ -406,7 +421,9 @@ module srl_nokia-acl {
         container statistics {
           config false;
           description
-            "Container for linecard policer statistics.";
+            "Enter the statistics context
+
+             Container for linecard policer statistics.";
           container aggregate {
             srl_nokia-ext:delivery-node-override "true";
             leaf last-clear {
@@ -415,13 +432,20 @@ module srl_nokia-acl {
                 "Time of the last clear command that applied to these statistics";
             }
             description
-              "None of these statistics are populated if the policer is configured as entry-specific=true.
+              "Enter the aggregate context
+
+               None of these statistics are populated if the policer is configured as entry-specific=true.
 
                    If entry-specific=false and subinterface-specific=true, this is sum of all the entries and all the policer templates instantiated for all subintrefaces.
 
                    If entry-specific=false and subinterface-specific=false, this is sum of all the entries using this policer template.";
             uses policer-stats;
             uses policer-stats-two-rates;
+          }
+          action clear {
+            if-feature "srl_nokia-feat:tools-as-modeled-actions-same-output";
+            description
+              "Reset all statistics associated with this particular policer to zero";
           }
         }
       }
@@ -432,7 +456,9 @@ module srl_nokia-acl {
     container datapath-programming {
       config false;
       description
-        "Container to represent the progress of ACL datapath programming";
+        "Enter the datapath-programming context
+
+         Container to represent the progress of ACL datapath programming";
       list forwarding-complex {
         description
           "List of forwarding complexes that are currently installed and online";
@@ -496,10 +522,13 @@ module srl_nokia-acl {
           }
         }
         description
-          "Reference to a specific network-instance, either name or regular-expression to match multiple network-instances";
+          "Enter the network-instance context
+
+           Reference to a specific network-instance, either name or regular-expression to match multiple network-instances";
         container source {
           choice source-selection {
             case interface {
+              if-feature "srl_nokia-feat:acl-ip-prefix-list-apply-path-interfaces";
               leaf interface {
                 type srl_nokia-comm:regex-string;
                 description
@@ -507,6 +536,7 @@ module srl_nokia-acl {
               }
             }
             case protocol {
+              if-feature "srl_nokia-feat:acl-ip-prefix-list-apply-path-bgp-peers";
               container protocol {
                 container bgp {
                   leaf group {
@@ -519,10 +549,16 @@ module srl_nokia-acl {
                     description
                       "This specifies a match condition on the IP or IPv6 addresses of configured bgp peers";
                   }
+                  description
+                    "Enter the bgp context";
                 }
+                description
+                  "Enter the protocol context";
               }
             }
           }
+          description
+            "Enter the source context";
         }
       }
     }
@@ -548,7 +584,6 @@ module srl_nokia-acl {
       }
       list prefix {
         key "ipv4-prefix";
-        min-elements 1;
         max-elements 8192;
         description
           "List of IPv4 prefixes";
@@ -559,7 +594,7 @@ module srl_nokia-acl {
         }
       }
       uses prefix-list-apply-path {
-        if-feature "srl_nokia-feat:acl-ip-prefix-list-apply-path";
+        if-feature "srl_nokia-feat:acl-ip-prefix-list-apply-path-bgp-peers or srl_nokia-feat:acl-ip-prefix-list-apply-path-interfaces";
       }
     }
   }
@@ -584,7 +619,6 @@ module srl_nokia-acl {
       }
       list prefix {
         key "ipv6-prefix";
-        min-elements 1;
         max-elements 8192;
         description
           "List of IPv6 prefixes";
@@ -595,7 +629,228 @@ module srl_nokia-acl {
         }
       }
       uses prefix-list-apply-path {
-        if-feature "srl_nokia-feat:acl-ip-prefix-list-apply-path";
+        if-feature "srl_nokia-feat:acl-ip-prefix-list-apply-path-bgp-peers or srl_nokia-feat:acl-ip-prefix-list-apply-path-interfaces";
+      }
+    }
+  }
+
+  grouping port-list {
+    description
+      "Configuration of Port List";
+    list port-list {
+      key "name";
+      max-elements 2048;
+      description
+        "A user defined L4 port list";
+      leaf name {
+        type srl_nokia-comm:name;
+        description
+          "Reference to the name of the port list";
+      }
+      leaf description {
+        type srl_nokia-comm:description;
+        description
+          "Description string for the port list";
+      }
+      list port {
+        key "id";
+        description
+          "List of ports or port-ranges";
+        max-elements 64;
+        leaf id {
+          type uint8 {
+            range "1..64";
+          }
+          description
+            "Identifier of the port-list entry ";
+        }
+        choice port {
+          case value {
+            leaf value {
+              type srl_nokia-pkt-match-types:l4-port-type;
+              description
+                "A destination port number";
+            }
+          }
+          case range {
+            container range {
+              description
+                "Enter the range context
+
+                 Container used to specify a contiguous range of TCP/UDP port numbers";
+              leaf start {
+                type srl_nokia-pkt-match-types:l4-port-type;
+                description
+                  "The starting port number to include in the range";
+                must "string(../end) != ''" {
+                  error-message "The port-list end value must also be specified to use range";
+                }
+              }
+              leaf end {
+                type srl_nokia-pkt-match-types:l4-port-type;
+                description
+                  "The ending port number to include in the range";
+                must "string(../start) != ''" {
+                  error-message "The port-list start value must also be specified to use range";
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  grouping ipv4-packet-length-list {
+    description
+      "Configuration of Ipv4 Packet-length List";
+    list ipv4-packet-length-list {
+      key "name";
+      max-elements 2048;
+      description
+        "A user defined Ipv4 packet length list";
+      leaf name {
+        type srl_nokia-comm:name;
+        description
+          "Reference to the name of the packet-length list";
+      }
+      leaf description {
+        type srl_nokia-comm:description;
+        description
+          "Description string for the list";
+      }
+      list packet-length {
+        key "id";
+        description
+          "List of packet-length values or ranges";
+        max-elements 64;
+        leaf id {
+          type uint8 {
+            range "1..64";
+          }
+          description
+            "Identifier of the packet-length-list entry ";
+        }
+        choice packet-length {
+          case value {
+            leaf value {
+              type uint32 {
+                range "0..65535";
+              }
+              description
+                "Packet Length value";
+            }
+          }
+          case range {
+            container range {
+              leaf start {
+                type uint32 {
+                  range "0..65535";
+                }
+                description
+                  "The starting packet-length value to include in the range";
+                must "string(../end) != ''" {
+                  error-message "The packet-length end value must also be specified to use range";
+                }
+                must '../end >= .' {
+                  error-message "The packet-length end value must be greater than start";
+                }
+              }
+              leaf end {
+                type uint32 {
+                  range "0..65535";
+                }
+                description
+                  "The ending packet-length value to include in the range";
+                must "string(../start) != ''" {
+                  error-message "The packet-length start value must also be specified to use range";
+                }
+                must '../start <= .' {
+                  error-message "The packet-length end value must be greater than start";
+                }
+              }
+              description
+                "Enter the range context";
+            }
+          }
+        }
+      }
+    }
+  }
+
+  grouping ipv6-packet-length-list {
+    description
+      "Configuration of Ipv6 Packet-length List";
+    list ipv6-packet-length-list {
+      key "name";
+      max-elements 2048;
+      description
+        "A user defined Ipv6 packet length list";
+      leaf name {
+        type srl_nokia-comm:name;
+        description
+          "Reference to the name of the packet-length list";
+      }
+      leaf description {
+        type srl_nokia-comm:description;
+        description
+          "Description string for the list";
+      }
+      list packet-length {
+        key "id";
+        description
+          "List of packet-length values or ranges";
+        max-elements 64;
+        leaf id {
+          type uint8 {
+            range "1..64";
+          }
+          description
+            "Identifier of the packet-length-list entry ";
+        }
+        choice packet-length {
+          case value {
+            leaf value {
+              type uint32 {
+                range "40..65575";
+              }
+              description
+                "Packet Length value";
+            }
+          }
+          case range {
+            container range {
+              leaf start {
+                type uint32 {
+                  range "40..65575";
+                }
+                description
+                  "The starting packet-length value to include in the range";
+                must "string(../end) != ''" {
+                  error-message "The packet-length end value must also be specified to use range";
+                }
+                must '../end >= .' {
+                  error-message "The packet-length end value must be greater than start";
+                }
+              }
+              leaf end {
+                type uint32 {
+                  range "40..65575";
+                }
+                description
+                  "The ending packet-length value to include in the range";
+                must "string(../start) != ''" {
+                  error-message "The packet-length start value must also be specified to use range";
+                }
+                must '../start <= .' {
+                  error-message "The packet-length end value must be greater than start";
+                }
+              }
+              description
+                "Enter the range context";
+            }
+          }
+        }
       }
     }
   }
@@ -604,11 +859,25 @@ module srl_nokia-acl {
     description
       "Top level grouping for match-list";
     container match-list {
-      if-feature "srl_nokia-feat:acl-ip-prefix-list";
       description
-        "Top level container for match list model config and operational state data";
-      uses ipv4-prefix-list;
-      uses ipv6-prefix-list;
+        "Enter the match-list context
+
+         Top level container for match list model config and operational state data";
+      uses ipv4-prefix-list {
+        if-feature "srl_nokia-feat:acl-ip-prefix-list";
+      }
+      uses ipv6-prefix-list {
+        if-feature "srl_nokia-feat:acl-ip-prefix-list";
+      }
+      uses ipv4-packet-length-list {
+        if-feature "srl_nokia-feat:acl-ip-packet-length";
+      }
+      uses ipv6-packet-length-list {
+        if-feature "srl_nokia-feat:acl-ip-packet-length";
+      }
+      uses port-list {
+        if-feature "srl_nokia-feat:acl-l4-port-list";
+      }
     }
   }
 
@@ -618,7 +887,9 @@ module srl_nokia-acl {
       "Container for the conditions that determine whether an Ethernet frame matches this entry";
     container destination-mac {
       description
-        "Ethernet frame matching criteria based on destination MAC address";
+        "Enter the destination-mac context
+
+         Ethernet frame matching criteria based on destination MAC address";
       leaf address {
         description
           "Match an Ethernet frame if its destination MAC address logically anded with the mask equals this MAC address.";
@@ -652,7 +923,9 @@ module srl_nokia-acl {
     }
     container source-mac {
       description
-        "Ethernet frame matching criteria based on source MAC address";
+        "Enter the source-mac context
+
+         Ethernet frame matching criteria based on source MAC address";
       leaf address {
         description
           "Match an Ethernet frame if its source MAC address logically anded with the mask equals this MAC address.";
@@ -678,10 +951,14 @@ module srl_nokia-acl {
     }
     container vlan {
       description
-        "Ethernet frame matching criteria based on VLAN tags";
+        "Enter the vlan context
+
+         Ethernet frame matching criteria based on VLAN tags";
       container outermost-vlan-id {
         description
-          "Ethernet frame matching criteria based on the outermost VLAN ID found before the subinterface-defining VLAN tag (if any) is removed.";
+          "Enter the outermost-vlan-id context
+
+           Ethernet frame matching criteria based on the outermost VLAN ID found before the subinterface-defining VLAN tag (if any) is removed.";
         choice vlan-matching-type {
           case range-with-one-value {
             leaf operator {
@@ -710,7 +987,9 @@ module srl_nokia-acl {
           case range-with-two-values {
             container range {
               description
-                "Container used to specify a contiguous range of VLAN IDs. Matched values include the start and end values.";
+                "Enter the range context
+
+                 Container used to specify a contiguous range of VLAN IDs. Matched values include the start and end values.";
               leaf start {
                 type srl_nokia-pkt-match-types:vlan-id-type;
                 description
@@ -755,7 +1034,9 @@ module srl_nokia-acl {
       "ACL entry common layer 4 fields";
     container destination-port {
       description
-        "A packet matches this condition if its destination TCP or UDP port number matches the value or range that is specified
+        "Enter the destination-port context
+
+         A packet matches this condition if its destination TCP or UDP port number matches the value or range or within the port-lists that is specified
 
          The rule should also have a condition that the IP protocol equals 6 (TCP) or 17 (UDP) in order for this to be interpreted correctly.";
       choice port {
@@ -795,7 +1076,9 @@ module srl_nokia-acl {
         case range {
           container range {
             description
-              "Container used to specify a contiguous range of TCP/UDP port numbers";
+              "Enter the range context
+
+               Container used to specify a contiguous range of TCP/UDP port numbers";
             leaf start {
               type srl_nokia-pkt-match-types:l4-port-type;
               description
@@ -842,11 +1125,38 @@ module srl_nokia-acl {
             }
           }
         }
+        case port-list {
+          list port-list {
+            if-feature "srl_nokia-feat:acl-l4-port-list";
+            key "name";
+            max-elements 4;
+            description
+              "Name of the port list";
+            leaf name {
+              type leafref {
+                path "/srl_nokia-acl:acl/srl_nokia-acl:match-list/srl_nokia-acl:port-list/srl_nokia-acl:name";
+              }
+              must "string(../../../../ipv4/protocol) = '6' or string(../../../../ipv6/next-header) = '6' or string(../../../../ipv4/protocol) = '17' or
+                    string(../../../../ipv6/next-header) = '17' or string(../../../../ipv4/protocol) = 'tcp' or string(../../../../ipv6/next-header) = 'tcp' or
+                    string(../../../../ipv4/protocol) = 'udp' or string(../../../../ipv6/next-header) = 'udp'" {
+                error-message "The protocol or next-header must be TCP or UDP to use port value";
+              }
+              must "string(../../../../ipv4/fragment) = '' or string(../../../../ipv4/first-fragment = true())" {
+                error-message "The first-fragment must be true to use port value with fragment";
+              }
+              must "string(../../../../../../type) = 'ipv4' or string(../../../../../../type) = 'ipv6'" {
+                error-message "The acl-filter must be of type ipv4 or ipv6";
+              }
+            }
+          }
+        }
       }
     }
     container source-port {
       description
-        "A packet matches this condition if its source TCP or UDP port number matches the value or range that is specified
+        "Enter the source-port context
+
+         A packet matches this condition if its source TCP or UDP port number matches the value or range or within the port-lists that is specified
 
          The rule should also have a condition that the IP protocol equals 6 (TCP) or 17 (UDP) in order for this to be interpreted correctly.";
       choice port {
@@ -886,7 +1196,9 @@ module srl_nokia-acl {
         case range {
           container range {
             description
-              "Container used to specify a contiguous range of TCP/UDP port numbers";
+              "Enter the range context
+
+               Container used to specify a contiguous range of TCP/UDP port numbers";
             leaf start {
               type srl_nokia-pkt-match-types:l4-port-type;
               description
@@ -918,6 +1230,31 @@ module srl_nokia-acl {
               }
               must "not(../../operator >= '')" {
                 error-message "The source port operator must be empty to use range";
+              }
+              must "string(../../../../ipv4/protocol) = '6' or string(../../../../ipv6/next-header) = '6' or string(../../../../ipv4/protocol) = '17' or
+                    string(../../../../ipv6/next-header) = '17' or string(../../../../ipv4/protocol) = 'tcp' or string(../../../../ipv6/next-header) = 'tcp' or
+                    string(../../../../ipv4/protocol) = 'udp' or string(../../../../ipv6/next-header) = 'udp'" {
+                error-message "The protocol or next-header must be TCP or UDP to use port value";
+              }
+              must "string(../../../../ipv4/fragment) = '' or string(../../../../ipv4/first-fragment = true())" {
+                error-message "The first-fragment must be true to use port value with fragment";
+              }
+              must "string(../../../../../../type) = 'ipv4' or string(../../../../../../type) = 'ipv6'" {
+                error-message "The acl-filter must be of type ipv4 or ipv6";
+              }
+            }
+          }
+        }
+        case port-list {
+          list port-list {
+            if-feature "srl_nokia-feat:acl-l4-port-list";
+            key "name";
+            max-elements 4;
+            description
+              "Name of the port list";
+            leaf name {
+              type leafref {
+                path "/srl_nokia-acl:acl/srl_nokia-acl:match-list/srl_nokia-acl:port-list/srl_nokia-acl:name";
               }
               must "string(../../../../ipv4/protocol) = '6' or string(../../../../ipv6/next-header) = '6' or string(../../../../ipv4/protocol) = '17' or
                     string(../../../../ipv6/next-header) = '17' or string(../../../../ipv4/protocol) = 'tcp' or string(../../../../ipv6/next-header) = 'tcp' or
@@ -960,7 +1297,9 @@ module srl_nokia-acl {
       "Container for the conditions that determine whether a packet matches this entry";
     container destination-ip {
       description
-        "Packet matching criteria based on destination IPv4 address";
+        "Enter the destination-ip context
+
+         Packet matching criteria based on destination IPv4 address";
       leaf prefix {
         description
           "Match a packet if its destination IP address is within the specified IPv4 prefix.";
@@ -975,7 +1314,7 @@ module srl_nokia-acl {
       list prefix-list {
         if-feature "srl_nokia-feat:acl-ip-prefix-list";
         key "name";
-        max-elements 1;
+        max-elements 8;
         description
           "Match a packet if its destination IP address is within the specified IPv4 prefix list.";
         leaf name {
@@ -1064,7 +1403,9 @@ module srl_nokia-acl {
     }
     container icmp {
       description
-        "A packet matches this condition if its ICMP type and code matches one of the specified combinations
+        "Enter the icmp context
+
+         A packet matches this condition if its ICMP type and code matches one of the specified combinations
 
          The rule should also have a condition that the IP protocol equals 1 (ICMP) in order for this to be interpreted correctly.";
       leaf type {
@@ -1102,7 +1443,9 @@ module srl_nokia-acl {
     }
     container source-ip {
       description
-        "Packet matching criteria based on source IPv4 address";
+        "Enter the source-ip context
+
+         Packet matching criteria based on source IPv4 address";
       leaf prefix {
         description
           "Match a packet if its source IP address is within the specified IPv4 prefix.";
@@ -1117,7 +1460,7 @@ module srl_nokia-acl {
       list prefix-list {
         if-feature "srl_nokia-feat:acl-ip-prefix-list";
         key "name";
-        max-elements 1;
+        max-elements 8;
         description
           "Match a packet if its source IP address is within the specified IPv4 prefix list.";
         leaf name {
@@ -1161,10 +1504,89 @@ module srl_nokia-acl {
         }
       }
     }
+    container packet-length {
+      if-feature "srl_nokia-feat:acl-ip-packet-length";
+      description
+        "Enter the packet-length context
+
+         A packet matches this condition if its packet-length matches the value or range or within the ipv4-packet-length-lists that is specified";
+      choice packet-length {
+        case value {
+          leaf operator {
+            description
+              "Comparison operator
+               eq = equal
+               ge = greater than or equal to
+               le = less than or equal to";
+            type srl_nokia-pkt-match-types:operator;
+            must "string(../value) != ''" {
+              error-message "The packet-length value must be specified along with operator";
+            }
+          }
+          leaf value {
+            description
+              "A ip-packet-length value";
+            type uint32 {
+              range "0..65535";
+            }
+          }
+        }
+        case range {
+          container range {
+            description
+              "Enter the range context
+
+               Container used to specify a contiguous range of ip-packet-length values";
+            leaf start {
+              type uint32 {
+                range "0..65535";
+              }
+              description
+                "The starting packet-length value to include in the range";
+              must "string(../end) != ''" {
+                error-message "The packet-length end value must also be specified to use range";
+              }
+              must '../end >= .' {
+                error-message "The packet-length end value must be greater than start";
+              }
+            }
+            leaf end {
+              type uint32 {
+                range "0..65535";
+              }
+              description
+                "The ending packet-length value to include in the range";
+              must "string(../start) != ''" {
+                error-message "The packet-length start value must also be specified to use range";
+              }
+              must '../start <= .' {
+                error-message "The packet-length end value must be greater than start";
+              }
+            }
+          }
+        }
+        case ipv4-packet-length-list {
+          list packet-length-list {
+            if-feature "srl_nokia-feat:acl-ip-packet-length";
+            key "name";
+            max-elements 1;
+            description
+              "Name of the Ipv4 packet length list";
+            leaf name {
+              type leafref {
+                path "/srl_nokia-acl:acl/srl_nokia-acl:match-list/srl_nokia-acl:ipv4-packet-length-list/srl_nokia-acl:name";
+              }
+            }
+          }
+        }
+      }
+    }
     container ttl {
       if-feature "srl_nokia-feat:acl-ttl";
       description
-        "A packet matches this condition if its IPv4 TTL value matches the value or range that is specified.";
+        "Enter the ttl context
+
+         A packet matches this condition if its IPv4 TTL value matches the value or range that is specified.";
       choice ttl-match-type {
         case value {
           leaf operator {
@@ -1194,7 +1616,9 @@ module srl_nokia-acl {
         case range {
           container range {
             description
-              "Container used to specify a contiguous range of TTL values";
+              "Enter the range context
+
+               Container used to specify a contiguous range of TTL values";
             leaf start {
               type uint8;
               description
@@ -1235,7 +1659,9 @@ module srl_nokia-acl {
       "Container for the conditions that determine whether a packet matches this entry";
     container destination-ip {
       description
-        "Packet matching criteria based on destination IPv6 address";
+        "Enter the destination-ip context
+
+         Packet matching criteria based on destination IPv6 address";
       leaf prefix {
         description
           "Match a packet if its destination IP address is within the specified IPv6 prefix.";
@@ -1247,7 +1673,7 @@ module srl_nokia-acl {
       list prefix-list {
         if-feature "srl_nokia-feat:acl-ip-prefix-list";
         key "name";
-        max-elements 1;
+        max-elements 8;
         description
           "Match a packet if its destination IP address is within the specified IPv6 prefix list.";
         leaf name {
@@ -1299,7 +1725,9 @@ module srl_nokia-acl {
     }
     container icmp6 {
       description
-        "A packet matches this condition if its ICMPv6 type and code matches one of the specified combinations
+        "Enter the icmp6 context
+
+         A packet matches this condition if its ICMPv6 type and code matches one of the specified combinations
 
          The rule should also have a condition that the next-header value equals 58 (ICMPv6) in order for this to be interpreted correctly.";
       leaf type {
@@ -1337,7 +1765,9 @@ module srl_nokia-acl {
     }
     container source-ip {
       description
-        "Packet matching criteria based on source IPv6 address";
+        "Enter the source-ip context
+
+         Packet matching criteria based on source IPv6 address";
       leaf prefix {
         description
           "Match a packet if its source IP address is within the specified IPv6 prefix.";
@@ -1349,7 +1779,7 @@ module srl_nokia-acl {
       list prefix-list {
         if-feature "srl_nokia-feat:acl-ip-prefix-list";
         key "name";
-        max-elements 1;
+        max-elements 8;
         description
           "Match a packet if its source IP address is within the specified IPv6 prefix list.";
         leaf name {
@@ -1387,10 +1817,89 @@ module srl_nokia-acl {
         }
       }
     }
+    container packet-length {
+      if-feature "srl_nokia-feat:acl-ip-packet-length";
+      description
+        "Enter the packet-length context
+
+         A packet matches this condition if its packet-length matches the value or range or within the ipv6-packet-length-lists that is specified";
+      choice packet-length {
+        case value {
+          leaf operator {
+            description
+              "Comparison operator
+               eq = equal
+               ge = greater than or equal to
+               le = less than or equal to";
+            type srl_nokia-pkt-match-types:operator;
+            must "string(../value) != ''" {
+              error-message "The packet-length value must be specified along with operator";
+            }
+          }
+          leaf value {
+            description
+              "A ip-packet-length value";
+            type uint32 {
+              range "40..65575";
+            }
+          }
+        }
+        case range {
+          container range {
+            description
+              "Enter the range context
+
+               Container used to specify a contiguous range of ip-packet-length values";
+            leaf start {
+              type uint32 {
+                range "40..65575";
+              }
+              description
+                "The starting packet-length value to include in the range";
+              must '../end >= .' {
+                error-message "The packet-length end value must be greater than start";
+              }
+              must "string(../end) != ''" {
+                error-message "The packet-length end value must also be specified to use range";
+              }
+            }
+            leaf end {
+              type uint32 {
+                range "40..65575";
+              }
+              description
+                "The ending packet-length value to include in the range";
+              must "string(../start) != ''" {
+                error-message "The packet-length start value must also be specified to use range";
+              }
+              must '../start <= .' {
+                error-message "The packet-length end value must be greater than start";
+              }
+            }
+          }
+        }
+        case ipv6-packet-length-list {
+          list packet-length-list {
+            if-feature "srl_nokia-feat:acl-ip-packet-length";
+            key "name";
+            max-elements 1;
+            description
+              "Name of the Ipv6 packet length list";
+            leaf name {
+              type leafref {
+                path "/srl_nokia-acl:acl/srl_nokia-acl:match-list/srl_nokia-acl:ipv6-packet-length-list/srl_nokia-acl:name";
+              }
+            }
+          }
+        }
+      }
+    }
     container hop-limit {
       if-feature "srl_nokia-feat:acl-ttl";
       description
-        "A packet matches this condition if its IPv6 hop-limit value matches the value or range that is specified.";
+        "Enter the hop-limit context
+
+         A packet matches this condition if its IPv6 hop-limit value matches the value or range that is specified.";
       choice hop-limit-match-type {
         case value {
           leaf operator {
@@ -1420,7 +1929,9 @@ module srl_nokia-acl {
         case range {
           container range {
             description
-              "Container used to specify a contiguous range of hop-limit values";
+              "Enter the range context
+
+               Container used to specify a contiguous range of hop-limit values";
             leaf start {
               type uint8;
               description
@@ -1493,6 +2004,8 @@ module srl_nokia-acl {
               error-message "the redirection only operates with an existing network-instance the type of which is ip-vrf or default";
             }
           }
+          description
+            "Enter the next-hop context";
         }
         leaf network-instance {
           description
@@ -1511,7 +2024,9 @@ module srl_nokia-acl {
   grouping common-filter-entry-action-config {
     container action {
       description
-        "Container for the actions to be applied to packets matching the filter entry.";
+        "Enter the action context
+
+         Container for the actions to be applied to packets matching the filter entry.";
       choice action {
         container accept {
           presence "Accept matching packets and forward them towards their normal destination";
@@ -1539,7 +2054,9 @@ module srl_nokia-acl {
           }
           container rate-limit {
             description
-              "Rate-limit accepted packets";
+              "Enter the rate-limit context
+
+               Rate-limit accepted packets";
             leaf system-cpu-policer {
               type leafref {
                 path "/acl/policers/system-cpu-policer/name";
@@ -1600,13 +2117,13 @@ module srl_nokia-acl {
           choice response {
             leaf v4-message-type {
               type enumeration {
-                enum host-unreachble {
+                enum host-unreachable {
                   value 1;
                 }
                 enum protocol-unreachable {
                   value 2;
                 }
-                enum port-unreachble {
+                enum port-unreachable {
                   value 3;
                 }
                 enum source-host-isolated {
@@ -1733,7 +2250,9 @@ module srl_nokia-acl {
       "ACL entry statistics";
     container statistics {
       description
-        "Container for per-entry statistics";
+        "Enter the statistics context
+
+         Container for per-entry statistics";
       config false;
       srl_nokia-ext:delivery-node-override "true";
       leaf last-clear {
@@ -1770,7 +2289,9 @@ module srl_nokia-acl {
         srl_nokia-ext:delivery-node-override "true";
         if-feature "srl_nokia-feat:acl-policer and not srl_nokia-feat:vsrl";
         description
-          "Policer stats for traffic matching the entry:
+          "Enter the policer context
+
+           Policer stats for traffic matching the entry:
 
            Statistics for policer configured with scope=global and entry-specific=true, and acl configured with subinterface-specific=false.";
         uses acl-policer-statistics;
@@ -1778,10 +2299,17 @@ module srl_nokia-acl {
       container system-cpu-policer {
         srl_nokia-ext:delivery-node-override "true";
         description
-          "System CPU policer stats for traffic matching the entry:
+          "Enter the system-cpu-policer context
+
+           System CPU policer stats for traffic matching the entry:
 
            Statistics for system cpu policer configured with scope=global and entry-specific=true, and acl configured with subinterface-specific=false.";
         uses acl-policer-statistics;
+      }
+      action clear {
+        if-feature "srl_nokia-feat:tools-as-modeled-actions-same-output";
+        description
+          "Reset all aggregate and per-interface statistics associated with this particular entry to zero";
       }
     }
   }
@@ -1821,6 +2349,16 @@ module srl_nokia-acl {
   }
 
   grouping acl-subinterface-entry-statistics {
+    container statistics {
+      config false;
+      action clear {
+        if-feature "srl_nokia-feat:tools-as-modeled-actions-same-output";
+        description
+          "Reset all statistics of all entries of the filter to zero";
+      }
+      description
+        "Enter the statistics context";
+    }
     list entry {
       config false;
       key "sequence-id";
@@ -1838,14 +2376,23 @@ module srl_nokia-acl {
       container statistics {
         if-feature "srl_nokia-feat:acl-subinterface-entry-statistics";
         description
-          "Container for per-entry statistics";
+          "Enter the statistics context
+
+           Container for per-entry statistics";
         config false;
         uses acl-subinterface-entry-match-statistics;
+        action clear {
+          if-feature "srl_nokia-feat:tools-as-modeled-actions-same-output";
+          description
+            "Reset all aggregate and per-interface statistics associated with this particular entry to zero";
+        }
       }
       container policer {
         if-feature "srl_nokia-feat:subif-acl-policer";
         description
-          "Policer stats for traffic matching the entry:
+          "Enter the policer context
+
+           Policer stats for traffic matching the entry:
 
            Statistics under /acl/interfaces for policer configured with scope=subinterface and entry-specific=true, and acl configured with subinterface-specific=input-and-output.";
         uses acl-policer-statistics;
@@ -1858,7 +2405,9 @@ module srl_nokia-acl {
       srl_nokia-ext:delivery-node-override "true";
       if-feature "srl_nokia-feat:subif-acl-policer";
       description
-        "Policer stats for traffic matching one or multiple entries:
+        "Enter the policer context
+
+         Policer stats for traffic matching one or multiple entries:
 
          List of ACL policer statistics of scope=subinterface and per-entry-statistics=false, and acl configured with subinterface-specific=false.";
       uses acl-policer-statistics;
@@ -1890,26 +2439,36 @@ module srl_nokia-acl {
       }
       container match {
         description
-          "Container for the conditions that determine whether a packet matches this entry";
+          "Enter the match context
+
+           Container for the conditions that determine whether a packet matches this entry";
         container l2 {
-          if-feature "not srl_nokia-feat:fpcx";
+          if-feature "srl_nokia-feat:acl-filter-mac";
           description
-            "Container for the common layer-2 match criteria";
+            "Enter the l2 context
+
+             Container for the common layer-2 match criteria";
           uses common-acl-filter-entry-match-l2-config;
         }
         container ipv4 {
           description
-            "Container for the common layer-3 IPv4 match criteria";
+            "Enter the ipv4 context
+
+             Container for the common layer-3 IPv4 match criteria";
           uses common-acl-filter-entry-match-ipv4-config;
         }
         container ipv6 {
           description
-            "Container for the common layer-3 IPv6 match criteria";
+            "Enter the ipv6 context
+
+             Container for the common layer-3 IPv6 match criteria";
           uses common-acl-filter-entry-match-ipv6-config;
         }
         container transport {
           description
-            "Container for the common layer-4 transport match criteria";
+            "Enter the transport context
+
+             Container for the common layer-4 transport match criteria";
           uses common-acl-filter-entry-match-layer4-config;
         }
         uses match-network-instance;
@@ -1933,7 +2492,9 @@ module srl_nokia-acl {
       }
       container interface-ref {
         description
-          "Reference to an interface or subinterface";
+          "Enter the interface-ref context
+
+           Reference to an interface or subinterface";
         leaf interface {
           type leafref {
             path "/srl_nokia-if:interface/srl_nokia-if:name";
@@ -1964,7 +2525,9 @@ module srl_nokia-acl {
       }
       container input {
         description
-          "Container for ACL filters that apply to ingress traffic on the subinterface";
+          "Enter the input context
+
+           Container for ACL filters that apply to ingress traffic on the subinterface";
         list acl-filter {
           key "name type";
           max-elements 4;
@@ -1993,7 +2556,9 @@ module srl_nokia-acl {
           srl_nokia-ext:delivery-node-override "true";
           if-feature "srl_nokia-feat:subif-acl-policer";
           description
-            "Container for policer scope=subinterface and per-entry-statistics=false statistics";
+            "Enter the statistics context
+
+             Container for policer scope=subinterface and per-entry-statistics=false statistics";
           config false;
           leaf last-clear {
             config false;
@@ -2002,12 +2567,19 @@ module srl_nokia-acl {
               "Time of the last clear command performed by the user at this level";
           }
           uses acl-subinterface-policer-statistics;
+          action clear {
+            if-feature "srl_nokia-feat:tools-as-modeled-actions-same-output";
+            description
+              "Reset all statistics to zero";
+          }
         }
       }
       container output {
         if-feature "not srl_nokia-feat:platform-7215-a1";
         description
-          "Container for ACL filters that apply to egress traffic on the subinterface";
+          "Enter the output context
+
+           Container for ACL filters that apply to egress traffic on the subinterface";
         list acl-filter {
           key "name type";
           max-elements 4;
@@ -2046,7 +2618,9 @@ module srl_nokia-acl {
           srl_nokia-ext:delivery-node-override "true";
           if-feature "srl_nokia-feat:subif-acl-policer";
           description
-            "Container for policer scope=subinterface and per-entry-statistics=false statistics";
+            "Enter the statistics context
+
+             Container for policer scope=subinterface and per-entry-statistics=false statistics";
           config false;
           leaf last-clear {
             config false;
@@ -2055,6 +2629,11 @@ module srl_nokia-acl {
               "Time of the last clear command performed by the user at this level";
           }
           uses acl-subinterface-policer-statistics;
+          action clear {
+            if-feature "srl_nokia-feat:tools-as-modeled-actions-same-output";
+            description
+              "Reset all statistics to zero";
+          }
         }
       }
     }
@@ -2149,6 +2728,16 @@ module srl_nokia-acl {
         description
           "Time of the last clear command performed by the user at this level";
       }
+      container statistics {
+        config false;
+        action clear {
+          if-feature "srl_nokia-feat:tools-as-modeled-actions-same-output";
+          description
+            "Reset all statistics of all entries of the filter to zero";
+        }
+        description
+          "Enter the statistics context";
+      }
       uses acl-filter-entry-top;
     }
   }
@@ -2156,7 +2745,9 @@ module srl_nokia-acl {
   grouping acl-top {
     container acl {
       description
-        "Top level container for configuration and operational state related to access control lists (ACLs)";
+        "Enter the acl context
+
+         Top level container for configuration and operational state related to access control lists (ACLs)";
       uses acl-filter-top;
       uses acl-interfaces-top;
       uses acl-policers-top;
@@ -2184,7 +2775,9 @@ module srl_nokia-acl {
   grouping control-plane-binding {
     container acl {
       description
-        "Container for ACL.";
+        "Enter the acl context
+
+         Container for ACL.";
       list acl-filter {
         key "name type";
         description

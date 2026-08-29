@@ -21,6 +21,10 @@ module srl_nokia-tools-aaa {
   description
     "This module defines operational commands related to AAA.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2023-07-31 {
     description
       "SRLinux 23.7.1";
@@ -37,7 +41,9 @@ module srl_nokia-tools-aaa {
   grouping aaa-tools-top {
     container authentication {
       description
-        "Operational commands related to authentication";
+        "Enter the authentication context
+
+         Operational commands related to authentication";
       list session {
         description
           "List of active sessions in the system";
@@ -91,7 +97,9 @@ module srl_nokia-tools-aaa {
     container authorization {
       if-feature "srl-feat:gnsi-authz";
       description
-        "Operational commands relating to authorization";
+        "Enter the authorization context
+
+         Operational commands relating to authorization";
     }
   }
 

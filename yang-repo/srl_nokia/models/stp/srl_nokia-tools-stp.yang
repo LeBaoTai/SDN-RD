@@ -21,6 +21,10 @@ module srl_nokia-tools-stp {
   description
     "Model for STP operational commands";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -39,6 +43,8 @@ module srl_nokia-tools-stp {
           description
             "Clear all Stp statistics";
         }
+        description
+          "Enter the statistics context";
       }
       container bpdu-guard-error {
         leaf clear {
@@ -46,6 +52,8 @@ module srl_nokia-tools-stp {
           description
             "Clear Bpdu Guard Error";
         }
+        description
+          "Enter the bpdu-guard-error context";
       }
     }
   }

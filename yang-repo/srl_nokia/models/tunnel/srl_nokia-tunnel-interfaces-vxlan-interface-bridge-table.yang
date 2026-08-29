@@ -21,6 +21,10 @@ module srl_nokia-tunnel-interfaces-vxlan-interface-bridge-table {
   description
     "Model for bridge-table-statistics on the vxlan-interface";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2021-06-30 {
     description
       "SRLinux 21.6.1";
@@ -80,6 +84,8 @@ module srl_nokia-tunnel-interfaces-vxlan-interface-bridge-table {
           srl_nokia-ext:show-importance "high";
         }
       }
+      description
+        "Enter the statistics context";
     }
   }
 

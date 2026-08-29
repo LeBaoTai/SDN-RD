@@ -27,6 +27,10 @@ module srl_nokia-interfaces-nbr-virtual-ip-discovery {
   description
     "Model for managing virtual ip discovery on IP subinterfaces.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2023-03-31 {
     description
       "SRLinux 23.3.1";
@@ -48,11 +52,18 @@ module srl_nokia-interfaces-nbr-virtual-ip-discovery {
     container statistics {
       config false;
       description
-        "Global statistics for Virtual IP discovery";
+        "Enter the statistics context
+
+         Global statistics for Virtual IP discovery";
       leaf out-total-probe-packets {
         type srl_nokia-comm:zero-based-counter64;
         description
           "The number of total probe packets transmitted for Virtual discovery.";
+      }
+      action clear {
+        if-feature "srl-feat:tools-as-modeled-actions-same-output";
+        description
+          "Clears the global statistics for all the Virtual IP addresses";
       }
     }
   }
@@ -61,11 +72,18 @@ module srl_nokia-interfaces-nbr-virtual-ip-discovery {
     container statistics {
       config false;
       description
-        "Statistics for the Virtual IP address";
+        "Enter the statistics context
+
+         Statistics for the Virtual IP address";
       leaf out-probe-packets {
         type srl_nokia-comm:zero-based-counter64;
         description
           "The number of probe packets transmitted for the Virtual IP discovery.";
+      }
+      action clear {
+        if-feature "srl-feat:tools-as-modeled-actions-same-output";
+        description
+          "Clears the statistics for the Virtual IP addresses";
       }
     }
   }

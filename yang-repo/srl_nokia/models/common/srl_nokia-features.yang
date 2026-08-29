@@ -11,6 +11,10 @@ module srl_nokia-features {
   description
     "YANG module detailing SRLinux features";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -80,11 +84,6 @@ module srl_nokia-features {
       "SRLinux 20.6.1";
   }
 
-  feature future-0-0 {
-    description
-      "Only true in 0.0 stream, false in other streams. The feature is for an unknown future release.";
-  }
-
   feature aaa-fqdn-for-radius-server-address {
     description
       "FQDN for RADIUS server address";
@@ -100,14 +99,14 @@ module srl_nokia-features {
       "Support for superuser flag for remote users";
   }
 
-  feature aaa-servers-health-check {
-    description
-      "Health checks for RADIUS and TACACS+";
-  }
-
   feature aaa-server-timeout {
     description
       "Support for configuration of a per-server timeout in a AAA server group";
+  }
+
+  feature aaa-servers-health-check {
+    description
+      "Health checks for RADIUS and TACACS+";
   }
 
   feature aaa-servers-tacacs-vsa {
@@ -120,10 +119,17 @@ module srl_nokia-features {
       "Support for authentication using spiffe-id";
   }
 
+  feature aaa-ssh-connections-limit {
+    description
+      "Support for SSH connections limit";
+  }
+
   feature aaa-superuser {
     description
       "Support for superuser flag for local users and roles";
   }
+
+  feature ac5x;
 
   feature acl-action-accept-with-log {
     description
@@ -150,9 +156,19 @@ module srl_nokia-features {
       "Support for ACL filters on l2 interfaces";
   }
 
+  feature acl-filter-embed-entries-bgp-fs {
+    description
+      "ACL support for embedding FlowSpec entries";
+  }
+
   feature acl-filter-ip-allowed-on-l2-interfaces {
     description
       "Support for ACL filters with type IPv4 or Ipv6 on l2 interfaces";
+  }
+
+  feature acl-filter-mac {
+    description
+      "Support for ACL mac filter";
   }
 
   feature acl-filter-mac-allowed-on-l2-interfaces {
@@ -163,11 +179,6 @@ module srl_nokia-features {
   feature acl-filter-mac-allowed-on-l3-interfaces {
     description
       "Support for ACL filters with type MAC on l3 interfaces";
-  }
-
-  feature acl-filter-mac {
-    description
-      "Support for ACL mac filter";
   }
 
   feature acl-filter-qos-forwarding-class {
@@ -215,14 +226,29 @@ module srl_nokia-features {
       "Support for ACL Match IP Option Present";
   }
 
+  feature acl-ip-packet-length {
+    description
+      "Support for ACL IP Packet Length";
+  }
+
   feature acl-ip-prefix-list {
     description
       "Support for ACL IP Prefix List";
   }
 
-  feature acl-ip-prefix-list-apply-path {
+  feature acl-ip-prefix-list-apply-path-bgp-peers {
     description
-      "Support for ACL Prefix List Apply-Path";
+      "Support for ACL Prefix List Apply-Path BGP peers";
+  }
+
+  feature acl-ip-prefix-list-apply-path-interfaces {
+    description
+      "Support for ACL Prefix List Apply-Path interfaces";
+  }
+
+  feature acl-l4-port-list {
+    description
+      "Support for ACL L4 Port List";
   }
 
   feature acl-logging {
@@ -273,6 +299,16 @@ module srl_nokia-features {
   feature admin-user-roles {
     description
       "Support for configurable roles for the admin user";
+  }
+
+  feature alarm-hardware {
+    description
+      "Support for alarm hardware, ACO/LT button, alarm LEDs, alarm connector";
+  }
+
+  feature algorithmic-tcam {
+    description
+      "Support for algorithmic TCAM compression and related operational telemetry (for example requested TCAM entry count).";
   }
 
   feature anycast-gw {
@@ -375,6 +411,11 @@ module srl_nokia-features {
       "BGP support for backup paths using BGP VPN routes. Also known as Edge PIC";
   }
 
+  feature bgp-bmp-support {
+    description
+      "Support for BGP Monitoring Protocol (BMP)";
+  }
+
   feature bgp-cfg-afi-safi-list {
     description
       "Support for the AFI-SAFI list based configuration and state model in BGP for instances, groups and neighbors.";
@@ -383,6 +424,11 @@ module srl_nokia-features {
   feature bgp-domain-path {
     description
       "Support for the Domain Path Attribute (D-PATH) for BGP IPVPN and EVPN routes";
+  }
+
+  feature bgp-flowspec-v1 {
+    description
+      "Support for bgp afi-safis ipv4-flowspec-v1 and ipv6-flowspec-v1";
   }
 
   feature bgp-graceful-restart-err {
@@ -425,11 +471,6 @@ module srl_nokia-features {
       "Support for bgp afi-safis ipv4-mvpn and ipv6-mvpn";
   }
 
-  feature bgp-flowspec-v1 {
-    description
-      "Support for bgp afi-safis ipv4-flowspec-v1 and ipv6-flowspec-v1";
-  }
-
   feature bgp-labeled-unicast {
     description
       "Support for BGP-LU address families";
@@ -448,6 +489,11 @@ module srl_nokia-features {
   feature bgp-labeled-unicast-prefix-sid {
     description
       "Support for prefix SID attribute in the context of SR-MPLS";
+  }
+
+  feature bgp-labeled-unicast-prefix-sid-ilm-statistics {
+    description
+      "BGP-LU prefix-SID ILM ingress statistics";
   }
 
   feature bgp-labeled-unicast-rfc8950 {
@@ -493,6 +539,11 @@ module srl_nokia-features {
   feature bgp-multipath-maximum-paths-limit-256 {
     description
       "Support multipath maximum-paths upper limit 256 depending on platform and afi-safi";
+  }
+
+  feature bgp-next-hop-resolution-policy {
+    description
+      "Support for BGP next-hop resolution policies";
   }
 
   feature bgp-next-hop-resolution-tag {
@@ -675,6 +726,11 @@ module srl_nokia-features {
       "Support for Bridge-Table split horizon groups";
   }
 
+  feature central-security-module {
+    description
+      "Support for central security module";
+  }
+
   feature chassis {
     description
       "The platform is in a chassis configuration";
@@ -693,6 +749,11 @@ module srl_nokia-features {
   feature chassis-vertical-orientation {
     description
       "The platform supports a configurable mount orientation";
+  }
+
+  feature cli-commit-discard-options {
+    description
+      "Commit and discard cli environment options";
   }
 
   feature cli-modeled-environment {
@@ -735,6 +796,16 @@ module srl_nokia-features {
       "Support for connection points on network-instances";
   }
 
+  feature containerz-cgroup {
+    description
+      "Support for containerz cgroup resource management";
+  }
+
+  feature containerz-location {
+    description
+      "Support for containerz location feature to control where containers are allowed to run";
+  }
+
   feature control-card-reboot {
     description
       "This platform supports reboots of control cards
@@ -742,14 +813,14 @@ module srl_nokia-features {
        Usually only for platforms with discrete CPMs.";
   }
 
-  feature cpm-datapath-resources {
-    description
-      "Support for monitoring the utilization of XDP-CPM datapath resources";
-  }
-
   feature cpiom-linecard-redundancy {
     description
       "This platform supports redundant cpiom line cards";
+  }
+
+  feature cpm-datapath-resources {
+    description
+      "Support for monitoring the utilization of XDP-CPM datapath resources";
   }
 
   feature cpm-warm-redundancy {
@@ -807,16 +878,6 @@ module srl_nokia-features {
       "Support IRB L2 interface name and mac-vrf instance name in Option 82 or 18";
   }
 
-  feature dhcpv4-snooping {
-    description
-      "Support for DHCPv4 snooping";
-  }
-
-  feature dhcpv6-snooping {
-    description
-      "Support for DHCPv6 snooping";
-  }
-
   feature dhcp-server {
     description
       "Support DHCPv4/v6 server feature";
@@ -825,6 +886,11 @@ module srl_nokia-features {
   feature dhcp-server-guard {
     description
       "Support for fhs dhcp server guard";
+  }
+
+  feature dhcp-svr-boot-compute {
+    description
+      "Support for dhcp server support for boot compute. custom options. next server address";
   }
 
   feature dhcp-svr-option-121 {
@@ -837,9 +903,14 @@ module srl_nokia-features {
       "Support for dhcp server option 26, Interface Mtu feature";
   }
 
-  feature dhcp-svr-boot-compute {
+  feature dhcpv4-snooping {
     description
-      "Support for dhcp server support for boot compute. custom options. next server address";
+      "Support for DHCPv4 snooping";
+  }
+
+  feature dhcpv6-snooping {
+    description
+      "Support for DHCPv6 snooping";
   }
 
   feature digital-coherent-optics {
@@ -897,16 +968,14 @@ module srl_nokia-features {
       "Support for dot1x stats per interface";
   }
 
+  feature dot1x-supplicant {
+    description
+      "Support for IEEE802.1X supplicant";
+  }
+
   feature dot1x-tunnel {
     description
       "Support for dot1x tunneling";
-  }
-
-  feature dot1x-tunnel-tunnel-all {
-    description
-      "Support for dot1x tunneling tunnel-all
-
-       Some platforms can tunnel, but not with fine (untagged, signle-tagged, double-tagged) granularity.";
   }
 
   feature dot1x-tunnel-detail {
@@ -919,6 +988,13 @@ module srl_nokia-features {
   feature dot1x-tunnel-system-stats {
     description
       "Support for tunneling IEEE 802.1X statistics in the system context";
+  }
+
+  feature dot1x-tunnel-tunnel-all {
+    description
+      "Support for dot1x tunneling tunnel-all
+
+       Some platforms can tunnel, but not with fine (untagged, signle-tagged, double-tagged) granularity.";
   }
 
   feature dynamic-load-balancing {
@@ -996,9 +1072,29 @@ module srl_nokia-features {
       "Support for the MicroPython-based event handler";
   }
 
+  feature event-handler-cron {
+    description
+      "Support for cron-like scheduling of event handler script";
+  }
+
   feature evpn {
     description
       "Support for EVPN";
+  }
+
+  feature evpn-anycast-l3-subnet {
+    description
+      "Support for EVPN Anycast for multi-homing L3 subnets for zero ESI";
+  }
+
+  feature evpn-iff {
+    description
+      "Support for EVPN Interface-ful model for IP Prefix routes, as in RFC9136 sections 4.4.2 and 4.4.3";
+  }
+
+  feature evpn-iff-unnumbered {
+    description
+      "Support for EVPN Interface-ful unnumbered model for IP Prefix routes, as in RFC9136 sections 4.4.2 and 4.4.3";
   }
 
   feature evpn-ifl-gw-ip {
@@ -1016,16 +1112,6 @@ module srl_nokia-features {
       "Support for the advertisement of IP AD per EVI/ES routes for EVPN-IFL host routes as per draft-ietf-bess-evpn-ip-aliasing";
   }
 
-  feature evpn-iff {
-    description
-      "Support for EVPN Interface-ful model for IP Prefix routes, as in RFC9136 sections 4.4.2 and 4.4.3";
-  }
-
-  feature evpn-iff-unnumbered {
-    description
-      "Support for EVPN Interface-ful unnumbered model for IP Prefix routes, as in RFC9136 sections 4.4.2 and 4.4.3";
-  }
-
   feature evpn-ifl-unequal-ecmp {
     description
       "Support for EVPN unequal ECMP for RT5 IFL routes";
@@ -1036,9 +1122,19 @@ module srl_nokia-features {
       "Support for allocation of labels for EVPN IML routes from a seperate label block.";
   }
 
+  feature evpn-layer-2-ecmp {
+    description
+      "Support for the layer-2 ecmp on BGP EVPN services";
+  }
+
   feature evpn-mh {
     description
       "Support for EVPN Multi-Homing";
+  }
+
+  feature evpn-mh-anycast {
+    description
+      "Support for EVPN Anycast Multi-Homing on Ethernet Segments";
   }
 
   feature evpn-mh-ip-aliasing {
@@ -1081,9 +1177,24 @@ module srl_nokia-features {
       "Support for EVPN MPLS Split-Horizon-Groups";
   }
 
+  feature evpn-neighbor-synchronization {
+    description
+      "Support for EVPN Neighbor Synchronization on layer-3 interfaces";
+  }
+
   feature evpn-route-internal-tags {
     description
       "Support for internal tags associated to evpn routes";
+  }
+
+  feature evpn-rt2-proxy-irb {
+    description
+      "Support for EVPN RT2 Proxy functionality on IRB subinterfaces";
+  }
+
+  feature evpn-rt2-proxy-mac-vrf {
+    description
+      "EVPN multihoming RT-2 proxy (draft-evpn-ip-mac-proxy) on MAC-VRF network-instance";
   }
 
   feature evpn-vxlan-ifl {
@@ -1109,6 +1220,11 @@ module srl_nokia-features {
   feature exponential-port-dampening {
     description
       "Support for exponential port dampening";
+  }
+
+  feature facility-alarm-mgr {
+    description
+      "Support for facility alarm manager to track and display the basic status of the equipment facilities";
   }
 
   feature factory-reset {
@@ -1191,6 +1307,16 @@ module srl_nokia-features {
       "Support for forwarding-complex drop counters and aggregate CPU extration statistics";
   }
 
+  feature fpcx {
+    description
+      "FPcx based platforms";
+  }
+
+  feature future-0-0 {
+    description
+      "Only true in 0.0 stream, false in other streams. The feature is for an unknown future release.";
+  }
+
   feature glome-authentication {
     description
       "GLOME user authentication for linux users (console and non-console)";
@@ -1234,6 +1360,11 @@ module srl_nokia-features {
   feature gnoi-healthz-forwarding-complex {
     description
       "gNOI Healthz service support for forwarding-complex";
+  }
+
+  feature gnoi-yang-action {
+    description
+      "gNOI YANG action service";
   }
 
   feature gnpsi {
@@ -1296,9 +1427,9 @@ module srl_nokia-features {
       "Support for gRPC Tunnel";
   }
 
-  feature udp-tunnel {
+  feature grub-password {
     description
-      "Support for UDP tunnel";
+      "Support for grub password";
   }
 
   feature host-network-instance {
@@ -1391,9 +1522,29 @@ module srl_nokia-features {
       "Support for IP tunnel decapsulation groups";
   }
 
+  feature ip-tunnel-encap-stats {
+    description
+      "Support for IP tunnel encapsulation statistics";
+  }
+
   feature ipfix {
     description
       "Support of Flow Sampling feature";
+  }
+
+  feature ipsec-inline-fastpath {
+    description
+      "Support IPsec with inline fastpath";
+  }
+
+  feature ipv4-ipv6-routes-lem-optimization-resources {
+    description
+      "Support for resources for IPv4/IPv6 FIB expansion into LEM and compression of entries";
+  }
+
+  feature ipv4-routes-lem-optimization {
+    description
+      "Support for IPv4 FIB expansion into LEM and compression of entries";
   }
 
   feature ipv4-unnumbered {
@@ -1416,6 +1567,11 @@ module srl_nokia-features {
       "Support for isis adjacency sid holdtime";
   }
 
+  feature isis-advertise-passive-only {
+    description
+      "Support for isis advertise-passive-only";
+  }
+
   feature isis-app-hot-restart {
     description
       "Support for isis non-stop-routing";
@@ -1436,6 +1592,11 @@ module srl_nokia-features {
       "Support for ISIS flexible algorithms";
   }
 
+  feature isis-interface-afi-safi-enable {
+    description
+      "Enable Placeholder leaf for OC mapping of interface context IPv4 or IPv6 enable flag";
+  }
+
   feature isis-level-passive {
     description
       "Support for isis per level passive configuration";
@@ -1444,6 +1605,11 @@ module srl_nokia-features {
   feature isis-lfa {
     description
       "Support for ISIS loop-free alternates";
+  }
+
+  feature isis-loopfree-alternate-flex-algo {
+    description
+      "Support for isis micro-loop avoidance";
   }
 
   feature isis-lsdb {
@@ -1466,6 +1632,16 @@ module srl_nokia-features {
       "Support for isis multi-instance";
   }
 
+  feature isis-micro-loop-avoidance {
+    description
+      "Support for isis micro-loop avoidance";
+  }
+
+  feature isis-micro-loop-avoidance-flex-algo {
+    description
+      "Support for isis micro-loop avoidance";
+  }
+
   feature isis-mt {
     description
       "Support for isis multi-topology";
@@ -1474,11 +1650,6 @@ module srl_nokia-features {
   feature isis-multi-part-tlv {
     description
       "Support for isis multi-part tlv's";
-  }
-
-  feature isis-interface-afi-safi-enable {
-    description
-      "Enable Placeholder leaf for OC mapping of interface context IPv4 or IPv6 enable flag";
   }
 
   feature isis-nsf {
@@ -1506,20 +1677,11 @@ module srl_nokia-features {
       "Support for isis weighted ecmp";
   }
 
-  feature isis-micro-loop-avoidance {
-    description
-      "Support for isis micro-loop avoidance";
-  }
+  feature ixr-dnx;
 
-  feature isis-micro-loop-avoidance-flex-algo {
-    description
-      "Support for isis micro-loop avoidance";
-  }
+  feature ixr-dnx-gen2;
 
-  feature isis-loopfree-alternate-flex-algo {
-    description
-      "Support for isis micro-loop avoidance";
-  }
+  feature ixr-dnx-gen2cp;
 
   feature ixr-dnx-gen2cp-gen3-mixed-system {
     description
@@ -1531,10 +1693,20 @@ module srl_nokia-features {
       "7250 IXR Gen 2cp platform grouping. This list consists of 7250 IXR-X1b, IXR-X3b and IXR-6e, IXR-10e with Jericho-2cp cards as of Jul, 2025";
   }
 
+  feature ixr-dnx-gen3;
+
   feature ixr-dnx-gen3-only-system {
     description
       "7250 IXR Gen 3 platform grouping. This list consists of 7250 IXR-6e, IXR-10e and IXR-18e with Jericho-3 cards as of Jul, 2025";
   }
+
+  feature ixr-xgs;
+
+  feature jericho2;
+
+  feature jericho2cp;
+
+  feature jericho3;
 
   feature keychain {
     description
@@ -1835,6 +2007,11 @@ module srl_nokia-features {
       "Support for dynamic link neasurement";
   }
 
+  feature link-measurement-lag-micro-sessions {
+    description
+      "Support for dynamic link neasurement";
+  }
+
   feature lldp-component {
     description
       "Support for LLDP Org Specific TLV type 127 OUI 00:12:0F subtype 04 and OUI 00:80:C2 subtype 07";
@@ -1848,6 +2025,11 @@ module srl_nokia-features {
   feature lldp-suppress-tlv {
     description
       "Support for suppress-tlv-advertisement";
+  }
+
+  feature lldp-ue-link-negotiation {
+    description
+      "Support for a component of LLDP Ultra Ethernet Link negotiation TLV";
   }
 
   feature lldp-vlan {
@@ -1900,6 +2082,11 @@ module srl_nokia-features {
       "Support for fallback keychain for macsec";
   }
 
+  feature macsec-lag-subinterface {
+    description
+      "Support for macsec on a LAG subinterface";
+  }
+
   feature macsec-subinterface {
     description
       "Support for macsec on a subinterface";
@@ -1933,6 +2120,11 @@ module srl_nokia-features {
   feature mirror-dest-local {
     description
       "Support for local mirror-destination";
+  }
+
+  feature mirror-dest-pcap-internal-capture-if {
+    description
+      "Support for mirroring based tools traffic-monitor capture";
   }
 
   feature mirror-dest-remote {
@@ -2050,9 +2242,24 @@ module srl_nokia-features {
       "Support for lsp-ping and lsp-trace over SR MPLS colored TE-Policy";
   }
 
+  feature mpls-oam-p2mp-ldp {
+    description
+      "Support for mpls oam p2mp ldp lsp-ping";
+  }
+
   feature mpls-oam-uncolored-tepolicy {
     description
       "Support for lsp-ping and lsp-trace over SR MPLS uncolored TE-Policy";
+  }
+
+  feature mpls-over-ip-dscp-marking-enhancements {
+    description
+      "Support for in-profile vs out-profile DSCP marking when encapsulating MPLS inside IP tunnels";
+  }
+
+  feature mpls-static-lsp {
+    description
+      "Support for static MPLS LSPs";
   }
 
   feature msdp {
@@ -2080,6 +2287,11 @@ module srl_nokia-features {
       "Support for disabling caching in NDK mgr";
   }
 
+  feature net-inst-mgr-app-hot-restart {
+    description
+      "Support for net_inst_mgr hot restart";
+  }
+
   feature netconf {
     description
       "Support for NETCONF";
@@ -2088,16 +2300,6 @@ module srl_nokia-features {
   feature netconf-unix-socket {
     description
       "Support for NETCONF over unix socket";
-  }
-
-  feature network-instance-multi-label-block-mpls {
-    description
-      "Support for multiple label blocks for MPLS Services in network-instances";
-  }
-
-  feature network-instance-single-dynamic-label-block-mpls {
-    description
-      "Support for single dynamic label block for MPLS Services in network-instances";
   }
 
   feature network-instance-leaked-route-readvertisement {
@@ -2110,9 +2312,24 @@ module srl_nokia-features {
       "Support for MPLS Services";
   }
 
+  feature network-instance-multi-label-block-mpls {
+    description
+      "Support for multiple label blocks for MPLS Services in network-instances";
+  }
+
+  feature network-instance-protocol-instance-names {
+    description
+      "Support for naming BGP, static and aggregate protocol instances";
+  }
+
   feature network-instance-route-limits {
     description
       "Support for a configurable per-family route limit for a network-instance";
+  }
+
+  feature network-instance-single-dynamic-label-block-mpls {
+    description
+      "Support for single dynamic label block for MPLS Services in network-instances";
   }
 
   feature network-instance-static-mpls {
@@ -2123,6 +2340,11 @@ module srl_nokia-features {
   feature nhsrr-evpn {
     description
       "Support for next hop self route reflector functionality for evpn";
+  }
+
+  feature ntp-server {
+    description
+      "Support for NTP server instances";
   }
 
   feature ntp-tls {
@@ -2143,6 +2365,11 @@ module srl_nokia-features {
   feature oam {
     description
       "Support for OAM";
+  }
+
+  feature oam-csig {
+    description
+      "Support for OAM Congestion Signalling";
   }
 
   feature oam-pm {
@@ -2180,9 +2407,24 @@ module srl_nokia-features {
       "Support for OpenConfig";
   }
 
+  feature operational-fan-speed {
+    description
+      "Support for displaying the operational fan speed";
+  }
+
   feature optical-line-system {
     description
       "Support for QFSP-DD-LS Amplifier";
+  }
+
+  feature ospf-mgr-app-hot-restart {
+    description
+      "Support for ospf hot restart";
+  }
+
+  feature ospf-vprn-dn-bit {
+    description
+      "Support for OSPF DN-bit control (ignore-dn-bit / suppress-dn-bit) in ip-vrf (VPRN) network-instances";
   }
 
   feature p4rt {
@@ -2220,6 +2462,11 @@ module srl_nokia-features {
       "Path Computation Element client functionality for pce associations";
   }
 
+  feature pcep-pcc-pce-init {
+    description
+      "PCE init SL, te-policy template";
+  }
+
   feature pcep-pcc-tls {
     description
       "Path Computation Element client functionality to support TLS";
@@ -2240,14 +2487,84 @@ module srl_nokia-features {
       "Support for PIM IP VRF";
   }
 
+  feature pim-snooping {
+    description
+      "Support for PIM snooping";
+  }
+
   feature pim-spt-switchover {
     description
       "Support for PIM SPT switchover";
   }
 
+  feature platform-7215-a1;
+
+  feature platform-7220-d1;
+
+  feature platform-7220-d2;
+
+  feature platform-7220-d3;
+
+  feature platform-7220-d4;
+
+  feature platform-7220-d5;
+
+  feature platform-7220-h2;
+
+  feature platform-7220-h3;
+
+  feature platform-7220-h4;
+
+  feature platform-7220-h4-32d;
+
+  feature platform-7220-h5-32d;
+
+  feature platform-7220-h5-64d;
+
+  feature platform-7220-h5-64o;
+
+  feature platform-7220-h5-64o-512;
+
+  feature platform-7220-h6-64;
+
+  feature platform-7250-ixr;
+
+  feature platform-7250-ixr-18e-gen3;
+
+  feature platform-7250-ixr-18e-unified;
+
+  feature platform-7250-ixr-e-gen2cp;
+
+  feature platform-7250-ixr-e-gen2cp-3;
+
+  feature platform-7250-ixr-e-gen3;
+
+  feature platform-7250-ixr-e-unified;
+
+  feature platform-7250-ixr-x1b;
+
+  feature platform-7250-ixr-x3b;
+
+  feature platform-7250-ixr-x4;
+
+  feature platform-7250-ixr-x4-osfp;
+
+  feature platform-7250-j2;
+
+  feature platform-7730-sxr-1-32d;
+
+  feature platform-7730-sxr-1d-32d;
+
+  feature platform-7730-sxr-1x-44s;
+
   feature platform-counter-bank-allocation {
     description
       "Support for managing the allocation of hardware counter banks";
+  }
+
+  feature platform-counter-bank-allocation-ip-tunnel-encap {
+    description
+      "Support for managing the allocation of hardware counter banks for originated GUE, MPLSoGRE, and MPLSoUDP tunnels";
   }
 
   feature platform-counter-bank-allocation-mep-opcode {
@@ -2255,9 +2572,26 @@ module srl_nokia-features {
       "Support for managing the allocation of hardware counter banks on per MEP OpCode basis";
   }
 
-  feature platform-counter-bank-allocation-subintf-policers-and-stats {
+  feature platform-counter-bank-allocation-subintf-fc-policers-and-stats {
     description
-      "Support for managing the allocation of hardware counter banks on per subinterface basis and its associated stats";
+      "Support for managing the allocation of hardware counter banks for fc policers on per subinterface basis and its associated stats";
+  }
+
+  feature platform-counter-bank-allocation-subintf-parent-policers-and-stats {
+    description
+      "Support for managing the allocation of hardware counter banks for parent policers on per subinterface basis and its associated stats";
+  }
+
+  feature platform-crimson;
+
+  feature platform-dnx-lag-pool-management {
+    description
+      "Support for managing the allocation of hardware LAG pool resources for LAG IDs and member links reservation on DNX platforms";
+  }
+
+  feature platform-dynamic-subinterfaces {
+    description
+      "Support for managing the allocation of hardware resources for dynamic subinterfaces";
   }
 
   feature platform-group-based-policy {
@@ -2275,6 +2609,8 @@ module srl_nokia-features {
       "Support for state showing the hash polynomial used by each hash user";
   }
 
+  feature platform-imgmt;
+
   feature platform-mdb-profile {
     description
       "Support for managing the allocation of hardware resources according to a Broadcom MDB profile";
@@ -2288,6 +2624,13 @@ module srl_nokia-features {
   feature platform-mdb-profile-4 {
     description
       "Support for managing the allocation of hardware resources according to MDB profile-4 on 7250 IXR Gen 3 platforms. FID 10477";
+  }
+
+  feature platform-sse-t81-64;
+
+  feature platform-vsrl {
+    description
+      "VSRL platforms";
   }
 
   feature poe {
@@ -2305,14 +2648,59 @@ module srl_nokia-features {
       "Support for policy-based forwarding action: decapsulate GRE";
   }
 
+  feature policy-based-forwarding-decapsulate-gre-ipv4-prefix-list {
+    description
+      "Support for policy-based forwarding action: encapsulate GRE with ipv4-prefix-list support";
+  }
+
+  feature policy-based-forwarding-decapsulate-gre-ipv6-prefix-list {
+    description
+      "Support for policy-based forwarding action: encapsulate GRE with ipv6-prefix-list support";
+  }
+
   feature policy-based-forwarding-decapsulate-gue {
     description
       "Support for policy-based forwarding action: decapsulate GUE";
   }
 
+  feature policy-based-forwarding-decapsulate-gue-ipv6 {
+    description
+      "Support for policy-based forwarding action: decapsulate GUE with ipv6 match support";
+  }
+
+  feature policy-based-forwarding-decapsulate-gue-ipv6-prefix-list {
+    description
+      "Support for policy-based forwarding action: decapsulate GUE with ipv6-prefix-list support";
+  }
+
+  feature policy-based-forwarding-decapsulate-ip-in-ip {
+    description
+      "Support for policy-based forwarding action: decapsulate IP-in-IP";
+  }
+
   feature policy-based-forwarding-decapsulate-mpls-udp {
     description
       "Support for policy-based forwarding action: decapsulate MPLS in UDP";
+  }
+
+  feature policy-based-forwarding-decapsulate-mpls-udp-ipv6-prefix-list {
+    description
+      "Support for policy-based forwarding action: decapsulate MPLS in UDP with ipv6-prefix-list support";
+  }
+
+  feature policy-based-forwarding-down-override {
+    description
+      "Support for overriding the the PF's effective action when the target is down.";
+  }
+
+  feature policy-based-forwarding-down-override-action-nh {
+    description
+      "Support for overriding the the PF's effective action for action NH when the target is down.";
+  }
+
+  feature policy-based-forwarding-down-override-action-nhg {
+    description
+      "Support for overriding the the PF's effective action for action NHG when the target is down.";
   }
 
   feature policy-based-forwarding-dscp-ip-protocol {
@@ -2323,6 +2711,16 @@ module srl_nokia-features {
   feature policy-based-forwarding-encapsulate-gre {
     description
       "Support for policy-based forwarding action: encapsulate GRE";
+  }
+
+  feature policy-based-forwarding-match-action-type {
+    description
+      "PBF policy type that provides a superset of ACL, QoS and PBR actions";
+  }
+
+  feature policy-based-forwarding-match-address-family {
+    description
+      "Support for address-family selector in policy-forwarding match conditions";
   }
 
   feature policy-based-forwarding-match-ipv4-prefix-list {
@@ -2350,24 +2748,14 @@ module srl_nokia-features {
       "Support for policy-forwarding to next-hop-group";
   }
 
-  feature policy-based-forwarding-down-override {
-    description
-      "Support for overriding the the PF's effective action when the target is down.";
-  }
-
-  feature policy-based-forwarding-down-override-action-nh {
-    description
-      "Support for overriding the the PF's effective action for action NH when the target is down.";
-  }
-
-  feature policy-based-forwarding-down-override-action-nhg {
-    description
-      "Support for overriding the the PF's effective action for action NHG when the target is down.";
-  }
-
   feature port-breakout {
     description
       "Support for ethernet port breakout (port connector)";
+  }
+
+  feature port-capacity {
+    description
+      "Support for ingress and egress port capacity bps info";
   }
 
   feature port-fec-clause74 {
@@ -2380,6 +2768,16 @@ module srl_nokia-features {
       "Support for port groups";
   }
 
+  feature port-host-if-fec-enhanced-stats-router {
+    description
+      "Support for host interface FEC enhanced statistics from the router side";
+  }
+
+  feature port-host-if-fec-histogram-router {
+    description
+      "Support for host interface FEC histogram from the router side";
+  }
+
   feature port-host-if-fec-stats-router {
     description
       "Support for host interface FEC statistics from the router side";
@@ -2390,6 +2788,11 @@ module srl_nokia-features {
       "Support for host interface FEC statistics from the transceiver side";
   }
 
+  feature port-speed-1-6T {
+    description
+      "Support for 1.6T port speed";
+  }
+
   feature port-speed-100G {
     description
       "Support for 100G ethernet port speed";
@@ -2398,16 +2801,6 @@ module srl_nokia-features {
   feature port-speed-100M {
     description
       "Support for 100M ethernet port speed";
-  }
-
-  feature port-speed-2-5G {
-    description
-      "Support for 2.5G ethernet port speed";
-  }
-
-  feature port-speed-5G {
-    description
-      "Support for 5G ethernet port speed";
   }
 
   feature port-speed-10G {
@@ -2430,9 +2823,9 @@ module srl_nokia-features {
       "Support for 1T port speed";
   }
 
-  feature port-speed-1-6T {
+  feature port-speed-2-5G {
     description
-      "Support for 1.6T port speed";
+      "Support for 2.5G ethernet port speed";
   }
 
   feature port-speed-200G {
@@ -2460,6 +2853,11 @@ module srl_nokia-features {
       "Support for 50G ethernet port speed";
   }
 
+  feature port-speed-5G {
+    description
+      "Support for 5G ethernet port speed";
+  }
+
   feature port-speed-800G {
     description
       "Support for 800G ethernet port speed";
@@ -2468,6 +2866,11 @@ module srl_nokia-features {
   feature power-management {
     description
       "Support for chassis power management";
+  }
+
+  feature pqc-support-ssh-crypt-functions {
+    description
+      "Support for PQC and configurable SSH cryptography functions";
   }
 
   feature protection-policies {
@@ -2528,6 +2931,11 @@ module srl_nokia-features {
   feature qos-de-out-profile {
     description
       "Support for qos de out profile";
+  }
+
+  feature qos-discard-all-high-drop-probability {
+    description
+      "Support for the system-wide discard-all-high-drop-probability configuration";
   }
 
   feature qos-dot1p-classifier-policy {
@@ -2595,6 +3003,11 @@ module srl_nokia-features {
       "Support for qos forwarding class";
   }
 
+  feature qos-global-policers {
+    description
+      "Support for qos global policers";
+  }
+
   feature qos-input-class-map {
     description
       "Support for qos input class map";
@@ -2633,6 +3046,11 @@ module srl_nokia-features {
   feature qos-irb-subinterface {
     description
       "Support for qos on irb subinterface";
+  }
+
+  feature qos-lag-subinterface-queuing {
+    description
+      "Support for subinterface queuing on LAG";
   }
 
   feature qos-ler-use-dscp {
@@ -2695,11 +3113,6 @@ module srl_nokia-features {
       "Priority-based Flow Control (PFC) support on DNX platforms, 7250 IXR-6e/10e and 7250 IXR-x1b/x3b  variants";
   }
 
-  feature qos-pfc-threshold {
-    description
-      "Support of PFC Threshold";
-  }
-
   feature qos-pfc-headroom-buffer {
     description
       "Support of PFC Headroom buffer";
@@ -2715,6 +3128,11 @@ module srl_nokia-features {
       "Pfc received traffic mapping capability";
   }
 
+  feature qos-pfc-threshold {
+    description
+      "Support of PFC Threshold";
+  }
+
   feature qos-pfc-xgs {
     description
       "Priority-based Flow Control (PFC) support on XGS platforms, 7220 D5/D4 and 7220 H4 variants";
@@ -2723,6 +3141,11 @@ module srl_nokia-features {
   feature qos-policer-policies {
     description
       "Support for qos policer policies";
+  }
+
+  feature qos-policers-subtree {
+    description
+      "Support for the qos policers subtree";
   }
 
   feature qos-pre-classifier {
@@ -2880,6 +3303,11 @@ module srl_nokia-features {
       "Support for per subinterface member instance state";
   }
 
+  feature qos-subinterface-policing {
+    description
+      "Support for subinterface policing";
+  }
+
   feature qos-subinterface-queue-type {
     description
       "Support for qos subinterface queue type";
@@ -2950,6 +3378,10 @@ module srl_nokia-features {
       "Support for qos wred traffic type tcp/non-tcp";
   }
 
+  feature qumran2cp;
+
+  feature qumran3d;
+
   feature ra-guard {
     description
       "Support for ra guard";
@@ -2980,11 +3412,6 @@ module srl_nokia-features {
       "Support operational commands related to restoration of a SD card";
   }
 
-  feature router-advertisement-rdnss-option {
-    description
-      "Support for router advertisement rdnss option";
-  }
-
   feature route-leaking {
     description
       "Support for inter network-instance route leaking";
@@ -2993,6 +3420,11 @@ module srl_nokia-features {
   feature route-table-show-report-improvements {
     description
       "Support for route table show report improvements";
+  }
+
+  feature router-advertisement-rdnss-option {
+    description
+      "Support for router advertisement rdnss option";
   }
 
   feature routing-policy-bgp-disable-fib {
@@ -3045,6 +3477,11 @@ module srl_nokia-features {
       "Support for community-set match-set-options: any, all and invert";
   }
 
+  feature routing-policy-conditional-statements {
+    description
+      "Support for routing policy conditional statements";
+  }
+
   feature routing-policy-enhanced-as-path-set {
     description
       "Support for as-path-member-set-member, character-mode regex and complete match-set-options";
@@ -3058,6 +3495,11 @@ module srl_nokia-features {
   feature routing-policy-extended-community-sets {
     description
       "Support for extended-community-set construct";
+  }
+
+  feature routing-policy-gribi-route-type {
+    description
+      "gRIBI as a protocol match in table-connection and other routing-policy types";
   }
 
   feature routing-policy-isis-actions {
@@ -3135,6 +3577,11 @@ module srl_nokia-features {
       "Support for match-set-options with tag-sets";
   }
 
+  feature rsvp {
+    description
+      "Support for base RSVP protocol and RSVP-TE LSPs";
+  }
+
   feature sbfd-return-label {
     description
       "Support for Seamless BFD, controlled (a.k.a. labeled) return";
@@ -3148,11 +3595,6 @@ module srl_nokia-features {
   feature secure-boot {
     description
       "Support for Secure Boot";
-  }
-
-  feature grub-password {
-    description
-      "Support for grub password";
   }
 
   feature segment-routing {
@@ -3225,6 +3667,11 @@ module srl_nokia-features {
       "Support Sflow for LAG/aggregate type of interfaces";
   }
 
+  feature sflow-system-egress-sample-rate {
+    description
+      "Support System Sflow Egress sample rate on Hx platforms";
+  }
+
   feature show-acl-aclfilter {
     description
       "Support for new show acl acl-filter reports";
@@ -3280,6 +3727,11 @@ module srl_nokia-features {
       "Support for basic SRv6 micro sid support";
   }
 
+  feature ssh-rekey-threshold {
+    description
+      "Support for SSH rekey threshold configuration";
+  }
+
   feature stamp {
     description
       "Support for Simple Two-way Active Measurement Protocol STAMP";
@@ -3308,6 +3760,11 @@ module srl_nokia-features {
   feature static-next-hop-group-gre-tunnel {
     description
       "Support GRE tunnel next-hops in static NHGs";
+  }
+
+  feature static-next-hop-mpls-over-gre {
+    description
+      "Support for MPLS over GRE encapsiulation in static NHs";
   }
 
   feature static-next-hop-unnumbered-interface {
@@ -3375,6 +3832,11 @@ module srl_nokia-features {
       "Support for configuring subinterface detailed stats";
   }
 
+  feature subif-ip-tags {
+    description
+      "Support for assignment of admin tags to IP subnets";
+  }
+
   feature subif-policer {
     description
       "Support for sub interface policer";
@@ -3415,6 +3877,11 @@ module srl_nokia-features {
       "Support for GNSS redundant receivers";
   }
 
+  feature sync-gnss-within-holdover {
+    description
+      "Configuration time duration for clock class 7 and 135 when entering holdover";
+  }
+
   feature sync-one-pps {
     description
       "Support for 1PPS timing port";
@@ -3443,6 +3910,11 @@ module srl_nokia-features {
   feature sync-ptp-ip-port-tracking {
     description
       "Support for tracking of rx/tx ports for ptp over ip";
+  }
+
+  feature sync-ptp-max-steps-removed {
+    description
+      "Support configuration of max-steps-removed";
   }
 
   feature sync-ptp-reset {
@@ -3490,6 +3962,26 @@ module srl_nokia-features {
       "Support for auto-generating a hash-seed from the base chassis MAC address";
   }
 
+  feature system-resource-acl-ip-filter-instances-general {
+    description
+      "Support for general acl ip system utilization resources";
+  }
+
+  feature system-resource-acl-ip-filter-instances-routed-bridged {
+    description
+      "Support for routed/bridged acl ip system utilization resources";
+  }
+
+  feature system-resource-acl-ipv4-ipv6-filter-instances {
+    description
+      "Support for acl ip system utilization resources";
+  }
+
+  feature system-resource-acl-mac-filter-instances {
+    description
+      "Support for acl mac system utilization resources";
+  }
+
   feature system-resource-ip-gre-tunnels {
     description
       "Support for system resource ip-gre-tunnels";
@@ -3510,14 +4002,14 @@ module srl_nokia-features {
       "Support for system resource mpls-next-hops";
   }
 
-  feature system-resource-pg-groups {
-    description
-      "Support for system resource pg-groups";
-  }
-
   feature system-resource-multicast-ppmc-indices {
     description
       "Support for system resource multicast-ppmc-indices";
+  }
+
+  feature system-resource-pg-groups {
+    description
+      "Support for system resource pg-groups";
   }
 
   feature system-resource-tunnels {
@@ -3528,6 +4020,16 @@ module srl_nokia-features {
   feature system-resource-utilization {
     description
       "Support for system resource utilization";
+  }
+
+  feature system-resource-utilization-acl {
+    description
+      "Support for system resource utilization acl";
+  }
+
+  feature system-resource-utilization-qos {
+    description
+      "Support for system resource utilization qos";
   }
 
   feature system-resource-vp-lag-groups {
@@ -3615,6 +4117,24 @@ module srl_nokia-features {
       "Rename node .system.tls.server-profile to .system.tls.profile";
   }
 
+  feature tomahawk3;
+
+  feature tomahawk4;
+
+  feature tomahawk5;
+
+  feature tomahawk6;
+
+  feature tools-as-modeled-actions-different-output {
+    description
+      "Support for tools migrated to modeled actions. Specific for models with a different output as before the migration.";
+  }
+
+  feature tools-as-modeled-actions-same-output {
+    description
+      "Support for tools migrated to modeled actions. Specific for models with the same output as before the migration or no output.";
+  }
+
   feature tools-force-pwd-change {
     description
       "Support for tools commands to force users to change password";
@@ -3700,6 +4220,20 @@ module srl_nokia-features {
       "Support for transceiver link length info";
   }
 
+  feature transceiver-removal {
+    description
+      "Support for simulated transceiver removal";
+  }
+
+  feature transceiver-reset {
+    description
+      "Support for transceiver reset";
+  }
+
+  feature trident3;
+
+  feature trident4;
+
   feature twamp {
     description
       "Support for TWAMP";
@@ -3708,6 +4242,11 @@ module srl_nokia-features {
   feature tx-flow-control {
     description
       "Support for transmitting Ethernet flow control (PAUSE) frames";
+  }
+
+  feature udp-tunnel {
+    description
+      "Support for UDP tunnel";
   }
 
   feature unequal-ecmp {
@@ -3723,6 +4262,16 @@ module srl_nokia-features {
   feature unified-forwarding-tables {
     description
       "Support for UFT resources";
+  }
+
+  feature unified-forwarding-tables-mode {
+    description
+      "Support for UFT resources mode field";
+  }
+
+  feature unified-forwarding-tables-mode-2 {
+    description
+      "Support for UFT resources mode enum 2";
   }
 
   feature virtual-ip-discovery {
@@ -3765,6 +4314,16 @@ module srl_nokia-features {
       "Support for VRRP";
   }
 
+  feature vsrl {
+    description
+      "VSRL common features";
+  }
+
+  feature vsrl-generic-hw {
+    description
+      "VSRL gen1 specific features";
+  }
+
   feature vxlan {
     description
       "Support for VXLAN";
@@ -3773,6 +4332,11 @@ module srl_nokia-features {
   feature vxlan-stats {
     description
       "Support for VXLAN statistics";
+  }
+
+  feature vxlan-v6 {
+    description
+      "Support for IPV6 VXLAN";
   }
 
   feature warm-reboot {
@@ -3785,113 +4349,4 @@ module srl_nokia-features {
       "Support for ztp-boot mode";
   }
 
-  feature ac5x;
-
-  feature fpcx {
-    description
-      "FPcx based platforms";
-  }
-
-  feature jericho2;
-
-  feature jericho2cp;
-
-  feature jericho3;
-
-  feature qumran2cp;
-
-  feature qumran3d;
-
-  feature tomahawk3;
-
-  feature tomahawk4;
-
-  feature tomahawk5;
-
-  feature trident3;
-
-  feature trident4;
-
-  feature platform-7215-a1;
-
-  feature platform-7220-d1;
-
-  feature platform-7220-d2;
-
-  feature platform-7220-d3;
-
-  feature platform-7220-d4;
-
-  feature platform-7220-d5;
-
-  feature platform-7220-h2;
-
-  feature platform-7220-h3;
-
-  feature platform-7220-h4;
-
-  feature platform-7220-h4-32d;
-
-  feature platform-7220-h5-32d;
-
-  feature platform-7220-h5-64d;
-
-  feature platform-7220-h5-64o;
-
-  feature platform-7250-ixr;
-
-  feature platform-7250-ixr-18e-gen3;
-
-  feature platform-7250-ixr-18e-unified;
-
-  feature platform-7250-ixr-e-gen2cp-3;
-
-  feature platform-7250-ixr-e-gen3;
-
-  feature platform-7250-ixr-e-gen2cp;
-
-  feature platform-7250-ixr-e-unified;
-
-  feature platform-7250-ixr-x1b;
-
-  feature platform-7250-ixr-x3b;
-
-  feature platform-7250-ixr-x4;
-
-  feature platform-7250-j2;
-
-  feature platform-7730-sxr-1-32d;
-
-  feature platform-7730-sxr-1d-32d;
-
-  feature platform-7730-sxr-1x-44s;
-
-  feature platform-crimson;
-
-  feature platform-imgmt;
-
-  feature platform-sse-t81-64;
-
-  feature platform-vsrl {
-    description
-      "VSRL platforms";
-  }
-
-  feature vsrl {
-    description
-      "VSRL common features";
-  }
-
-  feature vsrl-generic-hw {
-    description
-      "VSRL gen1 specific features";
-  }
-
-  feature ixr-dnx;
-
-  feature ixr-dnx-gen2;
-
-  feature ixr-dnx-gen2cp;
-
-  feature ixr-dnx-gen3;
 }

@@ -18,6 +18,10 @@ module srl_nokia-interfaces-ethernet-segment-association {
   description
     "This yang file gives a description of interface's ethernet-segment association";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2022-03-31 {
     description
       "SRLinux 22.3.1";
@@ -31,7 +35,9 @@ module srl_nokia-interfaces-ethernet-segment-association {
     container ethernet-segment-association {
       config false;
       description
-        "ethernet-segment association information.";
+        "Enter the ethernet-segment-association context
+
+         ethernet-segment association information.";
       leaf ethernet-segment {
         type srl_nokia-comm:name;
         description

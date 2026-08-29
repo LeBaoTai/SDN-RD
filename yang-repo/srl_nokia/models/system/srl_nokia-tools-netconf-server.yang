@@ -24,6 +24,10 @@ module srl_nokia-tools-netconf-server {
   description
     "Tools related to the NETCONF server";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-07-31 {
     description
       "SRLinux 24.7.1";
@@ -47,6 +51,8 @@ module srl_nokia-tools-netconf-server {
           description
             "Clear statistics information for the NETCONF server instance";
         }
+        description
+          "Enter the statistics context";
       }
       list session {
         key "session-id";
@@ -66,6 +72,8 @@ module srl_nokia-tools-netconf-server {
             description
               "Clear statistics information for the NETCONF session";
           }
+          description
+            "Enter the statistics context";
         }
       }
     }

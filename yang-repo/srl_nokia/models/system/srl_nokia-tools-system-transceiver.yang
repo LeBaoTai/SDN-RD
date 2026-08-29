@@ -21,6 +21,10 @@ module srl_nokia-tools-system-transceiver {
   description
     "Model for operational commands on transceivers";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -40,7 +44,9 @@ module srl_nokia-tools-system-transceiver {
         "Tools related to transceivers";
       container firmware {
         description
-          "Tools related to transceiver firmware";
+          "Enter the firmware context
+
+           Tools related to transceiver firmware";
         container transfer {
           presence "Required due to mandatory statements";
           description

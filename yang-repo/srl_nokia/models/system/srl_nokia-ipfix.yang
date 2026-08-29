@@ -28,6 +28,10 @@ module srl_nokia-ipfix {
     "This yang file gives a description of ipfix-agentity-
      configuration.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -231,12 +235,11 @@ module srl_nokia-ipfix {
          in the PSAMP MIB module.";
     }
     leaf packet-space {
-      type uint32;
+      type uint32 {
+        range "1..60000";
+      }
       units "packets";
       mandatory true;
-      must '(.>0)' {
-        error-message "packet-space 0 is not supported";
-      }
       srl_nokia-ext:show-importance "high";
       description
         "The number of unsampled packets between two
@@ -253,7 +256,7 @@ module srl_nokia-ipfix {
        generating Flow Records.";
     leaf maximum-flows {
       type uint32 {
-        range "1000..1000000";
+        range "1000..500000";
       }
       units "flows";
       default "250000";
@@ -276,8 +279,7 @@ module srl_nokia-ipfix {
       description
         "This parameters specified the active timeout for active flows within the cache
 
-         This parameter configures the time in seconds after which a Flow is expired even though packets matching this Flow are still received by the Cache.
-         The parameter value zero indicates infinity, meaning that there is no active timeout.";
+         This parameter configures the time in seconds after which a Flow is expired even though packets matching this Flow are still received by the Cache.";
     }
     leaf idle-timeout {
       type uint32 {
@@ -288,9 +290,7 @@ module srl_nokia-ipfix {
       description
         "This parameters specified the idle timeout for inactive flows within the cache.
 
-         This parameter configures the time in seconds after which a Flow is expired if no more packets matching this Flow are received by the Cache.
-         The parameter value zero indicates infinity, meaning that there is no idle timeout.
-         If not configured by the user, the Monitoring Device sets this parameter.";
+         This parameter configures the time in seconds after which a Flow is expired if no more packets matching this Flow are received by the Cache.";
     }
     leaf active-flows {
       type srl_nokia-comm:gauge32;
@@ -328,7 +328,9 @@ module srl_nokia-ipfix {
         "Packet selection method applied by the Selector.";
       container sample-count-based {
         description
-          "Systematic count-based packet Sampling.";
+          "Enter the sample-count-based context
+
+           Systematic count-based packet Sampling.";
         uses sample-count-based-parameters;
       }
     }
@@ -416,6 +418,7 @@ module srl_nokia-ipfix {
     list destination {
       key "name";
       min-elements 1;
+      max-elements 8;
       description
         "List of export destinations.";
       leaf name {
@@ -430,7 +433,9 @@ module srl_nokia-ipfix {
            Currently limited to UDP";
         container udp-exporter {
           description
-            "UDP parameters.";
+            "Enter the udp-exporter context
+
+             UDP parameters.";
           uses udp-exporter-parameters;
         }
       }
@@ -462,7 +467,9 @@ module srl_nokia-ipfix {
         "IPFIX version number.";
     }
     leaf destination-port {
-      type srl_nokia-comm:port-number;
+      type srl_nokia-comm:port-number {
+        range "1..65535";
+      }
       default "4739";
       must '(.>0)' {
         error-message "port 0 is not a valid destination port";
@@ -477,7 +484,9 @@ module srl_nokia-ipfix {
     container transport-session {
       config false;
       description
-        "State parameters of the Transport Session
+        "Enter the transport-session context
+
+         State parameters of the Transport Session
          directed to the given destination.";
       uses transport-session-parameters;
     }
@@ -935,7 +944,9 @@ module srl_nokia-ipfix {
             "Type of Cache and specific parameters.";
           container timeout-cache {
             description
-              "Flow expiration after active and idle
+              "Enter the timeout-cache context
+
+               Flow expiration after active and idle
                timeout; generation of Flow Records.";
             uses flow-cache-parameters;
           }

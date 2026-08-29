@@ -1,7 +1,0 @@
-vendors:
-  nokia:
-    srlinux:
-      "26.3":
-        searchPaths:
-          - openconfig
-          - nokia/srl_nokia

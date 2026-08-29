@@ -42,6 +42,10 @@ module srl_nokia-srv6-isis {
   description
     "This YANG file covers the segment routing v6 enhancements to ISIS";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -167,7 +171,9 @@ module srl_nokia-srv6-isis {
     container srv6-capabilities {
       when "../srl_nokia-isis:type = 'srl_nokia-srv6-types:router-capability-srv6-capabilities'";
       description
-        "This container defines SR Capability sub-TLV 25";
+        "Enter the srv6-capabilities context
+
+         This container defines SR Capability sub-TLV 25";
       leaf-list flags {
         type enumeration {
           enum oam {
@@ -224,10 +230,14 @@ module srl_nokia-srv6-isis {
     container srv6-locator {
       when "../srl_nokia-isis:type = 'srl_nokia-srv6-types:srv6-locator'";
       description
-        "This container defines the list of SRv6 Locator TLVs";
+        "Enter the srv6-locator context
+
+         This container defines the list of SRv6 Locator TLVs";
       container locators {
         description
-          "This container describes SRv6 Locators";
+          "Enter the locators context
+
+           This container describes SRv6 Locators";
         list locator {
           key "prefix mtid";
           description
@@ -269,7 +279,9 @@ module srl_nokia-srv6-isis {
           }
           container subtlvs {
             description
-              "This container describes sub-TLVs of the SRv6 Locator TLV";
+              "Enter the subtlvs context
+
+               This container describes sub-TLVs of the SRv6 Locator TLV";
             list subtlv {
               key "type";
               description
@@ -303,7 +315,9 @@ module srl_nokia-srv6-isis {
     container srv6-end-sids {
       when "../type = 'srl_nokia-srv6-types:srv6-end-sid'";
       description
-        "This container defines segment routing v6 extensions for prefixes";
+        "Enter the srv6-end-sids context
+
+         This container defines segment routing v6 extensions for prefixes";
       list srv6-end-sid {
         key "address";
         description
@@ -406,7 +420,9 @@ module srl_nokia-srv6-isis {
         }
         container sub-sub-tlvs {
           description
-            "This container describes sub-sub-TLVs of SRv6 End SID sub-TLV";
+            "Enter the sub-sub-tlvs context
+
+             This container describes sub-sub-TLVs of SRv6 End SID sub-TLV";
           list sub-sub-tlv {
             key "type";
             description
@@ -429,7 +445,9 @@ module srl_nokia-srv6-isis {
     container srv6-sid-structure {
       when "../type = 'srl_nokia-srv6-types:srv6-sid-structure-isis'";
       description
-        "This container describes sub-sub-TLV 1";
+        "Enter the srv6-sid-structure context
+
+         This container describes sub-sub-TLV 1";
       leaf block-length {
         type uint8;
         description
@@ -457,7 +475,9 @@ module srl_nokia-srv6-isis {
     container srv6-adjacency-sids {
       when "../srl_nokia-isis:type = 'srl_nokia-srv6-types:srv6-adj-sid'";
       description
-        "This container defines segment routing v6 Adjacency SIDs";
+        "Enter the srv6-adjacency-sids context
+
+         This container defines segment routing v6 Adjacency SIDs";
       list srv6-adjacency-sid {
         key "address";
         description
@@ -589,7 +609,9 @@ module srl_nokia-srv6-isis {
         }
         container sub-sub-tlvs {
           description
-            "This container describes sub-sub-TLVs of SRv6 Adj-SID sub-TLV";
+            "Enter the sub-sub-tlvs context
+
+             This container describes sub-sub-TLVs of SRv6 Adj-SID sub-TLV";
           list sub-sub-tlv {
             key "type";
             description
@@ -609,7 +631,9 @@ module srl_nokia-srv6-isis {
     container srv6-lan-adjacency-sids {
       when "../srl_nokia-isis:type = 'srl_nokia-srv6-types:srv6-adj-lan-sid'";
       description
-        "This container defines segment routing v6 LAN Adjacency SIDs";
+        "Enter the srv6-lan-adjacency-sids context
+
+         This container defines segment routing v6 LAN Adjacency SIDs";
       list srv6-lan-adjacency-sid {
         key "address";
         description
@@ -746,7 +770,9 @@ module srl_nokia-srv6-isis {
         }
         container sub-sub-tlvs {
           description
-            "This container describes sub-sub-TLVs of SRv6 LAN Adjacency SID sub-TLV";
+            "Enter the sub-sub-tlvs context
+
+             This container describes sub-sub-TLVs of SRv6 LAN Adjacency SID sub-TLV";
           list sub-sub-tlv {
             key "type";
             description

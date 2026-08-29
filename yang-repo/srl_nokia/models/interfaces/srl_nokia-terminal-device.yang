@@ -27,6 +27,10 @@ module srl_nokia-terminal-device {
      This model exists solely to support the logical channels model from openconfig and how it relates to the interfaces transceiver and dco attributes.
      The important part of this model is the association of the logical channels to the correct interface attributes.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -176,7 +180,9 @@ module srl_nokia-terminal-device {
     }
     container pre-fec-ber {
       description
-        "Bit error rate before forward error correction
+        "Enter the pre-fec-ber context
+
+         Bit error rate before forward error correction
 
          Note that decimal64 supports values as small as i x 10^-18 where i is an
          integer. Values smaller than this should be reported as 0
@@ -219,7 +225,9 @@ module srl_nokia-terminal-device {
     }
     container q-value {
       description
-        "Quality value (factor) in dB of a channel";
+        "Enter the q-value context
+
+         Quality value (factor) in dB of a channel";
       leaf current {
         type decimal64 {
           fraction-digits 2;
@@ -258,7 +266,9 @@ module srl_nokia-terminal-device {
     }
     container electrical-signal-to-noise-ratio {
       description
-        "Electrical signal to noise ratio";
+        "Enter the electrical-signal-to-noise-ratio context
+
+         Electrical signal to noise ratio";
       leaf current {
         type decimal64 {
           fraction-digits 2;
@@ -307,7 +317,9 @@ module srl_nokia-terminal-device {
        This logical channel model is included in Nokia SRL YANG to facilitate support of the openconfig management";
     container logical-channels {
       description
-        "Enclosing container for the list of logical channels";
+        "Enter the logical-channels context
+
+         Enclosing container for the list of logical channels";
       list channel {
         key "index";
         description
@@ -353,6 +365,9 @@ module srl_nokia-terminal-device {
         leaf loopback-mode {
           if-feature "srl_nokia-feat:dco-loopback";
           type terminal-dev-loopback-mode-type;
+          must ". = 'none' or boolean(../logical-channel-type)" {
+            error-message "loopback-mode requires logical-channel-type to be configured";
+          }
           description
             "Sets the loopback type on the logical channel
 
@@ -384,6 +399,8 @@ module srl_nokia-terminal-device {
               "Reference to the interface carrying the input signal
                for the logical channel.";
           }
+          description
+            "Enter the ingress context";
         }
         list assignment {
           key "index";
@@ -463,6 +480,8 @@ module srl_nokia-terminal-device {
         container otn {
           config false;
           uses logical-channel-stats;
+          description
+            "Enter the otn context";
         }
       }
     }
@@ -472,7 +491,9 @@ module srl_nokia-terminal-device {
     container terminal-device {
       if-feature "srl_nokia-feat:dco-logical-channels";
       description
-        "Top-level container for the terminal device";
+        "Enter the terminal-device context
+
+         Top-level container for the terminal device";
       uses terminal-logical-channel-top;
     }
   }

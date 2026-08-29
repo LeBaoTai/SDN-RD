@@ -19,6 +19,10 @@ module srl_nokia-qos-policers {
     "Nokia SR Linux Support
      Web: <http://www.nokia.com>";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -98,10 +102,14 @@ module srl_nokia-qos-policers {
     container policer-policies {
       if-feature "srl-feat:qos-policer-policies";
       description
-        "Policer-policies for subinterface level traffic metering";
+        "Enter the policer-policies context
+
+         Policer-policies for subinterface level traffic metering";
       container threshold-separation-policies {
         description
-          "This container lists pre-defined threshold-separation-policies";
+          "Enter the threshold-separation-policies context
+
+           This container lists pre-defined threshold-separation-policies";
         config false;
         list threshold-separation-policy {
           description
@@ -188,7 +196,9 @@ module srl_nokia-qos-policers {
           }
           container adaptation-rules {
             description
-              "Container defining adaptation rules for individual policer parameters";
+              "Enter the adaptation-rules context
+
+               Container defining adaptation rules for individual policer parameters";
             leaf peak-rate {
               description
                 "Adaptation rule for peak-rate-kbps parameter";
@@ -228,7 +238,9 @@ module srl_nokia-qos-policers {
           }
           container pir-threshold-separation {
             description
-              "Container defining selection of one from pre-defined policer-threshold-separation policies";
+              "Enter the pir-threshold-separation context
+
+               Container defining selection of one from pre-defined policer-threshold-separation policies";
             leaf inplus-separated {
               description
                 "Selecting a separate pir-bucket threshold for in-plus profile";
@@ -238,7 +250,9 @@ module srl_nokia-qos-policers {
           }
           container packet-length-adjustment {
             description
-              "The definition on how packet-length should be adjusted for the policer-algorithm calculation";
+              "Enter the packet-length-adjustment context
+
+               The definition on how packet-length should be adjusted for the policer-algorithm calculation";
             choice add-or-subtract {
               case add {
                 leaf add {
@@ -347,7 +361,9 @@ module srl_nokia-qos-policers {
         }
         container parent-policer {
           description
-            "Container with options to define aggeregate parent-policer parameters";
+            "Enter the parent-policer context
+
+             Container with options to define aggeregate parent-policer parameters";
           leaf parent-policer-threshold-policy {
             description
               "Assigns parent-policer-threshold-policy to the parent-policer";
@@ -357,7 +373,9 @@ module srl_nokia-qos-policers {
           }
           container rate {
             description
-              "Container with options defining parent-policer rate";
+              "Enter the rate context
+
+               Container with options defining parent-policer rate";
             leaf peak-rate-kbps {
               type uint32 {
                 range "64..800000000";
@@ -383,7 +401,9 @@ module srl_nokia-qos-policers {
           }
           container inputs {
             description
-              "Container defining input policers to parent-policer";
+              "Enter the inputs context
+
+               Container defining input policers to parent-policer";
             list policer {
               key "policer-id";
               max-elements 32;
@@ -614,16 +634,22 @@ module srl_nokia-qos-policers {
     container policer-statistics {
       config false;
       description
-        "The statistics per subinterface policers";
+        "Enter the policer-statistics context
+
+         The statistics per subinterface policers";
       container aggregate-statistics {
         srl_nokia-ext:delivery-node-override "true";
         description
-          "The aggregate statistics per subinterface policers";
+          "Enter the aggregate-statistics context
+
+           The aggregate statistics per subinterface policers";
         uses policer-counters;
       }
       container per-lag-member-statistics {
         description
-          "The subinterface policer stats per member-fp";
+          "Enter the per-lag-member-statistics context
+
+           The subinterface policer stats per member-fp";
         list linecard {
           description
             "Line-card within the system";

@@ -171,8 +171,7 @@
     },
     {
       "oc": "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/{config,state}/dscp-set",
-      "srlinux": "/acl/acl-filter/entry/match/ipv4/dscp-set",
-      "feature-flagged": true
+      "srlinux": "/acl/acl-filter/entry/match/ipv4/dscp-set"
     },
     {
       "oc": "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/{config,state}/length",
@@ -181,7 +180,6 @@
     {
       "oc": "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/{config,state}/protocol",
       "srlinux": "/acl/acl-filter/entry/match/ipv4/protocol",
-      "feature-flagged": true,
       "transform": "ip-protocol"
     },
     {
@@ -241,8 +239,7 @@
     },
     {
       "oc": "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/{config,state}/dscp-set",
-      "srlinux": "/acl/acl-filter/entry/match/ipv6/dscp-set",
-      "feature-flagged": true
+      "srlinux": "/acl/acl-filter/entry/match/ipv6/dscp-set"
     },
     {
       "oc": "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/{config,state}/length",
@@ -251,7 +248,6 @@
     {
       "oc": "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/{config,state}/protocol",
       "srlinux": "/acl/acl-filter/entry/match/ipv6/next-header",
-      "feature-flagged": true,
       "transform": "ip-protocol"
     },
     {
@@ -286,29 +282,24 @@
     {
       "oc": "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/{config,state}/source-port",
       "srlinux": "",
-      "pretranslate-transform": "acl-port-transform-leaf",
-      "feature-flagged": true
+      "pretranslate-transform": "acl-port-transform-leaf"
     },
     {
       "srlinux": "/acl/acl-filter/entry/match/transport/source-port/value",
-      "pretranslate-transform": "acl-port-transform-leaf",
-      "feature-flagged": true
+      "pretranslate-transform": "acl-port-transform-leaf"
     },
     {
       "oc": "",
       "srlinux": "/acl/acl-filter/entry/match/transport/source-port/operator",
-      "feature-flagged": true,
       "special-handling": "the operator needs to be set to 'eq'"
     },
     {
       "srlinux": "/acl/acl-filter/entry/match/transport/source-port/range/start",
-      "pretranslate-transform": "acl-port-transform-leaf",
-      "feature-flagged": true
+      "pretranslate-transform": "acl-port-transform-leaf"
     },
     {
       "srlinux": "/acl/acl-filter/entry/match/transport/source-port/range/end",
-      "pretranslate-transform": "acl-port-transform-leaf",
-      "feature-flagged": true
+      "pretranslate-transform": "acl-port-transform-leaf"
     },
     {
       "oc": "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/{config,state}/source-port-set",
@@ -317,29 +308,24 @@
     {
       "oc": "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/{config,state}/destination-port",
       "srlinux": "",
-      "pretranslate-transform": "acl-port-transform-leaf",
-      "feature-flagged": true
+      "pretranslate-transform": "acl-port-transform-leaf"
     },
     {
       "srlinux": "/acl/acl-filter/entry/match/transport/destination-port/value",
-      "pretranslate-transform": "acl-port-transform-leaf",
-      "feature-flagged": true
+      "pretranslate-transform": "acl-port-transform-leaf"
     },
     {
       "oc": "",
       "srlinux": "/acl/acl-filter/entry/match/transport/destination-port/operator",
-      "feature-flagged": true,
       "special-handling": "the operator needs to be set to 'eq'"
     },
     {
       "srlinux": "/acl/acl-filter/entry/match/transport/destination-port/range/start",
-      "pretranslate-transform": "acl-port-transform-leaf",
-      "feature-flagged": true
+      "pretranslate-transform": "acl-port-transform-leaf"
     },
     {
       "srlinux": "/acl/acl-filter/entry/match/transport/destination-port/range/end",
-      "pretranslate-transform": "acl-port-transform-leaf",
-      "feature-flagged": true
+      "pretranslate-transform": "acl-port-transform-leaf"
     },
     {
       "oc": "/acl/acl-sets/acl-set/acl-entries/acl-entry/transport/{config,state}/destination-port-set",
@@ -391,40 +377,33 @@
     },
     {
       "oc": "/acl/acl-sets/acl-set/acl-entries/acl-entry/actions/{config,state}",
-      "srlinux": "/acl/acl-filter/entry/action",
-      "feature-flagged": true
+      "srlinux": "/acl/acl-filter/entry/action"
     },
     {
       "oc": "/acl/acl-sets/acl-set/acl-entries/acl-entry/actions/{config,state}/forwarding-action",
       "pretranslate-transform": "acl-forwarding-action-leaf-transform",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "srlinux": "/acl/acl-filter/entry/action/accept",
-      "feature-flagged": true,
       "pretranslate-transform": "acl-forwarding-action-transform"
     },
     {
       "srlinux": "/acl/acl-filter/entry/action/drop",
-      "feature-flagged": true,
       "pretranslate-transform": "acl-forwarding-action-transform"
     },
     {
       "srlinux": "/acl/acl-filter/entry/action/reject",
-      "feature-flagged": true,
       "pretranslate-transform": "acl-forwarding-action-transform"
     },
     {
       "oc": "/acl/acl-sets/acl-set/acl-entries/acl-entry/actions/{config,state}/log-action",
       "pretranslate-transform": "acl-log-action-transform",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "srlinux": "/acl/acl-filter/entry/action/log",
-      "pretranslate-transform": "acl-log-action-transform",
-      "feature-flagged": true
+      "pretranslate-transform": "acl-log-action-transform"
     },
     {
       "oc": "/acl/acl-sets/acl-set/acl-entries/acl-entry/l2/{config,state}",
@@ -437,7 +416,6 @@
     {
       "oc": "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv4/{config,state}/dscp-set/dscp-set",
       "srlinux": "/acl/acl-filter/entry/match/ipv4/dscp-set/dscp-set",
-      "feature-flagged": true,
       "mapping": [
         {
           "0": "CS0"
@@ -549,7 +527,6 @@
     {
       "oc": "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/{config,state}/dscp-set/dscp-set",
       "srlinux": "/acl/acl-filter/entry/match/ipv6/dscp-set/dscp-set",
-      "feature-flagged": true,
       "mapping": [
         {
           "0": "CS0"
@@ -709,8 +686,7 @@
     },
     {
       "oc": "/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set/acl-entries/acl-entry/state",
-      "srlinux": "/acl/interface/input/acl-filter/entry/statistics",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set/acl-entries/acl-entry/state/sequence-id",
@@ -718,8 +694,7 @@
     },
     {
       "oc": "/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set/acl-entries/acl-entry/state/matched-packets",
-      "srlinux": "/acl/interface/input/acl-filter/entry/statistics/matched-packets",
-      "feature-flagged": true
+      "srlinux": "/acl/interface/input/acl-filter/entry/statistics/matched-packets"
     },
     {
       "oc": "/acl/interfaces/interface/ingress-acl-sets/ingress-acl-set/acl-entries/acl-entry/state/matched-octets",
@@ -727,23 +702,19 @@
     },
     {
       "oc": "/acl/interfaces/interface/egress-acl-sets",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/acl/interfaces/interface/egress-acl-sets/egress-acl-set/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/acl/interfaces/interface/egress-acl-sets/egress-acl-set",
-      "srlinux": "/acl/interface/output/acl-filter",
-      "feature-flagged": true
+      "srlinux": "/acl/interface/output/acl-filter"
     },
     {
       "oc": "/acl/interfaces/interface/egress-acl-sets/egress-acl-set/set-name",
-      "srlinux": "/acl/interface/output/acl-filter/name",
-      "feature-flagged": true
+      "srlinux": "/acl/interface/output/acl-filter/name"
     },
     {
       "oc": "/acl/interfaces/interface/egress-acl-sets/egress-acl-set/type",
@@ -764,53 +735,43 @@
         {
           "ACL_MPLS": ""
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/acl/interfaces/interface/egress-acl-sets/egress-acl-set/{config,state}/set-name",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/acl/interfaces/interface/egress-acl-sets/egress-acl-set/{config,state}/type",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/acl/interfaces/interface/egress-acl-sets/egress-acl-set/acl-entries",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/acl/interfaces/interface/egress-acl-sets/egress-acl-set/acl-entries/acl-entry",
-      "srlinux": "/acl/interface/output/acl-filter/entry",
-      "feature-flagged": true
+      "srlinux": "/acl/interface/output/acl-filter/entry"
     },
     {
       "oc": "/acl/interfaces/interface/egress-acl-sets/egress-acl-set/acl-entries/acl-entry/sequence-id",
-      "srlinux": "/acl/interface/output/acl-filter/entry/sequence-id",
-      "feature-flagged": true
+      "srlinux": "/acl/interface/output/acl-filter/entry/sequence-id"
     },
     {
       "oc": "/acl/interfaces/interface/egress-acl-sets/egress-acl-set/acl-entries/acl-entry/state",
-      "srlinux": "/acl/interface/output/acl-filter/entry/statistics",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/acl/interfaces/interface/egress-acl-sets/egress-acl-set/acl-entries/acl-entry/state/sequence-id",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/acl/interfaces/interface/egress-acl-sets/egress-acl-set/acl-entries/acl-entry/state/matched-packets",
-      "srlinux": "/acl/interface/output/acl-filter/entry/statistics/matched-packets",
-      "feature-flagged": true
+      "srlinux": "/acl/interface/output/acl-filter/entry/statistics/matched-packets"
     },
     {
       "oc": "/acl/interfaces/interface/egress-acl-sets/egress-acl-set/acl-entries/acl-entry/state/matched-octets",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/acl/interfaces/interface/egress-acl-sets/egress-acl-set/acl-entries/state/matched-octets",

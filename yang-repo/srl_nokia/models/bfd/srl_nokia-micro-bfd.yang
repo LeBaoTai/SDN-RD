@@ -28,6 +28,10 @@ module srl_nokia-micro-bfd {
     "This yang file gives a description of micro-bfd protocol
      configuration & state.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -154,7 +158,9 @@ module srl_nokia-micro-bfd {
     container micro-bfd-sessions {
       if-feature "srl_nokia-feat:lag";
       description
-        "Context to configure micro-BFD session parameters and report sessions state";
+        "Enter the micro-bfd-sessions context
+
+         Context to configure micro-BFD session parameters and report sessions state";
       list lag-interface {
         key "name";
         description
@@ -356,6 +362,13 @@ module srl_nokia-micro-bfd {
                The detection interval for the BFD session is calculated by multiplying the
                value of the negotiated transmission interval by this value.";
           }
+          action clear {
+            if-feature "srl_nokia-feat:tools-as-modeled-actions-different-output";
+            description
+              "Clear the associated micro-BFD sessions
+
+               Clearing a micro-BFD sessions causes the associated sessions to transition to a Down state";
+          }
           container async {
             srl_nokia-ext:delivery-node-override "true";
             srl_nokia-ext:stream-mode "sample=5";
@@ -401,6 +414,48 @@ module srl_nokia-micro-bfd {
             }
           }
         }
+      }
+      container statistics {
+        if-feature "srl_nokia-feat:tools-as-modeled-actions-different-output";
+        config false;
+        list lag-interface {
+          key "name";
+          config false;
+          description
+            "Lag interface against which the clear command is to be executed";
+          leaf name {
+            config false;
+            must "starts-with(../name,'lag')" {
+              error-message "Must be a LAG interface";
+            }
+            type srl_nokia-comm:interface-all;
+            description
+              "Reference ID for associated lag interface
+               Example: lag1 (Reference Interface lag1).";
+          }
+          list member-interface {
+            key "name";
+            config false;
+            description
+              "List of member-interfaces to be cleared";
+            leaf name {
+              config false;
+              must "starts-with(../name,'ethernet') or starts-with(../name,'lif') or starts-with(../name,'enp')" {
+                error-message "Must be an ethernet, lif, or enp interface";
+              }
+              type srl_nokia-comm:interface-all;
+              description
+                "Reference ID for associated interface
+                 Example: ethernet-2/1 (Reference Interface ethernet-2/1).";
+            }
+            action clear {
+              description
+                "Clear the BFD statistics associated with the micro-BFD sessions";
+            }
+          }
+        }
+        description
+          "Enter the statistics context";
       }
     }
   }

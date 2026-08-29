@@ -29,6 +29,10 @@ module srl_nokia-lacp {
 
      This model describes management of LACP parameters under SRL";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -137,7 +141,9 @@ module srl_nokia-lacp {
       "LACP packet statistics for the member interfaces";
     container statistics {
       description
-        "LACP protocol counters";
+        "Enter the statistics context
+
+         LACP protocol counters";
       leaf lacp-in-pkts {
         type srl_nokia-comm:zero-based-counter64;
         description
@@ -174,7 +180,9 @@ module srl_nokia-lacp {
   grouping lag-lacp-member-state {
     container lacp {
       description
-        "Operational status data for the member interfaces";
+        "Enter the lacp context
+
+         Operational status data for the member interfaces";
       leaf activity {
         type lacp-activity-type;
         description
@@ -284,6 +292,8 @@ module srl_nokia-lacp {
            combined with the system priority to construct the 8-octet
            system-id";
       }
+      description
+        "Enter the lacp context";
     }
   }
 

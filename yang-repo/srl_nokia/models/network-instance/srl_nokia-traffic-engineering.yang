@@ -24,6 +24,10 @@ module srl_nokia-traffic-engineering {
   description
     "Configuration and state related to the use and propagation of TE information.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -158,7 +162,9 @@ module srl_nokia-traffic-engineering {
       }
       container admin-groups {
         description
-          "Container for configuring admin groups";
+          "Enter the admin-groups context
+
+           Container for configuring admin groups";
         list group {
           description
             "List of admin groups defined for this network instance.";
@@ -182,7 +188,9 @@ module srl_nokia-traffic-engineering {
       }
       container shared-risk-link-groups {
         description
-          "Container for configuring SRLGs";
+          "Enter the shared-risk-link-groups context
+
+           Container for configuring SRLGs";
         list group {
           description
             "List of shared risk link groups defined for this network instance.";
@@ -215,7 +223,9 @@ module srl_nokia-traffic-engineering {
         }
         container interface-ref {
           description
-            "Reference to a subinterface";
+            "Enter the interface-ref context
+
+             Reference to a subinterface";
           leaf interface {
             type leafref {
               path "/srl_nokia-if:interface/srl_nokia-if:name";
@@ -274,7 +284,11 @@ module srl_nokia-traffic-engineering {
             type boolean;
             default "true";
           }
+          description
+            "Enter the export context";
         }
+        description
+          "Enter the bgp-ls context";
       }
     }
   }

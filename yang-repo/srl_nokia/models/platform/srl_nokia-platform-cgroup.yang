@@ -12,6 +12,9 @@ module srl_nokia-platform-cgroup {
   import srl_nokia-platform-control {
     prefix srl-platform-control;
   }
+  import srl_nokia-features {
+    prefix srl_nokia-feat;
+  }
 
   organization
     "Nokia";
@@ -21,6 +24,10 @@ module srl_nokia-platform-cgroup {
   description
     "This module defines configuration and operational state data related to cgroups.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-03-31 {
     description
       "SRLinux 24.3.1";
@@ -40,7 +47,9 @@ module srl_nokia-platform-cgroup {
     container memory-events {
       srl-ext:delivery-node-override "true";
       description
-        "Top-level container for cgroup memory events";
+        "Enter the memory-events context
+
+         Top-level container for cgroup memory events";
       leaf low {
         type uint64;
         description
@@ -75,10 +84,13 @@ module srl_nokia-platform-cgroup {
     description
       "Grouping for cgroup memory statistics";
     container memory-statistics {
+      config false;
       srl-ext:delivery-node-override "true";
       srl-ext:stream-mode "sample=5";
       description
-        "Top-level container for cgroup memory statistics";
+        "Enter the memory-statistics context
+
+         Top-level container for cgroup memory statistics";
       leaf current {
         type uint64;
         units "bytes";
@@ -147,10 +159,13 @@ module srl_nokia-platform-cgroup {
     description
       "Grouping for cgroup memory statistics";
     container cpuacct-statistics {
+      config false;
       srl-ext:delivery-node-override "true";
       srl-ext:stream-mode "sample=5";
       description
-        "Top-level container for cgroup cpuacct statistics";
+        "Enter the cpuacct-statistics context
+
+         Top-level container for cgroup cpuacct statistics";
       leaf user {
         type uint64;
         units "useconds";
@@ -169,13 +184,61 @@ module srl_nokia-platform-cgroup {
   grouping cgroup-state-top {
     description
       "Grouping for cgroup state";
-    leaf name {
-      type string;
-      description
-        "Name of the cgroup, as defined by its directory location in the filesystem";
-    }
     uses memory-statistics-top;
     uses cpuacct-statistics-top;
+  }
+
+  grouping memory-controller-top {
+    description
+      "Grouping for cgroup memory controller configuration";
+    container memory-controller {
+      description
+        "Enter the memory-controller context
+
+         Top-level container for cgroup memory controller configuration";
+      leaf memory-max {
+        type uint64;
+        units "bytes";
+        default "0";
+        description
+          "Memory limit for the cgroup. Write to this leaf to set the memory usage hard limit (memory.max) for the cgroup. Setting this leaf to 0 means no limit.";
+      }
+    }
+  }
+
+  grouping cpu-controller-top {
+    description
+      "Grouping for cgroup cpu controller configuration";
+    container cpu-controller {
+      description
+        "Enter the cpu-controller context
+
+         Top-level container for cgroup cpu controller configuration";
+      leaf cpu-weight {
+        type uint64 {
+          range "1..10000";
+        }
+        default "100";
+        description
+          "CPU bandwidth weight for the cgroup. Write to this leaf to set the CPU bandwidth weight (cpu.weight) for the cgroup. The default value is 100.";
+      }
+      leaf cpu-max {
+        type uint64 {
+          range "0..100000";
+        }
+        default "0";
+        description
+          "CPU bandwidth limit for the cgroup. Write to this leaf to set the CPU bandwidth limit (cpu.max) for the cgroup. Setting this leaf to 0 means no limit. The PERIOD is set to 100000.
+           Note: The configured quota is multiplied by number of available CPUs internally before setting the final value to cpu.max to scale across available system CPU resources.";
+      }
+    }
+  }
+
+  grouping cgroup-config-top {
+    description
+      "Grouping for cgroup configuration";
+    uses memory-controller-top;
+    uses cpu-controller-top;
   }
 
   grouping cgroup-top {
@@ -185,8 +248,15 @@ module srl_nokia-platform-cgroup {
       description
         "List of cgroups present in the system";
       key "name";
-      config false;
+      leaf name {
+        type string;
+        description
+          "Name of the cgroup, as defined by its directory location in the filesystem relative to the cgroup root.";
+      }
       uses cgroup-state-top;
+      uses cgroup-config-top {
+        if-feature "srl_nokia-feat:containerz-cgroup";
+      }
     }
   }
 

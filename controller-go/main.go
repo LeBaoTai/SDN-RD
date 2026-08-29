@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/LeBaoTai/myco-controller/internal/controller/gnmib"
+	"github.com/LeBaoTai/myco-controller/internal/oc/ocpath"
 )
 
 type ConfigPath struct {
@@ -27,6 +28,6 @@ func main() {
 	if err != nil {
 		log.Printf("Cannot establish connection:%v", err)
 	}
-	tr := connection.CreateTransaction()
-	connection.SetTransaction(tr)
+	
+	iface := ocpath.Root().Interface(Name string)
 }

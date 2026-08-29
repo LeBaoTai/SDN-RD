@@ -25,6 +25,10 @@ module srl_nokia-bfd {
     "This yang file gives a description of bfd protocol
      configuration.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -513,6 +517,47 @@ module srl_nokia-bfd {
             }
           }
         }
+      }
+      list peer {
+        if-feature "srl_nokia-feat:tools-as-modeled-actions-different-output";
+        key "local-discriminator";
+        config false;
+        description
+          "The list of local-discriminators associated with BFD";
+        leaf local-discriminator {
+          config false;
+          type uint32;
+          description
+            "BFD session local discriminator";
+        }
+        action clear {
+          description
+            "Clear the associated BFD sessions
+
+             Clearing a BFD sessions causes the associated BFD sessions ot transition to a Down state";
+        }
+      }
+      container statistics {
+        if-feature "srl_nokia-feat:tools-as-modeled-actions-different-output";
+        config false;
+        list peer {
+          key "local-discriminator";
+          config false;
+          description
+            "The list of local-discriminators associated with BFD";
+          leaf local-discriminator {
+            config false;
+            type uint32;
+            description
+              "BFD session local discriminator";
+          }
+          action clear {
+            description
+              "Clear the BFD statistics associated with the BFD sessions";
+          }
+        }
+        description
+          "Enter the statistics context";
       }
       leaf total-bfd-sessions {
         type srl_nokia-comm:zero-based-counter32;

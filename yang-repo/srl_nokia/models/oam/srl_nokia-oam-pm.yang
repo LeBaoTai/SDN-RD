@@ -22,6 +22,10 @@ module srl_nokia-oam-pm {
     "This YANG module contains the common OAM Performance Monitoring architectural
      components that will be used by the technology specific modules.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -150,7 +154,9 @@ module srl_nokia-oam-pm {
       }
       container threshold-alerts {
         description
-          "Enabling configured events for the measurement interval";
+          "Enter the threshold-alerts context
+
+           Enabling configured events for the measurement interval";
         leaf loss-event {
           type srl_nokia-comm:admin-state;
           default "disable";
@@ -613,6 +619,8 @@ module srl_nokia-oam-pm {
                         This is for the specific direction, test session, interval duration,
                         interval number, and bin type.";
         }
+        description
+          "Enter the forward context";
       }
       container backward {
         leaf minimum {
@@ -645,6 +653,8 @@ module srl_nokia-oam-pm {
                   This is for the specific direction, test session, interval duration,
                   interval number, and bin type.";
         }
+        description
+          "Enter the backward context";
       }
       container round-trip {
         leaf minimum {
@@ -677,6 +687,8 @@ module srl_nokia-oam-pm {
                   This is for the specific direction, test session, interval duration,
                   interval number, and bin type.";
         }
+        description
+          "Enter the round-trip context";
       }
       list bin {
         key "bin-number";
@@ -813,7 +825,7 @@ module srl_nokia-oam-pm {
     }
     container timing {
       description
-        "Enter the timing context used to configure availability options";
+        "Enter the timing context";
       leaf frames-per-delta-t {
         type uint32 {
           range "1..50";

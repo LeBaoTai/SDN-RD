@@ -21,6 +21,9 @@ module srl_nokia-bgp-vpn {
   import srl_nokia-policy-types {
     prefix srl_nokia-pol-types;
   }
+  import srl_nokia-routing-policy {
+    prefix srl-rpol;
+  }
 
   organization
     "Nokia";
@@ -30,6 +33,10 @@ module srl_nokia-bgp-vpn {
   description
     "This yang file models configuration and state of the bgp-vpn protocols (EVPN and IPVPN).";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -85,13 +92,30 @@ module srl_nokia-bgp-vpn {
       must '(/srl_nokia-netinst:network-instance[srl_nokia-netinst:name = current()/../../srl_nokia-netinst:name]/srl_nokia-netinst:type != "srl_nokia-netinst:host")' {
         error-message "The bgp-vpn configuration is not possible on network-instance of type host.";
       }
+      leaf next-hop-resolution-policy {
+        if-feature "srl_nokia-feat:bgp-next-hop-resolution-policy";
+        description
+          "Policy to evaluate whether the route or tunnel chosen to resolve each BGP next-hop is acceptable or not
+
+           The policy applies to all BGP EVPN and IPVPN routes imported into the network-instance, and covers both IPv4 next-hop addresses and IPv6 next-hop addresses.";
+        type leafref {
+          path "/srl-rpol:routing-policy/srl-rpol:policy/srl-rpol:name";
+        }
+        must "current()/../../../srl_nokia-netinst:type != 'srl_nokia-netinst:vpws' and current()/../../../srl_nokia-netinst:type != 'srl_nokia-netinst:mac-vrf'" {
+          error-message "next-hop-resolution-policy cannot be configured in network-instances of type vpws or mac-vrf";
+        }
+      }
       container backup-paths {
         if-feature "srl_nokia-feat:bgp-backup-path-frr-vpn or srl_nokia-feat:bgp-backup-path-frr-evpn";
         description
-          "Configuration of BGP VPN fast reroute";
+          "Enter the backup-paths context
+
+           Configuration of BGP VPN fast reroute";
         container ipv4-unicast {
           description
-            "Configuration of IPv4 unicast backup paths";
+            "Enter the ipv4-unicast context
+
+             Configuration of IPv4 unicast backup paths";
           leaf install {
             type boolean;
             default "false";
@@ -108,7 +132,9 @@ module srl_nokia-bgp-vpn {
         }
         container ipv6-unicast {
           description
-            "Configuration of IPv6 unicast backup paths";
+            "Enter the ipv6-unicast context
+
+             Configuration of IPv6 unicast backup paths";
           leaf install {
             type boolean;
             default "false";
@@ -178,7 +204,9 @@ module srl_nokia-bgp-vpn {
         }
         container route-distinguisher {
           description
-            "Route Distinguisher (RD) of the bgp-vpn instance.";
+            "Enter the route-distinguisher context
+
+             Route Distinguisher (RD) of the bgp-vpn instance.";
           leaf rd {
             srl_nokia-ext:show-importance "high";
             type srl_nokia-comm:route-distinguisher;
@@ -217,7 +245,9 @@ module srl_nokia-bgp-vpn {
         }
         container route-target {
           description
-            "Route Target (RT) of the bgp-vpn instance.";
+            "Enter the route-target context
+
+             Route Target (RT) of the bgp-vpn instance.";
           leaf export-rt {
             srl_nokia-ext:show-importance "high";
             type srl_nokia-pol-types:bgp-ext-community-type;

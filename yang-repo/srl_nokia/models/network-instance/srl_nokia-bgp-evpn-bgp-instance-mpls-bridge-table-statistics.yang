@@ -24,6 +24,10 @@ module srl_nokia-bgp-evpn-bgp-instance-mpls-bridge-table-statistics {
   description
     "Model for bridge-table unicast destinations on the bgp-evpn mpls instance";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2022-03-31 {
     description
       "SRLinux 22.3.1";
@@ -79,6 +83,8 @@ module srl_nokia-bgp-evpn-bgp-instance-mpls-bridge-table-statistics {
           srl_nokia-ext:show-importance "high";
         }
       }
+      description
+        "Enter the statistics context";
     }
   }
 

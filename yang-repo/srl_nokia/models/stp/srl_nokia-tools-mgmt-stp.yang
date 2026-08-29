@@ -24,6 +24,10 @@ module srl_nokia-tools-mgmt-stp {
   description
     "Model for Mgmt-Stp operational commands";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -45,6 +49,8 @@ module srl_nokia-tools-mgmt-stp {
           description
             "Clear all Stp statistics of this Mgmt-Stp Instance";
         }
+        description
+          "Enter the statistics context";
       }
       container bpdu-guard-error {
         leaf clear {
@@ -52,6 +58,8 @@ module srl_nokia-tools-mgmt-stp {
           description
             "Clear bpdu guard error on Mgmt-Stp";
         }
+        description
+          "Enter the bpdu-guard-error context";
       }
       list interface {
         key "interface-name";
@@ -68,6 +76,8 @@ module srl_nokia-tools-mgmt-stp {
             description
               "Clear all Stp statistics on this Mgmt-Stp Interface";
           }
+          description
+            "Enter the statistics context";
         }
         container bpdu-guard-error {
           leaf clear {
@@ -75,6 +85,8 @@ module srl_nokia-tools-mgmt-stp {
             description
               "Clear bpdu guard error on Mgmt-Stp interface";
           }
+          description
+            "Enter the bpdu-guard-error context";
         }
       }
     }

@@ -24,6 +24,10 @@ module srl_nokia-platform-first-hop-security-res-mgmt {
   description
     "This module defines the configuration of resources required to use First Hop Security.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -39,7 +43,9 @@ module srl_nokia-platform-first-hop-security-res-mgmt {
     container first-hop-security {
       if-feature "srl-feat:first-hop-security and srl-feat:trident3";
       description
-        "Container to provide an option for allocating required hardware resources to First Hop security ";
+        "Enter the first-hop-security context
+
+         Container to provide an option for allocating required hardware resources to First Hop security ";
       leaf first-hop-security-protocols {
         description
           "Set to enable use of hardware resource by protocols used for First Hop security
@@ -79,7 +85,9 @@ module srl_nokia-platform-first-hop-security-res-mgmt {
     container dot1x-multi-host-authentication-tcam {
       if-feature "srl-feat:dot1x-authenticator-multi-host-auth-tcam-res-mgmt";
       description
-        "Container to provide an option for allocating required hardware resources to dot1x multi-host-authentication or mac-based-authentication ";
+        "Enter the dot1x-multi-host-authentication-tcam context
+
+         Container to provide an option for allocating required hardware resources to dot1x multi-host-authentication or mac-based-authentication ";
       leaf dot1x-multi-host {
         description
           "number of hardware TCAM entries to use for multi host authentication";
@@ -91,7 +99,9 @@ module srl_nokia-platform-first-hop-security-res-mgmt {
     }
     container first-hop-security-tcam {
       description
-        "Container for managing the allocation of TCAM banks to First Hop Security.";
+        "Enter the first-hop-security-tcam context
+
+         Container for managing the allocation of TCAM banks to First Hop Security.";
       leaf first-hop-security-ip-source-guard-entries {
         if-feature "srl-feat:first-hop-security and srl-feat:future-0-0";
         description

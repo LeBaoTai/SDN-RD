@@ -18,6 +18,10 @@ module srl_nokia-gnmi {
   description
     "This module defines configuration and operational state data related to the gnmi service";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-03-31 {
     description
       "SRLinux 24.3.1";
@@ -26,7 +30,9 @@ module srl_nokia-gnmi {
   grouping gnmi-session-info {
     container gnmi {
       description
-        "Container for gNMI related session info";
+        "Enter the gnmi context
+
+         Container for gNMI related session info";
       list paths {
         description
           "List of paths being subscribed to";
@@ -80,7 +86,9 @@ module srl_nokia-gnmi {
   grouping gnmi-top {
     container gnmi {
       description
-        "Container for gnmi configuration and state";
+        "Enter the gnmi context
+
+         Container for gnmi configuration and state";
       leaf commit-confirmed-timeout {
         srl-ext:first-released "20.6.1";
         type uint32 {

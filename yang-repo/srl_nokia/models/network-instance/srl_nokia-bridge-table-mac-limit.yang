@@ -11,6 +11,10 @@ module srl_nokia-bridge-table-mac-limit {
   description
     "This yang file gives a description of bridge table mac limit configuration.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-03-31 {
     description
       "SRLinux 24.3.1";
@@ -23,7 +27,9 @@ module srl_nokia-bridge-table-mac-limit {
   grouping bridge-table-mac-limit-top {
     container mac-limit {
       description
-        "Bridge Table size and thresholds.";
+        "Enter the mac-limit context
+
+         Bridge Table size and thresholds.";
       leaf maximum-entries {
         type int32 {
           range "1..250000";

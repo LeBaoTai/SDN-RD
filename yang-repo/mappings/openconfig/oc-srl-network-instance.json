@@ -254,28 +254,23 @@
     },
     {
       "oc": "/network-instances/network-instance/inter-instance-policies",
-      "srlinux": "/network-instance/inter-instance-policies",
-      "feature-flagged": true
+      "srlinux": "/network-instance/inter-instance-policies"
     },
     {
       "oc": "/network-instances/network-instance/inter-instance-policies/apply-policy",
-      "srlinux": "/network-instance/inter-instance-policies/apply-policy",
-      "feature-flagged": true
+      "srlinux": "/network-instance/inter-instance-policies/apply-policy"
     },
     {
       "oc": "/network-instances/network-instance/inter-instance-policies/apply-policy/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/inter-instance-policies/apply-policy/{config,state}/import-policy",
-      "srlinux": "/network-instance/inter-instance-policies/apply-policy/import-policy",
-      "feature-flagged": true
+      "srlinux": "/network-instance/inter-instance-policies/apply-policy/import-policy"
     },
     {
       "oc": "/network-instances/network-instance/inter-instance-policies/apply-policy/{config,state}/import-policy/import-policy",
-      "srlinux": "/network-instance/inter-instance-policies/apply-policy/import-policy/import-policy",
-      "feature-flagged": true
+      "srlinux": "/network-instance/inter-instance-policies/apply-policy/import-policy/import-policy"
     },
     {
       "oc": "/network-instances/network-instance/inter-instance-policies/apply-policy/{config,state}/default-import-policy",
@@ -283,13 +278,11 @@
     },
     {
       "oc": "/network-instances/network-instance/inter-instance-policies/apply-policy/{config,state}/export-policy",
-      "srlinux": "/network-instance/inter-instance-policies/apply-policy/export-policy",
-      "feature-flagged": true
+      "srlinux": "/network-instance/inter-instance-policies/apply-policy/export-policy"
     },
     {
       "oc": "/network-instances/network-instance/inter-instance-policies/apply-policy/{config,state}/export-policy/export-policy",
-      "srlinux": "/network-instance/inter-instance-policies/apply-policy/export-policy/export-policy",
-      "feature-flagged": true
+      "srlinux": "/network-instance/inter-instance-policies/apply-policy/export-policy/export-policy"
     },
     {
       "oc": "/network-instances/network-instance/inter-instance-policies/apply-policy/{config,state}/default-export-policy",
@@ -313,13 +306,11 @@
     },
     {
       "oc": "/network-instances/network-instance/table-connections",
-      "srlinux": "/network-instance/table-connections",
-      "feature-flagged": true
+      "srlinux": "/network-instance/table-connections"
     },
     {
       "oc": "/network-instances/network-instance/table-connections/table-connection",
-      "srlinux": "/network-instance/table-connections/table-connection",
-      "feature-flagged": true
+      "srlinux": "/network-instance/table-connections/table-connection"
     },
     {
       "oc": "/network-instances/network-instance/table-connections/table-connection/src-protocol",
@@ -350,6 +341,9 @@
           "LOCAL": "host"
         },
         {
+          "GRIBI": "gribi"
+        },
+        {
           "<clear>": "arp-nd"
         },
         {
@@ -364,8 +358,7 @@
         {
           "<clear>": "bgp-label"
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/network-instances/network-instance/table-connections/table-connection/dst-protocol",
@@ -410,8 +403,7 @@
         {
           "<clear>": "bgp-label"
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/network-instances/network-instance/table-connections/table-connection/address-family",
@@ -423,8 +415,7 @@
         {
           "IPV6": "ipv6"
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/network-instances/network-instance/table-connections/table-connection/{config,state}",
@@ -447,18 +438,15 @@
     },
     {
       "oc": "/network-instances/network-instance/table-connections/table-connection/{config,state}/disable-metric-propagation",
-      "srlinux": "/network-instance/table-connections/table-connection/disable-metric-propagation",
-      "feature-flagged": true
+      "srlinux": "/network-instance/table-connections/table-connection/disable-metric-propagation"
     },
     {
       "oc": "/network-instances/network-instance/table-connections/table-connection/{config,state}/import-policy",
-      "srlinux": "/network-instance/table-connections/table-connection/import-policy",
-      "feature-flagged": true
+      "srlinux": "/network-instance/table-connections/table-connection/import-policy"
     },
     {
       "oc": "/network-instances/network-instance/table-connections/table-connection/{config,state}/import-policy/import-policy",
-      "srlinux": "/network-instance/table-connections/table-connection/import-policy/import-policy",
-      "feature-flagged": true
+      "srlinux": "/network-instance/table-connections/table-connection/import-policy/import-policy"
     },
     {
       "oc": "/network-instances/network-instance/table-connections/table-connection/{config,state}/default-import-policy",
@@ -470,8 +458,7 @@
         {
           "REJECT_ROUTE": "reject"
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/network-instances/network-instance/interfaces",
@@ -495,13 +482,11 @@
     },
     {
       "oc": "/network-instances/network-instance/interfaces/interface/{config,state}/interface",
-      "srlinux": "/network-instance/interface/interface-ref/interface",
-      "feature-flagged": true
+      "srlinux": "/network-instance/interface/interface-ref/interface"
     },
     {
       "oc": "/network-instances/network-instance/interfaces/interface/{config,state}/subinterface",
-      "srlinux": "/network-instance/interface/interface-ref/subinterface",
-      "feature-flagged": true
+      "srlinux": "/network-instance/interface/interface-ref/subinterface"
     },
     {
       "oc": "/network-instances/network-instance/interfaces/interface/{config,state}/associated-address-families",
@@ -709,7 +694,7 @@
     },
     {
       "oc": "/network-instances/network-instance/mpls",
-      "supported": false
+      "srlinux": "/network-instance/mpls"
     },
     {
       "oc": "/network-instances/network-instance/mpls/global",
@@ -2153,7 +2138,7 @@
     },
     {
       "oc": "/network-instances/network-instance/mpls/lsps",
-      "supported": false
+      "srlinux": "/network-instance/mpls/lsps"
     },
     {
       "oc": "/network-instances/network-instance/mpls/lsps/constrained-path",
@@ -2709,23 +2694,23 @@
     },
     {
       "oc": "/network-instances/network-instance/mpls/lsps/static-lsps",
-      "supported": false
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp",
-      "supported": false
+      "srlinux": "/network-instance/mpls/lsps/static-lsp"
     },
     {
       "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/name",
-      "supported": false
+      "srlinux": "/network-instance/mpls/lsps/static-lsp/name"
     },
     {
       "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/{config,state}",
-      "supported": false
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/{config,state}/name",
-      "supported": false
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/ingress",
@@ -2769,11 +2754,11 @@
     },
     {
       "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress",
-      "supported": false
+      "srlinux": "/network-instance/mpls/lsps/static-lsp/egress"
     },
     {
       "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/{config,state}",
-      "supported": false
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/{config,state}/next-hop",
@@ -2781,10 +2766,58 @@
     },
     {
       "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/{config,state}/incoming-label",
+      "srlinux": "/network-instance/mpls/lsps/static-lsp/egress/incoming-label"
+    },
+    {
+      "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/{config,state}/interface",
+      "supported": false
+    },
+    {
+      "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/{config,state}/metric",
       "supported": false
     },
     {
       "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/{config,state}/push-label",
+      "supported": false
+    },
+    {
+      "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/{config,state}/subinterface",
+      "supported": false
+    },
+    {
+      "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/lsp-next-hops",
+      "srlinux": ""
+    },
+    {
+      "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/lsp-next-hops/lsp-next-hop",
+      "srlinux": "/network-instance/mpls/lsps/static-lsp/egress/next-hop"
+    },
+    {
+      "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/lsp-next-hops/lsp-next-hop/index",
+      "srlinux": "/network-instance/mpls/lsps/static-lsp/egress/next-hop/index"
+    },
+    {
+      "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/lsp-next-hops/lsp-next-hop/{config,state}",
+      "srlinux": ""
+    },
+    {
+      "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/lsp-next-hops/lsp-next-hop/{config,state}/index",
+      "srlinux": ""
+    },
+    {
+      "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/lsp-next-hops/lsp-next-hop/{config,state}/interface",
+      "supported": false
+    },
+    {
+      "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/lsp-next-hops/lsp-next-hop/{config,state}/ip-address",
+      "srlinux": "/network-instance/mpls/lsps/static-lsp/egress/next-hop/ip-address"
+    },
+    {
+      "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/lsp-next-hops/lsp-next-hop/{config,state}/push-label",
+      "supported": false
+    },
+    {
+      "oc": "/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/lsp-next-hops/lsp-next-hop/{config,state}/subinterface",
       "supported": false
     },
     {
@@ -3717,11 +3750,11 @@
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop",
-      "srlinux": "/network-instance/route-table/next-hop"
+      "srlinux": "/network-instance/afts/next-hop"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/index",
-      "srlinux": "/network-instance/route-table/next-hop/index"
+      "srlinux": "/network-instance/afts/next-hop/index"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/state",
@@ -3733,7 +3766,7 @@
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/state/programmed-index",
-      "srlinux": "/network-instance/route-table/next-hop/programmed-index"
+      "srlinux": "/network-instance/afts/next-hop/programmed-index"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/state/pop-top-label",
@@ -3741,56 +3774,24 @@
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/state/ip-address",
-      "srlinux": "/network-instance/route-table/next-hop/ip-address"
+      "srlinux": "/network-instance/afts/next-hop/ip-address"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/state/mac-address",
-      "srlinux": "/network-instance/route-table/next-hop/interface-with-mac/mac-address",
+      "srlinux": "/network-instance/afts/next-hop/mac-address",
       "type": "srl_nokia-common:mac-address"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/state/pushed-mpls-label-stack",
-      "srlinux": "/network-instance/route-table/next-hop/mpls-encapsulation/pushed-mpls-label-stack"
-    },
-    {
-      "oc": "/network-instances/network-instance/afts/next-hops/next-hop/state/pushed-mpls-label-stack/pushed-mpls-label-stack",
-      "srlinux": "/network-instance/route-table/next-hop/mpls-encapsulation/pushed-mpls-label-stack/pushed-mpls-label-stack"
+      "supported": false
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/state/encapsulate-header",
-      "srlinux": "/network-instance/route-table/next-hop/tunnel/encapsulate-header",
-      "mapping": [
-        {
-          "GRE": "gre"
-        },
-        {
-          "IPV4": "ipv4"
-        },
-        {
-          "IPV6": "ipv6"
-        },
-        {
-          "MPLS": "mpls"
-        }
-      ]
+      "supported": false
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/state/decapsulate-header",
-      "srlinux": "/network-instance/route-table/next-hop/decapsulate-header",
-      "mapping": [
-        {
-          "GRE": "gre"
-        },
-        {
-          "IPV4": "ipv4"
-        },
-        {
-          "IPV6": "ipv6"
-        },
-        {
-          "MPLS": "mpls"
-        }
-      ]
+      "supported": false
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/state/origin-protocol",
@@ -3802,15 +3803,15 @@
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/state/counters",
-      "srlinux": "/network-instance/route-table/next-hop/counters"
+      "srlinux": "/network-instance/afts/next-hop/counters"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/state/counters/octets-forwarded",
-      "srlinux": "/network-instance/route-table/next-hop/counters/octets-forwarded"
+      "srlinux": "/network-instance/afts/next-hop/counters/octets-forwarded"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/state/counters/packets-forwarded",
-      "srlinux": "/network-instance/route-table/next-hop/counters/packets-forwarded"
+      "srlinux": "/network-instance/afts/next-hop/counters/packets-forwarded"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/state/vni-label",
@@ -3822,25 +3823,23 @@
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/state/oc-aftni:network-instance",
-      "srlinux": "/network-instance/route-table/next-hop/redirect/network-instance"
+      "srlinux": "/network-instance/afts/next-hop/network-instance"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/ip-in-ip",
-      "srlinux": "/network-instance/route-table/next-hop/tunnel/ip-in-ip"
+      "supported": false
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/ip-in-ip/state",
-      "srlinux": ""
+      "supported": false
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/ip-in-ip/state/src-ip",
-      "srlinux": "/network-instance/route-table/next-hop/tunnel/ip-in-ip/src-ip",
-      "type": "srl_nokia-common:ip-address"
+      "supported": false
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/ip-in-ip/state/dst-ip",
-      "srlinux": "/network-instance/route-table/next-hop/tunnel/ip-in-ip/dst-ip",
-      "type": "srl_nokia-common:ip-address"
+      "supported": false
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/gre",
@@ -3848,171 +3847,186 @@
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers",
-      "supported": false
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/index",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/index"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/state",
-      "supported": false
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/state/index",
-      "supported": false
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/state/type",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/type",
+      "type": "srl_nokia-common:encapsulation-header-type"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/gre",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/gre"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/gre/state",
-      "supported": false
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/gre/state/src-ip",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/gre/source-ip",
+      "type": "srl_nokia-common:ip-address"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/gre/state/dst-ip",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/gre/destination-ip",
+      "type": "srl_nokia-common:ip-address"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/gre/state/ttl",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/gre/ip-ttl"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/ipv4",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/ipv4"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/ipv4/state",
-      "supported": false
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/ipv4/state/src-ip",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/ipv4/source-ip",
+      "type": "srl_nokia-common:ipv4-address"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/ipv4/state/dst-ip",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/ipv4/destination-ip",
+      "type": "srl_nokia-common:ipv4-address"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/ipv6",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/ipv6"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/ipv6/state",
-      "supported": false
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/ipv6/state/src-ip",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/ipv6/source-ip",
+      "type": "srl_nokia-common:ipv6-address"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/ipv6/state/dst-ip",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/ipv6/destination-ip",
+      "type": "srl_nokia-common:ipv6-address"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/mpls"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls/state",
-      "supported": false
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls/state/traffic-class",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/mpls/traffic-class"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls/state/mpls-label-stack",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/mpls/mpls-label-stack"
+    },
+    {
+      "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls/state/mpls-label-stack/mpls-label-stack",
+      "srlinux": "/network-instance/afts/next-hop/encap-header/mpls/mpls-label-stack/mpls-label-stack"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/udp-v4",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/udp-v4"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/udp-v4/state",
-      "supported": false
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/udp-v4/state/src-ip",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/udp-v4/source-ip",
+      "type": "srl_nokia-common:ipv4-address"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/udp-v4/state/dst-ip",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/udp-v4/destination-ip",
+      "type": "srl_nokia-common:ipv4-address"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/udp-v4/state/dscp",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/udp-v4/in-profile-dscp"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/udp-v4/state/src-udp-port",
-      "supported": false
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/udp-v4/state/dst-udp-port",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/udp-v4/destination-udp-port"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/udp-v4/state/ip-ttl",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/udp-v4/ip-ttl"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/udp-v6",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/udp-v6"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/udp-v6/state",
-      "supported": false
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/udp-v6/state/src-ip",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/udp-v6/source-ip",
+      "type": "srl_nokia-common:ipv6-address"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/udp-v6/state/dst-ip",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/udp-v6/destination-ip",
+      "type": "srl_nokia-common:ipv6-address"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/udp-v6/state/dscp",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/udp-v6/in-profile-dscp"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/udp-v6/state/src-udp-port",
-      "supported": false
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/udp-v6/state/dst-udp-port",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/udp-v6/destination-udp-port"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/udp-v6/state/ip-ttl",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/udp-v6/ip-ttl"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/vxlan",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/vxlan"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/vxlan/state",
-      "supported": false
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/vxlan/state/vni-label",
-      "supported": false
+      "srlinux": "/network-instance/afts/next-hop/encap-header/vxlan/vni-label"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/vxlan/state/tunnel-src-ip-address",
@@ -4020,7 +4034,7 @@
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/interface-ref",
-      "srlinux": ""
+      "srlinux": "/network-instance/afts/next-hop/interface-ref"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/interface-ref/state",
@@ -4028,12 +4042,11 @@
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/interface-ref/state/interface",
-      "srlinux": "/network-instance/route-table/next-hop/subinterface",
-      "transform": "oc-interface-ref-to-srl-subinterface"
+      "srlinux": "/network-instance/afts/next-hop/interface-ref/interface"
     },
     {
       "oc": "/network-instances/network-instance/afts/next-hops/next-hop/interface-ref/state/subinterface",
-      "srlinux": ""
+      "srlinux": "/network-instance/afts/next-hop/interface-ref/subinterface"
     },
     {
       "oc": "/network-instances/network-instance/afts/aft-summaries",
@@ -4228,6 +4241,135 @@
       "srlinux": "/network-instance/route-table/ipv6-unicast/route-summary/route-type/active-routes"
     },
     {
+      "oc": "/network-instances/network-instance/programming-errors",
+      "srlinux": ""
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes",
+      "srlinux": ""
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/config",
+      "srlinux": "",
+      "finalize-transform": "oc-set-field-to-value{enabled=true}"
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/state",
+      "srlinux": "",
+      "finalize-transform": "oc-set-field-to-value{enabled=true}"
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/{config,state}/enabled",
+      "srlinux": "",
+      "pretranslate-transform": "oc-programming-errors-ip-routes-enabled-transform"
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/state/total-errors",
+      "srlinux": "/network-instance/programming-errors/ip-routes/total-errors"
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/failed-routes",
+      "srlinux": ""
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/failed-routes/failed",
+      "srlinux": "/network-instance/programming-errors/ip-routes/failed-route"
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/failed-routes/failed/prefix",
+      "srlinux": "/network-instance/programming-errors/ip-routes/failed-route/prefix"
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/failed-routes/failed/state",
+      "srlinux": ""
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/failed-routes/failed/state/prefix",
+      "srlinux": ""
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/failed-routes/failed/state/time",
+      "srlinux": "/network-instance/programming-errors/ip-routes/failed-route/time",
+      "transform": "timeticks64-to-date-and-time"
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/failed-routes/failed/state/dest-component",
+      "srlinux": "/network-instance/programming-errors/ip-routes/failed-route/forwarding-complexes-with-errors"
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/failed-routes/failed/state/dest-component/dest-component",
+      "srlinux": "/network-instance/programming-errors/ip-routes/failed-route/forwarding-complexes-with-errors/forwarding-complexes-with-errors",
+      "transform": "dest-component-to-forwarding-complex"
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/stale-routes",
+      "srlinux": ""
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/stale-routes/stale",
+      "srlinux": "/network-instance/programming-errors/ip-routes/stale-route"
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/stale-routes/stale/prefix",
+      "srlinux": "/network-instance/programming-errors/ip-routes/stale-route/prefix"
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/stale-routes/stale/state",
+      "srlinux": ""
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/stale-routes/stale/state/prefix",
+      "srlinux": ""
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/stale-routes/stale/state/time",
+      "srlinux": "/network-instance/programming-errors/ip-routes/stale-route/time",
+      "transform": "timeticks64-to-date-and-time"
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/stale-routes/stale/state/dest-component",
+      "srlinux": "/network-instance/programming-errors/ip-routes/stale-route/forwarding-complexes-with-errors"
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/stale-routes/stale/state/dest-component/dest-component",
+      "srlinux": "/network-instance/programming-errors/ip-routes/stale-route/forwarding-complexes-with-errors/forwarding-complexes-with-errors",
+      "transform": "dest-component-to-forwarding-complex"
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/drop-routes",
+      "srlinux": ""
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/drop-routes/drop",
+      "srlinux": "/network-instance/programming-errors/ip-routes/drop-route"
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/drop-routes/drop/prefix",
+      "srlinux": "/network-instance/programming-errors/ip-routes/drop-route/prefix"
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/drop-routes/drop/state",
+      "srlinux": ""
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/drop-routes/drop/state/prefix",
+      "srlinux": ""
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/drop-routes/drop/state/time",
+      "srlinux": "/network-instance/programming-errors/ip-routes/drop-route/time",
+      "transform": "timeticks64-to-date-and-time"
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/drop-routes/drop/state/dest-component",
+      "srlinux": "/network-instance/programming-errors/ip-routes/drop-route/forwarding-complexes-with-errors"
+    },
+    {
+      "oc": "/network-instances/network-instance/programming-errors/ip-routes/drop-routes/drop/state/dest-component/dest-component",
+      "srlinux": "/network-instance/programming-errors/ip-routes/drop-route/forwarding-complexes-with-errors/forwarding-complexes-with-errors",
+      "transform": "dest-component-to-forwarding-complex"
+    },
+    {
       "oc": "/network-instances/network-instance/protocols",
       "srlinux": "/network-instance/protocols"
     },
@@ -4254,7 +4396,11 @@
       "srlinux": ""
     },
     {
-      "oc": "/network-instances/network-instance/protocols/protocol/{config,state}/name",
+      "oc": "/network-instances/network-instance/protocols/protocol/config/name",
+      "pretranslate-transform": "oc-net-inst-protocol-config-name"
+    },
+    {
+      "oc": "/network-instances/network-instance/protocols/protocol/state/name",
       "srlinux": ""
     },
     {
@@ -4388,6 +4534,14 @@
       }
     },
     {
+      "oc": "/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/{config,state}/nh-network-instance",
+      "supported": false
+    },
+    {
+      "oc": "/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/{config,state}/next-network-instance",
+      "supported": false
+    },
+    {
       "oc": "/network-instances/network-instance/protocols/protocol/static-routes/static/next-hops/next-hop/enable-bfd",
       "supported": false
     },
@@ -4492,48 +4646,39 @@
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm",
-      "srlinux": "/network-instance/flexible-algorithm",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algorithm-definition",
-      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algorithm-definition/algorithm",
-      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algorithm-definition/algorithm/flex-algo-id",
-      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/flex-algo-id",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/flex-algo-id"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algorithm-definition/algorithm/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algorithm-definition/algorithm/{config,state}/flex-algo-id",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algorithm-definition/algorithm/config/flex-algo-name",
-      "supported": false,
-      "feature-flagged": true
+      "supported": false
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algorithm-definition/algorithm/state/flex-algo-name",
-      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/name",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/name"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algorithm-definition/algorithm/{config,state}/flex-algo-description",
-      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/description",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/description"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algorithm-definition/algorithm/{config,state}/metric-type",
@@ -4548,53 +4693,43 @@
         {
           "TE_METRIC": "te-metric"
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algorithm-definition/algorithm/config/calc-type",
-      "supported": false,
-      "feature-flagged": true
+      "supported": false
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algorithm-definition/algorithm/state/calc-type",
-      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/calc-type",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/calc-type"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algorithm-definition/algorithm/{config,state}/priority",
-      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/priority",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/priority"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algorithm-definition/algorithm/{config,state}/exclude",
-      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/exclude",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/exclude"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algorithm-definition/algorithm/{config,state}/exclude/exclude",
-      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/exclude/exclude",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/exclude/exclude"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algorithm-definition/algorithm/{config,state}/include-all",
-      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/include-all",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/include-all"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algorithm-definition/algorithm/{config,state}/include-all/include-all",
-      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/include-all/include-all",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/include-all/include-all"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algorithm-definition/algorithm/{config,state}/include-any",
-      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/include-any",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/include-any"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algorithm-definition/algorithm/{config,state}/include-any/include-any",
-      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/include-any/include-any",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/flexible-algorithm-definitions/flexible-algorithm-definition/include-any/include-any"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algorithm-definition/algorithm/{config,state}/srlg-exclude",
@@ -4610,8 +4745,7 @@
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algo-global-attributes",
-      "srlinux": "/network-instance/flexible-algorithm/global-attributes",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/global-attributes"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algo-global-attributes/srlgs",
@@ -4639,63 +4773,51 @@
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algo-global-attributes/flex-algo-admin-groups",
-      "srlinux": "/network-instance/flexible-algorithm/global-attributes/extended-admin-groups",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/global-attributes/extended-admin-groups"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algo-global-attributes/flex-algo-admin-groups/admin-group",
-      "srlinux": "/network-instance/flexible-algorithm/global-attributes/extended-admin-groups/group",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/global-attributes/extended-admin-groups/group"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algo-global-attributes/flex-algo-admin-groups/admin-group/admin-group-name",
-      "srlinux": "/network-instance/flexible-algorithm/global-attributes/extended-admin-groups/group/name",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/global-attributes/extended-admin-groups/group/name"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algo-global-attributes/flex-algo-admin-groups/admin-group/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algo-global-attributes/flex-algo-admin-groups/admin-group/{config,state}/admin-group-name",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algo-global-attributes/flex-algo-admin-groups/admin-group/{config,state}/bit-position",
-      "srlinux": "/network-instance/flexible-algorithm/global-attributes/extended-admin-groups/group/bit-position",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/global-attributes/extended-admin-groups/group/bit-position"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algo-interface-attributes",
-      "srlinux": "/network-instance/flexible-algorithm/interface-attributes",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/interface-attributes"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algo-interface-attributes/interface",
-      "srlinux": "/network-instance/flexible-algorithm/interface-attributes/interface",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/interface-attributes/interface"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algo-interface-attributes/interface/interface-id",
-      "srlinux": "/network-instance/flexible-algorithm/interface-attributes/interface/interface-name",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/interface-attributes/interface/interface-name"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algo-interface-attributes/interface/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algo-interface-attributes/interface/{config,state}/interface-id",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algo-interface-attributes/interface/{config,state}/te-metric",
-      "srlinux": "/network-instance/flexible-algorithm/interface-attributes/interface/te-metric",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/interface-attributes/interface/te-metric"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algo-interface-attributes/interface/{config,state}/min-delay",
@@ -4711,93 +4833,75 @@
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algo-interface-attributes/interface/{config,state}/admin-group",
-      "srlinux": "/network-instance/flexible-algorithm/interface-attributes/interface/extended-admin-group",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/interface-attributes/interface/extended-admin-group"
     },
     {
       "oc": "/network-instances/network-instance/flex-algorithm/flex-algo-interface-attributes/interface/{config,state}/admin-group/admin-group",
-      "srlinux": "/network-instance/flexible-algorithm/interface-attributes/interface/extended-admin-group/extended-admin-group",
-      "feature-flagged": true
+      "srlinux": "/network-instance/flexible-algorithm/interface-attributes/interface/extended-admin-group/extended-admin-group"
     },
     {
       "oc": "/network-instances/network-instance/static",
-      "srlinux": "/network-instance/static",
-      "feature-flagged": true
+      "srlinux": "/network-instance/static"
     },
     {
       "oc": "/network-instances/network-instance/static/next-hop-groups",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/static/next-hop-groups/next-hop-group",
-      "srlinux": "/network-instance/static/next-hop-group",
-      "feature-flagged": true
+      "srlinux": "/network-instance/static/next-hop-group"
     },
     {
       "oc": "/network-instances/network-instance/static/next-hop-groups/next-hop-group/name",
-      "srlinux": "/network-instance/static/next-hop-group/name",
-      "feature-flagged": true
+      "srlinux": "/network-instance/static/next-hop-group/name"
     },
     {
       "oc": "/network-instances/network-instance/static/next-hop-groups/next-hop-group/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/static/next-hop-groups/next-hop-group/{config,state}/name",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/static/next-hop-groups/next-hop-group/next-hops",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/static/next-hop-groups/next-hop-group/next-hops/next-hop",
-      "srlinux": "/network-instance/static/next-hop-group/next-hop",
-      "feature-flagged": true
+      "srlinux": "/network-instance/static/next-hop-group/next-hop"
     },
     {
       "oc": "/network-instances/network-instance/static/next-hop-groups/next-hop-group/next-hops/next-hop/index",
-      "srlinux": "/network-instance/static/next-hop-group/next-hop/index",
-      "feature-flagged": true
+      "srlinux": "/network-instance/static/next-hop-group/next-hop/index"
     },
     {
       "oc": "/network-instances/network-instance/static/next-hop-groups/next-hop-group/next-hops/next-hop/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/static/next-hop-groups/next-hop-group/next-hops/next-hop/{config,state}/index",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/static/next-hops",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/static/next-hops/next-hop",
-      "srlinux": "/network-instance/static/next-hop",
-      "feature-flagged": true
+      "srlinux": "/network-instance/static/next-hop"
     },
     {
       "oc": "/network-instances/network-instance/static/next-hops/next-hop/index",
-      "srlinux": "/network-instance/static/next-hop/index",
-      "feature-flagged": true
+      "srlinux": "/network-instance/static/next-hop/index"
     },
     {
       "oc": "/network-instances/network-instance/static/next-hops/next-hop/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/static/next-hops/next-hop/{config,state}/index",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/static/next-hops/next-hop/{config,state}/next-hop",
@@ -4818,7 +4922,6 @@
     {
       "oc": "/network-instances/network-instance/static/next-hops/next-hop/{config,state}/recurse",
       "srlinux": "/network-instance/static/next-hop/resolve",
-      "feature-flagged": true,
       "deviations": {
         "add": {
           "must": [
@@ -4848,34 +4951,34 @@
     },
     {
       "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header",
-      "srlinux": "/network-instance/static/next-hop/encap-header",
-      "feature-flagged": true
+      "srlinux": "/network-instance/static/next-hop/encap-header"
     },
     {
       "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/index",
-      "srlinux": "/network-instance/static/next-hop/encap-header/index",
-      "feature-flagged": true
+      "srlinux": "/network-instance/static/next-hop/encap-header/index"
     },
     {
       "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/{config,state}/index",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/{config,state}/type",
       "srlinux": "/network-instance/static/next-hop/encap-header/type",
-      "feature-flagged": true,
       "mapping": [
+        {
+          "GRE": "gre"
+        },
+        {
+          "MPLS": "mpls"
+        },
         {
           "UDPV4": "udp-v4"
         }
@@ -4883,23 +4986,19 @@
     },
     {
       "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/udp-v4",
-      "srlinux": "/network-instance/static/next-hop/encap-header/udp-v4",
-      "feature-flagged": true
+      "srlinux": "/network-instance/static/next-hop/encap-header/udp-v4"
     },
     {
       "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/udp-v4/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/udp-v4/{config,state}/src-ip",
-      "srlinux": "/network-instance/static/next-hop/encap-header/udp-v4/source-ip",
-      "feature-flagged": true
+      "srlinux": "/network-instance/static/next-hop/encap-header/udp-v4/source-ip"
     },
     {
       "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/udp-v4/{config,state}/dst-ip",
-      "srlinux": "/network-instance/static/next-hop/encap-header/udp-v4/destination-ip",
-      "feature-flagged": true
+      "srlinux": "/network-instance/static/next-hop/encap-header/udp-v4/destination-ip"
     },
     {
       "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/udp-v4/{config,state}/dscp",
@@ -4911,13 +5010,59 @@
     },
     {
       "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/udp-v4/{config,state}/dst-udp-port",
-      "srlinux": "/network-instance/static/next-hop/encap-header/udp-v4/destination-udp-port",
-      "feature-flagged": true
+      "srlinux": "/network-instance/static/next-hop/encap-header/udp-v4/destination-udp-port"
     },
     {
       "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/udp-v4/{config,state}/ip-ttl",
-      "srlinux": "/network-instance/static/next-hop/encap-header/udp-v4/ip-ttl",
-      "feature-flagged": true
+      "srlinux": "/network-instance/static/next-hop/encap-header/udp-v4/ip-ttl"
+    },
+    {
+      "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/gre",
+      "srlinux": "/network-instance/static/next-hop/encap-header/gre"
+    },
+    {
+      "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/gre/{config,state}",
+      "srlinux": ""
+    },
+    {
+      "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/gre/{config,state}/dst-ip",
+      "srlinux": "/network-instance/static/next-hop/encap-header/gre/destination-ip"
+    },
+    {
+      "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/gre/{config,state}/src-ip",
+      "srlinux": "/network-instance/static/next-hop/encap-header/gre/source-ip"
+    },
+    {
+      "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/gre/{config,state}/ttl",
+      "srlinux": "/network-instance/static/next-hop/encap-header/gre/ip-ttl"
+    },
+    {
+      "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/gre/{config,state}/dscp",
+      "srlinux": "/network-instance/static/next-hop/encap-header/gre/dscp"
+    },
+    {
+      "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/gre/{config,state}/in-profile-dscp",
+      "srlinux": "/network-instance/static/next-hop/encap-header/gre/in-profile-dscp"
+    },
+    {
+      "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/gre/{config,state}/out-profile-dscp",
+      "srlinux": "/network-instance/static/next-hop/encap-header/gre/out-profile-dscp"
+    },
+    {
+      "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/mpls",
+      "srlinux": "/network-instance/static/next-hop/encap-header/mpls"
+    },
+    {
+      "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/mpls/{config,state}",
+      "srlinux": ""
+    },
+    {
+      "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/mpls/{config,state}/label",
+      "srlinux": "/network-instance/static/next-hop/encap-header/mpls/label"
+    },
+    {
+      "oc": "/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/mpls/{config,state}/traffic-class",
+      "srlinux": "/network-instance/static/next-hop/encap-header/mpls/traffic-class"
     }
   ]
 }

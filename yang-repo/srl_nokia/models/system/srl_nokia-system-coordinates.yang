@@ -24,6 +24,10 @@ module srl_nokia-system-coordinates {
   description
     "This module defines configuration related system banners";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -32,7 +36,9 @@ module srl_nokia-system-coordinates {
   grouping coordinates-config-top {
     container coordinates {
       description
-        "Contains configuration and state related to system coordinates";
+        "Enter the coordinates context
+
+         Contains configuration and state related to system coordinates";
       leaf latitude {
         type srl-common:coordinate-location-latitude;
         description

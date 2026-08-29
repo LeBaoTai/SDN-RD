@@ -30,6 +30,10 @@ module srl_nokia-group-based-policy {
   description
     "A model for Group Based Policy of a network instance";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -73,30 +77,6 @@ module srl_nokia-group-based-policy {
           }
           description
             "The tag value associated to this group";
-          must "../../../srl_nokia-netinst:type = 'mac-vrf' or . <= 127" {
-            error-message "Valid range for GBP tags in IP-VRF is [0..127]";
-            srl_nokia-ext:if-feature "srl_nokia-feat:trident3";
-          }
-          must "../../../srl_nokia-netinst:type = 'ip-vrf' or . <= 255" {
-            error-message "Valid range for GBP tags in MAC-VRF is [0..255]";
-            srl_nokia-ext:if-feature "srl_nokia-feat:trident3";
-          }
-          must "../../../srl_nokia-netinst:type = 'mac-vrf' or . <= 16383 " {
-            error-message "Valid range for GBP tags in IP-VRF is [0..16383]";
-            srl_nokia-ext:if-feature "srl_nokia-feat:trident4";
-          }
-          must "../../../srl_nokia-netinst:type = 'ip-vrf' or . <= 16383" {
-            error-message "Valid range for GBP tags in MAC-VRF is [0..16383]";
-            srl_nokia-ext:if-feature "srl_nokia-feat:trident4";
-          }
-          must "../../../srl_nokia-netinst:type = 'mac-vrf' or . <= 255" {
-            error-message "Valid range for GBP tags in IP-VRF is [0..255]";
-            srl_nokia-ext:if-feature "srl_nokia-feat:future-0-0";
-          }
-          must "../../../srl_nokia-netinst:type = 'ip-vrf' or . <= 127" {
-            error-message "Valid range for GBP tags in MAC-VRF is [0..127]";
-            srl_nokia-ext:if-feature "srl_nokia-feat:future-0-0";
-          }
         }
       }
       list interface {

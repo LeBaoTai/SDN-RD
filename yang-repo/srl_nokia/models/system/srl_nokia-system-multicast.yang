@@ -21,6 +21,10 @@ module srl_nokia-system-multicast {
   description
     "This module defines system multicast and operational state data.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-03-31 {
     description
       "SRLinux 25.3.1";
@@ -49,6 +53,9 @@ module srl_nokia-system-multicast {
       }
       enum mldp {
         value 6;
+      }
+      enum static-lsp {
+        value 7;
       }
     }
     description
@@ -90,13 +97,17 @@ module srl_nokia-system-multicast {
         }
         uses multicast-id-usage-common;
       }
+      description
+        "Enter the statistics context";
     }
   }
 
   grouping multicast-id-top {
     container multicast-ids {
       description
-        "system multicast id information";
+        "Enter the multicast-ids context
+
+         system multicast id information";
       uses multicast-id-usage-top;
     }
   }
@@ -104,7 +115,9 @@ module srl_nokia-system-multicast {
   grouping multicast-top {
     container multicast {
       description
-        "system multicast information";
+        "Enter the multicast context
+
+         system multicast information";
       uses multicast-id-top;
     }
   }

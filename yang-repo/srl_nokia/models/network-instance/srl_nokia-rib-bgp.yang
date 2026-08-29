@@ -33,6 +33,10 @@ module srl_nokia-rib-bgp {
   description
     "This yang file models the state held by the BGP RIB databases.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -441,6 +445,8 @@ module srl_nokia-rib-bgp {
           "MPLS TTL value";
         type uint8;
       }
+      description
+        "Enter the mpls context";
     }
   }
 
@@ -642,6 +648,188 @@ module srl_nokia-rib-bgp {
     }
   }
 
+  grouping flowspec-v1-nlri-common-key {
+    leaf crc {
+      description
+        "CRC value calculated over the encoded nlri.";
+      type uint32;
+    }
+    leaf nlri-length {
+      description
+        "Length of the encoded flowspec nlri.";
+      type uint32;
+    }
+    leaf nlri {
+      description
+        "Encoded flowspec nlri.";
+      type yang:hex-string;
+    }
+  }
+
+  grouping flowspec-v1-common-key {
+    uses flowspec-v1-nlri-common-key;
+    leaf neighbor {
+      description
+        "If the route was learned from a BGP neighbor, this is the IPv4 or IPv6 address of that neighbor";
+      type srl_nokia-comm:ip-address-with-zone;
+    }
+    leaf path-id {
+      description
+        "Path identifier of the BGP route";
+      type uint32;
+    }
+  }
+
+  grouping flowspec-v1-common-local-rib-key {
+    uses flowspec-v1-nlri-common-key;
+    leaf neighbor {
+      description
+        "If the route was learned from a BGP neighbor, this is the IPv4 or IPv6 address of that neighbor";
+      type srl_nokia-comm:ip-address-with-zone;
+    }
+    leaf origin-protocol {
+      description
+        "If the route was imported from another protocol, this is the protocol name.";
+      type identityref {
+        base srl_nokia-comm:ip-route-type;
+      }
+    }
+    leaf path-id {
+      description
+        "Path identifier of the BGP route";
+      type uint32;
+    }
+  }
+
+  grouping flowspec-v1-nlri-components {
+    container nlri-components {
+      config false;
+      description
+        "Enter the nlri-components context
+
+         Decoded FlowSpec NLRI operands: one leaf per RFC 8955 / 8956 component type (empty when absent). Raw NLRI hex is only at route level (flowspec-v1-common nlri-raw).";
+      leaf destination-prefix {
+        config false;
+        description
+          "Destination prefix component (decoded operands).";
+        type string {
+          length "0..256";
+        }
+      }
+      leaf source-prefix {
+        config false;
+        description
+          "Source prefix component (decoded operands).";
+        type string {
+          length "0..256";
+        }
+      }
+      leaf ip-protocol {
+        config false;
+        description
+          "IP protocol / next-header (decoded operands).";
+        type string {
+          length "0..256";
+        }
+      }
+      leaf port {
+        config false;
+        description
+          "Port component (decoded operands).";
+        type string {
+          length "0..256";
+        }
+      }
+      leaf destination-port {
+        config false;
+        description
+          "Destination port component (decoded operands).";
+        type string {
+          length "0..256";
+        }
+      }
+      leaf source-port {
+        config false;
+        description
+          "Source port component (decoded operands).";
+        type string {
+          length "0..256";
+        }
+      }
+      leaf icmp-type {
+        config false;
+        description
+          "ICMP type component (decoded operands).";
+        type string {
+          length "0..256";
+        }
+      }
+      leaf icmp-code {
+        config false;
+        description
+          "ICMP code component (decoded operands).";
+        type string {
+          length "0..256";
+        }
+      }
+      leaf tcp-flags {
+        config false;
+        description
+          "TCP flags component (decoded operands).";
+        type string {
+          length "0..256";
+        }
+      }
+      leaf packet-length {
+        config false;
+        description
+          "Packet length component (decoded operands).";
+        type string {
+          length "0..256";
+        }
+      }
+      leaf dscp-mark {
+        config false;
+        description
+          "DSCP / traffic-class component (decoded operands).";
+        type string {
+          length "0..256";
+        }
+      }
+      leaf fragment {
+        config false;
+        description
+          "Fragment component (decoded operands).";
+        type string {
+          length "0..256";
+        }
+      }
+      leaf flow-label {
+        config false;
+        description
+          "IPv6 flow label component (decoded operands).";
+        type string {
+          length "0..256";
+        }
+      }
+    }
+  }
+
+  grouping flowspec-v1-common {
+    description
+      "Route-level NLRI, raw and components.";
+    leaf-list nlri-raw {
+      config false;
+      description
+        "FlowSpec NLRI raw data as hex string chunks.";
+      type string {
+        length "256";
+      }
+      max-elements 30;
+    }
+    uses flowspec-v1-nlri-components;
+  }
+
   grouping state-routes-common {
     leaf last-modified {
       description
@@ -836,11 +1024,33 @@ module srl_nokia-rib-bgp {
           "Indicates true if the route has a D-PATH with a domain-id that matches one of the local domain-ids";
         type boolean;
       }
+      leaf flowspec-validation-failed {
+        if-feature "srl-feat:bgp-flowspec-v1";
+        description
+          "Indicates true if the destination prefix in the flowspec route is invalid";
+        type boolean;
+      }
+      leaf flowspec-unsupported-match {
+        if-feature "srl-feat:bgp-flowspec-v1";
+        description
+          "Indicates true if the nlri match in the flowspec route is unsupported";
+        type boolean;
+      }
+      leaf flowspec-unsupported-action {
+        if-feature "srl-feat:bgp-flowspec-v1";
+        description
+          "Indicates true if the action in the flowspec route's extended communities is unsupported";
+        type boolean;
+      }
+      description
+        "Enter the invalid-reason context";
     }
     container route-flap-damping {
       if-feature "srl-feat:bgp-route-flap-damping";
       description
-        "Route flap damping state";
+        "Enter the route-flap-damping context
+
+         Route flap damping state";
       leaf suppressed {
         description
           "Reads true when a non-withdrawn route is suppressed because FOM > suppress-threshold";
@@ -1095,7 +1305,9 @@ module srl_nokia-rib-bgp {
     }
     container label {
       description
-        "The encoded label value and type in the EVPN NLRI";
+        "Enter the label context
+
+         The encoded label value and type in the EVPN NLRI";
       leaf value {
         description
           "The value of the label field
@@ -1131,6 +1343,11 @@ module srl_nokia-rib-bgp {
         "The route distinguisher encoded in the NLRI";
       type srl_nokia-comm:route-distinguisher;
     }
+    leaf ethernet-tag-id {
+      description
+        "The 32-bit Ethernet Tag ID encoded in the NLRI. The Ethernet Tag ID identifies a broadcast domain.";
+      type uint32;
+    }
     leaf mac-length {
       description
         "MAC address length";
@@ -1149,11 +1366,6 @@ module srl_nokia-rib-bgp {
         "The IP host address";
       type srl_nokia-comm:ip-address;
     }
-    leaf ethernet-tag-id {
-      description
-        "The 32-bit Ethernet Tag ID encoded in the NLRI. The Ethernet Tag ID identifies a broadcast domain.";
-      type uint32;
-    }
     leaf neighbor {
       description
         "If the route was learned from a BGP neighbor, this is the IPv4 or IPv6 address of that neighbor";
@@ -1171,7 +1383,9 @@ module srl_nokia-rib-bgp {
     }
     container label1 {
       description
-        "The encoded label1 value (used for layer 2 services) and type in the EVPN NLRI";
+        "Enter the label1 context
+
+         The encoded label1 value (used for layer 2 services) and type in the EVPN NLRI";
       leaf value {
         description
           "The value of the label field
@@ -1192,7 +1406,9 @@ module srl_nokia-rib-bgp {
     }
     container label2 {
       description
-        "The encoded label2 value (used for layer 3 services) and type in the EVPN NLRI";
+        "Enter the label2 context
+
+         The encoded label2 value (used for layer 3 services) and type in the EVPN NLRI";
       leaf value {
         description
           "The value of the label field
@@ -1244,15 +1460,15 @@ module srl_nokia-rib-bgp {
         "The route distinguisher encoded in the NLRI";
       type srl_nokia-comm:route-distinguisher;
     }
-    leaf originating-router {
-      description
-        "The IPv4 or IPv6 address of the originating router";
-      type srl_nokia-comm:ip-address;
-    }
     leaf ethernet-tag-id {
       description
         "The 32-bit Ethernet Tag ID encoded in the NLRI. The Ethernet Tag ID identifies a broadcast domain";
       type uint32;
+    }
+    leaf originating-router {
+      description
+        "The IPv4 or IPv6 address of the originating router";
+      type srl_nokia-comm:ip-address;
     }
     leaf neighbor {
       description
@@ -1354,7 +1570,9 @@ module srl_nokia-rib-bgp {
     }
     container label {
       description
-        "The encoded label value and type in the EVPN NLRI";
+        "Enter the label context
+
+         The encoded label value and type in the EVPN NLRI";
       leaf value {
         description
           "The value of the label field
@@ -1429,7 +1647,9 @@ module srl_nokia-rib-bgp {
     }
     container flags {
       description
-        "The SMET route Flags field in the NLRI";
+        "Enter the flags context
+
+         The SMET route Flags field in the NLRI";
       leaf igmp-mld-version-1 {
         description
           "When set to true, it indicates version 1
@@ -1534,7 +1754,9 @@ module srl_nokia-rib-bgp {
     }
     container flags {
       description
-        "The Multicast Membership Report Synch route Flags field in the NLRI";
+        "Enter the flags context
+
+         The Multicast Membership Report Synch route Flags field in the NLRI";
       leaf igmp-mld-version-1 {
         description
           "When set to true, it indicates version 1
@@ -1645,7 +1867,9 @@ module srl_nokia-rib-bgp {
     }
     container flags {
       description
-        "The Multicast Membership Report Synch route Flags field in the NLRI";
+        "Enter the flags context
+
+         The Multicast Membership Report Synch route Flags field in the NLRI";
       leaf igmp-mld-version-1 {
         description
           "When set to true, it indicates version 1
@@ -1703,7 +1927,9 @@ module srl_nokia-rib-bgp {
     container srv6-sid-information {
       when "../type = 'srl_nokia-srv6-types:srv6-sid-information'";
       description
-        "Service SID information";
+        "Enter the srv6-sid-information context
+
+         Service SID information";
       leaf sid-value {
         description
           "SRv6 SID";
@@ -1730,7 +1956,9 @@ module srl_nokia-rib-bgp {
         container srv6-sid-structure {
           when "../type = 'srl_nokia-srv6-types:srv6-sid-structure-bgp'";
           description
-            "SRv6 SID stricture information";
+            "Enter the srv6-sid-structure context
+
+             SRv6 SID stricture information";
           leaf block-length {
             description
               "Length of the block part of the SRv6 SID";
@@ -1770,7 +1998,9 @@ module srl_nokia-rib-bgp {
     container bgp-rib {
       config false;
       description
-        "Container for BGP RIB state";
+        "Enter the bgp-rib context
+
+         Container for BGP RIB state";
       list afi-safi {
         key "afi-safi-name";
         description
@@ -1784,10 +2014,14 @@ module srl_nokia-rib-bgp {
         }
         container ipv4-unicast {
           description
-            "Container for RIB state of IPv4-unicast routes";
+            "Enter the ipv4-unicast context
+
+             Container for RIB state of IPv4-unicast routes";
           container local-rib {
             description
-              "Container for local RIB, containing all imported routes from other protocols plus the post-import-policy version of all IPv4 routes learned from all BGP neighbors";
+              "Enter the local-rib context
+
+               Container for local RIB, containing all imported routes from other protocols plus the post-import-policy version of all IPv4 routes learned from all BGP neighbors";
             list route {
               key "prefix neighbor origin-protocol path-id";
               description
@@ -1805,10 +2039,14 @@ module srl_nokia-rib-bgp {
           }
           container rib-in-out {
             description
-              "Container for BGP routes learned and advertised to BGP neighbors";
+              "Enter the rib-in-out context
+
+               Container for BGP routes learned and advertised to BGP neighbors";
             container rib-in-pre {
               description
-                "Container for the pre-import-policy version of BGP routes learned from BGP neighbors";
+                "Enter the rib-in-pre context
+
+                 Container for the pre-import-policy version of BGP routes learned from BGP neighbors";
               list route {
                 key "prefix neighbor path-id";
                 description
@@ -1825,7 +2063,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-in-post {
               description
-                "Container for the post-import-policy version of BGP routes learned from BGP neighbors";
+                "Enter the rib-in-post context
+
+                 Container for the post-import-policy version of BGP routes learned from BGP neighbors";
               list route {
                 description
                   "List of IPv4 routes";
@@ -1844,7 +2084,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-out-post {
               description
-                "Container for the post-export-policy version of BGP routes advertised to BGP neighbors";
+                "Enter the rib-out-post context
+
+                 Container for the post-export-policy version of BGP routes advertised to BGP neighbors";
               list route {
                 key "prefix neighbor path-id";
                 description
@@ -1865,10 +2107,14 @@ module srl_nokia-rib-bgp {
         container ipv4-labeled-unicast {
           if-feature "srl-feat:bgp-labeled-unicast";
           description
-            "Container for RIB state of labeled IPv4-unicast routes";
+            "Enter the ipv4-labeled-unicast context
+
+             Container for RIB state of labeled IPv4-unicast routes";
           container local-rib {
             description
-              "Container for local RIB, containing all imported routes from other protocols plus the post-import-policy version of all label-IPv4 routes learned from all BGP neighbors";
+              "Enter the local-rib context
+
+               Container for local RIB, containing all imported routes from other protocols plus the post-import-policy version of all label-IPv4 routes learned from all BGP neighbors";
             list route {
               key "prefix neighbor origin-protocol path-id";
               description
@@ -1892,10 +2138,14 @@ module srl_nokia-rib-bgp {
           }
           container rib-in-out {
             description
-              "Container for BGP routes learned and advertised to BGP neighbors";
+              "Enter the rib-in-out context
+
+               Container for BGP routes learned and advertised to BGP neighbors";
             container rib-in-pre {
               description
-                "Container for the pre-import-policy version of BGP routes learned from BGP neighbors";
+                "Enter the rib-in-pre context
+
+                 Container for the pre-import-policy version of BGP routes learned from BGP neighbors";
               list route {
                 key "prefix neighbor path-id";
                 description
@@ -1918,7 +2168,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-in-post {
               description
-                "Container for the post-import-policy version of BGP routes learned from BGP neighbors";
+                "Enter the rib-in-post context
+
+                 Container for the post-import-policy version of BGP routes learned from BGP neighbors";
               list route {
                 description
                   "List of IPv4 routes";
@@ -1944,7 +2196,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-out-post {
               description
-                "Container for the post-export-policy version of BGP routes advertised to BGP neighbors.";
+                "Enter the rib-out-post context
+
+                 Container for the post-export-policy version of BGP routes advertised to BGP neighbors.";
               list route {
                 key "prefix neighbor path-id";
                 description
@@ -1970,10 +2224,14 @@ module srl_nokia-rib-bgp {
         container l3vpn-ipv4-unicast {
           if-feature "srl-feat:ipvpn";
           description
-            "Container for RIB state of VPN-IPv4 unicast routes.";
+            "Enter the l3vpn-ipv4-unicast context
+
+             Container for RIB state of VPN-IPv4 unicast routes.";
           container local-rib {
             description
-              "Container for local RIB
+              "Enter the local-rib context
+
+               Container for local RIB
 
                Includes the post import-policy RIB-INs corresponding to VPN-IPv4 routes received from default net-instance BGP peers (post import-policy means after processing by the BGP import policy attached to the default net-instance peer and after processing by the vrf-import policy of importing IP VRF network instances) plus the post vrf-export policy “imported” routes from local IP-VRF network instances.";
             list route {
@@ -2020,10 +2278,14 @@ module srl_nokia-rib-bgp {
           }
           container rib-in-out {
             description
-              "Container for BGP routes learned and advertised to BGP neighbors.";
+              "Enter the rib-in-out context
+
+               Container for BGP routes learned and advertised to BGP neighbors.";
             container rib-in-pre {
               description
-                "Container for the pre-import-policy version of BGP routes learned from BGP neighbors.";
+                "Enter the rib-in-pre context
+
+                 Container for the pre-import-policy version of BGP routes learned from BGP neighbors.";
               list route {
                 key "route-distinguisher prefix neighbor path-id";
                 description
@@ -2067,7 +2329,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-in-post {
               description
-                "Container for the post-import-policy version of BGP routes learned from BGP neighbors.";
+                "Enter the rib-in-post context
+
+                 Container for the post-import-policy version of BGP routes learned from BGP neighbors.";
               list route {
                 key "route-distinguisher prefix neighbor path-id";
                 description
@@ -2114,7 +2378,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-out-post {
               description
-                "Container for the post-export-policy version of BGP routes advertised to BGP neighbors.";
+                "Enter the rib-out-post context
+
+                 Container for the post-export-policy version of BGP routes advertised to BGP neighbors.";
               list route {
                 key "route-distinguisher prefix neighbor path-id";
                 description
@@ -2146,10 +2412,14 @@ module srl_nokia-rib-bgp {
         container l3vpn-ipv6-unicast {
           if-feature "srl-feat:ipvpn";
           description
-            "Container for RIB state of VPN-IPv6 unicast routes.";
+            "Enter the l3vpn-ipv6-unicast context
+
+             Container for RIB state of VPN-IPv6 unicast routes.";
           container local-rib {
             description
-              "Container for local RIB
+              "Enter the local-rib context
+
+               Container for local RIB
 
                Includes the post import-policy RIB-INs corresponding to VPN-IPv6 routes received from default net-instance BGP peers (post import-policy means after processing by the BGP import policy attached to the default net-instance peer and after processing by the vrf-import policy of importing IP VRF network instances) plus the post vrf-export policy “imported” routes from local IP-VRF network instances.";
             list route {
@@ -2196,10 +2466,14 @@ module srl_nokia-rib-bgp {
           }
           container rib-in-out {
             description
-              "Container for BGP routes learned and advertised to BGP neighbors.";
+              "Enter the rib-in-out context
+
+               Container for BGP routes learned and advertised to BGP neighbors.";
             container rib-in-pre {
               description
-                "Container for the pre-import-policy version of BGP routes learned from BGP neighbors.";
+                "Enter the rib-in-pre context
+
+                 Container for the pre-import-policy version of BGP routes learned from BGP neighbors.";
               list route {
                 key "route-distinguisher prefix neighbor path-id";
                 description
@@ -2243,7 +2517,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-in-post {
               description
-                "Container for the post-import-policy version of BGP routes learned from BGP neighbors.";
+                "Enter the rib-in-post context
+
+                 Container for the post-import-policy version of BGP routes learned from BGP neighbors.";
               list route {
                 key "route-distinguisher prefix neighbor path-id";
                 description
@@ -2290,7 +2566,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-out-post {
               description
-                "Container for the post-export-policy version of BGP routes advertised to BGP neighbors.";
+                "Enter the rib-out-post context
+
+                 Container for the post-export-policy version of BGP routes advertised to BGP neighbors.";
               list route {
                 key "route-distinguisher prefix neighbor path-id";
                 description
@@ -2321,10 +2599,14 @@ module srl_nokia-rib-bgp {
         }
         container ipv6-unicast {
           description
-            "Container for RIB state of IPv6-unicast routes.";
+            "Enter the ipv6-unicast context
+
+             Container for RIB state of IPv6-unicast routes.";
           container local-rib {
             description
-              "Container for local RIB, containing all imported routes from other protocols plus the post-import-policy version of all IPv4 routes learned from all BGP neighbors.";
+              "Enter the local-rib context
+
+               Container for local RIB, containing all imported routes from other protocols plus the post-import-policy version of all IPv4 routes learned from all BGP neighbors.";
             list route {
               key "prefix neighbor origin-protocol path-id";
               description
@@ -2342,10 +2624,14 @@ module srl_nokia-rib-bgp {
           }
           container rib-in-out {
             description
-              "Container for BGP routes learned and advertised to BGP neighbors.";
+              "Enter the rib-in-out context
+
+               Container for BGP routes learned and advertised to BGP neighbors.";
             container rib-in-pre {
               description
-                "Container for the pre-import-policy version of BGP routes learned from BGP neighbors.";
+                "Enter the rib-in-pre context
+
+                 Container for the pre-import-policy version of BGP routes learned from BGP neighbors.";
               list route {
                 key "prefix neighbor path-id";
                 description
@@ -2362,7 +2648,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-in-post {
               description
-                "Container for the post-import-policy version of BGP routes learned from BGP neighbors.";
+                "Enter the rib-in-post context
+
+                 Container for the post-import-policy version of BGP routes learned from BGP neighbors.";
               list route {
                 description
                   "List of IPv6 routes";
@@ -2381,7 +2669,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-out-post {
               description
-                "Container for the post-export-policy version of BGP routes advertised to BGP neighbors.";
+                "Enter the rib-out-post context
+
+                 Container for the post-export-policy version of BGP routes advertised to BGP neighbors.";
               list route {
                 key "prefix neighbor path-id";
                 description
@@ -2401,10 +2691,14 @@ module srl_nokia-rib-bgp {
         container ipv6-labeled-unicast {
           if-feature "srl-feat:bgp-labeled-unicast";
           description
-            "Container for RIB state of labeled IPv6-unicast routes.";
+            "Enter the ipv6-labeled-unicast context
+
+             Container for RIB state of labeled IPv6-unicast routes.";
           container local-rib {
             description
-              "Container for local RIB, containing all imported routes from other protocols plus the post-import-policy version of all label-IPv4 routes learned from all BGP neighbors.";
+              "Enter the local-rib context
+
+               Container for local RIB, containing all imported routes from other protocols plus the post-import-policy version of all label-IPv4 routes learned from all BGP neighbors.";
             list route {
               key "prefix neighbor origin-protocol path-id";
               description
@@ -2428,10 +2722,14 @@ module srl_nokia-rib-bgp {
           }
           container rib-in-out {
             description
-              "Container for BGP routes learned and advertised to BGP neighbors.";
+              "Enter the rib-in-out context
+
+               Container for BGP routes learned and advertised to BGP neighbors.";
             container rib-in-pre {
               description
-                "Container for the pre-import-policy version of BGP routes learned from BGP neighbors.";
+                "Enter the rib-in-pre context
+
+                 Container for the pre-import-policy version of BGP routes learned from BGP neighbors.";
               list route {
                 key "prefix neighbor path-id";
                 description
@@ -2454,7 +2752,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-in-post {
               description
-                "Container for the post-import-policy version of BGP routes learned from BGP neighbors.";
+                "Enter the rib-in-post context
+
+                 Container for the post-import-policy version of BGP routes learned from BGP neighbors.";
               list route {
                 description
                   "List of label-IPv6 routes";
@@ -2479,7 +2779,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-out-post {
               description
-                "Container for the post-export-policy version of BGP routes advertised to BGP neighbors.";
+                "Enter the rib-out-post context
+
+                 Container for the post-export-policy version of BGP routes advertised to BGP neighbors.";
               list route {
                 key "prefix neighbor path-id";
                 description
@@ -2505,10 +2807,14 @@ module srl_nokia-rib-bgp {
         container ipv4-mvpn {
           if-feature "srl-feat:bgp-ipvx-mvpn";
           description
-            "Container for RIB state of ipv4-mvpn routes.";
+            "Enter the ipv4-mvpn context
+
+             Container for RIB state of ipv4-mvpn routes.";
           container local-rib {
             description
-              "Ipv4-mvpn routes that are selected as the best route.
+              "Enter the local-rib context
+
+               Ipv4-mvpn routes that are selected as the best route.
                 This includes routes imported from other protocols.";
             list intra-as-ipmsi-ad-route {
               description
@@ -2561,7 +2867,9 @@ module srl_nokia-rib-bgp {
           }
           container rib-in-out {
             description
-              "Container for BGP routes learned and advertised to BGP neighbors.";
+              "Enter the rib-in-out context
+
+               Container for BGP routes learned and advertised to BGP neighbors.";
             container rib-in-pre {
               list intra-as-ipmsi-ad-route {
                 description
@@ -2605,6 +2913,8 @@ module srl_nokia-rib-bgp {
                 uses ng-mvpn-c-multicast;
                 uses ng-mvpn-route;
               }
+              description
+                "Enter the rib-in-pre context";
             }
             container rib-in-post {
               list intra-as-ipmsi-ad-route {
@@ -2655,6 +2965,8 @@ module srl_nokia-rib-bgp {
                 uses state-routes-common;
                 uses ng-mvpn-route;
               }
+              description
+                "Enter the rib-in-post context";
             }
             container rib-out-post {
               list intra-as-ipmsi-ad-route {
@@ -2699,16 +3011,22 @@ module srl_nokia-rib-bgp {
                 uses ng-mvpn-c-multicast;
                 uses ng-mvpn-route;
               }
+              description
+                "Enter the rib-out-post context";
             }
           }
         }
         container ipv6-mvpn {
           if-feature "srl-feat:bgp-ipvx-mvpn";
           description
-            "Container for RIB state of ipv6-mvpn routes.";
+            "Enter the ipv6-mvpn context
+
+             Container for RIB state of ipv6-mvpn routes.";
           container local-rib {
             description
-              "Ipv6-mvpn routes that are selected as the best route.
+              "Enter the local-rib context
+
+               Ipv6-mvpn routes that are selected as the best route.
                 This includes routes imported from other protocols.";
             list intra-as-ipmsi-ad-route {
               description
@@ -2761,7 +3079,9 @@ module srl_nokia-rib-bgp {
           }
           container rib-in-out {
             description
-              "Container for BGP routes learned and advertised to BGP neighbors.";
+              "Enter the rib-in-out context
+
+               Container for BGP routes learned and advertised to BGP neighbors.";
             container rib-in-pre {
               list intra-as-ipmsi-ad-route {
                 description
@@ -2805,6 +3125,8 @@ module srl_nokia-rib-bgp {
                 uses ng-mvpn-c-multicast;
                 uses ng-mvpn-route;
               }
+              description
+                "Enter the rib-in-pre context";
             }
             container rib-in-post {
               list intra-as-ipmsi-ad-route {
@@ -2855,6 +3177,8 @@ module srl_nokia-rib-bgp {
                 uses state-routes-common;
                 uses ng-mvpn-route;
               }
+              description
+                "Enter the rib-in-post context";
             }
             container rib-out-post {
               list intra-as-ipmsi-ad-route {
@@ -2899,15 +3223,21 @@ module srl_nokia-rib-bgp {
                 uses ng-mvpn-c-multicast;
                 uses ng-mvpn-route;
               }
+              description
+                "Enter the rib-out-post context";
             }
           }
         }
         container evpn {
           description
-            "Container for RIB state of EVPN routes";
+            "Enter the evpn context
+
+             Container for RIB state of EVPN routes";
           container local-rib {
             description
-              "Container for local RIB state of EVPN routes
+              "Enter the local-rib context
+
+               Container for local RIB state of EVPN routes
 
                Includes the post import-policy RIB-INs corresponding to EVPN routes received from default net-instance BGP peers
                (post import-policy means after processing by the BGP import policy attached to the default net-instance peer and
@@ -2931,7 +3261,7 @@ module srl_nokia-rib-bgp {
             list mac-ip-route {
               description
                 "List of Mac/IP Advertisement routes";
-              key "route-distinguisher mac-length mac-address ip-address ethernet-tag-id neighbor path-id";
+              key "route-distinguisher ethernet-tag-id mac-length mac-address ip-address neighbor path-id";
               uses evpn-mac-ip-common;
               uses state-routes-common;
               leaf-list imported-network-instances {
@@ -2954,7 +3284,7 @@ module srl_nokia-rib-bgp {
             list imet-route {
               description
                 "List of Inclusive Multicast Ethernet Tag routes";
-              key "route-distinguisher originating-router ethernet-tag-id neighbor path-id";
+              key "route-distinguisher ethernet-tag-id originating-router neighbor path-id";
               uses evpn-imet-common;
               uses state-routes-common;
               leaf-list imported-network-instances {
@@ -3045,10 +3375,14 @@ module srl_nokia-rib-bgp {
           }
           container rib-in-out {
             description
-              "Container for BGP routes learned and advertised to BGP neighbors";
+              "Enter the rib-in-out context
+
+               Container for BGP routes learned and advertised to BGP neighbors";
             container rib-in-pre {
               description
-                "Container for the pre-import-policy version of BGP routes learned from BGP neighbors.";
+                "Enter the rib-in-pre context
+
+                 Container for the pre-import-policy version of BGP routes learned from BGP neighbors.";
               list ethernet-ad-route {
                 description
                   "List of Ethernet AD (Auto-Discovery) routes";
@@ -3058,13 +3392,13 @@ module srl_nokia-rib-bgp {
               list mac-ip-route {
                 description
                   "List of Mac/IP Advertisement routes";
-                key "route-distinguisher mac-length mac-address ip-address ethernet-tag-id neighbor path-id";
+                key "route-distinguisher ethernet-tag-id mac-length mac-address ip-address neighbor path-id";
                 uses evpn-mac-ip-common;
               }
               list imet-route {
                 description
                   "List of Inclusive Multicast Ethernet Tag routes";
-                key "route-distinguisher originating-router ethernet-tag-id neighbor path-id";
+                key "route-distinguisher ethernet-tag-id originating-router neighbor path-id";
                 uses evpn-imet-common;
               }
               list ethernet-segment-route {
@@ -3100,7 +3434,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-in-post {
               description
-                "Container for the post-import-policy version of BGP routes learned from BGP neighbors.";
+                "Enter the rib-in-post context
+
+                 Container for the post-import-policy version of BGP routes learned from BGP neighbors.";
               list ethernet-ad-route {
                 description
                   "List of Ethernet AD (Auto-Discovery) routes";
@@ -3112,7 +3448,7 @@ module srl_nokia-rib-bgp {
               list mac-ip-route {
                 description
                   "List of Mac/IP Advertisement routes";
-                key "route-distinguisher mac-length mac-address ip-address ethernet-tag-id neighbor path-id";
+                key "route-distinguisher ethernet-tag-id mac-length mac-address ip-address neighbor path-id";
                 uses evpn-mac-ip-common;
                 uses state-routes-common;
                 uses srl_nokia-rt:internal-tags;
@@ -3120,7 +3456,7 @@ module srl_nokia-rib-bgp {
               list imet-route {
                 description
                   "List of Inclusive Multicast Ethernet Tag routes";
-                key "route-distinguisher originating-router ethernet-tag-id neighbor path-id";
+                key "route-distinguisher ethernet-tag-id originating-router neighbor path-id";
                 uses evpn-imet-common;
                 uses state-routes-common;
                 uses srl_nokia-rt:internal-tags;
@@ -3168,7 +3504,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-out-post {
               description
-                "Container for the post-export-policy version of BGP routes advertised to BGP neighbors.";
+                "Enter the rib-out-post context
+
+                 Container for the post-export-policy version of BGP routes advertised to BGP neighbors.";
               list ethernet-ad-route {
                 description
                   "List of Ethernet AD (Auto-Discovery) routes";
@@ -3183,7 +3521,7 @@ module srl_nokia-rib-bgp {
               list mac-ip-route {
                 description
                   "List of Mac/IP Advertisement routes";
-                key "route-distinguisher mac-length mac-address ip-address ethernet-tag-id neighbor path-id";
+                key "route-distinguisher ethernet-tag-id mac-length mac-address ip-address neighbor path-id";
                 uses evpn-mac-ip-common;
                 leaf next-hop {
                   description
@@ -3194,7 +3532,7 @@ module srl_nokia-rib-bgp {
               list imet-route {
                 description
                   "List of Inclusive Multicast Ethernet Tag routes";
-                key "route-distinguisher originating-router ethernet-tag-id neighbor path-id";
+                key "route-distinguisher ethernet-tag-id originating-router neighbor path-id";
                 uses evpn-imet-common;
                 leaf next-hop {
                   description
@@ -3261,20 +3599,32 @@ module srl_nokia-rib-bgp {
           }
         }
         container ipv4-flowspec-v1 {
+          if-feature "srl-feat:bgp-flowspec-v1";
           description
-            "Container for RIB state of ipv4-flowspec-v1 routes";
+            "Enter the ipv4-flowspec-v1 context
+
+             Container for RIB state of ipv4-flowspec-v1 routes";
           container local-rib {
             description
-              "Container for local RIB, containing all imported routes from other protocols plus the post-import-policy version of all IPv4 routes learned from all BGP neighbors";
+              "Enter the local-rib context
+
+               Container for local RIB, containing all imported routes from other protocols plus the post-import-policy version of all IPv4 routes learned from all BGP neighbors";
             list route {
-              key "prefix neighbor origin-protocol path-id";
+              key "crc nlri-length nlri neighbor origin-protocol path-id";
               description
-                "List of ipv4-flowspec-v1 routes in the local RIB";
-              uses state-common-local-rib-key;
+                "List of ipv4-flowspec-v1 routes. Keys to route include
+                 prefix, neighbor, origin and path-id. If route is
+                 imported route from other local protocols, neighbor
+                 IP address will be zero. If route is selected to
+                 be advertised to peer by local BGP speaker's
+                 decision making process, then the origin will be
+                 set to 'bgp'.";
+              uses flowspec-v1-common-local-rib-key;
+              uses flowspec-v1-common;
               uses state-routes-common;
               leaf attr-id {
                 description
-                  "Leaf reference to networkinstance/bgp-rib/attr-sets/attr-set/index";
+                  "Leaf reference to networkinstance/protocols/bgp/rib/attr-sets/attr-set/index.";
                 type leafref {
                   path "../../../../../srl_nokia-rib-bgp-routes:attr-sets/srl_nokia-rib-bgp-routes:attr-set/srl_nokia-rib-bgp-routes:index";
                 }
@@ -3283,18 +3633,23 @@ module srl_nokia-rib-bgp {
           }
           container rib-in-out {
             description
-              "Container for BGP routes learned and advertised to BGP neighbors";
+              "Enter the rib-in-out context
+
+               Container for BGP routes learned and advertised to BGP neighbors";
             container rib-in-pre {
               description
-                "Container for the pre-import-policy version of BGP routes learned from BGP neighbors";
+                "Enter the rib-in-pre context
+
+                 Container for the pre-import-policy version of BGP routes learned from BGP neighbors";
               list route {
-                key "prefix neighbor path-id";
+                key "crc nlri-length nlri neighbor path-id";
                 description
-                  "List of ipv4-flowspec-v1 routes";
-                uses state-common-key;
+                  "List of ipv4-flowspec-v1 routes in the RIB-IN, before import-policy modification.";
+                uses flowspec-v1-common-key;
+                uses flowspec-v1-common;
                 leaf attr-id {
                   description
-                    "Leaf reference to networkinstance/protocols/bgp/rib/attr-sets/attr-set/index";
+                    "Leaf reference to networkinstance/protocols/bgp/rib/attr-sets/attr-set/index.";
                   type leafref {
                     path "../../../../../../srl_nokia-rib-bgp-routes:attr-sets/srl_nokia-rib-bgp-routes:attr-set/srl_nokia-rib-bgp-routes:index";
                   }
@@ -3303,16 +3658,19 @@ module srl_nokia-rib-bgp {
             }
             container rib-in-post {
               description
-                "Container for the post-import-policy version of BGP routes learned from BGP neighbors";
+                "Enter the rib-in-post context
+
+                 Container for the post-import-policy version of BGP routes learned from BGP neighbors";
               list route {
+                key "crc nlri-length nlri neighbor path-id";
                 description
-                  "List of ipv4-flowspec-v1 routes";
-                key "prefix neighbor path-id";
-                uses state-common-key;
+                  "List of ipv4-flowspec-v1 routes in the RIB-IN, after import-policy modification.";
+                uses flowspec-v1-common-key;
+                uses flowspec-v1-common;
                 uses state-routes-common;
                 leaf attr-id {
                   description
-                    "Leaf reference to networkinstance/protocols/bgp/rib/attr-sets/attr-set/index";
+                    "Leaf reference to networkinstance/protocols/bgp/rib/attr-sets/attr-set/index.";
                   type leafref {
                     path "../../../../../../srl_nokia-rib-bgp-routes:attr-sets/srl_nokia-rib-bgp-routes:attr-set/srl_nokia-rib-bgp-routes:index";
                   }
@@ -3322,16 +3680,18 @@ module srl_nokia-rib-bgp {
             }
             container rib-out-post {
               description
-                "Container for the post-export-policy version of BGP routes advertised to BGP neighbors";
+                "Enter the rib-out-post context
+
+                 Container for the post-export-policy version of BGP routes advertised to BGP neighbors";
               list route {
-                key "prefix neighbor path-id";
+                key "crc nlri-length nlri neighbor path-id";
                 description
-                  "List of ipv4-flowspec-v1 routes";
-                uses state-common-key;
+                  "List of ipv4-flowspec-v1 routes in the RIB-OUT, after export-policy modification.";
+                uses flowspec-v1-common-key;
+                uses flowspec-v1-common;
                 leaf attr-id {
                   description
-                    "Leaf reference to networkinstance/protocols/bgp/rib/
-                     attr-sets/attr-set/index";
+                    "Leaf reference to networkinstance/protocols/bgp/rib/attr-sets/attr-set/index.";
                   type leafref {
                     path "../../../../../../srl_nokia-rib-bgp-routes:attr-sets/srl_nokia-rib-bgp-routes:attr-set/srl_nokia-rib-bgp-routes:index";
                   }
@@ -3341,20 +3701,32 @@ module srl_nokia-rib-bgp {
           }
         }
         container ipv6-flowspec-v1 {
+          if-feature "srl-feat:bgp-flowspec-v1";
           description
-            "Container for RIB state of ipv6-flowspec-v1 routes";
+            "Enter the ipv6-flowspec-v1 context
+
+             Container for RIB state of ipv6-flowspec-v1 routes";
           container local-rib {
             description
-              "Container for local RIB, containing all imported routes from other protocols plus the post-import-policy version of all IPv6 routes learned from all BGP neighbors";
+              "Enter the local-rib context
+
+               Container for local RIB, containing all imported routes from other protocols plus the post-import-policy version of all IPv4 routes learned from all BGP neighbors";
             list route {
-              key "prefix neighbor origin-protocol path-id";
+              key "crc nlri-length nlri neighbor origin-protocol path-id";
               description
-                "List of ipv4-flowspec-v1 routes in the local RIB";
-              uses state-common-local-rib-key;
+                "List of ipv6-flowspec-v1 routes. Keys to route include
+                 prefix, neighbor, origin and path-id. If route is
+                 imported route from other local protocols, neighbor
+                 IP address will be zero. If route is selected to
+                 be advertised to peer by local BGP speaker's
+                 decision making process, then the origin will be
+                 set to 'bgp'.";
+              uses flowspec-v1-common-local-rib-key;
+              uses flowspec-v1-common;
               uses state-routes-common;
               leaf attr-id {
                 description
-                  "Leaf reference to networkinstance/bgp-rib/attr-sets/attr-set/index";
+                  "Leaf reference to networkinstance/protocols/bgp/rib/attr-sets/attr-set/index.";
                 type leafref {
                   path "../../../../../srl_nokia-rib-bgp-routes:attr-sets/srl_nokia-rib-bgp-routes:attr-set/srl_nokia-rib-bgp-routes:index";
                 }
@@ -3363,18 +3735,23 @@ module srl_nokia-rib-bgp {
           }
           container rib-in-out {
             description
-              "Container for BGP routes learned and advertised to BGP neighbors";
+              "Enter the rib-in-out context
+
+               Container for BGP routes learned and advertised to BGP neighbors";
             container rib-in-pre {
               description
-                "Container for the pre-import-policy version of BGP routes learned from BGP neighbors";
+                "Enter the rib-in-pre context
+
+                 Container for the pre-import-policy version of BGP routes learned from BGP neighbors";
               list route {
-                key "prefix neighbor path-id";
+                key "crc nlri-length nlri neighbor path-id";
                 description
-                  "List of ipv6-flowspec-v1 routes";
-                uses state-common-key;
+                  "List of ipv6-flowspec-v1 routes in the RIB-IN, before import-policy modification.";
+                uses flowspec-v1-common-key;
+                uses flowspec-v1-common;
                 leaf attr-id {
                   description
-                    "Leaf reference to networkinstance/protocols/bgp/rib/attr-sets/attr-set/index";
+                    "Leaf reference to networkinstance/protocols/bgp/rib/attr-sets/attr-set/index.";
                   type leafref {
                     path "../../../../../../srl_nokia-rib-bgp-routes:attr-sets/srl_nokia-rib-bgp-routes:attr-set/srl_nokia-rib-bgp-routes:index";
                   }
@@ -3383,16 +3760,19 @@ module srl_nokia-rib-bgp {
             }
             container rib-in-post {
               description
-                "Container for the post-import-policy version of BGP routes learned from BGP neighbors";
+                "Enter the rib-in-post context
+
+                 Container for the post-import-policy version of BGP routes learned from BGP neighbors";
               list route {
+                key "crc nlri-length nlri neighbor path-id";
                 description
-                  "List of ipv6-flowspec-v1 routes";
-                key "prefix neighbor path-id";
-                uses state-common-key;
+                  "List of ipv6-flowspec-v1 routes in the RIB-IN, after import-policy modification.";
+                uses flowspec-v1-common-key;
+                uses flowspec-v1-common;
                 uses state-routes-common;
                 leaf attr-id {
                   description
-                    "Leaf reference to networkinstance/protocols/bgp/rib/attr-sets/attr-set/index";
+                    "Leaf reference to networkinstance/protocols/bgp/rib/attr-sets/attr-set/index.";
                   type leafref {
                     path "../../../../../../srl_nokia-rib-bgp-routes:attr-sets/srl_nokia-rib-bgp-routes:attr-set/srl_nokia-rib-bgp-routes:index";
                   }
@@ -3402,16 +3782,18 @@ module srl_nokia-rib-bgp {
             }
             container rib-out-post {
               description
-                "Container for the post-export-policy version of BGP routes advertised to BGP neighbors";
+                "Enter the rib-out-post context
+
+                 Container for the post-export-policy version of BGP routes advertised to BGP neighbors";
               list route {
-                key "prefix neighbor path-id";
+                key "crc nlri-length nlri neighbor path-id";
                 description
-                  "List of ipv6-flowspec-v1 routes";
-                uses state-common-key;
+                  "List of ipv6-flowspec-v1 routes in the RIB-OUT, after export-policy modification.";
+                uses flowspec-v1-common-key;
+                uses flowspec-v1-common;
                 leaf attr-id {
                   description
-                    "Leaf reference to networkinstance/protocols/bgp/rib/
-                     attr-sets/attr-set/index";
+                    "Leaf reference to networkinstance/protocols/bgp/rib/attr-sets/attr-set/index.";
                   type leafref {
                     path "../../../../../../srl_nokia-rib-bgp-routes:attr-sets/srl_nokia-rib-bgp-routes:attr-set/srl_nokia-rib-bgp-routes:index";
                   }
@@ -3423,13 +3805,19 @@ module srl_nokia-rib-bgp {
         container route-target {
           if-feature "srl-feat:bgp-rtc or srl-feat:bgp-rr-for-rtc";
           description
-            "Container for RIB state of RTC routes.";
+            "Enter the route-target context
+
+             Container for RIB state of RTC routes.";
           container rib-in-out {
             description
-              "Container for BGP routes learned and advertised to BGP neighbors.";
+              "Enter the rib-in-out context
+
+               Container for BGP routes learned and advertised to BGP neighbors.";
             container rib-in-pre {
               description
-                "Container for the pre-import-policy version of BGP routes learned from BGP neighbors.";
+                "Enter the rib-in-pre context
+
+                 Container for the pre-import-policy version of BGP routes learned from BGP neighbors.";
               list route {
                 key "origin-as route-target-prefix neighbor path-id";
                 description
@@ -3446,7 +3834,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-in-post {
               description
-                "Container for the post-import-policy version of BGP routes learned from BGP neighbors.";
+                "Enter the rib-in-post context
+
+                 Container for the post-import-policy version of BGP routes learned from BGP neighbors.";
               list route {
                 description
                   "List of RTC routes in the RIB-IN, after import-policy modification.";
@@ -3466,7 +3856,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-out-post {
               description
-                "Container for the post-export-policy version of BGP routes advertised to BGP neighbors.";
+                "Enter the rib-out-post context
+
+                 Container for the post-export-policy version of BGP routes advertised to BGP neighbors.";
               list route {
                 key "origin-as route-target-prefix neighbor path-id";
                 description
@@ -3486,13 +3878,19 @@ module srl_nokia-rib-bgp {
         container srte-policy-ipv4 {
           if-feature "srl-feat:bgp-srte-policy";
           description
-            "Container for RIB state of SR policy candidate paths with IPv4 endpoint addresses";
+            "Enter the srte-policy-ipv4 context
+
+             Container for RIB state of SR policy candidate paths with IPv4 endpoint addresses";
           container rib-in-out {
             description
-              "Container for BGP routes learned and advertised to BGP neighbors";
+              "Enter the rib-in-out context
+
+               Container for BGP routes learned and advertised to BGP neighbors";
             container rib-in-pre {
               description
-                "Container for the pre-import-policy version of BGP routes learned from BGP neighbors";
+                "Enter the rib-in-pre context
+
+                 Container for the pre-import-policy version of BGP routes learned from BGP neighbors";
               list route {
                 key "distinguisher color endpoint neighbor path-id";
                 description
@@ -3509,7 +3907,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-in-post {
               description
-                "Container for the post-import-policy version of BGP routes learned from BGP neighbors";
+                "Enter the rib-in-post context
+
+                 Container for the post-import-policy version of BGP routes learned from BGP neighbors";
               list route {
                 key "distinguisher color endpoint neighbor path-id";
                 description
@@ -3528,7 +3928,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-out-post {
               description
-                "Container for the post-export-policy version of BGP routes advertised to BGP neighbors";
+                "Enter the rib-out-post context
+
+                 Container for the post-export-policy version of BGP routes advertised to BGP neighbors";
               list route {
                 key "distinguisher color endpoint neighbor path-id";
                 description
@@ -3549,13 +3951,19 @@ module srl_nokia-rib-bgp {
         container srte-policy-ipv6 {
           if-feature "srl-feat:bgp-srte-policy";
           description
-            "Container for RIB state of SR policy candidate paths with IPv6 endpoint addresses";
+            "Enter the srte-policy-ipv6 context
+
+             Container for RIB state of SR policy candidate paths with IPv6 endpoint addresses";
           container rib-in-out {
             description
-              "Container for BGP routes learned and advertised to BGP neighbors";
+              "Enter the rib-in-out context
+
+               Container for BGP routes learned and advertised to BGP neighbors";
             container rib-in-pre {
               description
-                "Container for the pre-import-policy version of BGP routes learned from BGP neighbors";
+                "Enter the rib-in-pre context
+
+                 Container for the pre-import-policy version of BGP routes learned from BGP neighbors";
               list route {
                 key "distinguisher color endpoint neighbor path-id";
                 description
@@ -3572,7 +3980,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-in-post {
               description
-                "Container for the post-import-policy version of BGP routes learned from BGP neighbors";
+                "Enter the rib-in-post context
+
+                 Container for the post-import-policy version of BGP routes learned from BGP neighbors";
               list route {
                 key "distinguisher color endpoint neighbor path-id";
                 description
@@ -3591,7 +4001,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-out-post {
               description
-                "Container for the post-export-policy version of BGP routes advertised to BGP neighbors";
+                "Enter the rib-out-post context
+
+                 Container for the post-export-policy version of BGP routes advertised to BGP neighbors";
               list route {
                 key "distinguisher color endpoint neighbor path-id";
                 description
@@ -3612,10 +4024,14 @@ module srl_nokia-rib-bgp {
         container link-state {
           if-feature "srl-feat:traffic-engineering-bgpls";
           description
-            "Container for RIB state of link-state routes";
+            "Enter the link-state context
+
+             Container for RIB state of link-state routes";
           container local-rib {
             description
-              "Link-State routes that are selected as the best route.
+              "Enter the local-rib context
+
+               Link-State routes that are selected as the best route.
                This includes routes imported from other protocols.";
             list route {
               key "nlri-type crc nlri-length nlri neighbor origin-protocol path-id";
@@ -3641,10 +4057,14 @@ module srl_nokia-rib-bgp {
           }
           container rib-in-out {
             description
-              "Container for BGP routes learned and advertised to BGP neighbors";
+              "Enter the rib-in-out context
+
+               Container for BGP routes learned and advertised to BGP neighbors";
             container rib-in-pre {
               description
-                "Container for the pre-import-policy version of BGP routes learned from BGP neighbors";
+                "Enter the rib-in-pre context
+
+                 Container for the pre-import-policy version of BGP routes learned from BGP neighbors";
               list route {
                 key "nlri-type crc nlri-length nlri neighbor path-id";
                 description
@@ -3662,7 +4082,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-in-post {
               description
-                "Container for the post-import-policy version of BGP routes learned from BGP neighbors";
+                "Enter the rib-in-post context
+
+                 Container for the post-import-policy version of BGP routes learned from BGP neighbors";
               list route {
                 key "nlri-type crc nlri-length nlri neighbor path-id";
                 description
@@ -3681,7 +4103,9 @@ module srl_nokia-rib-bgp {
             }
             container rib-out-post {
               description
-                "Container for the post-export-policy version of BGP routes advertised to BGP neighbors";
+                "Enter the rib-out-post context
+
+                 Container for the post-export-policy version of BGP routes advertised to BGP neighbors";
               list route {
                 key "nlri-type crc nlri-length nlri neighbor path-id";
                 description
@@ -3702,7 +4126,9 @@ module srl_nokia-rib-bgp {
       }
       container attr-sets {
         description
-          "Container for BGP RIB path attribute sets that can be shared by one or more
+          "Enter the attr-sets context
+
+           Container for BGP RIB path attribute sets that can be shared by one or more
            BGP routes.";
         list attr-set {
           description
@@ -3715,7 +4141,9 @@ module srl_nokia-rib-bgp {
           }
           container as-path {
             description
-              "A container for the AS path attribute of the attribute set.";
+              "Enter the as-path context
+
+               A container for the AS path attribute of the attribute set.";
             list segment {
               description
                 "A list of segments. Each segment has a type and a list of one or more AS
@@ -3793,7 +4221,7 @@ module srl_nokia-rib-bgp {
           }
           container aggregator {
             description
-              "";
+              "Enter the aggregator context";
             leaf as-number {
               description
                 "The 2byte or 4byte AS number of the router that formed the aggregate
@@ -3810,7 +4238,9 @@ module srl_nokia-rib-bgp {
           }
           container pmsi-tunnel {
             description
-              "A container for the Provider Multicast Service Interface Tunnel Attribute (PTA) of the attribute set.";
+              "Enter the pmsi-tunnel context
+
+               A container for the Provider Multicast Service Interface Tunnel Attribute (PTA) of the attribute set.";
             leaf tunnel-type {
               description
                 "The value of the tunnel-type in the PMSI Tunnel Attribute";
@@ -3829,7 +4259,9 @@ module srl_nokia-rib-bgp {
             }
             container flags {
               description
-                "A container for the PTA Flags";
+                "Enter the flags context
+
+                 A container for the PTA Flags";
               leaf assisted-replication-type {
                 description
                   "The value of the assisted-replication role type.";
@@ -3842,7 +4274,9 @@ module srl_nokia-rib-bgp {
               }
               container pruned-flood-list {
                 description
-                  "A container for the optimized ingress replication pruned flood list flags.";
+                  "Enter the pruned-flood-list context
+
+                   A container for the optimized ingress replication pruned flood list flags.";
                 leaf broadcast-multicast {
                   description
                     "The value of the broadcast-multicast flag.";
@@ -3868,7 +4302,9 @@ module srl_nokia-rib-bgp {
             }
             container label {
               description
-                "The encoded label value and type in the PMSI Tunnel Attribute";
+                "Enter the label context
+
+                 The encoded label value and type in the PMSI Tunnel Attribute";
               leaf value {
                 description
                   "The value of the label field
@@ -3896,10 +4332,14 @@ module srl_nokia-rib-bgp {
           }
           container pmsi-tunnel-mldp {
             description
-              "A container for the Provider Multicast Service Interface Tunnel Attribute (PTA) for mLDP.";
+              "Enter the pmsi-tunnel-mldp context
+
+               A container for the Provider Multicast Service Interface Tunnel Attribute (PTA) for mLDP.";
             container flags {
               description
-                "A container for the PTA Flags";
+                "Enter the flags context
+
+                 A container for the PTA Flags";
               leaf leaf-information-required {
                 description
                   "The value of the Leaf Information Required (LIR) flag.";
@@ -3908,7 +4348,9 @@ module srl_nokia-rib-bgp {
             }
             container label {
               description
-                "The encoded label value and type in the PMSI Tunnel Attribute";
+                "Enter the label context
+
+                 The encoded label value and type in the PMSI Tunnel Attribute";
               leaf value {
                 description
                   "The value of the label field
@@ -3924,7 +4366,9 @@ module srl_nokia-rib-bgp {
             }
             container pmsi-tunnel-attribute {
               description
-                "This container the pmsi tunnel attribute information for mLDP.";
+                "Enter the pmsi-tunnel-attribute context
+
+                 This container the pmsi tunnel attribute information for mLDP.";
               leaf root-node-address {
                 description
                   "IP address of the root router, where the PMSI originates from.";
@@ -3944,7 +4388,9 @@ module srl_nokia-rib-bgp {
           }
           container communities {
             description
-              "Container for different types of BGP communities";
+              "Enter the communities context
+
+               Container for different types of BGP communities";
             leaf-list community {
               description
                 "List of standard 4-byte community values in the COMMUNITY path
@@ -3976,11 +4422,20 @@ module srl_nokia-rib-bgp {
               type string;
               ordered-by user;
             }
+            leaf-list ext-community-raw-format {
+              description
+                "List of extended 8-byte community values in the COMMUNITY path
+                 attribute.";
+              type string;
+              ordered-by user;
+            }
           }
           container domain-path {
             if-feature "srl-feat:bgp-domain-path";
             description
-              "Sequence of domain segments in the propagation path of the route";
+              "Enter the domain-path context
+
+               Sequence of domain segments in the propagation path of the route";
             list domain-segment {
               description
                 "List of domain segments in the propagation path of the route";
@@ -4021,7 +4476,9 @@ module srl_nokia-rib-bgp {
           container prefix-sid {
             if-feature "srl-feat:bgp-labeled-unicast-prefix-sid";
             description
-              "This container defines Prefix SID TLVs";
+              "Enter the prefix-sid context
+
+               This container defines Prefix SID TLVs";
             list tlv {
               key "type";
               description
@@ -4036,7 +4493,9 @@ module srl_nokia-rib-bgp {
               container label-index {
                 when "../type = 'label-index'";
                 description
-                  "This container defines TLV 1.";
+                  "Enter the label-index context
+
+                   This container defines TLV 1.";
                 leaf label-index {
                   type uint32;
                   description
@@ -4046,7 +4505,9 @@ module srl_nokia-rib-bgp {
               container srgb-originator {
                 when "../type = 'srgb-originator'";
                 description
-                  "This container defines TLV 3.";
+                  "Enter the srgb-originator context
+
+                   This container defines TLV 3.";
                 leaf-list srgb {
                   description
                     "List of SRGB ranges, each in the format <first-label>:<number-of-labels>";
@@ -4058,7 +4519,9 @@ module srl_nokia-rib-bgp {
               container srv6-l3-service {
                 when "../srl_nokia-rib-bgp-routes:type = 'srl_nokia-srv6-types:srv6-l3-service'";
                 description
-                  "This container defines TLV 5.";
+                  "Enter the srv6-l3-service context
+
+                   This container defines TLV 5.";
                 list sub-tlv {
                   key "type";
                   description
@@ -4076,7 +4539,9 @@ module srl_nokia-rib-bgp {
               container srv6-l2-service {
                 when "../srl_nokia-rib-bgp-routes:type = 'srl_nokia-srv6-types:srv6-l2-service'";
                 description
-                  "This container defines TLV 6.";
+                  "Enter the srv6-l2-service context
+
+                   This container defines TLV 6.";
                 list sub-tlv {
                   key "type";
                   description
@@ -4094,9 +4559,11 @@ module srl_nokia-rib-bgp {
             }
           }
           container tunnel-encapsulation {
-            if-feature "srl-feat:segment-routing-colored-te-policies";
+            if-feature "srl-feat:segment-routing-colored-te-policies or srl-feat:evpn-mh-anycast or srl-feat:evpn-anycast-l3-subnet";
             description
-              "This container models the Tunnel Encapsulation Attribute defined by RFC 9012";
+              "Enter the tunnel-encapsulation context
+
+               This container models the Tunnel Encapsulation Attribute defined by RFC 9012";
             leaf tunnel-type {
               description
                 "Identifies a type of tunnel";
@@ -4107,7 +4574,9 @@ module srl_nokia-rib-bgp {
             container srte-policy {
               when "../tunnel-type = 'srte-policy'";
               description
-                "SRTE policy tunnel type";
+                "Enter the srte-policy context
+
+                 SRTE policy tunnel type";
               container sub-tlvs {
                 list subtlv {
                   key "type";
@@ -4127,6 +4596,8 @@ module srl_nokia-rib-bgp {
                         "4-octet value indicating the Preference of the SR Policy Candidate Path";
                       type uint32;
                     }
+                    description
+                      "Enter the preference context";
                   }
                   container binding-sid {
                     when "../type = 'binding-sid'";
@@ -4144,6 +4615,8 @@ module srl_nokia-rib-bgp {
                         "Drop matching traffic if there is no valid candidate path";
                     }
                     uses full-mpls-label;
+                    description
+                      "Enter the binding-sid context";
                   }
                   list segment-list {
                     when "../type = 'segment-list'";
@@ -4165,6 +4638,8 @@ module srl_nokia-rib-bgp {
                             "4 octets an unsigned integer value indicating the weight associated with a segment list";
                           type uint32;
                         }
+                        description
+                          "Enter the weight context";
                       }
                       list segment {
                         description
@@ -4200,14 +4675,20 @@ module srl_nokia-rib-bgp {
                               "Set true when SID verification is requested";
                             type boolean;
                           }
+                          description
+                            "Enter the segment-type-a context";
                         }
                       }
+                      description
+                        "Enter the sub-tlvs context";
                     }
                   }
                   container explicit-null-label-policy {
                     when "../type = 'explicit-null-label-policy'";
                     description
-                      "Used to specify whether an Explicit NULL Label must be pushed on an unlabeled IP packet before any other labels";
+                      "Enter the explicit-null-label-policy context
+
+                       Used to specify whether an Explicit NULL Label must be pushed on an unlabeled IP packet before any other labels";
                     leaf value {
                       description
                         "Explicit null label policy";
@@ -4219,7 +4700,9 @@ module srl_nokia-rib-bgp {
                   container priority {
                     when "../type = 'priority'";
                     description
-                      "Used to specify indicate the order in which the SR policies are re-computed upon topological change";
+                      "Enter the priority context
+
+                       Used to specify indicate the order in which the SR policies are re-computed upon topological change";
                     leaf value {
                       type uint8;
                     }
@@ -4227,7 +4710,9 @@ module srl_nokia-rib-bgp {
                   container srte-policy-candidate-path-name {
                     when "../type = 'srte-policy-candidate-path-name'";
                     description
-                      "Symbolic name of the candidate path";
+                      "Enter the srte-policy-candidate-path-name context
+
+                       Symbolic name of the candidate path";
                     leaf name {
                       type string;
                     }
@@ -4235,19 +4720,76 @@ module srl_nokia-rib-bgp {
                   container srte-policy-name {
                     when "../type = 'srte-policy-name'";
                     description
-                      "Symbolic name of the policy";
+                      "Enter the srte-policy-name context
+
+                       Symbolic name of the policy";
                     leaf name {
                       type string;
                     }
                   }
                 }
+                description
+                  "Enter the sub-tlvs context";
+              }
+            }
+            container vxlan {
+              when "../tunnel-type = 'vxlan'";
+              description
+                "Enter the vxlan context
+
+                 VXLAN tunnel type";
+              container sub-tlvs {
+                list subtlv {
+                  key "type";
+                  description
+                    "List of subTLV types in the tunnel-encapsulation attribute";
+                  leaf type {
+                    type identityref {
+                      base tunnel-encapsulation-attribute-subtlv-type;
+                    }
+                    description
+                      "The type of subTLV being described
+
+                       The type of subTLV is expressed as a canonical name.";
+                  }
+                  container address-family {
+                    when "../type = 'tunnel-egress-endpoint'";
+                    description
+                      "Enter the address-family context
+
+                       Address family of the tunnel egress endpoint";
+                    leaf address-family {
+                      description
+                        "Address family of the tunnel egress endpoint address";
+                      type identityref {
+                        base srl_nokia-comm:address-family;
+                      }
+                    }
+                  }
+                  container address {
+                    when "../type = 'tunnel-egress-endpoint'";
+                    description
+                      "Enter the address context
+
+                       Address of the tunnel egress endpoint";
+                    leaf address {
+                      description
+                        "Address of the tunnel egress endpoint";
+                      type srl_nokia-comm:ip-address;
+                    }
+                  }
+                }
+                description
+                  "Enter the sub-tlvs context";
               }
             }
           }
           container link-state {
             if-feature "srl-feat:traffic-engineering-bgpls";
             description
-              "Container for link-state attributes.";
+              "Enter the link-state context
+
+               Container for link-state attributes.";
             leaf-list attr {
               description
                 "List of link-state attribute strings.";
@@ -4259,7 +4801,9 @@ module srl_nokia-rib-bgp {
           }
           container unknown-attributes {
             description
-              "Container for unknown path attributes";
+              "Enter the unknown-attributes context
+
+               Container for unknown path attributes";
             list unknown-attribute {
               description
                 "List of unknown BGP path attributes";

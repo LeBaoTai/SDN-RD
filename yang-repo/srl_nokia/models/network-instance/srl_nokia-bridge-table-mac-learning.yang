@@ -15,6 +15,10 @@ module srl_nokia-bridge-table-mac-learning {
   description
     "This yang file gives a description of bridge table mac learning configuration.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2020-06-30 {
     description
       "SRLinux 20.6.1";
@@ -72,7 +76,11 @@ module srl_nokia-bridge-table-mac-learning {
           description
             "Configurable aging time for dynamically learned mac addresses";
         }
+        description
+          "Enter the aging context";
       }
+      description
+        "Enter the mac-learning context";
     }
   }
 }

@@ -30,6 +30,10 @@ module srl_nokia-dot1x-tunneling {
   description
     "This module models dot1x tunneling under an interface";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -74,7 +78,9 @@ module srl_nokia-dot1x-tunneling {
       "Grouping for interface dot1x tunneling statistics";
     container statistics {
       description
-        "Enclosing container for interface dot1x tunneling statistics";
+        "Enter the statistics context
+
+         Enclosing container for interface dot1x tunneling statistics";
       if-feature "srl_nokia-feat:dot1x-interface-stats";
       config false;
       uses dot1x-tunneling-statistics;
@@ -90,7 +96,9 @@ module srl_nokia-dot1x-tunneling {
        If l2cp-transparency tunnel-all-l2cp is enabled setting the dot1x-tunneling to false will be overwritten.";
     container tunnel {
       description
-        "Enclosing container for dot1x tunneling";
+        "Enter the tunnel context
+
+         Enclosing container for dot1x tunneling";
       if-feature "srl_nokia-feat:dot1x-tunnel";
       leaf tunnel-all {
         if-feature "srl_nokia-feat:dot1x-tunnel-tunnel-all";
@@ -155,7 +163,9 @@ module srl_nokia-dot1x-tunneling {
     container statistics {
       if-feature "srl_nokia-feat:dot1x-tunnel-system-stats";
       description
-        "Enclosing container for system dot1x tunneling statistics";
+        "Enter the statistics context
+
+         Enclosing container for system dot1x tunneling statistics";
       config false;
       uses dot1x-tunneling-statistics;
     }
@@ -166,7 +176,9 @@ module srl_nokia-dot1x-tunneling {
       "Grouping for system dot1x tunneling";
     container tunnel {
       description
-        "Enclosing container for system dot1x tunneling";
+        "Enter the tunnel context
+
+         Enclosing container for system dot1x tunneling";
       config false;
       uses system-dot1x-tunnel-statistics;
     }

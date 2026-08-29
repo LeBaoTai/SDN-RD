@@ -30,6 +30,10 @@ module srl_nokia-tools-acl {
   description
     "Model for operational commands on network interfaces and subinterfaces.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -82,6 +86,8 @@ module srl_nokia-tools-acl {
         description
           "Reset all statistics of all entries of the filter to zero";
       }
+      description
+        "Enter the statistics context";
     }
     list entry {
       description
@@ -100,6 +106,8 @@ module srl_nokia-tools-acl {
           description
             "Reset all aggregate and per-interface statistics associated with this particular entry to zero";
         }
+        description
+          "Enter the statistics context";
       }
     }
   }
@@ -153,16 +161,24 @@ module srl_nokia-tools-acl {
           leaf clear {
             type empty;
           }
+          description
+            "Enter the statistics context";
         }
         uses acl-filter-clear-group;
+        description
+          "Enter the input context";
       }
       container output {
         container statistics {
           leaf clear {
             type empty;
           }
+          description
+            "Enter the statistics context";
         }
         uses acl-filter-clear-group;
+        description
+          "Enter the output context";
       }
     }
   }
@@ -174,17 +190,23 @@ module srl_nokia-tools-acl {
         description
           "Reset all statistics associated with this particular policer to zero";
       }
+      description
+        "Enter the statistics context";
     }
   }
 
   container acl {
     description
-      "Top level enclosing container for ACL operational tools";
+      "Enter the acl context
+
+       Top level enclosing container for ACL operational tools";
     uses acl-filter-clear-group;
     uses acl-interface-clear-group;
     container policers {
       description
-        "List of policers used by ACL entries";
+        "Enter the policers context
+
+         List of policers used by ACL entries";
       list system-cpu-policer {
         description
           "List of system CPU policers";
@@ -213,7 +235,9 @@ module srl_nokia-tools-acl {
   grouping tools-qos-classifiers-top {
     container classifiers {
       description
-        "Top level enclosing container for qos classifiers operational tools";
+        "Enter the classifiers context
+
+         Top level enclosing container for qos classifiers operational tools";
       list multifield-classifier {
         description
           "List of multifield-classifier QoS policies";
@@ -247,6 +271,8 @@ module srl_nokia-tools-acl {
           type empty;
         }
       }
+      description
+        "Enter the policer-templates context";
     }
   }
 
@@ -258,6 +284,8 @@ module srl_nokia-tools-acl {
           description
             "Reset all statistics of all entries of the ACL filter to zero";
         }
+        description
+          "Enter the statistics context";
       }
       list entry {
         description
@@ -276,8 +304,12 @@ module srl_nokia-tools-acl {
             description
               "Reset all aggregate and per-interface statistics associated with this particular entry to zero";
           }
+          description
+            "Enter the statistics context";
         }
       }
+      description
+        "Enter the acl context";
     }
   }
 

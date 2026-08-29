@@ -24,6 +24,10 @@ module srl_nokia-boot {
   description
     "This module defines configuration and operational state data related to the booting the system.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -100,7 +104,9 @@ module srl_nokia-boot {
   grouping boot-autoboot-top {
     container autoboot {
       description
-        "Top-level container for configuration and state data related to autobooting the system";
+        "Enter the autoboot context
+
+         Top-level container for configuration and state data related to autobooting the system";
       leaf admin-state {
         type srl-comm:admin-state;
         description
@@ -173,7 +179,9 @@ module srl_nokia-boot {
   grouping boot-fips-top {
     container fips-140 {
       description
-        "Boot up the router in fips-provider mode
+        "Enter the fips-140 context
+
+         Boot up the router in fips-provider mode
 
          In fips-provider mode only fips approved algorithms are allowed.
          In addition for fip-provider mode to take effect a reboot is of the router is needed.";
@@ -220,10 +228,14 @@ module srl_nokia-boot {
   grouping boot-bootzstate-top {
     container bootz {
       description
-        "Bootz info";
+        "Enter the bootz context
+
+         Bootz info";
       container status {
         description
-          "Bootz state ";
+          "Enter the status context
+
+           Bootz state ";
         leaf bootstate {
           config false;
           type string;
@@ -241,7 +253,9 @@ module srl_nokia-boot {
   grouping boot-top {
     container boot {
       description
-        "Top-level container for configuration and state data related to booting the system";
+        "Enter the boot context
+
+         Top-level container for configuration and state data related to booting the system";
       uses boot-images-top;
       uses boot-fips-top;
       uses boot-autoboot-top;

@@ -21,6 +21,10 @@ module srl_nokia-tools-boot {
   description
     "This module defines operational commands related to the booting the system.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -39,7 +43,9 @@ module srl_nokia-tools-boot {
       "Top-level container for FIPS-related operational commands.";
     container fips-140 {
       description
-        "Operational state and commands related to FIPS 140 cryptographic module validation.";
+        "Enter the fips-140 context
+
+         Operational state and commands related to FIPS 140 cryptographic module validation.";
       leaf conditional-test {
         type empty;
         description
@@ -62,7 +68,9 @@ module srl_nokia-tools-boot {
       container golden-image {
         if-feature "srl_nokia-feat:factory-reset";
         description
-          "Container for operational commands related to golden image";
+          "Enter the golden-image context
+
+           Container for operational commands related to golden image";
         leaf image {
           type srl-comm:local-file-no-path;
           description

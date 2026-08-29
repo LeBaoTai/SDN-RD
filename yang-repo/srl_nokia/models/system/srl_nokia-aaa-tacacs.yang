@@ -29,6 +29,10 @@ module srl_nokia-aaa-tacacs {
      related to the TACACS+ protocol for authentication,
      authorization, and accounting.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -94,7 +98,9 @@ module srl_nokia-aaa-tacacs {
       "Top-level grouping for TACACS+ server data";
     container tacacs {
       description
-        "Top-level container for TACACS+ server data";
+        "Enter the tacacs context
+
+         Top-level container for TACACS+ server data";
       uses aaa-tacacs-server-config;
     }
   }

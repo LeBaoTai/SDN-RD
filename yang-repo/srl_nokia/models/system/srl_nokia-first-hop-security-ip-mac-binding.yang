@@ -33,6 +33,10 @@ module srl_nokia-first-hop-security-ip-mac-binding {
   description
     "Model for First Hop Security (FHS) policy configuration.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -333,7 +337,9 @@ module srl_nokia-first-hop-security-ip-mac-binding {
   grouping fhs-ip-mac-binding-table {
     container fhs-ip-mac-bindings {
       description
-        "List of First Hop Security IP-MAC association in the database.";
+        "Enter the fhs-ip-mac-bindings context
+
+         List of First Hop Security IP-MAC association in the database.";
       list binding-table {
         config false;
         key "mac-address ip-address network-instance";
@@ -446,6 +452,8 @@ module srl_nokia-first-hop-security-ip-mac-binding {
         description
           "Reference to FHS Policy to apply to the associated netinstance";
       }
+      description
+        "Enter the fhs context";
     }
   }
 
@@ -480,6 +488,8 @@ module srl_nokia-first-hop-security-ip-mac-binding {
         }
         default "0";
       }
+      description
+        "Enter the fhs-classid-mgmt context";
     }
   }
 

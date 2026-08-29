@@ -216,12 +216,10 @@
     },
     {
       "oc": "/system/ntp/ntp-keys/ntp-key",
-      "feature-flagged": true,
       "srlinux": "/system/srl_nokia-ntp:ntp/srl_nokia-ntp:ntp-key"
     },
     {
       "oc": "/system/ntp/ntp-keys/ntp-key/key-id",
-      "feature-flagged": true,
       "srlinux": "/system/srl_nokia-ntp:ntp/srl_nokia-ntp:ntp-key/srl_nokia-ntp:key-id"
     },
     {
@@ -234,12 +232,10 @@
     },
     {
       "oc": "/system/ntp/ntp-keys/ntp-key/{config,state}/key-type",
-      "feature-flagged": true,
       "srlinux": "/system/srl_nokia-ntp:ntp/srl_nokia-ntp:ntp-key/srl_nokia-ntp:key-type"
     },
     {
       "oc": "/system/ntp/ntp-keys/ntp-key/{config,state}/key-value",
-      "feature-flagged": true,
       "srlinux": "/system/srl_nokia-ntp:ntp/srl_nokia-ntp:ntp-key/srl_nokia-ntp:key-value"
     },
     {
@@ -292,7 +288,6 @@
     },
     {
       "oc": "/system/ntp/servers/server/{config,state}/key-id",
-      "feature-flagged": true,
       "srlinux": "/system/srl_nokia-ntp:ntp/server/key-id"
     },
     {
@@ -531,7 +526,8 @@
     },
     {
       "oc": "/system/logging/remote-servers/remote-server/{config,state}/host",
-      "srlinux": ""
+      "srlinux": "",
+      "type": "srl_nokia-common:host-ietf"
     },
     {
       "oc": "/system/logging/remote-servers/remote-server/{config,state}/source-address",
@@ -598,7 +594,7 @@
     {
       "oc": "/system/memory",
       "srlinux": "/platform/srl_nokia-platform-control:control/srl_nokia-platform-memory:memory",
-      "feature-flagged": true,
+      "srl-state-only": true,
       "state-request-from-here": true
     },
     {
@@ -969,6 +965,56 @@
     },
     {
       "oc": "/system/alarms",
+      "srlinux": ""
+    },
+    {
+      "oc": "/system/alarms/alarm",
+      "srlinux": "/system/srl_nokia-system-alarms:alarms/srl_nokia-system-alarms:active"
+    },
+    {
+      "oc": "/system/alarms/alarm/config",
+      "supported": false
+    },
+    {
+      "oc": "/system/alarms/alarm/id",
+      "srlinux": "/system/srl_nokia-system-alarms:alarms/srl_nokia-system-alarms:active/srl_nokia-system-alarms:id"
+    },
+    {
+      "oc": "/system/alarms/alarm/state",
+      "srlinux": ""
+    },
+    {
+      "oc": "/system/alarms/alarm/state/id",
+      "srlinux": ""
+    },
+    {
+      "oc": "/system/alarms/alarm/state/resource",
+      "srlinux": "/system/srl_nokia-system-alarms:alarms/srl_nokia-system-alarms:active/srl_nokia-system-alarms:resource"
+    },
+    {
+      "oc": "/system/alarms/alarm/state/text",
+      "srlinux": "/system/srl_nokia-system-alarms:alarms/srl_nokia-system-alarms:active/srl_nokia-system-alarms:text"
+    },
+    {
+      "oc": "/system/alarms/alarm/state/time-created",
+      "srlinux": "/system/srl_nokia-system-alarms:alarms/srl_nokia-system-alarms:active/srl_nokia-system-alarms:time-created",
+      "transform": "timeticks64-to-date-and-time"
+    },
+    {
+      "oc": "/system/alarms/alarm/state/severity",
+      "srlinux": "/system/srl_nokia-system-alarms:alarms/srl_nokia-system-alarms:active/srl_nokia-system-alarms:severity",
+      "transform": "identityref-severity-to-enum"
+    },
+    {
+      "oc": "/system/alarms/alarm/state/type-id",
+      "srlinux": "/system/srl_nokia-system-alarms:alarms/srl_nokia-system-alarms:active/srl_nokia-system-alarms:type-id"
+    },
+    {
+      "oc": "/components/component/state/equipment-mismatch",
+      "supported": false
+    },
+    {
+      "oc": "/components/component/state/equipment-failure",
       "supported": false
     },
     {
@@ -1014,33 +1060,27 @@
     },
     {
       "oc": "/system/control-plane-traffic",
-      "feature-flagged": true,
       "srlinux": "/system/control-plane-traffic"
     },
     {
       "oc": "/system/control-plane-traffic/ingress",
-      "feature-flagged": true,
       "srlinux": "/system/control-plane-traffic/input"
     },
     {
       "oc": "/system/control-plane-traffic/ingress/acl",
-      "feature-flagged": true,
       "srlinux": "/system/control-plane-traffic/input/acl"
     },
     {
       "oc": "/system/control-plane-traffic/ingress/acl/acl-set",
-      "feature-flagged": true,
       "srlinux": "/system/control-plane-traffic/input/acl/acl-filter"
     },
     {
       "oc": "/system/control-plane-traffic/ingress/acl/acl-set/set-name",
-      "feature-flagged": true,
       "srlinux": "/system/control-plane-traffic/input/acl/acl-filter/name"
     },
     {
       "oc": "/system/control-plane-traffic/ingress/acl/acl-set/type",
       "srlinux": "/system/control-plane-traffic/input/acl/acl-filter/type",
-      "feature-flagged": true,
       "mapping": [
         {
           "ACL_IPV4": "ipv4"
@@ -1061,17 +1101,14 @@
     },
     {
       "oc": "/system/control-plane-traffic/ingress/acl/acl-set/{config,state}",
-      "feature-flagged": true,
       "srlinux": ""
     },
     {
       "oc": "/system/control-plane-traffic/ingress/acl/acl-set/{config,state}/set-name",
-      "feature-flagged": true,
       "srlinux": ""
     },
     {
       "oc": "/system/control-plane-traffic/ingress/acl/acl-set/{config,state}/type",
-      "feature-flagged": true,
       "srlinux": ""
     },
     {

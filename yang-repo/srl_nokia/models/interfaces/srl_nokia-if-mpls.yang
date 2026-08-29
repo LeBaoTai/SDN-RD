@@ -21,6 +21,10 @@ module srl_nokia-if-mpls {
   description
     "Model for managing MPLS at a subinterface level";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-07-31 {
     description
       "SRLinux 24.7.1";
@@ -42,7 +46,9 @@ module srl_nokia-if-mpls {
         error-message "mpls is not supported on bridged or local-mirror-dest subinterfaces";
       }
       description
-        "Container for MPLS configuration and state at the subinterface level";
+        "Enter the mpls context
+
+         Container for MPLS configuration and state at the subinterface level";
       uses srl_nokia-if-ip:subinterface-statistics;
     }
   }

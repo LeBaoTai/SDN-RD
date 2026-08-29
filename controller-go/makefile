@@ -2,23 +2,21 @@
 # compile yang file
 
 YANG_REPO := ../yang-repo
-OUTPUT    := ./internal/oc/oc.go
+OUTPUT_DIR := ./internal/oc
+
+YANG_PATHS := $(shell find $(YANG_REPO) -type d ! -path '*/.*' | paste -sd, -)
 
 .PHONY: generate-yang
 generate-yang:
-	go run github.com/openconfig/ygot/generator \
-		-path=$(YANG_REPO) \
-		-output_file=./internal/oc/oc.go \
-		-package_name=oc \
-		-generate_fakeroot \
-		-fakeroot_name=Device \
-		-shorten_enum_leaf_names \
-		-typedef_enum_with_defmod \
-		-exclude_modules=ietf-interfaces \
-		-compress_paths=true \
-		-generate_simple_unions \
-		-generate_populate_defaults=true \
-		-generate_getters \
+	go run github.com/openconfig/ygnmi/app/ygnmi generator \
+    	--base_package_path=./internal/oc \
+    	--output_dir=./internal/oc \
+    	--paths=$(YANG_PATHS) \
+    	--compress_paths=true \
+		--exclude_modules=ietf-interfaces \
+    	--fakeroot_name=root \
+    	--split_top_level_packages=true \
+		--pathstructs_split_files_count=10 \
 		$(YANG_REPO)/openconfig/interfaces/openconfig-interfaces.yang \
 		$(YANG_REPO)/openconfig/interfaces/openconfig-if-ip.yang \
 		$(YANG_REPO)/openconfig/bgp/openconfig-bgp.yang \

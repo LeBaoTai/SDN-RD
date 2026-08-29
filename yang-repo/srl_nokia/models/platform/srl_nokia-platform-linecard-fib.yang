@@ -21,6 +21,10 @@ module srl_nokia-platform-linecard-fib {
   description
     "This module defines a state model for FIB objects maintained in each forwarding complex";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -59,6 +63,15 @@ module srl_nokia-platform-linecard-fib {
 
            If a network-instance receives multiple EVPN-VXLAN routes from the same VTEP but with different VNI values, only the
            next-hop corresponding to the lowest VNI value is used for forwarding. The other next-hops are marked as down-vni-conflict.";
+      }
+      enum down-tcam-resources {
+        if-feature "srl_nokia-feat:combined-ecmp-redirect";
+        description
+          "The NHG is down because of an underlying TCAM resource issue
+
+           In NHGs where data path egress filtering for combined ECMP relies on ACLs to override the ECMP group ID obtained from route lookup
+           with an alternate ECMP group containing only access next hops, exhaustion of TCAM resources for those ACLs causes the NHG to be
+           marked as down-tcam-resources.";
       }
     }
   }
@@ -121,6 +134,8 @@ module srl_nokia-platform-linecard-fib {
           }
         }
       }
+      description
+        "Enter the fib-table context";
     }
   }
 

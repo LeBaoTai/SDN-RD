@@ -25,6 +25,10 @@ module srl_nokia-twamp {
     "Nokia SR Linux Support
      Web: <http://www.nokia.com>";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-07-31 {
     description
       "SRLinux 24.7.1";
@@ -172,7 +176,9 @@ module srl_nokia-twamp {
     container dropped-connections {
       config false;
       description
-        "TWAMP-Control (TCP) dropped or closed connections";
+        "Enter the dropped-connections context
+
+         TWAMP-Control (TCP) dropped or closed connections";
       leaf tcp-connection-closed {
         description
           "TCP connection closed";
@@ -257,7 +263,9 @@ module srl_nokia-twamp {
     container dropped-connection-states {
       config false;
       description
-        "The state of the TWAMP-Control channel when the failure occured";
+        "Enter the dropped-connection-states context
+
+         The state of the TWAMP-Control channel when the failure occured";
       leaf idle {
         description
           "Count of TWAMP-Control connection failures in idle state";
@@ -297,7 +305,9 @@ module srl_nokia-twamp {
     container rejected-session {
       config false;
       description
-        "Per reason code error statistics for test session rejection";
+        "Enter the rejected-session context
+
+         Per reason code error statistics for test session rejection";
       leaf invalid-ip-address-version {
         description
           "Sessions rejected because of bad IP version";
@@ -372,7 +382,9 @@ module srl_nokia-twamp {
     container dropped-test-packet {
       config false;
       description
-        "TWAMP-Test packet drop stats";
+        "Enter the dropped-test-packet context
+
+         TWAMP-Test packet drop stats";
       leaf incorrect-packet-size {
         description
           "Test packets dropped because of unexpected packet size";
@@ -504,6 +516,8 @@ module srl_nokia-twamp {
       uses twamp-test-sessions-statistics;
       uses twamp-test-session-packet-statistics;
       uses twamp-control-connection-statistics;
+      description
+        "Enter the statistics context";
     }
   }
 
@@ -540,6 +554,8 @@ module srl_nokia-twamp {
         uses twamp-test-sessions-statistics;
         uses twamp-test-session-packet-statistics;
         uses twamp-control-connection-statistics;
+        description
+          "Enter the statistics context";
       }
     }
   }
@@ -590,6 +606,8 @@ module srl_nokia-twamp {
         srl_nokia-ext:stream-mode "sample=2";
         uses twamp-test-sessions-statistics;
         uses twamp-test-session-packet-statistics;
+        description
+          "Enter the statistics context";
       }
     }
   }
@@ -667,6 +685,8 @@ module srl_nokia-twamp {
       srl_nokia-ext:stream-mode "sample=2";
       config false;
       uses twamp-test-session-packet-statistics;
+      description
+        "Enter the statistics context";
     }
   }
 
@@ -674,7 +694,9 @@ module srl_nokia-twamp {
     container session-reflector {
       config false;
       description
-        "Configuration and state for the TWAMP Session-Reflector";
+        "Enter the session-reflector context
+
+         Configuration and state for the TWAMP Session-Reflector";
       list test-session {
         description
           "TWAMP Session-Reflector test sessions.";
@@ -691,7 +713,9 @@ module srl_nokia-twamp {
       presence "Configure TWAMP";
       container server {
         description
-          "Configuration of the TWAMP Server logical entity";
+          "Enter the server context
+
+           Configuration of the TWAMP Server logical entity";
         list network-instance {
           key "name";
           leaf name {
@@ -713,6 +737,8 @@ module srl_nokia-twamp {
       container statistics {
         config false;
         uses twamp-server-error-statistics;
+        description
+          "Enter the statistics context";
       }
     }
   }

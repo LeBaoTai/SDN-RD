@@ -62,7 +62,6 @@
     {
       "oc": "/interfaces/interface/{config,state}/loopback-mode",
       "srlinux": "/interface/loopback-mode",
-      "feature-flagged": true,
       "mapping": [
         {
           "NONE": "none"
@@ -90,8 +89,7 @@
     },
     {
       "oc": "/interfaces/interface/{config,state}/oc-if-sdn:forwarding-viable",
-      "srlinux": "/interface/ethernet/forwarding-viable",
-      "feature-flagged": true
+      "srlinux": "/interface/ethernet/forwarding-viable"
     },
     {
       "oc": "/interfaces/interface/state/ifindex",
@@ -135,8 +133,7 @@
     },
     {
       "oc": "/interfaces/interface/{config,state}/id",
-      "srlinux": "/interface/p4rt/id",
-      "feature-flagged": true
+      "srlinux": "/interface/p4rt/id"
     },
     {
       "oc": "/interfaces/interface/state/logical",
@@ -233,13 +230,11 @@
     },
     {
       "oc": "/interfaces/interface/state/counters/interface-transitions",
-      "srlinux": "/interface/statistics/interface-transitions",
-      "feature-flagged": true
+      "srlinux": "/interface/statistics/interface-transitions"
     },
     {
       "oc": "/interfaces/interface/state/counters/link-transitions",
-      "srlinux": "/interface/statistics/link-transitions",
-      "feature-flagged": true
+      "srlinux": "/interface/statistics/link-transitions"
     },
     {
       "oc": "/interfaces/interface/state/counters/last-clear",
@@ -385,8 +380,7 @@
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/state/counters/in-errors",
-      "srlinux": "/interface/subinterface/statistics/in-error-packets",
-      "feature-flagged": true
+      "srlinux": "/interface/subinterface/statistics/in-error-packets"
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/state/counters/in-unknown-protos",
@@ -422,8 +416,7 @@
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/state/counters/out-errors",
-      "srlinux": "/interface/subinterface/statistics/out-error-packets",
-      "feature-flagged": true
+      "srlinux": "/interface/subinterface/statistics/out-error-packets"
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/state/counters/carrier-transitions",
@@ -650,13 +643,11 @@
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv4/oc-ip:state/oc-ip:counters",
-      "srlinux": "/interface/subinterface/ipv4/statistics",
-      "feature-flagged": true
+      "srlinux": "/interface/subinterface/ipv4/statistics"
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv4/oc-ip:state/oc-ip:counters/oc-ip:in-pkts",
-      "srlinux": "/interface/subinterface/ipv4/statistics/in-packets",
-      "feature-flagged": true
+      "srlinux": "/interface/subinterface/ipv4/statistics/in-packets"
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv4/oc-ip:state/oc-ip:counters/oc-ip:in-octets",
@@ -684,23 +675,19 @@
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv4/oc-ip:state/oc-ip:counters/oc-ip:in-forwarded-pkts",
-      "srlinux": "/interface/subinterface/ipv4/statistics/in-forwarded-packets",
-      "feature-flagged": true
+      "srlinux": "/interface/subinterface/ipv4/statistics/in-forwarded-packets"
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv4/oc-ip:state/oc-ip:counters/oc-ip:in-forwarded-octets",
-      "srlinux": "/interface/subinterface/ipv4/statistics/in-forwarded-octets",
-      "feature-flagged": true
+      "srlinux": "/interface/subinterface/ipv4/statistics/in-forwarded-octets"
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv4/oc-ip:state/oc-ip:counters/oc-ip:in-discarded-pkts",
-      "srlinux": "/interface/subinterface/ipv4/statistics/in-discarded-packets",
-      "feature-flagged": true
+      "srlinux": "/interface/subinterface/ipv4/statistics/in-discarded-packets"
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv4/oc-ip:state/oc-ip:counters/oc-ip:out-pkts",
-      "srlinux": "/interface/subinterface/ipv4/statistics/out-packets",
-      "feature-flagged": true
+      "srlinux": "/interface/subinterface/ipv4/statistics/out-packets"
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv4/oc-ip:state/oc-ip:counters/oc-ip:out-octets",
@@ -712,18 +699,15 @@
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv4/oc-ip:state/oc-ip:counters/oc-ip:out-forwarded-pkts",
-      "srlinux": "/interface/subinterface/ipv4/statistics/out-forwarded-packets",
-      "feature-flagged": true
+      "srlinux": "/interface/subinterface/ipv4/statistics/out-forwarded-packets"
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv4/oc-ip:state/oc-ip:counters/oc-ip:out-forwarded-octets",
-      "srlinux": "/interface/subinterface/ipv4/statistics/out-forwarded-octets",
-      "feature-flagged": true
+      "srlinux": "/interface/subinterface/ipv4/statistics/out-forwarded-octets"
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv4/oc-ip:state/oc-ip:counters/oc-ip:out-discarded-pkts",
-      "srlinux": "/interface/subinterface/ipv4/statistics/out-discarded-packets",
-      "feature-flagged": true
+      "srlinux": "/interface/subinterface/ipv4/statistics/out-discarded-packets"
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv6",
@@ -933,13 +917,11 @@
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv6/oc-ip:state/oc-ip:counters",
-      "srlinux": "/interface/subinterface/ipv6/statistics",
-      "feature-flagged": true
+      "srlinux": "/interface/subinterface/ipv6/statistics"
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv6/oc-ip:state/oc-ip:counters/oc-ip:in-pkts",
-      "srlinux": "/interface/subinterface/ipv6/statistics/in-packets",
-      "feature-flagged": true
+      "srlinux": "/interface/subinterface/ipv6/statistics/in-packets"
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv6/oc-ip:state/oc-ip:counters/oc-ip:in-octets",
@@ -967,23 +949,19 @@
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv6/oc-ip:state/oc-ip:counters/oc-ip:in-forwarded-pkts",
-      "srlinux": "/interface/subinterface/ipv6/statistics/in-forwarded-packets",
-      "feature-flagged": true
+      "srlinux": "/interface/subinterface/ipv6/statistics/in-forwarded-packets"
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv6/oc-ip:state/oc-ip:counters/oc-ip:in-forwarded-octets",
-      "srlinux": "/interface/subinterface/ipv6/statistics/in-forwarded-octets",
-      "feature-flagged": true
+      "srlinux": "/interface/subinterface/ipv6/statistics/in-forwarded-octets"
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv6/oc-ip:state/oc-ip:counters/oc-ip:in-discarded-pkts",
-      "srlinux": "/interface/subinterface/ipv6/statistics/in-discarded-packets",
-      "feature-flagged": true
+      "srlinux": "/interface/subinterface/ipv6/statistics/in-discarded-packets"
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv6/oc-ip:state/oc-ip:counters/oc-ip:out-pkts",
-      "srlinux": "/interface/subinterface/ipv6/statistics/out-packets",
-      "feature-flagged": true
+      "srlinux": "/interface/subinterface/ipv6/statistics/out-packets"
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv6/oc-ip:state/oc-ip:counters/oc-ip:out-octets",
@@ -995,18 +973,15 @@
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv6/oc-ip:state/oc-ip:counters/oc-ip:out-forwarded-pkts",
-      "srlinux": "/interface/subinterface/ipv6/statistics/out-forwarded-packets",
-      "feature-flagged": true
+      "srlinux": "/interface/subinterface/ipv6/statistics/out-forwarded-packets"
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv6/oc-ip:state/oc-ip:counters/oc-ip:out-forwarded-octets",
-      "srlinux": "/interface/subinterface/ipv6/statistics/out-forwarded-octets",
-      "feature-flagged": true
+      "srlinux": "/interface/subinterface/ipv6/statistics/out-forwarded-octets"
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv6/oc-ip:state/oc-ip:counters/oc-ip:out-discarded-pkts",
-      "srlinux": "/interface/subinterface/ipv6/statistics/out-discarded-packets",
-      "feature-flagged": true
+      "srlinux": "/interface/subinterface/ipv6/statistics/out-discarded-packets"
     },
     {
       "oc": "/interfaces/interface/subinterfaces/subinterface/oc-ip:ipv6/oc-ip-ext:autoconf",
@@ -1023,7 +998,6 @@
     {
       "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:{config,state}/oc-eth:mac-address",
       "srlinux": "/interface/ethernet/mac-address",
-      "feature-flagged": true,
       "type": "srl_nokia-common:mac-address"
     },
     {
@@ -1121,6 +1095,82 @@
       "srlinux": "/interface/ethernet/statistics"
     },
     {
+      "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:pre-fec-ber",
+      "srlinux": "/interface/ethernet/forward-error-correction/statistics/host-if-fec-router/pre-fec-ber"
+    },
+    {
+      "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:pre-fec-ber/oc-eth:instant",
+      "srlinux": "/interface/ethernet/forward-error-correction/statistics/host-if-fec-router/pre-fec-ber/instant"
+    },
+    {
+      "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:pre-fec-ber/oc-eth:avg",
+      "supported": false
+    },
+    {
+      "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:pre-fec-ber/oc-eth:min",
+      "srlinux": "/interface/ethernet/forward-error-correction/statistics/host-if-fec-router/pre-fec-ber/min"
+    },
+    {
+      "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:pre-fec-ber/oc-eth:max",
+      "srlinux": "/interface/ethernet/forward-error-correction/statistics/host-if-fec-router/pre-fec-ber/max"
+    },
+    {
+      "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:pre-fec-ber/oc-eth:interval",
+      "supported": false
+    },
+    {
+      "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:pre-fec-ber/oc-eth:min-time",
+      "srlinux": "/interface/ethernet/forward-error-correction/statistics/host-if-fec-router/pre-fec-ber/min-time",
+      "transform": "timeticks64-to-date-and-time"
+    },
+    {
+      "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:pre-fec-ber/oc-eth:max-time",
+      "srlinux": "/interface/ethernet/forward-error-correction/statistics/host-if-fec-router/pre-fec-ber/max-time",
+      "transform": "timeticks64-to-date-and-time"
+    },
+    {
+      "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:post-fec-ber",
+      "srlinux": "/interface/ethernet/forward-error-correction/statistics/host-if-fec-router/post-fec-ber"
+    },
+    {
+      "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:post-fec-ber/oc-eth:instant",
+      "srlinux": "/interface/ethernet/forward-error-correction/statistics/host-if-fec-router/post-fec-ber/instant"
+    },
+    {
+      "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:post-fec-ber/oc-eth:avg",
+      "supported": false
+    },
+    {
+      "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:post-fec-ber/oc-eth:min",
+      "srlinux": "/interface/ethernet/forward-error-correction/statistics/host-if-fec-router/post-fec-ber/min"
+    },
+    {
+      "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:post-fec-ber/oc-eth:max",
+      "srlinux": "/interface/ethernet/forward-error-correction/statistics/host-if-fec-router/post-fec-ber/max"
+    },
+    {
+      "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:post-fec-ber/oc-eth:interval",
+      "supported": false
+    },
+    {
+      "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:post-fec-ber/oc-eth:min-time",
+      "srlinux": "/interface/ethernet/forward-error-correction/statistics/host-if-fec-router/post-fec-ber/min-time",
+      "transform": "timeticks64-to-date-and-time"
+    },
+    {
+      "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:post-fec-ber/oc-eth:max-time",
+      "srlinux": "/interface/ethernet/forward-error-correction/statistics/host-if-fec-router/post-fec-ber/max-time",
+      "transform": "timeticks64-to-date-and-time"
+    },
+    {
+      "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:counters/oc-eth:fec-uncorrectable-blocks",
+      "srlinux": "/interface/ethernet/forward-error-correction/statistics/host-if-fec-router/frame-error-count"
+    },
+    {
+      "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:counters/oc-eth:fec-corrected-blocks",
+      "srlinux": "/interface/ethernet/forward-error-correction/statistics/host-if-fec-router/corrected-frame-error-count"
+    },
+    {
       "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:counters/oc-eth:in-mac-control-frames",
       "supported": false
     },
@@ -1134,8 +1184,7 @@
     },
     {
       "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:counters/oc-eth:in-undersize-frames",
-      "srlinux": "/interface/ethernet/statistics/in-undersize-frames",
-      "feature-flagged": true
+      "srlinux": "/interface/ethernet/statistics/in-undersize-frames"
     },
     {
       "oc": "/interfaces/interface/oc-eth:ethernet/oc-eth:state/oc-eth:counters/oc-eth:in-jabber-frames",

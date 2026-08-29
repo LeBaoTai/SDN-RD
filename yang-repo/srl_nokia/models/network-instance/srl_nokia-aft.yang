@@ -27,6 +27,10 @@ module srl_nokia-aft {
   description
     "A telemetry optimized model of forwarding table objects.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -48,15 +52,28 @@ module srl_nokia-aft {
       "SRLinux 24.3.1";
   }
 
+  typedef failed-complex-list-including-control {
+    type string {
+      pattern 'control-A|control-B|complex-([0-9]|1[0-6])\.[01]';
+    }
+  }
+
   grouping traffic-statistics {
     container counters {
       srl_nokia-ext:telemetry-atomic "false";
       description
-        "Packet forwarding counters";
+        "Enter the counters context
+
+         Packet forwarding counters";
       leaf resource-allocation-failed {
         type boolean;
         description
           "True when an available statistics resource was not available for this forwarding object";
+      }
+      leaf-list resource-allocation-failed-locations {
+        description
+          "List of forwarding complexes that reported a stat resource allocation failure. They appear in the format (slot-number,complex-number).";
+        type failed-complex-list-including-control;
       }
       leaf packets-forwarded {
         type srl_nokia-comm:zero-based-counter64;
@@ -74,7 +91,9 @@ module srl_nokia-aft {
   grouping aft-ipv4-unicast {
     container ipv4-unicast {
       description
-        "The abstract forwarding table for IPv4 unicast
+        "Enter the ipv4-unicast context
+
+         The abstract forwarding table for IPv4 unicast
 
          Entries within this table are uniquely keyed on the IPv4 unicast destination prefix which is matched by ingress
          packets. The data set represented by the IPv4 Unicast AFT is the set of entries from the IPv4 unicast RIB that
@@ -136,7 +155,9 @@ module srl_nokia-aft {
   grouping aft-ipv6-unicast {
     container ipv6-unicast {
       description
-        "The abstract forwarding table for IPv6 unicast
+        "Enter the ipv6-unicast context
+
+         The abstract forwarding table for IPv6 unicast
 
          Entries within this table are uniquely keyed on the IPv6 unicast destination prefix which is matched by ingress
          packets. The data set represented by the IPv6 Unicast AFT is the set of entries from the IPv6 unicast RIB that
@@ -278,10 +299,15 @@ module srl_nokia-aft {
   grouping common-nexthop-encap-udp {
     description
       "Common fields used for UDP in IPv4/IPv6 encapsulation applied on top of a packet";
-    leaf dscp {
+    leaf in-profile-dscp {
       type srl_nokia-comm:dscp-value;
       description
-        "DSCP value in the added IP header";
+        "DSCP value in the outer IP header except when the packet is out of profile";
+    }
+    leaf out-profile-dscp {
+      type srl_nokia-comm:dscp-value;
+      description
+        "DSCP value in the outer IP header when the packet was policed as out of profile";
     }
     leaf destination-udp-port {
       type srl_nokia-comm:port-number;
@@ -334,7 +360,9 @@ module srl_nokia-aft {
       }
       container interface-ref {
         description
-          "Reference to a subinterface";
+          "Enter the interface-ref context
+
+           Reference to a subinterface";
         leaf interface {
           type leafref {
             path "/srl_nokia-if:interface/srl_nokia-if:name";
@@ -370,7 +398,9 @@ module srl_nokia-aft {
         container gre {
           when "../type = 'srl_nokia-comm:gre'";
           description
-            "Container of nodes for GRE encapsulation";
+            "Enter the gre context
+
+             Container of nodes for GRE encapsulation";
           leaf source-ip {
             type srl_nokia-comm:ip-address;
             description
@@ -386,11 +416,23 @@ module srl_nokia-aft {
             description
               "IP TTL in the outer IP header added by GRE encapsulation";
           }
+          leaf in-profile-dscp {
+            type srl_nokia-comm:dscp-value;
+            description
+              "DSCP value in the outer IP header except when the packet is out of profile";
+          }
+          leaf out-profile-dscp {
+            type srl_nokia-comm:dscp-value;
+            description
+              "DSCP value in the outer IP header when the packet was policed as out of profile";
+          }
         }
         container ipv4 {
           when "../type = 'srl_nokia-comm:ipv4'";
           description
-            "Container of nodes for IPv4 encapsulation
+            "Enter the ipv4 context
+
+             Container of nodes for IPv4 encapsulation
 
              When this container is used, an IPv4 header with no subsequent transport header is added to the packet";
           uses common-nexthop-encap-ipv4;
@@ -398,7 +440,9 @@ module srl_nokia-aft {
         container ipv6 {
           when "../type = 'srl_nokia-comm:ipv6'";
           description
-            "Container of nodes for IPv6 encapsulation
+            "Enter the ipv6 context
+
+             Container of nodes for IPv6 encapsulation
 
              When this container is used, an IPv6 header with no subsequent transport header is added to the packet";
           uses common-nexthop-encap-ipv6;
@@ -406,7 +450,9 @@ module srl_nokia-aft {
         container mpls {
           when "../type = 'srl_nokia-comm:mpls'";
           description
-            "Container of nodes for MPLS encapsulation";
+            "Enter the mpls context
+
+             Container of nodes for MPLS encapsulation";
           leaf traffic-class {
             type uint8 {
               range "0..7";
@@ -428,21 +474,27 @@ module srl_nokia-aft {
         container udp-v4 {
           when "../type = 'srl_nokia-comm:udp-v4'";
           description
-            "Container of nodes for UDP in IPv4 encapsulation";
+            "Enter the udp-v4 context
+
+             Container of nodes for UDP in IPv4 encapsulation";
           uses common-nexthop-encap-ipv4;
           uses common-nexthop-encap-udp;
         }
         container udp-v6 {
           when "../type = 'srl_nokia-comm:udp-v6'";
           description
-            "Container of nodes for UDP in IPv6 encapsulation";
+            "Enter the udp-v6 context
+
+             Container of nodes for UDP in IPv6 encapsulation";
           uses common-nexthop-encap-ipv6;
           uses common-nexthop-encap-udp;
         }
         container vxlan {
           when "../type = 'srl_nokia-comm:vxlan'";
           description
-            "Container of nodes for VXLAN encapsulation";
+            "Enter the vxlan context
+
+             Container of nodes for VXLAN encapsulation";
           leaf vni-label {
             type uint32 {
               range "1..16777215";
@@ -452,21 +504,7 @@ module srl_nokia-aft {
           }
         }
       }
-      container counters {
-        srl_nokia-ext:telemetry-atomic "false";
-        description
-          "Packet forwarding counters";
-        leaf packets-forwarded {
-          type srl_nokia-comm:zero-based-counter64;
-          description
-            "The number of packets forwarded";
-        }
-        leaf octets-forwarded {
-          type srl_nokia-comm:zero-based-counter64;
-          description
-            "The number of octets in the packets that were forwarded";
-        }
-      }
+      uses traffic-statistics;
     }
   }
 
@@ -476,7 +514,9 @@ module srl_nokia-aft {
     container afts {
       config false;
       description
-        "The abstract forwarding tables (AFTs) that are associated with the network instance";
+        "Enter the afts context
+
+         The abstract forwarding tables (AFTs) that are associated with the network instance";
       uses aft-next-hop-groups;
       uses aft-ipv4-unicast;
       uses aft-ipv6-unicast;

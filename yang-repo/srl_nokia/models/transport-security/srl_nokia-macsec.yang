@@ -33,6 +33,10 @@ module srl_nokia-macsec {
   description
     "This module models MKA and macsec configuration under a subinterface";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -164,7 +168,7 @@ module srl_nokia-macsec {
 
   typedef sci-hex-string {
     type srl_nokia-comm:hex-string {
-      length "16";
+      length "23";
     }
   }
 
@@ -270,6 +274,8 @@ module srl_nokia-macsec {
         description
           "MKPDU TX error count";
       }
+      description
+        "Enter the out-mkpdu-errors context";
     }
     container in-mkpdu-errors {
       leaf icv-verification-errors {
@@ -294,6 +300,8 @@ module srl_nokia-macsec {
         description
           "MKPDU RX non-recent peer list Message Number error count";
       }
+      description
+        "Enter the in-mkpdu-errors context";
     }
     leaf sak-generation-errors {
       srl_nokia-ext:show-importance "high";
@@ -344,7 +352,9 @@ module srl_nokia-macsec {
     container statistics {
       config false;
       description
-        "Operational state data for MKA";
+        "Enter the statistics context
+
+         Operational state data for MKA";
       uses macsec-mka-global-state;
     }
   }
@@ -598,7 +608,9 @@ module srl_nokia-macsec {
     container statistics {
       config false;
       description
-        "MKA interface counters";
+        "Enter the statistics context
+
+         MKA interface counters";
       uses macsec-mka-interface-counters;
       uses macsec-mka-error-counters;
     }
@@ -742,14 +754,16 @@ module srl_nokia-macsec {
 
            A value of 0 means that frames are accepted only in the correct order.";
       }
+      description
+        "Enter the replay-protection context";
     }
-    leaf rx-must-be-encrypted {
+    leaf rx-must-be-macsec-enabled {
       type boolean;
       default "true";
       description
-        "when true; only accept encrypted packets,
+        "when true; only accept macsec with sectag packets,
 
-         If false accept a mix of encrypted and clear text packets";
+         If false accept a mix of macsec and clear text packets";
     }
     list exclude-protocols {
       key "protocol";
@@ -1136,7 +1150,9 @@ module srl_nokia-macsec {
       "MKA interface top level grouping";
     container mka {
       description
-        "Enclosing container for the MKA interface";
+        "Enter the mka context
+
+         Enclosing container for the MKA interface";
       uses macsec-mka-interface-config;
       uses macsec-mka-interface-state;
     }
@@ -1163,24 +1179,43 @@ module srl_nokia-macsec {
             error-message "Ethernet interfaces only";
           }
           description
-            "Reference to a base interface, for example a port or LAG";
+            "Reference to a base interface, for example a port";
         }
         leaf subinterface {
           if-feature "srl_nokia-feat:macsec-subinterface";
-          type leafref {
-            path "/srl_nokia-if:interface[srl_nokia-if:name=current()/../interface]/srl_nokia-if:subinterface/srl_nokia-if:index";
+          type uint32 {
+            range "0..9999";
+          }
+          must '(../aggregate-id and /srl_nokia-if:interface[srl_nokia-if:name=current()/../aggregate-id]/srl_nokia-if:subinterface[srl_nokia-if:index=current()]) or (not(../aggregate-id) and /srl_nokia-if:interface[srl_nokia-if:name=current()/../interface]/srl_nokia-if:subinterface[srl_nokia-if:index=current()])' {
+            error-message "Subinterface must exist under the referenced interface or aggregate";
           }
           description
             "Reference to a subinterface
 
              This requires the base interface to be specified using the interface leaf in this container.";
         }
+        leaf aggregate-id {
+          if-feature "srl_nokia-feat:lag";
+          if-feature "srl_nokia-feat:macsec-lag-subinterface";
+          type leafref {
+            path "/srl_nokia-if:interface[srl_nokia-if:name=current()/../interface]/srl_nokia-if:ethernet/srl_nokia-if:aggregate-id";
+          }
+          must '../subinterface' {
+            error-message "aggregate-id can only be configured when subinterface is specified";
+          }
+          description
+            "Reference to the aggregate-id configured on the interface";
+        }
+        description
+          "Enter the interface-ref context";
       }
       uses macsec-interface-config;
       container statistics {
         config false;
         description
-          "MACsec interface counters";
+          "Enter the statistics context
+
+           MACsec interface counters";
         uses macsec-interface-counters;
       }
       uses macsec-scsa-interface-top;
@@ -1193,7 +1228,9 @@ module srl_nokia-macsec {
       "MKA top level grouping";
     container mka {
       description
-        "The MKA";
+        "Enter the mka context
+
+         The MKA";
       uses macsec-mka-policy-top;
       uses macsec-mka-global-top;
     }
@@ -1204,6 +1241,8 @@ module srl_nokia-macsec {
       if-feature "srl_nokia-feat:macsec";
       uses macsec-mka-top;
       uses macsec-interface-top;
+      description
+        "Enter the macsec context";
     }
   }
 

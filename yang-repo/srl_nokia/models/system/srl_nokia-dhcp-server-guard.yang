@@ -30,6 +30,10 @@ module srl_nokia-dhcp-server-guard {
   description
     "This yang file gives a description of DHCP server guard policy configuration";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -67,7 +71,9 @@ module srl_nokia-dhcp-server-guard {
       }
       container server6-preference {
         description
-          "Specifies value to be verified with the received DHCPv6 server preference option
+          "Enter the server6-preference context
+
+           Specifies value to be verified with the received DHCPv6 server preference option
 
            Verifies that DHCPv6 server preference option value is in the range between min and max.
            If DHCPv6 server preference option is not received then the preference value is set to zero.
@@ -100,7 +106,9 @@ module srl_nokia-dhcp-server-guard {
     container dhcp-server-guard-statistics {
       config false;
       description
-        "Dhcp server guard statistics.";
+        "Enter the dhcp-server-guard-statistics context
+
+         Dhcp server guard statistics.";
       leaf total-dhcp-packets-received {
         type srl_nokia-comm:zero-based-counter64;
         description

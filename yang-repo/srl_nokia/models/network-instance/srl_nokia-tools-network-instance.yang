@@ -15,6 +15,10 @@ module srl_nokia-tools-network-instance {
   description
     "Model for operational commands on system.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -41,12 +45,16 @@ module srl_nokia-tools-network-instance {
     }
     container protocols {
       description
-        "The routing protocols that are enabled for this
+        "Enter the protocols context
+
+         The routing protocols that are enabled for this
          network-instance.";
     }
     container bridge-table {
       description
-        "bridge-table";
+        "Enter the bridge-table context
+
+         bridge-table";
     }
     list connection-point {
       if-feature "srl-feat:connection-point";
@@ -60,13 +68,17 @@ module srl_nokia-tools-network-instance {
       }
       container bridge-table {
         description
-          "bridge-table";
+          "Enter the bridge-table context
+
+           bridge-table";
       }
     }
     container segment-routing {
       if-feature "srl-feat:segment-routing-shared-sid-lsp-stats";
       description
-        "segment-routing info";
+        "Enter the segment-routing context
+
+         segment-routing info";
     }
   }
 }

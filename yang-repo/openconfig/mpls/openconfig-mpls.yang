@@ -759,6 +759,7 @@ module openconfig-mpls {
       "Top level grouping for MPLS configuration and state";
 
     container mpls {
+      presence "presence"; // SRL deviation
       description
         "Anchor point for mpls configuration and operational
         data";

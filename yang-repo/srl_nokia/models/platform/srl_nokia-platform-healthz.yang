@@ -42,6 +42,10 @@ module srl_nokia-platform-healthz {
   description
     "This module defines healthz parameters for platform components.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -65,7 +69,9 @@ module srl_nokia-platform-healthz {
     container healthz {
       config false;
       description
-        "The health of the component
+        "Enter the healthz context
+
+         The health of the component
 
          The paramaters within this
          container indicate the status of the component beyond whether

@@ -40,6 +40,10 @@ module srl_nokia-oam-pm-ethcfm {
     "This YANG module contains the management data definitions for the
      Ethernet CFM Performance Monitoring.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -73,10 +77,14 @@ module srl_nokia-oam-pm-ethcfm {
       container delay {
         if-feature "srl_nokia-feat:oam-pm-ethcfm-dmm";
         uses srl_nokia-oam-pm:bin-group;
+        description
+          "Enter the delay context";
       }
       container loss {
         if-feature "srl_nokia-feat:oam-pm-ethcfm-slm";
         uses srl_nokia-oam-pm:loss-events;
+        description
+          "Enter the loss context";
       }
       list session {
         key "session-name";
@@ -109,6 +117,8 @@ module srl_nokia-oam-pm-ethcfm {
             description
               "The MEP identifier specific to the domain and association identifier";
           }
+          description
+            "Enter the source context";
         }
         leaf target {
           mandatory true;
@@ -205,10 +215,14 @@ module srl_nokia-oam-pm-ethcfm {
                      This value is 'not-applicable to the 'raw' measurement-interval, as it is unbounded.";
                 }
                 uses srl_nokia-oam-pm:mi-delay-statistics;
+                description
+                  "Enter the statistics context";
               }
             }
           }
           uses srl_nokia-oam-pm:delay-events-state;
+          description
+            "Enter the eth-cfm-single-ended-dmm-test context";
         }
         container eth-cfm-single-ended-slm-test {
           if-feature "srl_nokia-feat:oam-pm-ethcfm-slm";
@@ -265,15 +279,23 @@ module srl_nokia-oam-pm-ethcfm {
                 container forward {
                   uses srl_nokia-oam-pm:mi-forward-loss;
                   uses srl_nokia-oam-pm:mi-directional-loss-statistics;
+                  description
+                    "Enter the forward context";
                 }
                 container backward {
                   uses srl_nokia-oam-pm:mi-backward-loss;
                   uses srl_nokia-oam-pm:mi-directional-loss-statistics;
+                  description
+                    "Enter the backward context";
                 }
+                description
+                  "Enter the statistics context";
               }
             }
           }
           uses srl_nokia-oam-pm:loss-events-state;
+          description
+            "Enter the eth-cfm-single-ended-slm-test context";
         }
       }
     }

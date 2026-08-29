@@ -33,6 +33,10 @@ module srl_nokia-mirroring {
   description
     "This module defines configuration and operational state data for mirroring (SPAN/ERSPAN).";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -112,6 +116,12 @@ module srl_nokia-mirroring {
       "The direction of traffic to be mirrored";
   }
 
+  identity capture-type;
+
+  identity capture-interface {
+    base capture-type;
+  }
+
   grouping mirroring-instance-top {
     description
       "Top-level grouping containing a list of mirroring instances";
@@ -163,7 +173,9 @@ module srl_nokia-mirroring {
       "Top-level grouping containing a list of mirror sources.";
     container mirror-source {
       description
-        "Configure mirror source(s)";
+        "Enter the mirror-source context
+
+         Configure mirror source(s)";
       list interface {
         if-feature "srl-feat:mirror-source-intf";
         description
@@ -254,6 +266,8 @@ module srl_nokia-mirroring {
             }
           }
         }
+        description
+          "Enter the acl context";
       }
     }
   }
@@ -263,7 +277,9 @@ module srl_nokia-mirroring {
       "Top-level grouping containing local/remote mirror destination";
     container mirror-destination {
       description
-        "Configure mirror destination";
+        "Enter the mirror-destination context
+
+         Configure mirror destination";
       leaf slice-size {
         if-feature "srl-feat:mirror-dest-slicing";
         type uint16 {
@@ -408,6 +424,21 @@ module srl_nokia-mirroring {
               "The owner-assigned tunnel table index value that identifies
                the tunnel used by mirror-destination.";
           }
+          description
+            "Enter the tunnel-end-points context";
+        }
+      }
+      container pcap {
+        description
+          "Enter the pcap context
+
+           Capture mirror packets as pcap";
+        leaf-list capture-type {
+          description
+            "Capture packets for the capture-type into the tshark app";
+          type identityref {
+            base capture-type;
+          }
         }
       }
       container statistics {
@@ -440,6 +471,8 @@ module srl_nokia-mirroring {
           description
             "The number of egress mirrored octets";
         }
+        description
+          "Enter the statistics context";
       }
     }
   }

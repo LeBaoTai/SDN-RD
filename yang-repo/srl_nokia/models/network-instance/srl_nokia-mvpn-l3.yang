@@ -33,6 +33,10 @@ module srl_nokia-mvpn-l3 {
   description
     "This yang file models configuration and state of the L3 Multicast vpn service";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -204,7 +208,9 @@ module srl_nokia-mvpn-l3 {
   grouping mldp-tunnel {
     container mldp {
       description
-        "multipoint ldp for provider tunnel";
+        "Enter the mldp context
+
+         multipoint ldp for provider tunnel";
       leaf admin-state {
         type srl_nokia-comm:admin-state;
         description
@@ -257,7 +263,9 @@ module srl_nokia-mvpn-l3 {
       }
       container mldp {
         description
-          "Multipoint LDP inclusive provider tunnel identifier";
+          "Enter the mldp context
+
+           Multipoint LDP inclusive provider tunnel identifier";
         leaf root-address {
           type srl_nokia-comm:ip-address;
           description
@@ -312,7 +320,9 @@ module srl_nokia-mvpn-l3 {
       }
       container mldp {
         description
-          "Multipoint LDP inclusive provider tunnel identifier";
+          "Enter the mldp context
+
+           Multipoint LDP inclusive provider tunnel identifier";
         leaf root-address {
           type srl_nokia-comm:ip-address;
           description
@@ -341,13 +351,15 @@ module srl_nokia-mvpn-l3 {
     container inclusive {
       uses mldp-tunnel;
       uses inclusive-provider-tunnel-state;
+      description
+        "Enter the inclusive context";
     }
   }
 
   grouping selective-configuration {
     container data-rate-threshold {
       description
-        "Enter the data-threshold context";
+        "Enter the data-rate-threshold context";
       list group-range {
         description
           "The data rate threshold to switch an (c-s,c-g) from IPMSI to SPMSI
@@ -384,6 +396,8 @@ module srl_nokia-mvpn-l3 {
       uses mldp-tunnel;
       uses selective-configuration;
       uses selective-provider-tunnel-state;
+      description
+        "Enter the selective context";
     }
   }
 
@@ -391,6 +405,8 @@ module srl_nokia-mvpn-l3 {
     container provider-tunnel {
       uses inclusive-provider-tunnel;
       uses selective-provider-tunnel;
+      description
+        "Enter the provider-tunnel context";
     }
   }
 

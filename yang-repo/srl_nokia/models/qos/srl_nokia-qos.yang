@@ -37,6 +37,10 @@ module srl_nokia-qos {
     "Nokia SR Linux Support
      Web: <http://www.nokia.com>";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -198,7 +202,9 @@ module srl_nokia-qos {
       srl_nokia-ext:first-released "19.11.1";
       if-feature "srl-feat:qos";
       description
-        "Top-level container for QoS data";
+        "Enter the qos context
+
+         Top-level container for QoS data";
       uses ecn-top;
       uses queue-names-config;
       uses forwarding-classes-config;
@@ -262,7 +268,9 @@ module srl_nokia-qos {
   grouping qos-interface-queue-root-top {
     container queues {
       description
-        "Container for a list of queues that are instantiated on an interface";
+        "Enter the queues context
+
+         Container for a list of queues that are instantiated on an interface";
       list queue {
         key "queue-name";
         leaf queue-name {
@@ -271,9 +279,13 @@ module srl_nokia-qos {
           }
           description
             "The queue name";
-          must 'string(../../../interface-ref/subinterface) = "" or /srl_nokia-platform:platform/srl_nokia-platform-qos:qos/srl_nokia-platform-qos:traffic-management-mode = "two-priorities"' {
+          must 'string(../../../../interface-ref/subinterface) = "" or /srl_nokia-platform:platform/srl_nokia-platform-qos:qos/srl_nokia-platform-qos:traffic-management-mode = "two-priorities"' {
             error-message "configuring of a queue only permitted for interfaces";
             srl_nokia-ext:if-feature "srl_nokia-features:qos-subinterface-queuing";
+          }
+          must 'string(../../../../interface-ref/subinterface) = "" or not(starts-with(../../../../interface-ref/interface, "lag"))' {
+            error-message "configuring of a queue not permitted for LAG sub-interfaces";
+            srl_nokia-ext:if-feature "srl_nokia-features:qos-subinterface-queuing and not srl_nokia-features:qos-lag-subinterface-queuing";
           }
         }
         description
@@ -357,6 +369,8 @@ module srl_nokia-qos {
                  On 7250 IXR-6/10 there can be a significant difference between the configured value and the operational value";
             }
           }
+          description
+            "Enter the active-queue-management context";
         }
         container queue-depth {
           config false;
@@ -368,7 +382,7 @@ module srl_nokia-qos {
               "Maximum queue depth in bytes";
           }
           leaf committed-burst-size {
-            if-feature "srl-feat:qos-queue-committed-burst-size";
+            if-feature "srl-feat:qos-queue-committed-burst-size or srl-feat:qos-subinterface-queuing";
             type uint32;
             units "bytes";
             description
@@ -435,10 +449,14 @@ module srl_nokia-qos {
             description
               "The number of samples that were expected, but did not arrive fast enough to be included in the average and high-watermark calculations";
           }
+          description
+            "Enter the queue-depth context";
         }
         container scheduling {
           description
-            "Container for queue scheduling parameters";
+            "Enter the scheduling context
+
+             Container for queue scheduling parameters";
           config false;
           leaf peak-rate-percent {
             srl_nokia-ext:first-released "20.6.1";
@@ -456,11 +474,31 @@ module srl_nokia-qos {
             description
               "The actual/operational peak rate in bits per second";
           }
+          leaf committed-rate-percent {
+            if-feature "srl-feat:qos-scheduler-policies and srl-feat:qos-subinterface-queuing";
+            type uint8 {
+              range "0..100";
+            }
+            description
+              "The maximum percentage of port bandwidth that is available to the traffic in this queue during the CIR scheduling loop. The default is 0";
+          }
+          leaf committed-rate-bps {
+            if-feature "srl-feat:qos-scheduler-policies and srl-feat:qos-subinterface-queuing";
+            type uint64;
+            description
+              "The actual/operational committed rate in bits per second";
+          }
           leaf strict-priority {
             if-feature "srl-feat:qos-scheduler-policies";
             type boolean;
             description
               "When set to true the queue is serviced as a strict priority queue, regardless of whether a weight is configured or its value. When set to false the queue is serviced using WRR, even if the queue does not have a configured weight; in this case the default weight value of 1 is used";
+          }
+          leaf priority-level {
+            if-feature "srl-feat:qos-scheduler-policies and srl-feat:qos-subinterface-queuing";
+            type uint8;
+            description
+              "The priority level for the queue when scheduled as part of strict scheduler";
           }
           leaf weight {
             type uint8 {
@@ -509,7 +547,9 @@ module srl_nokia-qos {
           container aggregate-statistics {
             srl_nokia-ext:delivery-node-override "true";
             description
-              "Aggregate queue statistics per interface-queue or subinterface-queue";
+              "Enter the aggregate-statistics context
+
+               Aggregate queue statistics per interface-queue or subinterface-queue";
             leaf last-clear {
               type srl_nokia-comm:date-and-time-delta;
               description
@@ -524,7 +564,9 @@ module srl_nokia-qos {
           }
           container per-lag-member-statistics {
             description
-              "Queue statistics per-LAG member. These statistics are relevant only for LAG";
+              "Enter the per-lag-member-statistics context
+
+               Queue statistics per-LAG member. These statistics are relevant only for LAG";
             list member-interface {
               key "member-interface-name";
               leaf member-interface-name {
@@ -538,6 +580,8 @@ module srl_nokia-qos {
               }
             }
           }
+          description
+            "Enter the queue-statistics context";
         }
       }
     }
@@ -558,12 +602,16 @@ module srl_nokia-qos {
     container scheduler {
       srl_nokia-ext:first-released "20.12.1";
       description
-        "Output traffic scheduler options";
+        "Enter the scheduler context
+
+         Output traffic scheduler options";
       container scheduling-resources-pools {
         config false;
         if-feature "srl-feat:qos-queue-scheduling-policy";
         description
-          "Lists the scheduling resources pools that the given interface is using";
+          "Enter the scheduling-resources-pools context
+
+           Lists the scheduling resources pools that the given interface is using";
         leaf resource-set-pool {
           type uint8 {
             range "0..1";
@@ -692,7 +740,9 @@ module srl_nokia-qos {
         }
         container inputs {
           description
-            "List of subinterface inputs";
+            "Enter the inputs context
+
+             List of subinterface inputs";
           list interface {
             key "interface-id";
             leaf interface-id {
@@ -720,17 +770,13 @@ module srl_nokia-qos {
           error-message "Attachment of a scheduler not permitted for sub-interface when traffic-management is set to eight-priorities";
           srl_nokia-ext:if-feature "srl_nokia-features:qos-subinterface-queuing";
         }
-      }
-      leaf aggregate-rate-percentage {
-        if-feature "srl-feat:qos-subinterface-queuing";
-        description
-          "Defines the aggregate-rate for a subinterface as a percentage of outgoing interface rate";
-        type uint8 {
-          range "1..100";
+        must 'string(../../../interface-ref/subinterface) != "" or not(boolean(/srl_nokia-qos:qos/srl_nokia-qos:scheduler-policies/srl_nokia-qos:scheduler-policy[srl_nokia-qos:name=current()]/srl_nokia-qos:scheduler[srl_nokia-qos:sequence=1]/srl_nokia-qos:output/srl_nokia-qos:peak-rate-percent))' {
+          error-message "Scheduler policy with output peak-rate-percent configured can only be attached to sub-interfaces";
+          srl_nokia-ext:if-feature "srl_nokia-features:qos-subinterface-queuing";
         }
-        default "100";
-        must '. = 100 or string(../../../interface-ref/subinterface) != "" and /srl_nokia-platform:platform/srl_nokia-platform-qos:qos/srl_nokia-platform-qos:traffic-management-mode = "two-priorities"' {
-          error-message "aggregate-rate-percentage not permitted for sub-interface when traffic-management is set to eight-priorities";
+        must 'string(../../../interface-ref/subinterface) = "" or not(starts-with(../../../interface-ref/interface, "lag"))' {
+          error-message "Attachment of scheduler-policy not permitted for LAG sub-interfaces";
+          srl_nokia-ext:if-feature "srl_nokia-features:qos-subinterface-queuing and not srl_nokia-features:qos-lag-subinterface-queuing";
         }
       }
     }
@@ -763,7 +809,9 @@ module srl_nokia-qos {
       container parent-policer {
         config false;
         description
-          "Parent-policer operational parameters";
+          "Enter the parent-policer context
+
+           Parent-policer operational parameters";
         leaf rate-kbps {
           description
             "Operational rate of the parent policer";
@@ -790,6 +838,8 @@ module srl_nokia-qos {
         }
         uses srl_nokia-qos-policers:policer-instance-state;
       }
+      description
+        "Enter the policer-policies context";
     }
   }
 
@@ -1053,10 +1103,50 @@ module srl_nokia-qos {
     }
   }
 
+  grouping qos-subinterface-output-pending-top {
+    leaf-list voq-set-pending {
+      if-feature "srl-feat:qos-subinterface-queuing";
+      config false;
+      description
+        "List of member interfaces, related to this subinterface, where the VoQ-set
+         (voq-id or voq-connector-id) resource has not yet been allocated";
+      type leafref {
+        path "/srl_nokia-if:interface/srl_nokia-if:name";
+      }
+    }
+    leaf-list voq-set-statistics-pending {
+      if-feature "srl-feat:qos-subinterface-queuing and srl-feat:qos-voq-stats-enable";
+      config false;
+      description
+        "List of member interfaces, related to this subinterface, where the VoQ
+         statistics resource (voq-stat-id) has not yet been allocated.
+         Only populated when voq-statistics is enabled on the subinterface";
+      type leafref {
+        path "/srl_nokia-if:interface/srl_nokia-if:name";
+      }
+    }
+    leaf lag-bundle-pending {
+      if-feature "srl-feat:qos-lag-subinterface-queuing";
+      config false;
+      type boolean;
+      default "false";
+      description
+        "True when the LAG bundle-id for this LAG sub-interface has not yet
+         been allocated. A LAG bundle-id is a precondition for allocating
+         voq-set and voq-connector-set on a LAG sub-interface; while this
+         leaf reads true, voq-set-pending will also be empty because the
+         downstream voq-set allocation is intentionally not attempted.
+         Only meaningful on LAG sub-interfaces with per-subinterface
+         queueing QoS configured; reads false on all other sub-interfaces.";
+    }
+  }
+
   grouping qos-interface-input-top {
     container input {
       description
-        "Top-level container for QoS configuration and state relating to ingress traffic on the subinterface";
+        "Enter the input context
+
+         Top-level container for QoS configuration and state relating to ingress traffic on the subinterface";
       uses qos-subinterface-input-top;
       leaf pfc-buffer-allocation-profile {
         if-feature "srl-feat:qos-pfc";
@@ -1093,6 +1183,10 @@ module srl_nokia-qos {
       must 'string(../../interface-ref/subinterface) = "" or /srl_nokia-platform:platform/srl_nokia-platform-qos:qos/srl_nokia-platform-qos:traffic-management-mode = "two-priorities"' {
         error-message "Attachment of buffer-allocation-profile, not permitted for sub-interface when traffic-management is set to eight-priorities";
         srl_nokia-ext:if-feature "srl_nokia-features:qos-subinterface-queuing";
+      }
+      must 'string(../../interface-ref/subinterface) = "" or not(starts-with(../../interface-ref/interface, "lag"))' {
+        error-message "Attachment of buffer-allocation-profile, not permitted for LAG sub-interfaces";
+        srl_nokia-ext:if-feature "srl_nokia-features:qos-subinterface-queuing and not srl_nokia-features:qos-lag-subinterface-queuing";
       }
     }
     list interface-pool {
@@ -1145,7 +1239,9 @@ module srl_nokia-qos {
         }
         container queue-depth {
           description
-            "Container with the latest queue-depth information for a specific VOQ";
+            "Enter the queue-depth context
+
+             Container with the latest queue-depth information for a specific VOQ";
           list congestion-event {
             max-elements 1;
             description
@@ -1201,7 +1297,9 @@ module srl_nokia-qos {
   grouping qos-interface-output-top {
     container output {
       description
-        "Top-level container for QoS configuration and state relating to egress traffic on the interface or subinterface";
+        "Enter the output context
+
+         Top-level container for QoS configuration and state relating to egress traffic on the interface or subinterface";
       leaf interface-pool-policy {
         if-feature "srl-feat:qos-interface-pool-policy";
         description
@@ -1219,6 +1317,9 @@ module srl_nokia-qos {
       uses qos-subinterface-output-class-map-pending-top {
         if-feature "srl-feat:qos-subinterface-members";
       }
+      uses qos-subinterface-output-pending-top {
+        if-feature "srl-feat:qos-subinterface-queuing";
+      }
       uses qos-interface-buffer-allocation;
       uses qos-interface-output-voq {
         if-feature "srl-feat:qos-triggered-queue-depth-sampling";
@@ -1229,7 +1330,9 @@ module srl_nokia-qos {
   grouping qos-interfaces {
     container interfaces {
       description
-        "Interfaces and subinterfaces with QoS configuration and state";
+        "Enter the interfaces context
+
+         Interfaces and subinterfaces with QoS configuration and state";
       list interface {
         key "interface-id";
         unique "interface-ref/interface interface-ref/subinterface";
@@ -1250,7 +1353,9 @@ module srl_nokia-qos {
         }
         container interface-ref {
           description
-            "Reference to an interface or subinterface";
+            "Enter the interface-ref context
+
+             Reference to an interface or subinterface";
           leaf interface {
             type leafref {
               path "/srl_nokia-if:interface/srl_nokia-if:name";
@@ -1299,6 +1404,10 @@ module srl_nokia-qos {
           description
             "Enable or disable voq-stats at interface";
           type boolean;
+          must ". = false() or string(../interface-ref/subinterface) = '' or string(../output/buffer-allocation-profile) != ''" {
+            error-message "voq-statistics can be enabled on subinterface only when output buffer-allocation-profile is configured";
+            srl_nokia-ext:if-feature "srl_nokia-features:qos-subinterface-queuing";
+          }
         }
         leaf voq-statistics-allocation-status {
           config false;
@@ -1346,7 +1455,9 @@ module srl_nokia-qos {
         container input {
           if-feature "srl-feat:qos-pfc";
           description
-            "QoS input parmeters ar forwarding-complex level";
+            "Enter the input context
+
+             QoS input parmeters ar forwarding-complex level";
           leaf pfc-buffer-reservation {
             if-feature "srl-feat:qos-pfc-headroom-buffer";
             description
@@ -1365,7 +1476,9 @@ module srl_nokia-qos {
         }
         container output {
           description
-            "QoS ouput parameters at forwarding-complex level";
+            "Enter the output context
+
+             QoS ouput parameters at forwarding-complex level";
           leaf fp-pool-policy {
             if-feature "srl-feat:qos-fp-pool-policy";
             description
@@ -1434,12 +1547,16 @@ module srl_nokia-qos {
   grouping qos-buffer-management {
     container buffer-management {
       description
-        "Container for the list of configured queue management profiles";
+        "Enter the buffer-management context
+
+         Container for the list of configured queue management profiles";
       container committed-burst-size-table {
         srl_nokia-ext:delivery-node-override "true";
         if-feature "srl-feat:qos-committed-burst-size-table";
         description
-          "Defines possible committed-burst sizes";
+          "Enter the committed-burst-size-table context
+
+           Defines possible committed-burst sizes";
         leaf alt-0 {
           type uint32;
           units "bytes";
@@ -1472,7 +1589,9 @@ module srl_nokia-qos {
       container trunk-pool-policy {
         if-feature "srl-feat:qos-trunk-pool-policy";
         description
-          "Defines system-wide trunk-pool-policy applicable to all CoE interfaces";
+          "Enter the trunk-pool-policy context
+
+           Defines system-wide trunk-pool-policy applicable to all CoE interfaces";
         list trunk-pool {
           description
             "List of trunk-pools.
@@ -1517,7 +1636,9 @@ module srl_nokia-qos {
         }
         container wred {
           description
-            "Configuration and operational state parameters relating to Weighted Random Early Detection (WRED)";
+            "Enter the wred context
+
+             Configuration and operational state parameters relating to Weighted Random Early Detection (WRED)";
           list wred-slope {
             description
               "List of WRED slopes";
@@ -1608,9 +1729,13 @@ module srl_nokia-qos {
                 must '0 = ../maximum-burst-size' {
                   error-message "MBS must be zero/default in order to provision MBS delay";
                 }
-                must 'not(../committed-burst-size-delay) = not(.)' {
+                must 'string(../committed-burst-size-delay) != ""' {
                   error-message "CBS delay must be provisioned together with MBS delay";
                   srl_nokia-ext:if-feature "srl_nokia-features:qos-queue-committed-burst-size";
+                }
+                must '/srl_nokia-platform:platform/srl_nokia-platform-qos:qos/srl_nokia-platform-qos:traffic-management-mode != "two-priorities"' {
+                  error-message "maximum-burst-size-delay is not supported when traffic-management-mode is two-priorities";
+                  srl_nokia-ext:if-feature "srl_nokia-features:qos-subinterface-queuing";
                 }
                 description
                   "Maximum amount of shared buffer memory available to the queue, expressed as a function of time-delay.
@@ -1635,13 +1760,13 @@ module srl_nokia-qos {
               leaf committed-burst-size-delay {
                 if-feature "srl-feat:qos-queue-committed-burst-size and srl-feat:qos-queue-burst-delay";
                 type uint32 {
-                  range "1..4294967295";
+                  range "0..4294967295";
                 }
                 units "microseconds";
                 must 'not(../committed-burst-size)' {
                   error-message "CBS must be unprovisioned in order to provision CBS delay";
                 }
-                must 'not(../maximum-burst-size-delay) = not(.)' {
+                must 'string(../maximum-burst-size-delay) != ""' {
                   error-message "MBS delay must be provisioned together with CBS delay";
                 }
                 must '(../maximum-burst-size-delay) and (. <= ../maximum-burst-size-delay)' {
@@ -1651,7 +1776,7 @@ module srl_nokia-qos {
                   "Committed amount of shared buffer memory available to the queue, expressed as a function of time-delay.
                    The number of bytes is calculated by multiplying committed-burst-size-delay by interface speed the queue is attached to.
 
-                   Must be non-zero/non-default in order to take effect, and when so, the bytes based committed-burst-size leaf is disallowed.";
+                   Must be present in order to take effect, and when so, the bytes based committed-burst-size leaf is disallowed.";
               }
               leaf cbs-adaptation-rule {
                 if-feature "srl-feat:qos-queue-cbs-adaptation-rule";
@@ -1665,6 +1790,10 @@ module srl_nokia-qos {
                 type uint32;
                 must '. <= ../maximum-burst-size' {
                   error-message "High threshold bytes must be less than MBS";
+                }
+                must '. = 0 or /srl_nokia-platform:platform/srl_nokia-platform-qos:qos/srl_nokia-platform-qos:traffic-management-mode != "two-priorities"' {
+                  error-message "high-threshold-bytes is not supported when traffic-management-mode is two-priorities";
+                  srl_nokia-ext:if-feature "srl_nokia-features:qos-subinterface-queuing";
                 }
                 default "0";
                 description
@@ -1686,6 +1815,10 @@ module srl_nokia-qos {
                 must '. < ../high-threshold-bytes' {
                   error-message "Low threshold must be less than high threshold";
                 }
+                must '/srl_nokia-platform:platform/srl_nokia-platform-qos:qos/srl_nokia-platform-qos:traffic-management-mode != "two-priorities"' {
+                  error-message "low-threshold-bytes is not supported when traffic-management-mode is two-priorities";
+                  srl_nokia-ext:if-feature "srl_nokia-features:qos-subinterface-queuing";
+                }
                 description
                   "The queue depth that, when crossed in a falling direction, signals a potential end of congestion
 
@@ -1697,6 +1830,10 @@ module srl_nokia-qos {
                   range "1..255";
                 }
                 default "3";
+                must '. = 3 or /srl_nokia-platform:platform/srl_nokia-platform-qos:qos/srl_nokia-platform-qos:traffic-management-mode != "two-priorities"' {
+                  error-message "low-threshold-count is not supported when traffic-management-mode is two-priorities";
+                  srl_nokia-ext:if-feature "srl_nokia-features:qos-subinterface-queuing";
+                }
                 description
                   "The number of consecutive queue-depth samples below low-threshold-bytes that are required to declare the end of congestion
 
@@ -1706,6 +1843,10 @@ module srl_nokia-qos {
                 if-feature "srl-feat:qos-triggered-queue-depth-sampling";
                 must '. = false() or (../high-threshold-bytes > 0 and ../low-threshold-bytes > 0)' {
                   error-message "True setting requires high-threshold-bytes and low-threshold-bytes to be greater than zero";
+                }
+                must '. = false() or /srl_nokia-platform:platform/srl_nokia-platform-qos:qos/srl_nokia-platform-qos:traffic-management-mode != "two-priorities"' {
+                  error-message "queue-depth-sampling is not supported when traffic-management-mode is two-priorities";
+                  srl_nokia-ext:if-feature "srl_nokia-features:qos-subinterface-queuing";
                 }
                 description
                   "True setting enables triggered queue-depth sampling
@@ -1781,6 +1922,8 @@ module srl_nokia-qos {
               }
             }
           }
+          description
+            "Enter the queues context";
         }
       }
       list slope-policy {
@@ -1846,7 +1989,9 @@ module srl_nokia-qos {
         }
         container root-tier {
           description
-            "Parameters related to root-tier buffers";
+            "Enter the root-tier context
+
+             Parameters related to root-tier buffers";
           leaf default-slope-policy {
             if-feature "srl-feat:qos-slope-policy";
             type leafref {
@@ -1878,7 +2023,9 @@ module srl_nokia-qos {
             }
             container mid-pool-members {
               description
-                "List of mid-pool members participating in this given root-pool";
+                "Enter the mid-pool-members context
+
+                 List of mid-pool members participating in this given root-pool";
               list mid-pool-member {
                 description
                   "Mid-pool member";
@@ -1896,7 +2043,9 @@ module srl_nokia-qos {
         }
         container mid-tier {
           description
-            "Mid-pool parameters definition";
+            "Enter the mid-tier context
+
+             Mid-pool parameters definition";
           list mid-pool {
             description
               "Mid-pool definition";
@@ -1957,7 +2106,9 @@ module srl_nokia-qos {
           }
           container allocation-size {
             description
-              "Interface-pool size definition";
+              "Enter the allocation-size context
+
+               Interface-pool size definition";
             leaf explicit-percentage {
               type srl_nokia-comm:percentage;
               description
@@ -1966,7 +2117,9 @@ module srl_nokia-qos {
             }
             container bw-proportional {
               description
-                "Defines how the mid-pool size is shared between individual interface-pools taking into account interface-speed";
+                "Enter the bw-proportional context
+
+                 Defines how the mid-pool size is shared between individual interface-pools taking into account interface-speed";
               leaf over-subscription-factor {
                 description
                   "Factor defining how much of the over-subscription for the given interface-pool is allowed, when its size is calculated as a proportion of the corresponding interface-speed.
@@ -1988,7 +2141,9 @@ module srl_nokia-qos {
   grouping queue-names-config {
     container queues {
       description
-        "Enclosing container for the list of user-defined queue names";
+        "Enter the queues context
+
+         Enclosing container for the list of user-defined queue names";
       list queue {
         key "name";
         description
@@ -2061,7 +2216,9 @@ module srl_nokia-qos {
       container queue-depth-sampling {
         if-feature "srl-feat:qos-queue-depth-sampling";
         description
-          "System level configuration for queue-depth sampling";
+          "Enter the queue-depth-sampling context
+
+           System level configuration for queue-depth sampling";
         leaf admin-state {
           type srl_nokia-comm:admin-state;
           default "disable";
@@ -2084,7 +2241,9 @@ module srl_nokia-qos {
   grouping forwarding-classes-config {
     container forwarding-classes {
       description
-        "Enclosing container for list of user-defined forwarding class names";
+        "Enter the forwarding-classes context
+
+         Enclosing container for list of user-defined forwarding class names";
       list forwarding-class {
         key "name";
         unique "forwarding-class-index";
@@ -2196,6 +2355,8 @@ module srl_nokia-qos {
               error-message "cannot be configured together with default multicast queue";
             }
           }
+          description
+            "Enter the output context";
         }
       }
     }
@@ -2205,7 +2366,9 @@ module srl_nokia-qos {
     container packet-trimming {
       srl_nokia-ext:delivery-node-override "true";
       description
-        "Configuration related to packet-trimming";
+        "Enter the packet-trimming context
+
+         Configuration related to packet-trimming";
       leaf enable-packet-trimming {
         description
           "Enables packet-trimming on the system";
@@ -2276,10 +2439,14 @@ module srl_nokia-qos {
       container received-traffic {
         if-feature "srl-feat:qos-pfc-received-traffic-mapping";
         description
-          "Parameters related to receiving traffic for pfc-generation";
+          "Enter the received-traffic context
+
+           Parameters related to receiving traffic for pfc-generation";
         container unicast-mapping {
           description
-            "Parameters defing mapping of incoming unicast traffic into a pfc-queues";
+            "Enter the unicast-mapping context
+
+             Parameters defing mapping of incoming unicast traffic into a pfc-queues";
           list pfc-queue {
             key "pfc-queue-name";
             unique "pfc-pause-frame-priority";
@@ -2322,10 +2489,14 @@ module srl_nokia-qos {
       }
       container received-pfc-pause-frames {
         description
-          "Parameters describing the behaviour when pfc-pause-frames are received on outgoing interface";
+          "Enter the received-pfc-pause-frames context
+
+           Parameters describing the behaviour when pfc-pause-frames are received on outgoing interface";
         container deadlock {
           description
-            "Parameters related to avoid a deadlock related to pfc on outgoing interface";
+            "Enter the deadlock context
+
+             Parameters related to avoid a deadlock related to pfc on outgoing interface";
           leaf enable {
             type boolean;
             default "false";
@@ -2378,7 +2549,9 @@ module srl_nokia-qos {
   grouping pfc-interface-stats {
     container statistics {
       description
-        "Statistics related to PFC functionality";
+        "Enter the statistics context
+
+         Statistics related to PFC functionality";
       config false;
       leaf last-clear {
         type srl_nokia-comm:date-and-time-delta;
@@ -2518,7 +2691,9 @@ module srl_nokia-qos {
   grouping dcbx {
     container dcbx {
       description
-        "Container defining DCBX related parameters and state information";
+        "Enter the dcbx context
+
+         Container defining DCBX related parameters and state information";
       leaf admin-state {
         type srl_nokia-comm:admin-state;
         default "enable";
@@ -2576,7 +2751,9 @@ module srl_nokia-qos {
         config false;
         if-feature "srl-feat:qos-dcbx-ets";
         description
-          "Information about received and sent ETS TLVs";
+          "Enter the ets-tlv context
+
+           Information about received and sent ETS TLVs";
         leaf remote-credit-based-shaper {
           type uint8;
           description
@@ -2669,7 +2846,9 @@ module srl_nokia-qos {
   grouping pfc-interface {
     container pfc {
       description
-        "Parameters and information related to PFC on the interface";
+        "Enter the pfc context
+
+         Parameters and information related to PFC on the interface";
       leaf pfc-mapping-profile {
         type leafref {
           path "../../../../pfc-mapping-profile/name";
@@ -2718,7 +2897,9 @@ module srl_nokia-qos {
         container policers {
           if-feature "srl-feat:qos-policer-policies";
           description
-            "Container containing the assignment of the policers to respective forwarding types";
+            "Enter the policers context
+
+             Container containing the assignment of the policers to respective forwarding types";
           leaf unicast-policer {
             type leafref {
               path "../../../../policer-policies/policer-policy/policer/policer-id";
@@ -2787,7 +2968,9 @@ module srl_nokia-qos {
         }
         container queue {
           description
-            "Container used to define whether local subinterface should be created or re-direction to remote queue at interface level should be used";
+            "Enter the queue context
+
+             Container used to define whether local subinterface should be created or re-direction to remote queue at interface level should be used";
           leaf name {
             type leafref {
               path "/srl_nokia-qos:qos/srl_nokia-qos:queues/srl_nokia-qos:queue/srl_nokia-qos:name";
@@ -2833,7 +3016,9 @@ module srl_nokia-qos {
       container pre-classification {
         if-feature "srl-feat:qos-pre-classifier";
         description
-          "Defines list of protected codepoints within the system
+          "Enter the pre-classification context
+
+           Defines list of protected codepoints within the system
 
            Dot1p codepoints have highest priority. MPLS and DSCP condepoints are relevant only on untagged interfaces";
         list dot1p {
@@ -2890,7 +3075,9 @@ module srl_nokia-qos {
       container forwarding-class-resource-priority {
         if-feature "srl-feat:qos-forwarding-class-resource-priority";
         description
-          "Defines priority per forwarding-class and per profile to be used for access to shared chipset resources";
+          "Enter the forwarding-class-resource-priority context
+
+           Defines priority per forwarding-class and per profile to be used for access to shared chipset resources";
         list forwarding-class {
           description
             "User defined forwarding class";
@@ -2929,7 +3116,9 @@ module srl_nokia-qos {
       container drop-zones {
         if-feature "srl-feat:qos-drop-zones";
         description
-          "Defines drop-zones per shared-resource on per resource-priority and per packet-type basis";
+          "Enter the drop-zones context
+
+           Defines drop-zones per shared-resource on per resource-priority and per packet-type basis";
         list unicast-priority {
           key "resource-priority";
           leaf resource-priority {
@@ -2996,7 +3185,9 @@ module srl_nokia-qos {
       container resource-utilization-thresholds {
         if-feature "srl-feat:qos-resource-utilization-thresholds";
         description
-          "Defines thresholds monitoring used resorces which divide individual shared chipset resources into 4 utilization-zones";
+          "Enter the resource-utilization-thresholds context
+
+           Defines thresholds monitoring used resorces which divide individual shared chipset resources into 4 utilization-zones";
         list threshold {
           key "index";
           leaf index {
@@ -3008,7 +3199,9 @@ module srl_nokia-qos {
           }
           container buffer-segment {
             description
-              "Utilization thresholds for buffer segments";
+              "Enter the buffer-segment context
+
+               Utilization thresholds for buffer segments";
             leaf rising-threshold-value {
               description
                 "The rising-threshold-value definining the transition from higher-congestion zone to lower-congestion zone";
@@ -3028,7 +3221,9 @@ module srl_nokia-qos {
           }
           container packet-id {
             description
-              "Utilization thresholds for packet re-ordering contexts";
+              "Enter the packet-id context
+
+               Utilization thresholds for packet re-ordering contexts";
             leaf rising-threshold-value {
               description
                 "The rising-threshold-value definining the transition from higher-congestion zone to lower-congestion zone";
@@ -3048,7 +3243,9 @@ module srl_nokia-qos {
           }
           container header-buffer {
             description
-              "Utilization thresholds for packet header buffers";
+              "Enter the header-buffer context
+
+               Utilization thresholds for packet header buffers";
             leaf rising-threshold-value {
               description
                 "The rising-threshold-value definining the transition from higher-congestion zone to lower-congestion zone";
@@ -3068,11 +3265,15 @@ module srl_nokia-qos {
           }
         }
       }
+      description
+        "Enter the resource-management context";
     }
     container system-generated-traffic {
       if-feature "srl-feat:qos-system-generated-traffic-map";
       description
-        "Defines mapping of dscp values into forwarding-class and profile for system generated traffic";
+        "Enter the system-generated-traffic context
+
+         Defines mapping of dscp values into forwarding-class and profile for system generated traffic";
       config false;
       list dscp {
         key "value";
@@ -3099,7 +3300,9 @@ module srl_nokia-qos {
   grouping scheduler-policies-top {
     container scheduler-policies {
       description
-        "Container for the list of configured scheduler policies";
+        "Enter the scheduler-policies context
+
+         Container for the list of configured scheduler policies";
       list scheduler-policy {
         if-feature "srl-feat:qos-scheduler-policies";
         key "name";
@@ -3140,7 +3343,6 @@ module srl_nokia-qos {
           list input {
             key "id";
             unique "queue-name";
-            unique "priority-level";
             description
               "List of input sources for the scheduler";
             leaf id {
@@ -3193,6 +3395,10 @@ module srl_nokia-qos {
                 error-message "Should be in the range 1..127";
                 srl_nokia-ext:if-feature "not (srl_nokia-features:ixr-dnx)";
               }
+              must '/srl_nokia-platform:platform/srl_nokia-platform-qos:qos/srl_nokia-platform-qos:traffic-management-mode = "eight-priorities" or (../../sequence = 1)' {
+                error-message "weight can be configured only in weighted schedulers in two-priorities";
+                srl_nokia-ext:if-feature "srl_nokia-features:qos-subinterface-queuing";
+              }
               description
                 "For weighted round-robin schedulers, this leaf indicates the weight of the corresponding input";
             }
@@ -3241,12 +3447,42 @@ module srl_nokia-qos {
               }
             }
           }
+          container output {
+            if-feature "srl-feat:qos-subinterface-queuing";
+            description
+              "Enter the output context
+
+               Output for this scheduler";
+            leaf output-type {
+              type enumeration {
+                enum interface;
+              }
+              must '/srl_nokia-platform:platform/srl_nokia-platform-qos:qos/srl_nokia-platform-qos:traffic-management-mode = "two-priorities" and (../../sequence = 1)' {
+                error-message "output can only be configured for scheduler sequence 1 when traffic-management-mode is two-priorities";
+              }
+            }
+            leaf peak-rate-percent {
+              description
+                "Defines PIR aggregate output rate for scheduler";
+              type uint8 {
+                range "1..100";
+              }
+              must '/srl_nokia-platform:platform/srl_nokia-platform-qos:qos/srl_nokia-platform-qos:traffic-management-mode = "two-priorities" and (../../sequence = 1)' {
+                error-message "output can only be configured for scheduler sequence 1 when traffic-management-mode is two-priorities";
+              }
+              must '../output-type = "interface"' {
+                error-message "peak-rate-percent can only be configured when output-type is set to interface";
+              }
+            }
+          }
         }
       }
       container scheduling-priority-mapping-table {
         if-feature "srl-feat:qos-scheduling-priority-mapping";
         description
-          "This table maps individual scheduling-classes into scheduling-priority.
+          "Enter the scheduling-priority-mapping-table context
+
+           This table maps individual scheduling-classes into scheduling-priority.
 
            This table is global for the whole system";
         list scheduling-class {
@@ -3293,7 +3529,9 @@ module srl_nokia-qos {
           }
           container scheduling {
             description
-              "Definition of scheduling related for the queue";
+              "Enter the scheduling context
+
+               Definition of scheduling related for the queue";
             leaf scheduling-class {
               description
                 "Scheduling-class of the queue";
@@ -3312,7 +3550,9 @@ module srl_nokia-qos {
             }
             container packet-length-adjustment {
               description
-                "The definition on how packet-length should be adjusted for the scheduling-algorithm calculation";
+                "Enter the packet-length-adjustment context
+
+                 The definition on how packet-length should be adjusted for the scheduling-algorithm calculation";
               leaf add {
                 description
                   "Number of bytes to be added to the packet-length for the scheduling-algorithm calculation";
@@ -3377,7 +3617,9 @@ module srl_nokia-qos {
           }
           container rate {
             description
-              "Defines the scheduler rate";
+              "Enter the rate context
+
+               Defines the scheduler rate";
             choice kbps-or-percentage {
               case peak-rate-kbps {
                 leaf peak-rate-kbps {
@@ -3406,7 +3648,9 @@ module srl_nokia-qos {
           }
           container inputs {
             description
-              "List of scheduler inputs";
+              "Enter the inputs context
+
+               List of scheduler inputs";
             choice auto-or-explicit-input {
               case queue-list {
                 leaf-list queue {
@@ -3475,7 +3719,9 @@ module srl_nokia-qos {
           }
           container rate {
             description
-              "Defines the scheduler rate";
+              "Enter the rate context
+
+               Defines the scheduler rate";
             choice kbps-or-percentage {
               case peak-rate-kbps {
                 leaf peak-rate-kbps {
@@ -3504,7 +3750,9 @@ module srl_nokia-qos {
           }
           container inputs {
             description
-              "List of scheduler inputs";
+              "Enter the inputs context
+
+               List of scheduler inputs";
             choice auto-or-explicit-list {
               case scheduling-class {
                 leaf-list scheduling-class {
@@ -3560,6 +3808,8 @@ module srl_nokia-qos {
       uses egress-reclassification {
         if-feature "srl-feat:qos-dscp-reclassifier-policy";
       }
+      description
+        "Enter the classifiers context";
     }
   }
 
@@ -3797,6 +4047,8 @@ module srl_nokia-qos {
       uses ip-rewrite {
         if-feature "srl-feat:qos-ip-rewrite-policy";
       }
+      description
+        "Enter the rewrite-rules context";
     }
   }
 
@@ -3898,6 +4150,8 @@ module srl_nokia-qos {
             }
           }
         }
+        description
+          "Enter the in-plus context";
       }
       container in {
         choice dscp-or-precedence {
@@ -3918,6 +4172,8 @@ module srl_nokia-qos {
             }
           }
         }
+        description
+          "Enter the in context";
       }
       container out {
         choice dscp-or-precedence {
@@ -3938,6 +4194,8 @@ module srl_nokia-qos {
             }
           }
         }
+        description
+          "Enter the out context";
       }
       container exceed {
         choice dscp-or-precedence {
@@ -3958,6 +4216,8 @@ module srl_nokia-qos {
             }
           }
         }
+        description
+          "Enter the exceed context";
       }
     }
   }
@@ -4158,22 +4418,30 @@ module srl_nokia-qos {
   grouping fpcx-queue-stats {
     container in-profile {
       description
-        "Stats for packets marked with In profile transmitted by the queue";
+        "Enter the in-profile context
+
+         Stats for packets marked with In profile transmitted by the queue";
       uses queue-stats-group;
     }
     container in-plus-profile {
       description
-        "Stats for packets marked with In-Plus profile transmitted by the queue";
+        "Enter the in-plus-profile context
+
+         Stats for packets marked with In-Plus profile transmitted by the queue";
       uses queue-stats-group;
     }
     container out-profile {
       description
-        "Stats for packets marked with Out profile transmitted by the queue";
+        "Enter the out-profile context
+
+         Stats for packets marked with Out profile transmitted by the queue";
       uses queue-stats-group;
     }
     container exceed-profile {
       description
-        "Stats for packets marked with Exceed profile transmitted by the queue";
+        "Enter the exceed-profile context
+
+         Stats for packets marked with Exceed profile transmitted by the queue";
       uses queue-stats-group;
     }
   }
@@ -4254,6 +4522,8 @@ module srl_nokia-qos {
         description
           "The operational hardware value of the high threshold in bytes";
       }
+      description
+        "Enter the queue-depth context";
     }
     list virtual-output-queue {
       if-feature "srl-feat:qos-virtual-output-queue";
@@ -4280,20 +4550,28 @@ module srl_nokia-qos {
           description
             "The operational hardware value of the high threshold in bytes";
         }
+        description
+          "Enter the queue-depth context";
       }
       container low-drop-probability {
         description
-          "The unicast statistics from the VOQ to the egress queue that were classified as low drop-probability. This reads 0 when the IMM associated with the VOQ is not inserted and it resets to 0 whenever the IMM associated with the VOQ is removed";
+          "Enter the low-drop-probability context
+
+           The unicast statistics from the VOQ to the egress queue that were classified as low drop-probability. This reads 0 when the IMM associated with the VOQ is not inserted and it resets to 0 whenever the IMM associated with the VOQ is removed";
         uses queue-stats-group;
       }
       container medium-drop-probability {
         description
-          "The unicast statistics from the VOQ to the egress queue that were classified as medium drop-probability. This reads 0 when the IMM associated with the VOQ is not inserted and it resets to 0 whenever the IMM associated with the VOQ is removed";
+          "Enter the medium-drop-probability context
+
+           The unicast statistics from the VOQ to the egress queue that were classified as medium drop-probability. This reads 0 when the IMM associated with the VOQ is not inserted and it resets to 0 whenever the IMM associated with the VOQ is removed";
         uses queue-stats-group;
       }
       container high-drop-probability {
         description
-          "The unicast statistics unicast packets transmitted from the VOQ to the egress queue that were classified as high drop-probability. This reads 0 when the IMM associated with the VOQ is not inserted and it resets to 0 whenever the IMM associated with the VOQ is removed";
+          "Enter the high-drop-probability context
+
+           The unicast statistics unicast packets transmitted from the VOQ to the egress queue that were classified as high drop-probability. This reads 0 when the IMM associated with the VOQ is not inserted and it resets to 0 whenever the IMM associated with the VOQ is removed";
         uses queue-stats-group;
       }
     }
@@ -4304,7 +4582,9 @@ module srl_nokia-qos {
   augment "/srl_nokia-system:system/srl_nokia-system:control-plane-traffic/srl_nokia-system:output" {
     container qos {
       description
-        "Parameters describing QoS handling of system generated traffic";
+        "Enter the qos context
+
+         Parameters describing QoS handling of system generated traffic";
       leaf management-protocols-dscp {
         if-feature "srl-feat:qos-management-protocols-dscp";
         description

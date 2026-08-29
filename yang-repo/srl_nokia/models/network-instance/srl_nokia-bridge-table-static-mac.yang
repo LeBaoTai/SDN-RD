@@ -21,6 +21,10 @@ module srl_nokia-bridge-table-static-mac {
   description
     "This yang file gives a description of bridge table static-mac configuration.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-10-31 {
     description
       "SRLinux 24.10.1";
@@ -71,6 +75,8 @@ module srl_nokia-bridge-table-static-mac {
              as input, as follows: 'destination <name>'.";
         }
       }
+      description
+        "Enter the static-mac context";
     }
   }
 

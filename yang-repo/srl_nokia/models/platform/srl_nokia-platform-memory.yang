@@ -21,6 +21,10 @@ module srl_nokia-platform-memory {
   description
     "This module defines configuration and operational state data related to system memory.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2019-11-30 {
     description
       "SRLinux 19.11.1";
@@ -59,7 +63,9 @@ module srl_nokia-platform-memory {
       "Top-level grouping for system memory state";
     container memory {
       description
-        "Top-level container for system memory state";
+        "Enter the memory context
+
+         Top-level container for system memory state";
       config false;
       uses memory-state-top;
     }

@@ -21,6 +21,10 @@ module srl_nokia-bridge-table-reserved-macs {
   description
     "This yang file gives a description of bridge table configuration.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2021-11-30 {
     description
       "SRLinux 21.11.1";
@@ -46,6 +50,8 @@ module srl_nokia-bridge-table-reserved-macs {
           }
         }
       }
+      description
+        "Enter the reserved-macs context";
     }
   }
 

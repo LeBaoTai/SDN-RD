@@ -24,6 +24,10 @@ module srl_nokia-mpls-label-management {
   description
     "This module defines configuration and operational state data for system wide MPLS label management.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-03-31 {
     description
       "SRLinux 24.3.1";
@@ -193,7 +197,9 @@ module srl_nokia-mpls-label-management {
   grouping mpls-services-label-management-top {
     container services {
       description
-        "Container for system wide Services MPLS label management";
+        "Enter the services context
+
+         Container for system wide Services MPLS label management";
     }
   }
 
@@ -201,10 +207,14 @@ module srl_nokia-mpls-label-management {
     container mpls {
       if-feature "srl_nokia-feat:label-management";
       description
-        "Container for system wide MPLS label management";
+        "Enter the mpls context
+
+         Container for system wide MPLS label management";
       container label-ranges {
         description
-          "Container for managing MPLS label blocks";
+          "Enter the label-ranges context
+
+           Container for managing MPLS label blocks";
         list static {
           description
             "List of static label blocks

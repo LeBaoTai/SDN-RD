@@ -24,6 +24,10 @@ module srl_nokia-tools-ospf {
   description
     "Model for OSPF operational commands";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2023-03-31 {
     description
       "SRLinux 23.3.1";
@@ -56,10 +60,14 @@ module srl_nokia-tools-ospf {
             description
               "Advertise the norrmal metric for all OSPF interfaces, even if some are configured for LDP synchronization and OSPF is not in sync with LDP on these interfaces";
           }
+          description
+            "Enter the ldp-synchronization context";
         }
         container link-state-database {
           description
-            "The OSPF link state database";
+            "Enter the link-state-database context
+
+             The OSPF link state database";
           leaf clear {
             type empty;
             description
@@ -68,7 +76,9 @@ module srl_nokia-tools-ospf {
         }
         container neighbors {
           description
-            "Container for OSPF neighbors tools";
+            "Enter the neighbors context
+
+             Container for OSPF neighbors tools";
           leaf clear {
             type empty;
             description
@@ -110,6 +120,8 @@ module srl_nokia-tools-ospf {
                 description
                   "Reset all of the adjacencies on this interface";
               }
+              description
+                "Enter the neighbors context";
             }
           }
         }
@@ -119,6 +131,8 @@ module srl_nokia-tools-ospf {
             description
               "Reset all of the OSPF instance statistics to zero.";
           }
+          description
+            "Enter the statistics context";
         }
         container overload {
           leaf clear {
@@ -126,6 +140,8 @@ module srl_nokia-tools-ospf {
             description
               "Reset OSPF instance overload status.";
           }
+          description
+            "Enter the overload context";
         }
         container manual-spf {
           leaf run {
@@ -133,6 +149,8 @@ module srl_nokia-tools-ospf {
             description
               "Run a SPF calculation.";
           }
+          description
+            "Enter the manual-spf context";
         }
       }
     }

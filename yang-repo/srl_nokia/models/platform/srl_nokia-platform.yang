@@ -21,6 +21,10 @@ module srl_nokia-platform {
   description
     "This module defines configuration and operational state data related to platform components.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-03-31 {
     description
       "SRLinux 24.3.1";
@@ -96,7 +100,9 @@ module srl_nokia-platform {
     container bios {
       config false;
       description
-        "State related to the BIOS of this component";
+        "Enter the bios context
+
+         State related to the BIOS of this component";
       uses component-bios-bootloader-common;
     }
   }
@@ -105,7 +111,9 @@ module srl_nokia-platform {
     container bootloader {
       config false;
       description
-        "State related to the boot loader of this component";
+        "Enter the bootloader context
+
+         State related to the boot loader of this component";
       uses component-bios-bootloader-common;
     }
   }
@@ -129,7 +137,9 @@ module srl_nokia-platform {
     container power {
       config false;
       description
-        "State related to power consumption and allocation for this component";
+        "Enter the power context
+
+         State related to power consumption and allocation for this component";
       leaf allocated {
         if-feature "srl-feat:chassis and srl-feat:power-management";
         type uint32;
@@ -184,7 +194,9 @@ module srl_nokia-platform {
     container temperature {
       config false;
       description
-        "State related to temperature for this component";
+        "Enter the temperature context
+
+         State related to temperature for this component";
       uses component-temperature-common;
       leaf margin {
         type srl-comm:temperature;
@@ -200,7 +212,9 @@ module srl_nokia-platform {
     container temperature {
       config false;
       description
-        "State related to temperature for this component";
+        "Enter the temperature context
+
+         State related to temperature for this component";
       uses component-temperature-common;
     }
   }
@@ -349,10 +363,14 @@ module srl_nokia-platform {
 
   container platform {
     description
-      "Enclosing container for platform components";
+      "Enter the platform context
+
+       Enclosing container for platform components";
     container trust {
       description
-        "State information related to Platform Trust";
+        "Enter the trust context
+
+         State information related to Platform Trust";
       config false;
     }
   }

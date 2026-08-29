@@ -30,6 +30,10 @@ module srl_nokia-gnsi-pathz {
   description
     "This module defines configuration and operational state data related to the Pathz service within gNSI.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-10-31 {
     description
       "SRLinux 24.10.1";
@@ -105,12 +109,16 @@ module srl_nokia-gnsi-pathz {
       }
       container reads {
         description
-          "The counter were collected while performing a read operation on the schema path.";
+          "Enter the reads context
+
+           The counter were collected while performing a read operation on the schema path.";
         uses counters;
       }
       container writes {
         description
-          "The counter were collected while performing a write operation on the schema path.";
+          "Enter the writes context
+
+           The counter were collected while performing a write operation on the schema path.";
         uses counters;
       }
     }
@@ -121,7 +129,9 @@ module srl_nokia-gnsi-pathz {
       "A collection of counters collected by the gNSI.pathz module.";
     container counters {
       description
-        "A collection of per-schema path counters collected by the gNSI.pathz module.";
+        "Enter the counters context
+
+         A collection of per-schema path counters collected by the gNSI.pathz module.";
       config false;
       uses pathz-policy-success-failure-counters;
     }
@@ -186,7 +196,9 @@ module srl_nokia-gnsi-pathz {
       "Grouping of Pathz authorization policy instance information";
     container pathz {
       description
-        "Information relating to the active Pathz authorization policy instances
+        "Enter the pathz context
+
+         Information relating to the active Pathz authorization policy instances
 
          This policies is provided by the gNSI gRPC service, and can be changed using the gNSI.Pathz.Rotate RPC";
       leaf collect-policy-success-failure-counters {
@@ -197,7 +209,7 @@ module srl_nokia-gnsi-pathz {
       }
       leaf use-exclusively {
         type boolean;
-        default "false";
+        default "true";
         description
           "Indicates whether the Pathz authorization policy should be used exclusively for access authorization.
 
@@ -216,7 +228,9 @@ module srl_nokia-gnsi-pathz {
     container pathz {
       config false;
       description
-        "Information relating to the active Pathz authorization policy instances
+        "Enter the pathz context
+
+         Information relating to the active Pathz authorization policy instances
 
          This policies is provided by the gNSI gRPC service, and can be changed using the gNSI.Pathz.Rotate RPC";
       uses grpc-server-pathz-policy-state {

@@ -21,6 +21,10 @@ module srl_nokia-tools-interfaces-packet-link-qual {
   description
     "Model for managing gNOI Packet Link Qualification tests";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-03-31 {
     description
       "SRLinux 24.3.1";
@@ -44,7 +48,9 @@ module srl_nokia-tools-interfaces-packet-link-qual {
               error-message "Must be used with an ethernet port which is not a subinterface";
             }
             description
-              "Start packet link qualification";
+              "Enter the start context
+
+               Start packet link qualification";
             leaf id {
               mandatory true;
               description
@@ -62,7 +68,9 @@ module srl_nokia-tools-interfaces-packet-link-qual {
         case cancel {
           container cancel {
             description
-              "Cancel the packet link qualification and delete the results";
+              "Enter the cancel context
+
+               Cancel the packet link qualification and delete the results";
             leaf id {
               mandatory true;
               description
@@ -72,6 +80,8 @@ module srl_nokia-tools-interfaces-packet-link-qual {
           }
         }
       }
+      description
+        "Enter the packet-link-qualification context";
     }
   }
 

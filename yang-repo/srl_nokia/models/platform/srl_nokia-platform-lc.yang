@@ -27,6 +27,10 @@ module srl_nokia-platform-lc {
   description
     "This module defines configuration and operational state data related to line cards.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -121,7 +125,9 @@ module srl_nokia-platform-lc {
     container load-balancing {
       config false;
       description
-        "Load-balancing state presented on a per-forwarding-complex basis";
+        "Enter the load-balancing context
+
+         Load-balancing state presented on a per-forwarding-complex basis";
       list hash-user {
         key "user";
         leaf user {
@@ -282,7 +288,9 @@ module srl_nokia-platform-lc {
           srl-ext:first-released "20.6.1";
           srl-ext:delivery-node-override "true";
           description
-            "Top-level container for fabric configuration and state";
+            "Enter the fabric context
+
+             Top-level container for fabric configuration and state";
           if-feature "srl-feat:chassis";
           uses fabric-state;
         }
@@ -320,7 +328,9 @@ module srl_nokia-platform-lc {
           if-feature "srl-feat:forwarding-complex-pipeline-counters";
           config false;
           description
-            "Counters related to traffic destined to the control-plane";
+            "Enter the control-plane-traffic context
+
+             Counters related to traffic destined to the control-plane";
           leaf queued-aggregate {
             type srl-comm:zero-based-counter64;
             description
@@ -346,7 +356,9 @@ module srl_nokia-platform-lc {
           if-feature "srl-feat:forwarding-complex-pipeline-counters";
           config false;
           description
-            "State container for forwarding-complex drop counters";
+            "Enter the drop-counters context
+
+             State container for forwarding-complex drop counters";
           leaf adverse-aggregate {
             type srl-comm:zero-based-counter64;
             description
@@ -392,7 +404,9 @@ module srl_nokia-platform-lc {
           if-feature "srl-feat:platform-counter-bank-allocation";
           config false;
           description
-            "Bank allocation across different stake-holders. Banks are required by policers to function as well for various stats collection such as Per-Prefix Stats, LSP Stats and alike";
+            "Enter the counter-banks context
+
+             Bank allocation across different stake-holders. Banks are required by policers to function as well for various stats collection such as Per-Prefix Stats, LSP Stats and alike";
           list bank {
             config false;
             key "bank-id";
@@ -414,6 +428,15 @@ module srl_nokia-platform-lc {
               }
               description
                 "Bank size. Counter banks are in different sizes and applications can make use of different bank sizes for scale";
+            }
+            leaf-list banks-in-group {
+              if-feature "srl-feat:platform-counter-bank-allocation-subintf-parent-policers-and-stats";
+              description
+                "Certain applications mandate allocation of another corresponding bank to function properly as mandated by datapath
+                 When given application requires to be grouped with another bank, assuming bank is available at the time of allocation, is displayed in this field";
+              type uint16 {
+                range "1..34";
+              }
             }
             list application {
               key "name";

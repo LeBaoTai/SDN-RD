@@ -47,6 +47,10 @@ module srl_nokia-aaa {
 
      Portions of this model reuse data definitions or structure from RFC 7317 - A YANG Data Model for System Management";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -231,7 +235,9 @@ module srl_nokia-aaa {
     container service-request {
       if-feature "srl-feat:aaa-servers-tacacs-vsa";
       description
-        "Tacacs VSA config to be retrieved from server";
+        "Enter the service-request context
+
+         Tacacs VSA config to be retrieved from server";
       uses aaa-servergroup-servicerequest-config;
     }
   }
@@ -258,7 +264,9 @@ module srl_nokia-aaa {
     container tacacs {
       if-feature "srl-feat:aaa-servers-tacacs-vsa";
       description
-        "Top-level container for TACACS servergroup data";
+        "Enter the tacacs context
+
+         Top-level container for TACACS servergroup data";
       uses aaa-servergroup-tacacs-config;
       uses aaa-servergroup-tacacs-servicerequest-top;
     }
@@ -316,7 +324,9 @@ module srl_nokia-aaa {
       srl-ext:delivery-node-override "true";
       srl-ext:stream-mode "sample=5";
       description
-        "Enclosing container for server statistics";
+        "Enter the statistics context
+
+         Enclosing container for server statistics";
       config false;
       leaf login-success {
         type srl-comm:zero-based-counter32;
@@ -389,6 +399,32 @@ module srl_nokia-aaa {
         type srl-comm:zero-based-counter32;
         description
           "Number of valid VSAs received";
+      }
+      leaf tls-error {
+        if-feature "srl-feat:radius-tls";
+        type enumeration {
+          enum internal {
+            value 1;
+          }
+          enum no-route {
+            value 2;
+          }
+          enum timeout {
+            value 3;
+          }
+          enum handshake-failure {
+            value 4;
+          }
+          enum closed-by-remote {
+            value 5;
+          }
+          enum tls-profile-disabled {
+            value 6;
+          }
+        }
+        description
+          "Reason for unsuccessful setup using the
+           authentication method 'tls-profile'.";
       }
     }
   }
@@ -516,6 +552,34 @@ module srl_nokia-aaa {
         description
           "List of roles assigned to this user";
       }
+      uses aaa-session-action;
+    }
+  }
+
+  grouping aaa-session-action {
+    action disconnect {
+      if-feature "srl-feat:tools-as-modeled-actions-same-output";
+      description
+        "Disconnect the cli session, requesting the cli to terminate";
+      output {
+        leaf service-name {
+          type string;
+          description
+            "Service name of the disconnected session";
+        }
+      }
+    }
+    action stop {
+      if-feature "srl-feat:tools-as-modeled-actions-same-output";
+      description
+        "Stop the aaa session, the process belonging to the session will be terminated gracefully";
+      output {
+        leaf pid {
+          type int32;
+          description
+            "Process identifier of the killed session";
+        }
+      }
     }
   }
 
@@ -550,7 +614,9 @@ module srl_nokia-aaa {
     container lockout {
       config false;
       description
-        "Information relating to the lockout state of this user";
+        "Enter the lockout context
+
+         Information relating to the lockout state of this user";
       leaf active {
         type boolean;
         description
@@ -682,6 +748,7 @@ module srl_nokia-aaa {
       description
         "List of local users configured on the system";
       uses aaa-authentication-user-config;
+      uses aaa-authentication-user-action;
     }
   }
 
@@ -733,7 +800,9 @@ module srl_nokia-aaa {
     container tacacs {
       srl-ext:first-released "21.11.1";
       description
-        "Top-level container for configuration relating to TACACS+ interworking with roles";
+        "Enter the tacacs context
+
+         Top-level container for configuration relating to TACACS+ interworking with roles";
       leaf priv-lvl {
         description
           "The TACACS+ priv-lvl to map to this role
@@ -748,7 +817,9 @@ module srl_nokia-aaa {
       if-feature "srl-feat:cli-plugin-authorization";
       srl-ext:first-released "23.3.1";
       description
-        "Top-level container for cli plugin configuration";
+        "Enter the cli context
+
+         Top-level container for cli plugin configuration";
       leaf load-global-plugins {
         type boolean;
         default "true";
@@ -787,7 +858,9 @@ module srl_nokia-aaa {
     container netconf {
       if-feature "srl-feat:netconf";
       description
-        "Top-level container for netconf plugin configuration";
+        "Enter the netconf context
+
+         Top-level container for netconf plugin configuration";
       leaf-list allowed-operations {
         type enumeration {
           enum action;
@@ -831,7 +904,9 @@ module srl_nokia-aaa {
       "Top-level grouping for admin users";
     container admin-user {
       description
-        "Enclosing container for admin user";
+        "Enter the admin-user context
+
+         Enclosing container for admin user";
       leaf username {
         type string;
         default "admin";
@@ -886,7 +961,9 @@ module srl_nokia-aaa {
       "Top-level grouping for linuxadmin users";
     container linuxadmin-user {
       description
-        "Enclosing container for linuxadmin user";
+        "Enter the linuxadmin-user context
+
+         Enclosing container for linuxadmin user";
       leaf username {
         type string;
         default "linuxadmin";
@@ -917,7 +994,9 @@ module srl_nokia-aaa {
       "Top-level grouping for local linux users";
     container local-linux-users {
       description
-        "Enclosing container for local linux users";
+        "Enter the local-linux-users context
+
+         Enclosing container for local linux users";
       leaf-list disable-login {
         type enumeration {
           enum remote;
@@ -986,7 +1065,9 @@ module srl_nokia-aaa {
     container acctz {
       if-feature "srl-feat:gnsi-accounting and not srl-feat:platform-imgmt";
       description
-        "Top-level container for acctz accounting";
+        "Enter the acctz context
+
+         Top-level container for acctz accounting";
       leaf history-size {
         description
           "Size of the kept accounting events history. Setting a value of 0 disables acctz history";
@@ -1003,7 +1084,9 @@ module srl_nokia-aaa {
       "Top-level grouping for user activity accounting";
     container accounting {
       description
-        "Top-level container for accounting";
+        "Enter the accounting context
+
+         Top-level container for accounting";
       uses aaa-accounting-methods-common;
       uses aaa-accounting-events-top;
       uses aaa-acctz-top;
@@ -1042,7 +1125,9 @@ module srl_nokia-aaa {
       "Top-level grouping for authorization events";
     container events {
       description
-        "Enclosing container for the set of events subject to authorization";
+        "Enter the events context
+
+         Enclosing container for the set of events subject to authorization";
       list event {
         key "event-type";
         description
@@ -1057,7 +1142,9 @@ module srl_nokia-aaa {
       "Top-level grouping for global authorization data";
     container authorization {
       description
-        "Top-level container for authorization configuration and operational state data";
+        "Enter the authorization context
+
+         Top-level container for authorization configuration and operational state data";
       uses aaa-authorization-role-top;
     }
   }
@@ -1093,10 +1180,25 @@ module srl_nokia-aaa {
 
          After the timeout is reached, the session is disconnected from the system.";
     }
+    leaf ssh-connection-limit {
+      if-feature "srl-feat:aaa-ssh-connections-limit";
+      type uint8 {
+        range "1..max";
+      }
+      description
+        "Maximum number of concurrent SSH connections allowed to the system
+
+         When configured, limits the total number of simultaneous SSH, NETCONF over SSH, and
+         SCP connections. Once the limit is exceeded, no further SSH, NETCONF, or SCP logins
+         are permitted until an existing connection is closed. By default there is no limit.
+         Console login is not restricted.";
+    }
     container dynamic-spiffe {
       if-feature "srl-feat:aaa-spiffe-id and not srl-feat:platform-imgmt";
       description
-        "Dynamic SPIFFE settings";
+        "Enter the dynamic-spiffe context
+
+         Dynamic SPIFFE settings";
       leaf allow {
         type boolean;
         default "false";
@@ -1124,7 +1226,9 @@ module srl_nokia-aaa {
     container login-method {
       if-feature "srl-feat:glome-authentication";
       description
-        "Authentication methods for console login and remote (e.g. SSH) access
+        "Enter the login-method context
+
+         Authentication methods for console login and remote (e.g. SSH) access
 
          Support for traditional password or GLOME (Generic Low Overhead Message Exchange) authentication for Linux users.";
       leaf console {
@@ -1169,7 +1273,9 @@ module srl_nokia-aaa {
       "Top-level grouping for global authentication data";
     container authentication {
       description
-        "Top-level container for global authentication data";
+        "Enter the authentication context
+
+         Top-level container for global authentication data";
       uses aaa-authentication-config;
       uses aaa-authentication-admin-users;
       uses aaa-authentication-linuxadmin-users;
@@ -1177,6 +1283,7 @@ module srl_nokia-aaa {
       uses aaa-authentication-user-top;
       uses aaa-state-sessions-top;
       uses srl-aaa-password:aaa-password-top;
+      uses aaa-authentication-action;
     }
   }
 
@@ -1197,13 +1304,54 @@ module srl_nokia-aaa {
     }
   }
 
+  grouping aaa-authentication-action {
+    action force-all-user-password-change {
+      if-feature "srl-feat:tools-force-pwd-change and srl-feat:tools-as-modeled-actions-different-output";
+      description
+        "Set change-on-first-login to true for all users
+
+         This command will only take effect if the feature change-on-first-login is currently set to true.";
+      output {
+        leaf message {
+          type string;
+          description
+            "Confirmation that all local users will be required to change their password on next login.";
+        }
+      }
+    }
+  }
+
+  grouping aaa-authentication-user-action {
+    action unlock {
+      if-feature "srl-feat:tools-as-modeled-actions-same-output";
+      description
+        "Unlock the user, This will change its lockout state into false";
+    }
+    action force-password-change {
+      if-feature "srl-feat:tools-force-pwd-change and srl-feat:tools-as-modeled-actions-different-output";
+      description
+        "Set change-on-first-login to true for this user
+
+         This command will only take effect if the feature change-on-first-login is currently set to true.";
+      output {
+        leaf message {
+          type string;
+          description
+            "Confirmation that the given user will be required to change their password on next login.";
+        }
+      }
+    }
+  }
+
   grouping aaa-top {
     description
       "Top-level grouping for AAA services";
     container aaa {
       srl-ext:first-released "19.11.1";
       description
-        "Top-level container for AAA services";
+        "Enter the aaa context
+
+         Top-level container for AAA services";
       uses aaa-authentication-top;
       uses aaa-authorization-top;
       uses aaa-accounting-top;

@@ -30,6 +30,10 @@ module srl_nokia-acl-qos {
   description
     "This module defines configuration and operational state data for access control lists (ACL) support of QoS classification conditions and actions.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -89,7 +93,9 @@ module srl_nokia-acl-qos {
   grouping qos-actions {
     container action {
       description
-        "Container for the actions to be applied to packets matching the classifier entry.";
+        "Enter the action context
+
+         Container for the actions to be applied to packets matching the classifier entry.";
       leaf forwarding-class {
         type leafref {
           path "/srl_nokia-qos:qos/srl_nokia-qos:forwarding-classes/srl_nokia-qos:forwarding-class/srl_nokia-qos:name";
@@ -108,7 +114,9 @@ module srl_nokia-acl-qos {
       container rewrite {
         if-feature "not srl_nokia-feat:platform-7250-ixr and not srl_nokia-feat:platform-7250-ixr-e-unified and not srl_nokia-feat:platform-7250-ixr-18e-unified and not srl_nokia-feat:platform-7250-ixr-x1b and not srl_nokia-feat:platform-7250-ixr-x3b and not srl_nokia-feat:fpcx";
         description
-          "Rewrite actions associated with packets that match the classifier entry. Where a packet matches these criteria, the specified rewrite actions should be performed.";
+          "Enter the rewrite context
+
+           Rewrite actions associated with packets that match the classifier entry. Where a packet matches these criteria, the specified rewrite actions should be performed.";
         leaf set-dscp {
           type uint8 {
             range "0..63";
@@ -131,7 +139,9 @@ module srl_nokia-acl-qos {
   grouping qos-multifield-classification-criteria {
     container ipv4 {
       description
-        "Container for the layer-3 IPv4 match criteria";
+        "Enter the ipv4 context
+
+         Container for the layer-3 IPv4 match criteria";
       uses srl_nokia-acl:common-acl-filter-entry-match-ipv4-config {
         refine "destination-ip/prefix-list" {
           if-feature "srl_nokia-feat:acl-qos-ip-prefix-list";
@@ -143,7 +153,9 @@ module srl_nokia-acl-qos {
     }
     container ipv6 {
       description
-        "Container for the layer-3 IPv6 match criteria";
+        "Enter the ipv6 context
+
+         Container for the layer-3 IPv6 match criteria";
       uses srl_nokia-acl:common-acl-filter-entry-match-ipv6-config {
         refine "destination-ip/prefix-list" {
           if-feature "srl_nokia-feat:acl-qos-ip-prefix-list";
@@ -155,7 +167,9 @@ module srl_nokia-acl-qos {
     }
     container transport {
       description
-        "Container for the layer-4 transport match criteria";
+        "Enter the transport context
+
+         Container for the layer-4 transport match criteria";
       uses srl_nokia-acl:common-acl-filter-entry-match-layer4-config;
     }
   }
@@ -200,7 +214,9 @@ module srl_nokia-acl-qos {
         }
         container match {
           description
-            "Matching conditions for QoS multifield-classifier";
+            "Enter the match context
+
+             Matching conditions for QoS multifield-classifier";
           uses qos-multifield-classification-criteria;
         }
         uses qos-actions;

@@ -23,6 +23,10 @@ module srl_nokia-interfaces-vlans {
 
      This model describes management of VLAN parameters under SRL Interfaces";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-03-31 {
     description
       "SRLinux 25.3.1";
@@ -282,7 +286,9 @@ module srl_nokia-interfaces-vlans {
       "Top-level configuration and state for VLAN parameters";
     container encap {
       description
-        "VLAN match parmeters for the associated subinterface";
+        "Enter the encap context
+
+         VLAN match parmeters for the associated subinterface";
       container single-tagged {
         presence "Match single-tagged packets with a specific vlan-id.";
         description
@@ -302,7 +308,7 @@ module srl_nokia-interfaces-vlans {
         must '(../../../../vlan-tagging = true())' {
           error-message "untagged only configurable if vlan-tagging enabled on parent interface";
         }
-        must "(../../../srl_nokia-if:type = 'srl_nokia-if:bridged')" {
+        must "(../../../srl_nokia-if:type = 'srl_nokia-if:bridged') or (../../../srl_nokia-if:type = 'srl_nokia-if:submgmt-access')" {
           error-message "untagged only allowed with type bridged";
         }
       }
@@ -337,7 +343,7 @@ module srl_nokia-interfaces-vlans {
         must '(../../../../vlan-tagging = true())' {
           error-message "double-tagged only configurable if vlan-tagging enabled on parent interface";
         }
-        must "(../../../srl_nokia-if:type = 'srl_nokia-if:bridged')" {
+        must "(../../../srl_nokia-if:type = 'srl_nokia-if:bridged') or (../../../srl_nokia-if:type = 'srl_nokia-if:submgmt-access')" {
           error-message "double-tagged only allowed with type bridged";
         }
         uses vlan-double-tagged-params;
@@ -444,6 +450,8 @@ module srl_nokia-interfaces-vlans {
            The configured tpid is used by the action configured by 'vlan-stack-action'
            when modifying the VLAN stack.";
       }
+      description
+        "Enter the ingress-mapping context";
     }
   }
 
@@ -517,6 +525,8 @@ module srl_nokia-interfaces-vlans {
            The configured tpid is used by the action configured by 'vlan-stack-action'
            when modifying the VLAN stack.";
       }
+      description
+        "Enter the egress-mapping context";
     }
   }
 
@@ -549,7 +559,9 @@ module srl_nokia-interfaces-vlans {
       "Top-level configuration and state for VLAN parameters per subinterface";
     container vlan {
       description
-        "Parameters for VLAN definition under SRL interfaces";
+        "Enter the vlan context
+
+         Parameters for VLAN definition under SRL interfaces";
       container vlan-discovery {
         if-feature "srl_nokia-feat:ztp-boot-mode";
         presence "Configures the vlan-discovery parameters";

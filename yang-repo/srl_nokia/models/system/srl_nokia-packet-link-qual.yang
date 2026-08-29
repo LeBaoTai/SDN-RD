@@ -27,6 +27,10 @@ module srl_nokia-packet-link-qual {
   description
     "This module defines configuration elements related to the gNOI Packet Link Qualification service";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-03-31 {
     description
       "SRLinux 24.3.1";
@@ -43,7 +47,9 @@ module srl_nokia-packet-link-qual {
   grouping packet-link-qualification-profile-top {
     container packet-link-qualification {
       description
-        "Top-level container for gNOI Packet Link Qualification profiles";
+        "Enter the packet-link-qualification context
+
+         Top-level container for gNOI Packet Link Qualification profiles";
       list profile {
         description
           "List of configured Packet Link Qualification profiles";
@@ -76,6 +82,8 @@ module srl_nokia-packet-link-qual {
                   "Time at which the test should be torn down";
                 type srl-comm:date-and-time-delta;
               }
+              description
+                "Enter the ntp context";
             }
           }
           case rpc {
@@ -121,6 +129,8 @@ module srl_nokia-packet-link-qual {
                 }
                 units "seconds";
               }
+              description
+                "Enter the rpc context";
             }
           }
         }
@@ -129,7 +139,9 @@ module srl_nokia-packet-link-qual {
           case packet-generator {
             container packet-generator {
               description
-                "Packet generator endpoint";
+                "Enter the packet-generator context
+
+                 Packet generator endpoint";
               leaf packet-rate {
                 mandatory true;
                 type uint32 {
@@ -167,7 +179,9 @@ module srl_nokia-packet-link-qual {
   grouping packet-link-qualification-profile-results-top {
     container packet-link-qualification {
       description
-        "gNOI Packet Link Qualification results";
+        "Enter the packet-link-qualification context
+
+         gNOI Packet Link Qualification results";
       config false;
       list result {
         key "id";

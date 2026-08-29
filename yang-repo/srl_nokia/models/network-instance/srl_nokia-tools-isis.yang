@@ -21,6 +21,10 @@ module srl_nokia-tools-isis {
   description
     "Model for ISIS operational commands";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -80,7 +84,9 @@ module srl_nokia-tools-isis {
         }
         container ldp-synchronization {
           description
-            "IS-IS LDP-IGP synchronisation";
+            "Enter the ldp-synchronization context
+
+             IS-IS LDP-IGP synchronisation";
           leaf exit {
             type empty;
             description
@@ -89,7 +95,9 @@ module srl_nokia-tools-isis {
         }
         container link-state-database {
           description
-            "The ISIS link state database";
+            "Enter the link-state-database context
+
+             The ISIS link state database";
           leaf clear {
             type empty;
             description
@@ -111,6 +119,8 @@ module srl_nokia-tools-isis {
               description
                 "Reset all of the adjacencies on this interface";
             }
+            description
+              "Enter the adjacencies context";
           }
         }
         container multi-part-tlv-statistics {
@@ -120,6 +130,8 @@ module srl_nokia-tools-isis {
             description
               "Reset all of the IS-IS instance mult-tlv-part statistics to zero.";
           }
+          description
+            "Enter the multi-part-tlv-statistics context";
         }
         container statistics {
           leaf clear {
@@ -127,6 +139,8 @@ module srl_nokia-tools-isis {
             description
               "Reset all of the IS-IS instance statistics to zero.";
           }
+          description
+            "Enter the statistics context";
         }
         container segment-routing-statistics {
           if-feature "srl_nokia-feat:segment-routing-isis-lsp-stats";
@@ -135,6 +149,8 @@ module srl_nokia-tools-isis {
             description
               "Reset all of the applicable Node, Adj, SID statistics to zero.";
           }
+          description
+            "Enter the segment-routing-statistics context";
         }
         container overload {
           if-feature "srl_nokia-feat:igp-overload-on-fib-failure";
@@ -143,6 +159,8 @@ module srl_nokia-tools-isis {
             description
               "Reset ISIS instance overload status.";
           }
+          description
+            "Enter the overload context";
         }
       }
     }

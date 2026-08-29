@@ -28,6 +28,10 @@ module srl_nokia-sflow {
     "This yang file gives a description of sflow-agent
      configuration.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -184,12 +188,13 @@ module srl_nokia-sflow {
       }
       leaf egress-sample-rate {
         srl_nokia-ext:show-importance "high";
-        if-feature "srl-feat:sflow-gue-packets";
+        if-feature "srl-feat:sflow-gue-packets or srl-feat:sflow-system-egress-sample-rate";
         type uint32 {
           range "0..2000000";
         }
         default "0";
         must '(not(../transport) or . = 0 or ../transport = "gnpsi")' {
+          srl_nokia-ext:if-feature "srl_nokia-features:sflow-gue-packets";
           error-message "Egress sampling is supported only when transport is GNPSI";
         }
         description
@@ -267,6 +272,8 @@ module srl_nokia-sflow {
           description
             "Total number of sFlow packets sent to collectors";
         }
+        description
+          "Enter the statistics context";
       }
     }
   }

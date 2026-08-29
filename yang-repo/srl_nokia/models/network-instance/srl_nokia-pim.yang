@@ -36,6 +36,10 @@ module srl_nokia-pim {
   description
     "This yang file models configuration and state of the PIM protocol";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -173,7 +177,9 @@ module srl_nokia-pim {
     container import-policies {
       if-feature "srl_nokia-feat:mcast-route-policy";
       description
-        "Import policies.";
+        "Enter the import-policies context
+
+         Import policies.";
       leaf-list join-policy {
         description
           "Policies that apply to the Join message";
@@ -247,10 +253,14 @@ module srl_nokia-pim {
   grouping pim-global-rp-config {
     container rendezvous-points {
       description
-        "Define rendezvous points for sparse mode multicast";
+        "Enter the rendezvous-points context
+
+         Define rendezvous points for sparse mode multicast";
       container static {
         description
-          "Static rendezvous point (RP) configuration";
+          "Enter the static context
+
+           Static rendezvous point (RP) configuration";
         list rendezvous-point {
           description
             "List of static rendezvous points";
@@ -284,10 +294,14 @@ module srl_nokia-pim {
   grouping pim-global-ssm-config {
     container ssm {
       description
-        "Source Specific Multicast (SSM) configuration";
+        "Enter the ssm context
+
+         Source Specific Multicast (SSM) configuration";
       container ssm-ranges {
         description
-          "List of accepted Source Specific Multicast (SSM) address ranges";
+          "Enter the ssm-ranges context
+
+           List of accepted Source Specific Multicast (SSM) address ranges";
         list group-range {
           description
             "Define an accepted SSM group range";
@@ -306,7 +320,9 @@ module srl_nokia-pim {
     container spt-switchover {
       if-feature "srl_nokia-feat:pim-spt-switchover";
       description
-        "Define Shortest Path Tree (SPT) switchover threshold for multicast groups";
+        "Enter the spt-switchover context
+
+         Define Shortest Path Tree (SPT) switchover threshold for multicast groups";
       list group {
         description
           "Configure SPT switchover threshold for a multicast group prefix";
@@ -358,6 +374,8 @@ module srl_nokia-pim {
            These can be on an operationally down interface or on an interface on which PIM is not enabled.";
         type srl_nokia-comm:zero-based-counter32;
       }
+      description
+        "Enter the received context";
     }
     container transmitted {
       leaf register-messages {
@@ -398,6 +416,8 @@ module srl_nokia-pim {
            The number of multicast data packets which could not be encapsulated in Register messages because the Time To Live (TTL) was zero.";
         type srl_nokia-comm:zero-based-counter32;
       }
+      description
+        "Enter the transmitted context";
     }
     leaf forwarded-candidate-rp-advertisements {
       config false;
@@ -454,7 +474,9 @@ module srl_nokia-pim {
     container statistics {
       config false;
       description
-        "Global PIM address family statistics";
+        "Enter the statistics context
+
+         Global PIM address family statistics";
       uses pim-address-family-statistics-state;
     }
   }
@@ -495,6 +517,12 @@ module srl_nokia-pim {
       config false;
       description
         "Router interface on which the RPF neighbor exists";
+      type string;
+    }
+    leaf rpf-neighbor-spmsi-interface-name {
+      config false;
+      description
+        "S-PMSI router interface on which the RPF neighbor exists";
       type string;
     }
     leaf sg-state {
@@ -826,20 +854,7 @@ module srl_nokia-pim {
           "Router interface name";
         type srl_nokia-comm:subinterface-multicast;
       }
-      uses pim-database-interface-flags;
-    }
-    container outgoing-tunnel-interface {
-      if-feature "srl_nokia-feat:l3-multicast-vpn";
-      config false;
-      description
-        "The outgoing PMSI for the database entry";
-      leaf name {
-        config false;
-        description
-          "The outgoing I-PMSI tunnel name";
-        type string;
-      }
-      leaf s-pmsi-name {
+      leaf spmsi-interface-name {
         config false;
         description
           "The outgoing S-PMSI tunnel name, if any, corresponding to the outgoing I-PMSI tunnel";
@@ -853,7 +868,9 @@ module srl_nokia-pim {
     container statistics {
       config false;
       description
-        "Forwarding statistics for the database entry
+        "Enter the statistics context
+
+         Forwarding statistics for the database entry
 
          These statistics are collected by the forwarding engine.";
       leaf forwarded-packets {
@@ -889,7 +906,9 @@ module srl_nokia-pim {
     container database {
       config false;
       description
-        "Database of PIM (S,G) (*,G), (*,*,RP)";
+        "Enter the database context
+
+         Database of PIM (S,G) (*,G), (*,*,RP)";
       list group {
         key "group source";
         leaf group {
@@ -915,7 +934,9 @@ module srl_nokia-pim {
     container database {
       config false;
       description
-        "Database of PIM (S,G) (*,G), (*,*,RP) for the interface";
+        "Enter the database context
+
+         Database of PIM (S,G) (*,G), (*,*,RP) for the interface";
       list group {
         key "group source";
         leaf group {
@@ -1126,7 +1147,9 @@ module srl_nokia-pim {
       if-feature "srl_nokia-feat:l3-multicast-vpn-spmsi";
       config false;
       description
-        "Selective Provider Multicast Service Interface (S-PMSI) tunnel state";
+        "Enter the s-pmsi context
+
+         Selective Provider Multicast Service Interface (S-PMSI) tunnel state";
       list mldp {
         config false;
         description
@@ -1386,6 +1409,8 @@ module srl_nokia-pim {
           "The number of packets received with an unsupported PIM type";
         type srl_nokia-comm:zero-based-counter32;
       }
+      description
+        "Enter the received context";
     }
     container transmitted {
       leaf hello-messages {
@@ -1424,6 +1449,8 @@ module srl_nokia-pim {
           "The number of multicast data packets transmitted on this interface";
         type srl_nokia-comm:zero-based-counter32;
       }
+      description
+        "Enter the transmitted context";
     }
     leaf join-policy-drops {
       if-feature "srl_nokia-feat:mcast-route-policy";
@@ -1581,7 +1608,9 @@ module srl_nokia-pim {
     container ipv4 {
       config false;
       description
-        "IPv4 specific interface parameters";
+        "Enter the ipv4 context
+
+         IPv4 specific interface parameters";
       leaf oper-state {
         config false;
         description
@@ -1609,14 +1638,18 @@ module srl_nokia-pim {
       container statistics {
         config false;
         description
-          "PIM Interface Statistics";
+          "Enter the statistics context
+
+           PIM Interface Statistics";
         uses pim-interface-statistics-state;
       }
     }
     container ipv6 {
       config false;
       description
-        "IPv6 specific interface parameters";
+        "Enter the ipv6 context
+
+         IPv6 specific interface parameters";
       leaf oper-state {
         config false;
         description
@@ -1644,7 +1677,9 @@ module srl_nokia-pim {
       container statistics {
         config false;
         description
-          "PIM Interface statistics";
+          "Enter the statistics context
+
+           PIM Interface statistics";
         uses pim-interface-statistics-state;
       }
     }
@@ -1756,7 +1791,9 @@ module srl_nokia-pim {
     container neighbors {
       config false;
       description
-        "Details about PIM neighbors";
+        "Enter the neighbors context
+
+         Details about PIM neighbors";
       list neighbor {
         key "address";
         leaf address {
@@ -1817,7 +1854,9 @@ module srl_nokia-pim {
         case selected-types {
           container event-types {
             description
-              "Enable tracing for selected event types only";
+              "Enter the event-types context
+
+               Enable tracing for selected event types only";
             container adjacency {
               presence "Enable tracing for adjacency events";
               description
@@ -1974,7 +2013,9 @@ module srl_nokia-pim {
         case selected-types {
           container packet-types {
             description
-              "Enable tracing for selected packet types only";
+              "Enter the packet-types context
+
+               Enable tracing for selected packet types only";
             container hello {
               presence "Enable tracing for hello packets";
               description
@@ -2022,7 +2063,9 @@ module srl_nokia-pim {
         "Enter the trace-options context";
       container trace {
         description
-          "Tracing parameter flags";
+          "Enter the trace context
+
+           Tracing parameter flags";
         uses pim-events-tracing-config;
         uses pim-packet-tracing-config;
       }
@@ -2051,13 +2094,17 @@ module srl_nokia-pim {
       uses pim-global-state;
       container ipv4 {
         description
-          "IPv4 specific PIM parameters";
+          "Enter the ipv4 context
+
+           IPv4 specific PIM parameters";
         uses pim-address-family-config;
         uses pim-address-family-state;
       }
       container ipv6 {
         description
-          "IPv6 specific PIM parameters";
+          "Enter the ipv6 context
+
+           IPv6 specific PIM parameters";
         uses pim-address-family-config;
         uses pim-address-family-state;
       }

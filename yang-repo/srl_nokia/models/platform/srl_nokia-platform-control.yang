@@ -24,6 +24,10 @@ module srl_nokia-platform-control {
   description
     "This module defines configuration and operational state data related to control modules.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -132,7 +136,9 @@ module srl_nokia-platform-control {
     container last-switchover-reason {
       config false;
       description
-        "State information relating to the last control module switchover";
+        "Enter the last-switchover-reason context
+
+         State information relating to the last control module switchover";
       leaf trigger {
         description
           "Indicates the trigger of the last switchover
@@ -238,7 +244,7 @@ module srl_nokia-platform-control {
         if-feature "srl-feat:cpm-warm-redundancy";
       }
       uses srl-platform:component-delayed-reboot-state {
-        if-feature "srl-feat:chassis";
+        if-feature "srl-feat:control-card-reboot";
       }
       uses srl-platform:component-common-state-sw;
       uses srl-platform:component-locator;

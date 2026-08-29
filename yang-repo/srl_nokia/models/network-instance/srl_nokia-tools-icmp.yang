@@ -15,6 +15,10 @@ module srl_nokia-tools-icmp {
   description
     "YANG model for ICMP (statistics related) operational commands";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2021-03-31 {
     description
       "SRLinux 21.3.1";
@@ -28,24 +32,32 @@ module srl_nokia-tools-icmp {
     container icmp {
       container statistics {
         description
-          "ICMP version 4 statistics";
+          "Enter the statistics context
+
+           ICMP version 4 statistics";
         leaf clear {
           type empty;
           description
             "Resets all the YANG state counters under network-instance/icmp/statistics to zero";
         }
       }
+      description
+        "Enter the icmp context";
     }
     container icmp6 {
       container statistics {
         description
-          "ICMP version 6 statistics";
+          "Enter the statistics context
+
+           ICMP version 6 statistics";
         leaf clear {
           type empty;
           description
             "Resets all the YANG state counters under network-instance/icmp6/statistics to zero";
         }
       }
+      description
+        "Enter the icmp6 context";
     }
   }
 

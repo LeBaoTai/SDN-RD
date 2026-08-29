@@ -6,6 +6,9 @@ module srl_nokia-system-multicast-mfib-table {
   import srl_nokia-system {
     prefix srl-system;
   }
+  import srl_nokia-system-multicast {
+    prefix srl-system-multicast;
+  }
   import srl_nokia-common {
     prefix srl_nokia-comm;
   }
@@ -28,6 +31,10 @@ module srl_nokia-system-multicast-mfib-table {
     "This module defines system Multicast Forwarding Information Base (MFIB) operational
      state data.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2023-03-31 {
     description
       "SRLinux 23.3.1";
@@ -37,7 +44,9 @@ module srl_nokia-system-multicast-mfib-table {
     container multicast-forwarding-information-base {
       config false;
       description
-        "System Multicast Forwarding Information Base table";
+        "Enter the multicast-forwarding-information-base context
+
+         System Multicast Forwarding Information Base table";
       list multicast-route {
         description
           "List of all the MFIB entries in the system";
@@ -84,5 +93,45 @@ module srl_nokia-system-multicast-mfib-table {
   augment "/srl-system:system" {
     srl_nokia-ext:first-released "23.3.1";
     uses system-mfib-table-top;
+  }
+
+  grouping replication-id-usage-common {
+    container statistics {
+      config false;
+      leaf maximum-ids {
+        type int32;
+        description
+          "Maximum number of replication ids available in the system";
+        srl_nokia-ext:show-importance "high";
+      }
+      leaf current-usage {
+        type srl_nokia-comm:zero-based-counter64;
+        description
+          "The total number of replication ids that are in use on the system";
+        srl_nokia-ext:show-importance "high";
+      }
+      leaf total-pending {
+        type srl_nokia-comm:zero-based-counter64;
+        description
+          "The total number of replication ids pending allocation on the system";
+        srl_nokia-ext:show-importance "high";
+      }
+      description
+        "Enter the statistics context";
+    }
+  }
+
+  grouping replication-id-top {
+    container replication-ids {
+      description
+        "Enter the replication-ids context
+
+         system replication id information";
+      uses replication-id-usage-common;
+    }
+  }
+
+  augment "/srl-system:system/srl-system-multicast:multicast" {
+    uses replication-id-top;
   }
 }

@@ -30,39 +30,117 @@ module srl_nokia-submgmt {
   contact
     "Nokia SR Linux Support
      Web: <http://www.nokia.com>";
+  description
+    "This module defines configuration and operational state data
+     related to subscriber management.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-03-31 {
     description
       "SRLinux 25.3.1";
   }
 
+  grouping subscriber-management-hosts {
+    description
+      "Subscriber hosts from state";
+    container hosts {
+      config false;
+      list host {
+        key "ip-address mac-address net-inst-name";
+        description
+          "Host";
+        leaf ip-address {
+          type srl_nokia-comm:ip-address;
+          description
+            "IPv4 or IPv6 address of the subscriber host";
+        }
+        leaf mac-address {
+          type srl_nokia-comm:mac-address;
+          description
+            "Mac address of the subscriber host";
+        }
+        leaf net-inst-name {
+          type string;
+          description
+            "Network instance name of the subscriber host";
+        }
+        leaf ip-address-prefix-length {
+          type uint32;
+          description
+            "IPv4 or IPv6 address prefix length of the subscriber host";
+        }
+        leaf global-if-id {
+          type uint32;
+          description
+            "Global interface identifier of the subscriber host";
+        }
+        leaf net-inst-id {
+          type uint32;
+          description
+            "Network instance identifier of the subscriber host";
+        }
+      }
+      description
+        "Enter the hosts context";
+    }
+  }
+
   grouping subscriber-management-top {
     description
-      "Top level grouping for subscriber-management";
+      "Grouping of reusable elements";
     container subscriber-management {
       if-feature "srl-feat:submgmt-fpcx";
+      presence "Configure subscriber-management";
       description
         "Top level container for subscriber-management data";
+      container profiles {
+        description
+          "Enter the profiles context
+
+           Subscriber management profiles";
+      }
+      container ref-points {
+        description
+          "Enter the ref-points context
+
+           Properties of reference points for communication with external systems";
+      }
+      container services {
+        description
+          "Enter the services context
+
+           Services";
+      }
       uses subscriber-management-policies;
       container interfaces {
         description
-          "List of interfaces used by subscriber-management";
+          "Enter the interfaces context
+
+           List of interfaces used by subscriber-management";
         uses subscriber-interfaces;
         uses capture-subinterface-top;
       }
+      uses subscriber-management-hosts;
     }
   }
 
   grouping subscriber-management-policies {
+    description
+      "Grouping of reusable elements";
     uses sla-profile;
     uses subscriber-profile;
   }
 
   grouping subscriber-profile {
+    description
+      "Grouping of reusable elements";
     list subscriber-profile {
+      key "name";
       description
         "List of subscriber-profiles";
-      key "name";
       leaf name {
         type srl_nokia-comm:name;
         description
@@ -70,20 +148,24 @@ module srl_nokia-submgmt {
       }
       container output {
         description
-          "Parameters related to output of subscriber-profile";
+          "Enter the output context
+
+           Parameters related to output of subscriber-profile";
         container qos {
           if-feature "srl-feat:qos";
           description
-            "QoS parameters for susbcriber-profile";
+            "Enter the qos context
+
+             QoS parameters for susbcriber-profile";
           leaf queue-scheduling-policy {
             if-feature "srl-feat:qos-queue-scheduling-policy";
+            type leafref {
+              path "/srl_nokia-qos:qos/srl_nokia-qos:scheduler-policies/srl_nokia-qos:queue-scheduling-policy/srl_nokia-qos:name";
+            }
             description
               "Reference to the name of queue-scheduling-policy
 
                Such policy can contain only tier-1 scheduler definitions";
-            type leafref {
-              path "/srl_nokia-qos:qos/srl_nokia-qos:scheduler-policies/srl_nokia-qos:queue-scheduling-policy/srl_nokia-qos:name";
-            }
           }
         }
       }
@@ -91,12 +173,18 @@ module srl_nokia-submgmt {
   }
 
   grouping classifiers {
+    description
+      "Grouping of reusable elements";
     container classifiers {
       description
-        "Input classifier policies";
+        "Enter the classifiers context
+
+         Input classifier policies";
       container default {
         description
-          "The conatiner defining default qos parameters for packets which do not match any of the classification rules";
+          "Enter the default context
+
+           The conatiner defining default qos parameters for packets which do not match any of the classification rules";
         leaf forwarding-class {
           type leafref {
             path "/srl_nokia-qos:qos/srl_nokia-qos:forwarding-classes/srl_nokia-qos:forwarding-class/srl_nokia-qos:name";
@@ -105,19 +193,19 @@ module srl_nokia-submgmt {
             "The default forwarding class for packets which do no match any classification rules";
         }
         leaf profile {
-          description
-            "The default profile for packets that do not match any classification rules";
           type srl_nokia-comm:classify-profile;
           default "out";
+          description
+            "The default profile for packets that do not match any classification rules";
         }
       }
       leaf dot1p-policy {
         if-feature "srl-feat:qos-dot1p-classifier-policy";
-        description
-          "Reference to the name of a dot1p classification policy";
         type leafref {
           path "/srl_nokia-qos:qos/srl_nokia-qos:classifiers/srl_nokia-qos:dot1p-policy/srl_nokia-qos:name";
         }
+        description
+          "Reference to the name of a dot1p classification policy";
       }
       leaf dscp-policy {
         type leafref {
@@ -130,23 +218,31 @@ module srl_nokia-submgmt {
   }
 
   grouping policer-policies {
+    description
+      "Grouping of reusable elements";
     container policer-policies {
+      description
+        "Enter the policer-policies context
+
+         Policer policies";
       leaf policer-policy {
         if-feature "srl-feat:qos-policer-policies";
-        description
-          "Reference to the name of a policer-policy";
         type leafref {
           path "/srl_nokia-qos:qos/srl_nokia-qos:policer-policies/srl_nokia-qos:policer-policy/srl_nokia-qos:name";
         }
+        description
+          "Reference to the name of a policer-policy";
       }
       container overrides {
         description
-          "Parameters overriding the policer-policy policer settings";
+          "Enter the overrides context
+
+           Parameters overriding the policer-policy policer settings";
         list policer {
-          description
-            "The list of policer belonging to the policer-policy";
           key "policer-id";
           max-elements 32;
+          description
+            "The list of policer belonging to the policer-policy";
           leaf policer-id {
             type uint8 {
               range "0..31";
@@ -224,9 +320,13 @@ module srl_nokia-submgmt {
   }
 
   grouping acl {
+    description
+      "Grouping of reusable elements";
     container acl {
       description
-        "ACL filters";
+        "Enter the acl context
+
+         ACL filters";
       list acl-filter {
         key "name type";
         max-elements 4;
@@ -237,18 +337,24 @@ module srl_nokia-submgmt {
           type leafref {
             path "/srl_nokia-acl:acl/srl_nokia-acl:acl-filter/srl_nokia-acl:name";
           }
+          description
+            "name";
         }
         leaf type {
           type leafref {
             path "/srl_nokia-acl:acl/srl_nokia-acl:acl-filter[srl_nokia-acl:name=current()/../name]"
                + "/srl_nokia-acl:type";
           }
+          description
+            "type";
         }
       }
     }
   }
 
   grouping input-qos {
+    description
+      "Grouping of reusable elements";
     leaf input-class-map {
       if-feature "srl-feat:qos-input-class-map";
       type leafref {
@@ -262,9 +368,13 @@ module srl_nokia-submgmt {
   }
 
   grouping rewrite-policies {
+    description
+      "Grouping of reusable elements";
     container rewrite-policies {
       description
-        "Output rewrite policies";
+        "Enter the rewrite-policies context
+
+         Output rewrite policies";
       leaf dscp-policy {
         type leafref {
           path "/srl_nokia-qos:qos/srl_nokia-qos:rewrite-rules/srl_nokia-qos:dscp-policy/srl_nokia-qos:name";
@@ -284,7 +394,13 @@ module srl_nokia-submgmt {
   }
 
   grouping sla-scheduling {
+    description
+      "Grouping of reusable elements";
     container scheduling {
+      description
+        "Enter the scheduling context
+
+         Scheduling";
       leaf queue-scheduling-policy {
         if-feature "srl-feat:qos-queue-scheduling-policy";
         type leafref {
@@ -296,10 +412,14 @@ module srl_nokia-submgmt {
            Such policy can contain only queue and tier-0 schedulers definitions";
       }
       container overrides {
+        description
+          "Enter the overrides context
+
+           Overrides";
         list queue {
+          key "queue-name";
           description
             "List of queues";
-          key "queue-name";
           leaf queue-name {
             type leafref {
               path "/srl_nokia-qos:qos/srl_nokia-qos:queues/srl_nokia-qos:queue/srl_nokia-qos:name";
@@ -308,38 +428,40 @@ module srl_nokia-submgmt {
               "The queue name";
           }
           leaf scheduling-class {
-            description
-              "Scheduling-class of the queue";
             type uint8 {
               range "0|2|4|6";
             }
             default "0";
+            description
+              "Scheduling-class of the queue";
           }
           leaf weight {
-            description
-              "The scheduling weight of the given queue";
             type uint8 {
               range "1..127";
             }
             default "1";
+            description
+              "The scheduling weight of the given queue";
           }
           container packet-length-adjustment {
             description
-              "The definition on how packet-length should be adjusted for the scheduling-algorithm calculation";
+              "Enter the packet-length-adjustment context
+
+               The definition on how packet-length should be adjusted for the scheduling-algorithm calculation";
             leaf add {
-              description
-                "Number of bytes to be added to the packet-length for the scheduling-algorithm calculation";
               type uint32 {
                 range "0..32";
               }
               units "bytes";
               default "0";
+              description
+                "Number of bytes to be added to the packet-length for the scheduling-algorithm calculation";
             }
           }
           leaf tier-0-scheduler-rate {
+            type uint64;
             description
               "Tier-0 queue-scheduler peak-rate in kilobits-per-second";
-            type uint64;
           }
         }
       }
@@ -347,6 +469,8 @@ module srl_nokia-submgmt {
   }
 
   grouping output-qos {
+    description
+      "Grouping of reusable elements";
     leaf output-class-map {
       if-feature "srl-feat:qos-output-class-map";
       type leafref {
@@ -371,6 +495,8 @@ module srl_nokia-submgmt {
       "Sla-profile QoS realted configuration data";
     list sla-profile {
       key "name";
+      description
+        "SLA profile";
       leaf name {
         type srl_nokia-comm:name;
         description
@@ -378,7 +504,9 @@ module srl_nokia-submgmt {
       }
       container input {
         description
-          "Container with references to input configuration for sla-profile";
+          "Enter the input context
+
+           Container with references to input configuration for sla-profile";
         uses acl;
         uses input-qos {
           if-feature "srl-feat:qos";
@@ -386,7 +514,9 @@ module srl_nokia-submgmt {
       }
       container output {
         description
-          "Container with references to output configuration for sla-profile";
+          "Enter the output context
+
+           Container with references to output configuration for sla-profile";
         uses acl;
         uses output-qos {
           if-feature "srl-feat:qos";
@@ -395,59 +525,61 @@ module srl_nokia-submgmt {
     }
   }
 
-  uses subscriber-management-top;
-
   grouping subscriber-interfaces {
+    description
+      "Grouping of reusable elements";
     list subscriber-interface {
+      key "name";
       description
         "Creates subscriber-interface.
 
          This is a new type of the interface which is not tied to a physical resource. Instead, it provides object for creating subnets and grouping of physical subinterfaces sharing these subnets.
          All subinterfaces associated under this subscriber interface must be of the same same type 'routed vs.bridged'.
          In case of routed-type, none of subinterfaces should have IPv4/Ipv6 subnet associated";
-      key "name";
       leaf name {
         type srl_nokia-comm:name;
         description
           "User-configured name for subscriber-interface";
       }
       leaf network-instance {
-        description
-          "Defines network-instance this subscriber-interface is using";
         type leafref {
           path "/srl_nokia-ni:network-instance/srl_nokia-ni:name";
         }
+        description
+          "Defines network-instance this subscriber-interface is using";
       }
       container subnets {
         description
-          "List of IPv4 and IPv6 subnets";
+          "Enter the subnets context
+
+           List of IPv4 and IPv6 subnets";
         list ipv4-subnet {
+          key "ipv4-prefix";
           description
             "List of IPv4 prefixes";
-          key "ipv4-prefix";
           leaf ipv4-prefix {
+            type srl_nokia-comm:ipv4-prefix;
             description
               "IPv4 prefix";
-            type srl_nokia-comm:ipv4-prefix;
           }
         }
         list ipv6-subnet {
+          key "ipv6-prefix";
           description
             "List of IPv6 prefixes";
-          key "ipv6-prefix";
           leaf ipv6-prefix {
+            type srl_nokia-comm:ipv6-prefix;
             description
               "IPv6 prefix";
-            type srl_nokia-comm:ipv6-prefix;
           }
         }
       }
       list group-interface {
+        key "name";
         description
           "Creates a group-interface within subscriber-management-interface.
 
            Not sure this is needed. For the moment it is just a place-holder";
-        key "name";
         leaf name {
           type srl_nokia-comm:name;
           description
@@ -460,8 +592,6 @@ module srl_nokia-submgmt {
             "List of subinterfaces referenced by subscriber-management-interface";
           leaf interface-id {
             type string;
-            description
-              "Identifier for the interface or subinterface";
             must 'not (starts-with(., "_"))' {
               error-message "reserved interface-id cannot be configured";
             }
@@ -469,16 +599,18 @@ module srl_nokia-submgmt {
                               ../interface-ref/interface" {
               error-message "subscriber-management configuration is not supported on LAG member ports";
             }
+            description
+              "Identifier for the interface or subinterface";
           }
           container interface-ref {
             description
-              "Reference to an interface and a subinterface";
+              "Enter the interface-ref context
+
+               Reference to an interface and a subinterface";
             leaf interface {
               type leafref {
                 path "/srl_nokia-if:interface/srl_nokia-if:name";
               }
-              description
-                "Reference to a base interface, for example a port or LAG";
               must "not (string(../subinterface) != '' and starts-with(current(), 'irb'))" {
                 error-message "qos configuration is not supported on IRB sub interface";
                 srl_nokia-ext:if-feature "not (srl_nokia-features:qos-irb-subinterface)";
@@ -492,94 +624,98 @@ module srl_nokia-submgmt {
               must 'not (/srl_nokia-if:interface[srl_nokia-if:name=current()]/srl_nokia-if:breakout-mode)' {
                 error-message "Interfaces with breakout-mode configured are not supported";
               }
+              description
+                "Reference to a base interface, for example a port or LAG";
             }
             leaf subinterface {
               type leafref {
                 path "/srl_nokia-if:interface[srl_nokia-if:name=current()/../interface]/srl_nokia-if:subinterface/srl_nokia-if:index";
               }
+              must '../interface' {
+                error-message "interface must be configured when subinterface is set";
+              }
               description
                 "Reference to a subinterface
 
                  This requires the base interface to be specified using the interface leaf in this container";
-              must '../interface' {
-                error-message "interface must be configured when subinterface is set";
-              }
             }
           }
           container defaults {
             description
-              "Default subscriber-management object associated with the given subinterface";
+              "Enter the defaults context
+
+               Default subscriber-management object associated with the given subinterface";
             leaf sla-profile {
-              description
-                "Default SLA-profile for all subscriber-hosts created on the given subinterface";
               type leafref {
                 path "/subscriber-management/sla-profile/name";
               }
+              description
+                "Default SLA-profile for all subscriber-hosts created on the given subinterface";
             }
             leaf subscriber-profile {
-              description
-                "Subscriber-profile assigned to the subscriber-host";
               type leafref {
                 path "/subscriber-management/subscriber-profile/name";
               }
+              description
+                "Subscriber-profile assigned to the subscriber-host";
             }
           }
           list ipv4-static-host {
+            key "ipv4-address mac-address";
             description
               "List of IPv4 static-hosts on the subinterface";
-            key "ipv4-address mac-address";
             leaf ipv4-address {
+              type srl_nokia-comm:ipv4-address;
               description
                 "IPv4 address for a static host";
-              type srl_nokia-comm:ipv4-address;
             }
             leaf mac-address {
+              type srl_nokia-comm:mac-address;
               description
                 "MAC address for a static host";
-              type srl_nokia-comm:mac-address;
             }
             leaf sla-profile {
-              description
-                "SLA-profile assigned to the subscriber-host";
               type leafref {
                 path "/subscriber-management/sla-profile/name";
               }
+              description
+                "SLA-profile assigned to the subscriber-host";
             }
             leaf subscriber-profile {
-              description
-                "Subscriber-profile assigned to the subscriber-host";
               type leafref {
                 path "/subscriber-management/subscriber-profile/name";
               }
+              description
+                "Subscriber-profile assigned to the subscriber-host";
             }
           }
           list ipv6-static-host {
+            key "ipv6-address mac-address";
             description
               "List of IPv6 static-hosts on the subinterface";
-            key "ipv6-address mac-address";
             leaf ipv6-address {
+              type srl_nokia-comm:ipv6-address;
               description
                 "IPv6 address for a static host";
-              type srl_nokia-comm:ipv6-address;
             }
             leaf mac-address {
+              type srl_nokia-comm:mac-address;
               description
                 "MAC address for a static host";
-              type srl_nokia-comm:mac-address;
             }
             leaf sla-profile {
-              description
-                "SLA-profile assigned to the subscriber-host";
               type leafref {
                 path "/subscriber-management/sla-profile/name";
               }
+              description
+                "SLA-profile assigned to the subscriber-host";
             }
             leaf subscriber-profile {
-              description
-                "Subscriber-profile assigned to the subscriber-host";
               type leafref {
                 path "/subscriber-management/subscriber-profile/name";
               }
+              description
+                "Subscriber-profile assigned to the subscriber-host";
             }
           }
         }
@@ -588,29 +724,33 @@ module srl_nokia-submgmt {
   }
 
   grouping capture-subinterface-top {
+    description
+      "Grouping of reusable elements";
     list capture-subinterface {
       key "name";
+      description
+        "Capture subinterface";
       leaf name {
         type srl_nokia-comm:name;
         description
           "User-configured name for capture-subinterface";
       }
       leaf network-instance {
-        description
-          "Defines network-instance this subscriber-interface is using";
         type leafref {
           path "/srl_nokia-ni:network-instance/srl_nokia-ni:name";
         }
+        description
+          "Defines network-instance this subscriber-interface is using";
       }
       container interface-ref {
         description
-          "Reference to an interface and a subinterface";
+          "Enter the interface-ref context
+
+           Reference to an interface and a subinterface";
         leaf interface {
           type leafref {
             path "/srl_nokia-if:interface/srl_nokia-if:name";
           }
-          description
-            "Reference to a base interface, for example a port or LAG";
           must "not (string(../subinterface) != '' and starts-with(current(), 'irb'))" {
             error-message "qos configuration is not supported on IRB sub interface";
             srl_nokia-ext:if-feature "not (srl_nokia-features:qos-irb-subinterface)";
@@ -624,38 +764,44 @@ module srl_nokia-submgmt {
           must 'not (/srl_nokia-if:interface[srl_nokia-if:name=current()]/srl_nokia-if:breakout-mode)' {
             error-message "Interfaces with breakout-mode configured are not supported";
           }
+          description
+            "Reference to a base interface, for example a port or LAG";
         }
         leaf subinterface {
           type leafref {
             path "/srl_nokia-if:interface[srl_nokia-if:name=current()/../interface]/srl_nokia-if:subinterface/srl_nokia-if:index";
           }
+          must '../interface' {
+            error-message "interface must be configured when subinterface is set";
+          }
           description
             "Reference to a subinterface
 
              This requires the base interface to be specified using the interface leaf in this container";
-          must '../interface' {
-            error-message "interface must be configured when subinterface is set";
-          }
         }
       }
       container defaults {
         description
-          "Default subscriber-management objects associated with capture-subinterface";
+          "Enter the defaults context
+
+           Default subscriber-management objects associated with capture-subinterface";
         leaf sla-profile {
-          description
-            "Default SLA-profile for all subscriber-hosts created based on the capture-subinterface";
           type leafref {
             path "/subscriber-management/sla-profile/name";
           }
+          description
+            "Default SLA-profile for all subscriber-hosts created based on the capture-subinterface";
         }
         leaf subscriber-profile {
-          description
-            "Subscriber-profile assigned to the subscriber-hosts created based on this capture-subinterface";
           type leafref {
             path "/subscriber-management/subscriber-profile/name";
           }
+          description
+            "Subscriber-profile assigned to the subscriber-hosts created based on this capture-subinterface";
         }
       }
     }
   }
+
+  uses subscriber-management-top;
 }

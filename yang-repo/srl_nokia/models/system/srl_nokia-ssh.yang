@@ -27,6 +27,10 @@ module srl_nokia-ssh {
   description
     "This module defines SSH configuration";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -62,6 +66,356 @@ module srl_nokia-ssh {
   revision 2019-11-30 {
     description
       "SRLinux 19.11.1";
+  }
+
+  identity cipher-type {
+    description
+      "Base identity for cipher types";
+  }
+
+  identity triple-des-cbc {
+    base cipher-type;
+    description
+      "3des-cbc";
+  }
+
+  identity aes128-cbc {
+    base cipher-type;
+    description
+      "aes128-cbc";
+  }
+
+  identity aes192-cbc {
+    base cipher-type;
+    description
+      "aes192-cbc";
+  }
+
+  identity aes256-cbc {
+    base cipher-type;
+    description
+      "aes256-cbc";
+  }
+
+  identity aes128-ctr {
+    base cipher-type;
+    description
+      "aes128-ctr";
+  }
+
+  identity aes192-ctr {
+    base cipher-type;
+    description
+      "aes192-ctr";
+  }
+
+  identity aes256-ctr {
+    base cipher-type;
+    description
+      "aes256-ctr";
+  }
+
+  identity aes128-gcm_openssh.com {
+    base cipher-type;
+    description
+      "aes128-gcm@openssh.com";
+  }
+
+  identity aes256-gcm_openssh.com {
+    base cipher-type;
+    description
+      "aes256-gcm@openssh.com";
+  }
+
+  identity chacha20-poly1305_openssh.com {
+    base cipher-type;
+    description
+      "chacha20-poly1305@openssh.com";
+  }
+
+  identity mac-type {
+    description
+      "Base identity for MAC types";
+  }
+
+  identity hmac-sha1 {
+    base mac-type;
+    description
+      "hmac-sha1";
+  }
+
+  identity hmac-sha1-96 {
+    base mac-type;
+    description
+      "hmac-sha1-96";
+  }
+
+  identity hmac-sha2-256 {
+    base mac-type;
+    description
+      "hmac-sha2-256";
+  }
+
+  identity hmac-sha2-512 {
+    base mac-type;
+    description
+      "hmac-sha2-512";
+  }
+
+  identity hmac-md5 {
+    base mac-type;
+    description
+      "hmac-md5";
+  }
+
+  identity hmac-md5-96 {
+    base mac-type;
+    description
+      "hmac-md5-96";
+  }
+
+  identity umac-64_openssh.com {
+    base mac-type;
+    description
+      "umac-64@openssh.com";
+  }
+
+  identity umac-128_openssh.com {
+    base mac-type;
+    description
+      "umac-128@openssh.com";
+  }
+
+  identity hmac-sha1-etm_openssh.com {
+    base mac-type;
+    description
+      "hmac-sha1-etm@openssh.com";
+  }
+
+  identity hmac-sha1-96-etm_openssh.com {
+    base mac-type;
+    description
+      "hmac-sha1-96-etm@openssh.com";
+  }
+
+  identity hmac-sha2-256-etm_openssh.com {
+    base mac-type;
+    description
+      "hmac-sha2-256-etm@openssh.com";
+  }
+
+  identity hmac-sha2-512-etm_openssh.com {
+    base mac-type;
+    description
+      "hmac-sha2-512-etm@openssh.com";
+  }
+
+  identity hmac-md5-etm_openssh.com {
+    base mac-type;
+    description
+      "hmac-md5-etm@openssh.com";
+  }
+
+  identity hmac-md5-96-etm_openssh.com {
+    base mac-type;
+    description
+      "hmac-md5-96-etm@openssh.com";
+  }
+
+  identity umac-64-etm_openssh.com {
+    base mac-type;
+    description
+      "umac-64-etm@openssh.com";
+  }
+
+  identity umac-128-etm_openssh.com {
+    base mac-type;
+    description
+      "umac-128-etm@openssh.com";
+  }
+
+  identity kex-type {
+    description
+      "Base identity for Kex algorithm types";
+  }
+
+  identity diffie-hellman-group1-sha1 {
+    base kex-type;
+    description
+      "diffie-hellman-group1-sha1";
+  }
+
+  identity diffie-hellman-group14-sha1 {
+    base kex-type;
+    description
+      "diffie-hellman-group14-sha1";
+  }
+
+  identity diffie-hellman-group14-sha256 {
+    base kex-type;
+    description
+      "diffie-hellman-group14-sha256";
+  }
+
+  identity diffie-hellman-group16-sha512 {
+    base kex-type;
+    description
+      "diffie-hellman-group16-sha512";
+  }
+
+  identity diffie-hellman-group18-sha512 {
+    base kex-type;
+    description
+      "diffie-hellman-group18-sha512";
+  }
+
+  identity diffie-hellman-group-exchange-sha1 {
+    base kex-type;
+    description
+      "diffie-hellman-group-exchange-sha1";
+  }
+
+  identity diffie-hellman-group-exchange-sha256 {
+    base kex-type;
+    description
+      "diffie-hellman-group-exchange-sha256";
+  }
+
+  identity ecdh-sha2-nistp256 {
+    base kex-type;
+    description
+      "ecdh-sha2-nistp256";
+  }
+
+  identity ecdh-sha2-nistp384 {
+    base kex-type;
+    description
+      "ecdh-sha2-nistp384";
+  }
+
+  identity ecdh-sha2-nistp521 {
+    base kex-type;
+    description
+      "ecdh-sha2-nistp521";
+  }
+
+  identity curve25519-sha256 {
+    base kex-type;
+    description
+      "curve25519-sha256";
+  }
+
+  identity curve25519-sha256_libssh.org {
+    base kex-type;
+    description
+      "curve25519-sha256@libssh.org";
+  }
+
+  identity sntrup761x25519-sha512 {
+    base kex-type;
+    description
+      "sntrup761x25519-sha512";
+  }
+
+  identity sntrup761x25519-sha512_openssh.com {
+    base kex-type;
+    description
+      "sntrup761x25519-sha512@openssh.com";
+  }
+
+  identity mlkem768x25519-sha256 {
+    base kex-type;
+    description
+      "mlkem768x25519-sha256";
+  }
+
+  identity key-type {
+    description
+      "Base identity for Host key algorithm types";
+  }
+
+  identity ssh-ed25519 {
+    base key-type;
+    description
+      "ssh-ed25519";
+  }
+
+  identity ssh-ed25519-cert-v01_openssh.com {
+    base key-type;
+    description
+      "ssh-ed25519-cert-v01@openssh.com";
+  }
+
+  identity sk-ssh-ed25519_openssh.com {
+    base key-type;
+    description
+      "sk-ssh-ed25519@openssh.com";
+  }
+
+  identity sk-ssh-ed25519-cert-v01_openssh.com {
+    base key-type;
+    description
+      "sk-ssh-ed25519-cert-v01@openssh.com";
+  }
+
+  identity ecdsa-sha2-nistp256 {
+    base key-type;
+    description
+      "ecdsa-sha2-nistp256";
+  }
+
+  identity ecdsa-sha2-nistp256-cert-v01_openssh.com {
+    base key-type;
+    description
+      "ecdsa-sha2-nistp256-cert-v01@openssh.com";
+  }
+
+  identity ecdsa-sha2-nistp384 {
+    base key-type;
+    description
+      "ecdsa-sha2-nistp384";
+  }
+
+  identity ecdsa-sha2-nistp384-cert-v01_openssh.com {
+    base key-type;
+    description
+      "ecdsa-sha2-nistp384-cert-v01@openssh.com";
+  }
+
+  identity ecdsa-sha2-nistp521 {
+    base key-type;
+    description
+      "ecdsa-sha2-nistp521";
+  }
+
+  identity ecdsa-sha2-nistp521-cert-v01_openssh.com {
+    base key-type;
+    description
+      "ecdsa-sha2-nistp521-cert-v01@openssh.com";
+  }
+
+  identity sk-ecdsa-sha2-nistp256_openssh.com {
+    base key-type;
+    description
+      "sk-ecdsa-sha2-nistp256@openssh.com";
+  }
+
+  identity sk-ecdsa-sha2-nistp256-cert-v01_openssh.com {
+    base key-type;
+    description
+      "sk-ecdsa-sha2-nistp256-cert-v01@openssh.com";
+  }
+
+  identity ssh-rsa {
+    base key-type;
+    description
+      "ssh-rsa";
+  }
+
+  identity ssh-rsa-cert-v01_openssh.com {
+    base key-type;
+    description
+      "ssh-rsa-cert-v01@openssh.com";
   }
 
   grouping ssh-server-instance-top {
@@ -245,6 +599,62 @@ module srl_nokia-ssh {
 
            Takes effect only if the value is set to false for every configured ssh server instance.";
       }
+      description
+        "Enter the host-key context";
+    }
+    leaf-list cipher-list {
+      if-feature "srl_nokia-feat:pqc-support-ssh-crypt-functions";
+      description
+        "Ordered list of allowed SSH ciphers.";
+      ordered-by user;
+      type identityref {
+        base cipher-type;
+      }
+    }
+    leaf-list mac-list {
+      if-feature "srl_nokia-feat:pqc-support-ssh-crypt-functions";
+      description
+        "Ordered list of allowed SSH mac algorithms.";
+      ordered-by user;
+      type identityref {
+        base mac-type;
+      }
+    }
+    leaf-list kex-list {
+      if-feature "srl_nokia-feat:pqc-support-ssh-crypt-functions";
+      description
+        "Ordered list of allowed SSH kex algorithms.";
+      ordered-by user;
+      type identityref {
+        base kex-type;
+      }
+    }
+    leaf-list key-list {
+      if-feature "srl_nokia-feat:pqc-support-ssh-crypt-functions";
+      description
+        "Ordered list of allowed SSH host key algorithms.";
+      ordered-by user;
+      type identityref {
+        base key-type;
+      }
+    }
+    leaf rekey-limit-data {
+      if-feature "srl_nokia-feat:ssh-rekey-threshold";
+      type uint32;
+      units "megabytes";
+      description
+        "Maximum amount of data that may be transmitted/received before the session key is renegotiated
+
+         Specified value is in Megabytes. When not specified, the default value is between 1GB and 4GB depending on the cipher.";
+    }
+    leaf rekey-limit-time {
+      if-feature "srl_nokia-feat:ssh-rekey-threshold";
+      type uint32;
+      units "seconds";
+      description
+        "Maximum amount of time that may pass before the session key is renegotiated
+
+         Specified value is in seconds. When not specified, no time-based rekey is performed.";
     }
   }
 

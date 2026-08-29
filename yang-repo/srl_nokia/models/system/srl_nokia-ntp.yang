@@ -33,6 +33,10 @@ module srl_nokia-ntp {
   description
     "This module defines NTP configuration and state";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -350,7 +354,9 @@ module srl_nokia-ntp {
   grouping clock-top {
     container clock {
       description
-        "Top-level container for system clock configuration and state";
+        "Enter the clock context
+
+         Top-level container for system clock configuration and state";
       leaf timezone {
         type srl-tz:tzdata-timezone;
         description

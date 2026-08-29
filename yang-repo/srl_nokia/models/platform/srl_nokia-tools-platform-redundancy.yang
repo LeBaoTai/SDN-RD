@@ -18,6 +18,10 @@ module srl_nokia-tools-platform-redundancy {
   description
     "Model for operational commands for platform redundancy.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -38,7 +42,9 @@ module srl_nokia-tools-platform-redundancy {
   grouping tools-redundancy-top {
     container redundancy {
       description
-        "Top-level container for redundancy operational commands";
+        "Enter the redundancy context
+
+         Top-level container for redundancy operational commands";
       container switchover {
         if-feature "srl-feat:redundant-cpms";
         presence "Trigger a switchover of the cpm";
@@ -48,7 +54,9 @@ module srl_nokia-tools-platform-redundancy {
       container synchronize {
         if-feature "srl-feat:redundant-cpms";
         description
-          "Top-level container for manual synchronization activies";
+          "Enter the synchronize context
+
+           Top-level container for manual synchronization activies";
         leaf system {
           type empty;
           description
@@ -67,13 +75,32 @@ module srl_nokia-tools-platform-redundancy {
       container linecard {
         if-feature "srl-feat:cpiom-linecard-redundancy";
         description
-          "Top-level container for manual line card user-triggered redundancy operations";
-        leaf trigger-forwarding-takeover {
-          type empty;
-          description
-            "Force distribution of forwarding across two CPIOMs where all forwarding for all odd MDA slots are handled via CPIOM-A and forwarding for all even MDA slots are handled via CPIOM-B
+          "Enter the linecard context
 
-             Node triggers active / active mode, only when both CPIOMs are synchronized";
+           Top-level container for manual line card user-triggered redundancy operations";
+        leaf forwarder {
+          type enumeration {
+            enum iom-A {
+              description
+                "Forwarding functionality for all MDAs is to be handled via IOM A. Assumes all MDAs are in full sync mode.
+
+                 Does not trigger Control Plane activity switch. Control plane processing remains on current owner.";
+            }
+            enum iom-B {
+              description
+                "Forwarding functionality for all MDAs is to be handled via IOM B. Assumes all MDAs are in full sync mode.
+
+                 Does not trigger Control Plane activity switch. Control plane processing remains on current owner.";
+            }
+            enum both {
+              description
+                "Forwarding functionality is distributed among IOM A and IOM B. Both IOMs attempt ownership of forwarding operations for half of the MDAs. Assumes all MDAs are in full sync mode.
+
+                 Does not trigger Control Plane activity switch. Control plane processing remains on current owner.";
+            }
+          }
+          description
+            "Force re-distribution of forwarding ownership among IOMs.";
         }
       }
     }

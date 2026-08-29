@@ -18,6 +18,10 @@ module srl_nokia-tools-platform-secure-boot {
   description
     "Model for operational commands for Platform Trust: Secure Boot.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -39,7 +43,9 @@ module srl_nokia-tools-platform-secure-boot {
     container secure-boot {
       if-feature "srl-feat:secure-boot";
       description
-        "Secure Boot operational commands";
+        "Enter the secure-boot context
+
+         Secure Boot operational commands";
       list control {
         description
           "Operational commands related to Secure Boot for control modules";
@@ -51,7 +57,9 @@ module srl_nokia-tools-platform-secure-boot {
         }
         container activate {
           description
-            "Activate Secure Boot";
+            "Enter the activate context
+
+             Activate Secure Boot";
           leaf serial-number {
             type string;
             description
@@ -65,7 +73,9 @@ module srl_nokia-tools-platform-secure-boot {
         }
         container update {
           description
-            "Update UEFI Secure Boot authorized database (db), Key Exchange Key (KEK), Platform Key (PK)";
+            "Enter the update context
+
+             Update UEFI Secure Boot authorized database (db), Key Exchange Key (KEK), Platform Key (PK)";
           leaf serial-number {
             type string;
             description
@@ -79,7 +89,9 @@ module srl_nokia-tools-platform-secure-boot {
         }
         container revoke {
           description
-            "Update UEFI Secure Boot forbidden database (dbx), Key Exchange Key (KEK), Platform Key (PK)";
+            "Enter the revoke context
+
+             Update UEFI Secure Boot forbidden database (dbx), Key Exchange Key (KEK), Platform Key (PK)";
           leaf serial-number {
             type string;
             description

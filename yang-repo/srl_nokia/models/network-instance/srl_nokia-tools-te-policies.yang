@@ -21,6 +21,10 @@ module srl_nokia-tools-te-policies {
   description
     "Model for Taffic Engineering Policies operational commands";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -59,10 +63,14 @@ module srl_nokia-tools-te-policies {
           container statistics {
             if-feature "srl_nokia-feat:te-policy-statistics";
             description
-              "TE Policy Statistics tools options";
+              "Enter the statistics context
+
+               TE Policy Statistics tools options";
             container ingress {
               description
-                "TE Policy ingress statistics";
+                "Enter the ingress context
+
+                 TE Policy ingress statistics";
               leaf clear {
                 type empty;
                 description
@@ -71,7 +79,9 @@ module srl_nokia-tools-te-policies {
             }
             container egress {
               description
-                "TE Policy egress statistics";
+                "Enter the egress context
+
+                 TE Policy egress statistics";
               leaf clear {
                 type empty;
                 description
@@ -103,6 +113,8 @@ module srl_nokia-tools-te-policies {
             }
           }
         }
+        description
+          "Enter the sr-uncolored context";
       }
       container sr-colored {
         if-feature "srl_nokia-feat:te-policy-colored-statistics";
@@ -121,10 +133,14 @@ module srl_nokia-tools-te-policies {
           container statistics {
             if-feature "srl_nokia-feat:te-policy-colored-statistics";
             description
-              "TE Policy Statistics tools options";
+              "Enter the statistics context
+
+               TE Policy Statistics tools options";
             container ingress {
               description
-                "TE Policy egress statistics";
+                "Enter the ingress context
+
+                 TE Policy egress statistics";
               leaf clear {
                 type empty;
                 description
@@ -168,10 +184,14 @@ module srl_nokia-tools-te-policies {
               container statistics {
                 if-feature "srl_nokia-feat:te-policy-colored-statistics";
                 description
-                  "TE Policy Statistics tools options";
+                  "Enter the statistics context
+
+                   TE Policy Statistics tools options";
                 container egress {
                   description
-                    "TE Policy egress statistics";
+                    "Enter the egress context
+
+                     TE Policy egress statistics";
                   leaf clear {
                     type empty;
                     description
@@ -182,7 +202,11 @@ module srl_nokia-tools-te-policies {
             }
           }
         }
+        description
+          "Enter the sr-colored context";
       }
+      description
+        "Enter the traffic-engineering-policies context";
     }
   }
 

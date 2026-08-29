@@ -24,6 +24,10 @@ module srl_nokia-msdp {
   description
     "This module models MSDP configuration in default network instance";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -392,6 +396,125 @@ module srl_nokia-msdp {
           limit has been exceeded";
       type srl_nokia-comm:zero-based-counter32;
     }
+    container source-active {
+      config false;
+      description
+        "Enter the source-active context
+
+         MSDP Source Active advertisements currently in the MSDP speaker's cache";
+      list group {
+        key "group source origin-rendez-vous-point";
+        leaf group {
+          description
+            "The group address of the source active";
+          type srl_nokia-comm:ipv4-address;
+        }
+        leaf source {
+          description
+            "The source address of the source active";
+          type srl_nokia-comm:ipv4-address-unicast;
+        }
+        leaf origin-rendez-vous-point {
+          description
+            "The origin rendezvous point address of the source active";
+          type srl_nokia-comm:ipv4-address;
+        }
+        leaf peer-learnt-from {
+          config false;
+          description
+            "The peer from which the source active was last accepted";
+          type srl_nokia-comm:ipv4-address;
+        }
+        leaf reverse-path-forwarding-peer {
+          config false;
+          description
+            "The peer from which an source active message corresponding
+                to this cache would be accepted";
+          type srl_nokia-comm:ipv4-address;
+        }
+        leaf up-time {
+          config false;
+          description
+            "The time since this was first placed in the source active cache";
+          type srl_nokia-comm:date-and-time-delta;
+        }
+        leaf expiry-time {
+          config false;
+          description
+            "The time remaining before this will expire from the
+                source active cache";
+          type srl_nokia-comm:date-and-time-delta;
+        }
+      }
+    }
+    container source-active-rejected {
+      config false;
+      description
+        "Enter the source-active-rejected context
+
+         MSDP Source Active advertisements rejected from the MSDP speaker's cache";
+      list group-name {
+        key "group-name group source origin-rendez-vous-point peer";
+        leaf group-name {
+          description
+            "The peer group name of the source active that is rejected";
+          type string {
+            length "0..32";
+          }
+        }
+        leaf group {
+          description
+            "The group address of the source active that is rejected";
+          type srl_nokia-comm:ipv4-address;
+        }
+        leaf source {
+          description
+            "The source address of the source active that is rejected";
+          type srl_nokia-comm:ipv4-address;
+        }
+        leaf origin-rendez-vous-point {
+          description
+            "The origin rendezvous point address of the source active that is rejected";
+          type srl_nokia-comm:ipv4-address;
+        }
+        leaf peer {
+          description
+            "The peer from which this rejected source active was last received";
+          type srl_nokia-comm:ipv4-address;
+        }
+        leaf failure-reason {
+          config false;
+          description
+            "The reason why this source active is rejected";
+          type enumeration {
+            enum import-policy-failure {
+              value 1;
+            }
+            enum export-policy-failure {
+              value 2;
+            }
+            enum reverse-path-forwarding-failure {
+              value 3;
+            }
+            enum active-source-limit-exceeded {
+              value 4;
+            }
+            enum source-active-source-limit-exceeded {
+              value 5;
+            }
+            enum peer-active-source-limit-exceeded {
+              value 6;
+            }
+            enum group-active-source-limit-exceeded {
+              value 7;
+            }
+            enum group-peer-active-source-limit-exceeded {
+              value 8;
+            }
+          }
+        }
+      }
+    }
   }
 
   grouping msdp-peer-statistics-state {
@@ -548,7 +671,9 @@ module srl_nokia-msdp {
     container statistics {
       config false;
       description
-        "MSDP Peer statistics";
+        "Enter the statistics context
+
+         MSDP Peer statistics";
       uses msdp-peer-statistics-state;
     }
   }
@@ -609,7 +734,9 @@ module srl_nokia-msdp {
         case selected-types {
           container packet-types {
             description
-              "Enable tracing for selected packet types only";
+              "Enter the packet-types context
+
+               Enable tracing for selected packet types only";
             container peer {
               presence "Enable tracing for peer packets";
               description
@@ -653,7 +780,9 @@ module srl_nokia-msdp {
         case selected-types {
           container event-types {
             description
-              "Enable tracing for selected event types only";
+              "Enter the event-types context
+
+               Enable tracing for selected event types only";
             container node {
               presence "Enable tracing for node events";
               description
@@ -731,7 +860,9 @@ module srl_nokia-msdp {
         "Enter the trace-options context";
       container trace {
         description
-          "Tracing parameter flags";
+          "Enter the trace context
+
+           Tracing parameter flags";
         uses msdp-events-tracing-config;
         uses msdp-packet-tracing-config;
       }

@@ -6,6 +6,9 @@ module srl_nokia-aggregate-routes {
   import srl_nokia-common {
     prefix srl_nokia-comm;
   }
+  import srl_nokia-features {
+    prefix srl_nokia-feat;
+  }
   import srl_nokia-network-instance {
     prefix srl_nokia-netinst;
   }
@@ -21,6 +24,10 @@ module srl_nokia-aggregate-routes {
   description
     "This yang file gives a description of aggregate route configuration.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-07-31 {
     description
       "SRLinux 24.7.1";
@@ -41,6 +48,12 @@ module srl_nokia-aggregate-routes {
   grouping aggregate-route-top {
     container aggregate-routes {
       presence "Configure Aggregate Routes";
+      leaf instance-name {
+        if-feature "srl_nokia-feat:network-instance-protocol-instance-names";
+        type srl_nokia-comm:name;
+        description
+          "The name of the aggregate routing instance (optional)";
+      }
       list route {
         max-elements 16384;
         key "prefix";
@@ -89,6 +102,8 @@ module srl_nokia-aggregate-routes {
               range "1..4294967295";
             }
           }
+          description
+            "Enter the aggregator context";
         }
         container communities {
           leaf-list add {
@@ -100,6 +115,8 @@ module srl_nokia-aggregate-routes {
             ordered-by user;
             max-elements 12;
           }
+          description
+            "Enter the communities context";
         }
       }
     }

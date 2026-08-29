@@ -18,6 +18,10 @@ module srl_nokia-p4rt {
   description
     "This module defines configuration and operational state data related to the P4RT service";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-03-31 {
     description
       "SRLinux 24.3.1";
@@ -26,7 +30,9 @@ module srl_nokia-p4rt {
   grouping p4rt-session-info {
     container p4rt {
       description
-        "Container for P4RT related session info";
+        "Enter the p4rt context
+
+         Container for P4RT related session info";
       leaf primary {
         type boolean;
         srl-ext:show-importance "high";
@@ -55,6 +61,8 @@ module srl_nokia-p4rt {
           description
             "The linecard slot for which this forwarding complex resides on";
         }
+        description
+          "Enter the forwarding-complex context";
       }
     }
   }

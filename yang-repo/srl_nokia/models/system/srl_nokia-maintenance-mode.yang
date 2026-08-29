@@ -30,6 +30,10 @@ module srl_nokia-maintenance-mode {
   description
     "This module defines configuration and operational state data for Maintenance Mode.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-10-31 {
     description
       "SRLinux 24.10.1";
@@ -62,10 +66,14 @@ module srl_nokia-maintenance-mode {
   grouping group-members-top {
     container members {
       description
-        "Container for specifying the members of the maintenance group - i.e. the components that will eventually be taken out of service for repair or replacement.";
+        "Enter the members context
+
+         Container for specifying the members of the maintenance group - i.e. the components that will eventually be taken out of service for repair or replacement.";
       container bgp {
         description
-          "Container for specifying the BGP members of the maintenance group";
+          "Enter the bgp context
+
+           Container for specifying the BGP members of the maintenance group";
         list network-instance {
           description
             "List of network instances with one or more peers to be placed in maintenance mode";
@@ -106,7 +114,9 @@ module srl_nokia-maintenance-mode {
       container isis {
         if-feature "srl-feat:isis-maint-mode";
         description
-          "Container for specifying the ISIS members of the maintenance group";
+          "Enter the isis context
+
+           Container for specifying the ISIS members of the maintenance group";
         leaf-list network-instances {
           description
             "List of network instances that should be part of the maintenance group.";
@@ -132,7 +142,9 @@ module srl_nokia-maintenance-mode {
       }
       container maintenance-mode {
         description
-          "Container with options for activating and deactivating maintenance mode for this group";
+          "Enter the maintenance-mode context
+
+           Container with options for activating and deactivating maintenance mode for this group";
         leaf admin-state {
           type srl_nokia-comm:admin-state;
           default "disable";
@@ -167,7 +179,9 @@ module srl_nokia-maintenance-mode {
       }
       container bgp {
         description
-          "Container for BGP policies used to achieve traffic draining";
+          "Enter the bgp context
+
+           Container for BGP policies used to achieve traffic draining";
         leaf import-policy {
           description
             "A reference to the pre-configured routing policy to apply as an additional/final import policy on BGP sessions in the maintenance group";
@@ -186,10 +200,14 @@ module srl_nokia-maintenance-mode {
       container isis {
         if-feature "srl-feat:isis-maint-mode";
         description
-          "Container for ISIS configurations.";
+          "Enter the isis context
+
+           Container for ISIS configurations.";
         container overload {
           description
-            "Container for ISIS overload configurations.";
+            "Enter the overload context
+
+             Container for ISIS overload configurations.";
           leaf set-bit {
             description
               "When set to true, the Overload bit is set";

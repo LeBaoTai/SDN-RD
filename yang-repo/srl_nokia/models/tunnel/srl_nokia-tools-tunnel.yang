@@ -19,6 +19,10 @@ module srl_nokia-tools-tunnel {
     "Nokia SR Linux Support
      Web: <http://www.nokia.com>";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-07-31 {
     description
       "SRLinux 24.7.1";
@@ -31,7 +35,9 @@ module srl_nokia-tools-tunnel {
   grouping tools-tunnel-top {
     container tunnel {
       description
-        "Top-level container for the tunnel table.";
+        "Enter the tunnel context
+
+         Top-level container for the tunnel table.";
       if-feature "srl-feat:vxlan or srl-feat:pseudowire";
       srl_nokia-ext:first-released "20.10.1";
     }

@@ -35,6 +35,10 @@ module srl_nokia-ethcfm {
      management of Ethernet Operations, Administration and
      Maintenance for Connectivity Fault Management.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -313,7 +317,9 @@ module srl_nokia-ethcfm {
     container linktrace {
       config false;
       description
-        "Data definitions related to a linktrace test result";
+        "Enter the linktrace context
+
+         Data definitions related to a linktrace test result";
       reference
         "[IEEE802.1Q] 20.3 [ITU-T Y.1731] 7.3";
       leaf status {
@@ -391,7 +397,9 @@ module srl_nokia-ethcfm {
           }
           container last-egress-identifier {
             description
-              "TLV included with in the LTM used to identify the instantiating or relaying management point";
+              "Enter the last-egress-identifier context
+
+               TLV included with in the LTM used to identify the instantiating or relaying management point";
             leaf integer {
               description
                 "An octet string the first two bytes of the egress-identifier";
@@ -405,7 +413,9 @@ module srl_nokia-ethcfm {
           }
           container next-egress-identifier {
             description
-              "TLV included with in the LTM used to identify the instantiating or relaying management point";
+              "Enter the next-egress-identifier context
+
+               TLV included with in the LTM used to identify the instantiating or relaying management point";
             leaf integer {
               description
                 "An octet string the first two bytes of the egress-identifier";
@@ -456,6 +466,8 @@ module srl_nokia-ethcfm {
               description
                 "The value of the port id subtype";
             }
+            description
+              "Enter the ingress-port-id context";
           }
           leaf egress-action {
             type srl_nokia-ethcfm-types:reply-action;
@@ -490,6 +502,8 @@ module srl_nokia-ethcfm {
               description
                 "The value of the port id subtype";
             }
+            description
+              "Enter the egress-port-id context";
           }
         }
       }
@@ -648,6 +662,8 @@ module srl_nokia-ethcfm {
           }
         }
       }
+      description
+        "Enter the loopback context";
     }
   }
 
@@ -655,13 +671,17 @@ module srl_nokia-ethcfm {
     container eth-cfm {
       if-feature "srl_nokia-feat:ethcfm-subinterface";
       description
-        "Configuration of ETH-CFM functions independent of Maintenance Domain context
+        "Enter the eth-cfm context
+
+         Configuration of ETH-CFM functions independent of Maintenance Domain context
 
          This is an ETH-CFM function that is configured directly under the subinterface";
       container ingress-squelching {
         if-feature "srl_nokia-feat:ethcfm-ingress-squelching";
         description
-          "Ingress ETH-CFM functions independent of Maintenance Domain context";
+          "Enter the ingress-squelching context
+
+           Ingress ETH-CFM functions independent of Maintenance Domain context";
         leaf squelch-levels {
           type srl_nokia-ethcfm-types:md-levels-ordered-type;
           description
@@ -684,6 +704,8 @@ module srl_nokia-ethcfm {
             description
               "The count of ETH-CFM packets discarded on the subinterface because of ingress squelching";
           }
+          description
+            "Enter the statistics context";
         }
       }
     }
@@ -780,6 +802,8 @@ module srl_nokia-ethcfm {
               "MAC address associated with the index";
           }
         }
+        description
+          "Enter the system-mac-pool context";
       }
       list interface {
         config false;
@@ -921,6 +945,8 @@ module srl_nokia-ethcfm {
           }
         }
       }
+      description
+        "Enter the mac-allocation context";
     }
   }
 
@@ -987,7 +1013,9 @@ module srl_nokia-ethcfm {
         }
         container md-name {
           description
-            "Context for domain name";
+            "Enter the md-name context
+
+             Context for domain name";
           choice md-name {
             case dns-like {
               leaf dns {
@@ -1064,7 +1092,9 @@ module srl_nokia-ethcfm {
           }
           container ma-name {
             description
-              "Context for association name";
+              "Enter the ma-name context
+
+               Context for association name";
             choice ma-name {
               mandatory true;
               case icc-based {
@@ -1159,6 +1189,8 @@ module srl_nokia-ethcfm {
               description
                 "The network instance to which the information in this maintenance-association applies";
             }
+            description
+              "Enter the network-instance context";
           }
           leaf ccm-interval {
             type srl_nokia-ethcfm-types:ccm-interval-type;
@@ -1188,7 +1220,9 @@ module srl_nokia-ethcfm {
           }
           container remote-mep-auto-discovery {
             description
-              "This set of data definitions describes the auto discovery behavior for remote MEPs";
+              "Enter the remote-mep-auto-discovery context
+
+               This set of data definitions describes the auto discovery behavior for remote MEPs";
             leaf admin-state {
               type srl_nokia-comm:admin-state;
               default "disable";
@@ -1297,14 +1331,12 @@ module srl_nokia-ethcfm {
                   "Reference to a subinterface
 
                    This requires the base interface to be specified using the interface leaf in this container.";
-                must "(/srl_nokia-if:interface[srl_nokia-if:name=current()/../interface]/srl_nokia-if:subinterface[srl_nokia-if:index=current()]/srl_nokia-if:type !='bridged')" {
-                  error-message "Platform requires subinterface type routed.";
-                  srl_nokia-ext:if-feature "srl_nokia-features:jericho3 or srl_nokia-features:qumran3d";
-                }
                 must "(/srl_nokia-if:interface[srl_nokia-if:name=current()/../interface]/srl_nokia-if:subinterface[srl_nokia-if:index=current()]/srl_nokia-if:type ='bridged') or ../../direction='down'" {
                   error-message "Sub-interface's Network-instance type does not support MEP direction 'up'.";
                 }
               }
+              description
+                "Enter the interface-ref context";
             }
             leaf admin-state {
               type srl_nokia-comm:admin-state;
@@ -1325,7 +1357,9 @@ module srl_nokia-ethcfm {
             container mac-address {
               if-feature "srl_nokia-feat:ethcfm-mp-mac-address-allocation";
               description
-                "Context allows for the MEP MAC configuration
+                "Enter the mac-address context
+
+                 Context allows for the MEP MAC configuration
 
                  Leaf /ethcfm/mac-allocation/mode determines which of the MAC configurations are applied.";
               leaf custom-address {
@@ -1356,6 +1390,8 @@ module srl_nokia-ethcfm {
                     error-message "name must be specified when index configured";
                   }
                 }
+                description
+                  "Enter the custom-mac-pool context";
               }
               leaf system-mac-pool-index {
                 type uint8 {
@@ -1376,7 +1412,9 @@ module srl_nokia-ethcfm {
             }
             container continuity-check {
               description
-                "This set of data definitions describes the handling of Ethernet Continuity Check (ETH-CCM)";
+                "Enter the continuity-check context
+
+                 This set of data definitions describes the handling of Ethernet Continuity Check (ETH-CCM)";
               leaf ccm-transmit {
                 type srl_nokia-comm:admin-state;
                 default "disable";
@@ -1399,7 +1437,7 @@ module srl_nokia-ethcfm {
               }
               container ccm-local-fault {
                 description
-                  "Enter the ccm local fault action context";
+                  "Enter the ccm-local-fault context";
                 leaf action {
                   type srl_nokia-ethcfm-types:action-type;
                   must "../../../direction != 'up' or . = 'deny'" {
@@ -1509,7 +1547,7 @@ module srl_nokia-ethcfm {
       container statistics {
         config false;
         description
-          "Enter the ETH-CFM system level statistics context";
+          "Enter the statistics context";
         leaf receive-count {
           type srl_nokia-comm:zero-based-counter64;
           description
@@ -1547,7 +1585,9 @@ module srl_nokia-ethcfm {
       container cfm-stack-table {
         config false;
         description
-          "The cfm-stack-table provides an overview of CFM MEP state in a single view";
+          "Enter the cfm-stack-table context
+
+           The cfm-stack-table provides an overview of CFM MEP state in a single view";
         container interface {
           description
             "Enter the interface context";

@@ -21,6 +21,10 @@ module srl_nokia-mpls-services-network-instance-label-management {
   description
     "This module defines configuration and operational state data for system wide MPLS label management for network-instances";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -39,7 +43,9 @@ module srl_nokia-mpls-services-network-instance-label-management {
       "Grouping for multiple label blocks for MPLS services";
     container dynamic-label-blocks {
       description
-        "Container for multiple dynamic label blocks for MPLS services";
+        "Enter the dynamic-label-blocks context
+
+         Container for multiple dynamic label blocks for MPLS services";
       leaf ip {
         type leafref {
           path "/srl_nokia-system:system/srl_nokia-mplslbl:mpls/srl_nokia-mplslbl:label-ranges/srl_nokia-mplslbl:dynamic/srl_nokia-mplslbl:name";

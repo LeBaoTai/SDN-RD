@@ -21,6 +21,10 @@ module srl_nokia-tunnel-interfaces-vxlan-interface-bridge-table-unicast-destinat
   description
     "Model for bridge-table unicast destinations on the vxlan-interface";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-10-31 {
     description
       "SRLinux 24.10.1";
@@ -76,6 +80,8 @@ module srl_nokia-tunnel-interfaces-vxlan-interface-bridge-table-unicast-destinat
             "The list of slot IDs corresponding to the linecards that did not successfully program the mac";
         }
       }
+      description
+        "Enter the mac-table context";
     }
   }
 
@@ -127,6 +133,8 @@ module srl_nokia-tunnel-interfaces-vxlan-interface-bridge-table-unicast-destinat
           srl_nokia-ext:show-importance "high";
         }
       }
+      description
+        "Enter the statistics context";
     }
   }
 
@@ -186,6 +194,8 @@ module srl_nokia-tunnel-interfaces-vxlan-interface-bridge-table-unicast-destinat
       config false;
       uses bridge-table-vxlan-interface-unicast-destinations-destination-top;
       uses bridge-table-vxlan-interface-unicast-destinations-es-destination-top;
+      description
+        "Enter the unicast-destinations context";
     }
   }
 

@@ -30,6 +30,10 @@ module srl_nokia-tunnel-interfaces {
   description
     "Model for tunnel-interfaces in SRLinux.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -167,6 +171,8 @@ module srl_nokia-tunnel-interfaces {
              The egress VNI is determined by the static egress-vni configured in the associated destination
              or by the dynamic egress-vni learned from the control plane.";
         }
+        description
+          "Enter the ingress context";
       }
       container egress {
         leaf source-ip {
@@ -209,6 +215,8 @@ module srl_nokia-tunnel-interfaces {
                with a ip-vrf network-instance.";
           }
         }
+        description
+          "Enter the egress context";
       }
       uses bridge-table-group-top;
     }

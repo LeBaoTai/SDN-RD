@@ -24,6 +24,10 @@ module srl_nokia-bgp-evpn-bgp-instance-mpls-bridge-table-unicast-destinations {
   description
     "Model for bridge-table unicast destinations on the bgp-evpn mpls instance";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -95,6 +99,8 @@ module srl_nokia-bgp-evpn-bgp-instance-mpls-bridge-table-unicast-destinations {
           srl_nokia-ext:show-importance "high";
         }
       }
+      description
+        "Enter the statistics context";
     }
   }
 
@@ -140,6 +146,8 @@ module srl_nokia-bgp-evpn-bgp-instance-mpls-bridge-table-unicast-destinations {
             "The list of slot IDs corresponding to the linecards that did not successfully program the mac";
         }
       }
+      description
+        "Enter the mac-table context";
     }
   }
 
@@ -191,6 +199,8 @@ module srl_nokia-bgp-evpn-bgp-instance-mpls-bridge-table-unicast-destinations {
           srl_nokia-ext:show-importance "high";
         }
       }
+      description
+        "Enter the statistics context";
     }
   }
 
@@ -288,6 +298,8 @@ module srl_nokia-bgp-evpn-bgp-instance-mpls-bridge-table-unicast-destinations {
       config false;
       uses evpn-mpls-bridge-table-unicast-destinations-destination-top;
       uses evpn-mpls-bridge-table-unicast-destinations-es-destination-top;
+      description
+        "Enter the unicast-destinations context";
     }
   }
 

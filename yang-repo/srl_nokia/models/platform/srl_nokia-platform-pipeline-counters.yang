@@ -18,6 +18,10 @@ module srl_nokia-platform-pipeline-counters {
   description
     "This module defines configuration and operational state related to extraction and injection of packets between a linecard ASIC and the host CPU";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-10-31 {
     description
       "SRLinux 24.10.1";
@@ -246,13 +250,19 @@ module srl_nokia-platform-pipeline-counters {
       if-feature "srl-feat:ixr-dnx";
       config false;
       description
-        "Top-level container for the packet counters associated with the different NPU sub-blocks.";
+        "Enter the pipeline-counters context
+
+         Top-level container for the packet counters associated with the different NPU sub-blocks.";
       container host-interface-block {
         description
-          "The ASIC host interface block subsystem that connects the NPU to the host CPU (on the CPM)";
+          "Enter the host-interface-block context
+
+           The ASIC host interface block subsystem that connects the NPU to the host CPU (on the CPM)";
         container packet-extraction {
           description
-            "Packet extraction from the NPU towards the CPU";
+            "Enter the packet-extraction context
+
+             Packet extraction from the NPU towards the CPU";
           uses extraction-stats;
           list extraction-reason {
             description

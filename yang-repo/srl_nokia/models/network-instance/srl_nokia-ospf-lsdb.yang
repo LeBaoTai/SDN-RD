@@ -24,6 +24,10 @@ module srl_nokia-ospf-lsdb {
   description
     "This yang file models configuration and state of the OSPFv2 protocol";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -128,7 +132,9 @@ module srl_nokia-ospf-lsdb {
       "A generic specification of an unknown TLV";
     container unknown-tlv {
       description
-        "An unknown TLV within the context. Unknown TLVs are
+        "Enter the unknown-tlv context
+
+         An unknown TLV within the context. Unknown TLVs are
          defined to be the set of TLVs that are not modelled
          within the OpenConfig model, or are unknown to the
          local system such that it cannot decode their value.";
@@ -141,7 +147,9 @@ module srl_nokia-ospf-lsdb {
       "A generic specification of an unknown TLV";
     container unknown-subtlv {
       description
-        "An unknown SubTLV within the context. Unknown Sub-TLV
+        "Enter the unknown-subtlv context
+
+         An unknown SubTLV within the context. Unknown Sub-TLV
          are defined to be the set of SubTLVs that are not modelled
          by the OpenConfig schema, or are unknown to the local system
          such that it cannot decode their value.";
@@ -230,7 +238,9 @@ module srl_nokia-ospf-lsdb {
       "Structural grouping for Router LSA contents within the LSDB";
     container router-lsa {
       description
-        "Contents of the router LSA";
+        "Enter the router-lsa context
+
+         Contents of the router LSA";
       leaf flags {
         description
           "Router-LSA flag values";
@@ -266,7 +276,9 @@ module srl_nokia-ospf-lsdb {
        LSA";
     container types-of-service {
       description
-        "Breakdown of LSA contents specifying multiple
+        "Enter the types-of-service context
+
+         Breakdown of LSA contents specifying multiple
          TOS values";
       list type-of-service {
         key "tos";
@@ -282,7 +294,9 @@ module srl_nokia-ospf-lsdb {
       "Structural grouping for Network LSA contents within the LSDB";
     container network-lsa {
       description
-        "Contents of the network LSA";
+        "Enter the network-lsa context
+
+         Contents of the network LSA";
       uses ospfv2-lsdb-network-lsa-state;
     }
   }
@@ -293,7 +307,9 @@ module srl_nokia-ospf-lsdb {
        LSDB";
     container summary-lsa {
       description
-        "Contents of the summary LSA";
+        "Enter the summary-lsa context
+
+         Contents of the summary LSA";
       uses ospfv2-lsdb-summary-lsa-state;
       uses ospfv2-lsdb-generic-lsa-tos-metric-structure;
     }
@@ -305,11 +321,15 @@ module srl_nokia-ospf-lsdb {
        the LSDB";
     container as-external-lsa {
       description
-        "Contents of the AS External LSA";
+        "Enter the as-external-lsa context
+
+         Contents of the AS External LSA";
       uses ospfv2-lsdb-asexternal-lsa-state;
       container types-of-service {
         description
-          "Breakdown of External LSA contents specifying multiple
+          "Enter the types-of-service context
+
+           Breakdown of External LSA contents specifying multiple
            TOS values";
         list type-of-service {
           key "tos";
@@ -327,12 +347,16 @@ module srl_nokia-ospf-lsdb {
        the LSDB";
     container nssa-external-lsa {
       description
-        "Contents of the NSSA External LSA";
+        "Enter the nssa-external-lsa context
+
+         Contents of the NSSA External LSA";
       uses ospfv2-lsdb-asexternal-lsa-state;
       uses ospfv2-lsdb-nssa-external-lsa-state;
       container types-of-service {
         description
-          "Breakdown of the NSSA External LSA contents specifying multiple
+          "Enter the types-of-service context
+
+           Breakdown of the NSSA External LSA contents specifying multiple
            TOS values";
         list type-of-service {
           key "tos";
@@ -349,7 +373,9 @@ module srl_nokia-ospf-lsdb {
       "Structural grouping for Opaque LSA contents within the LSDB";
     container opaque-lsa {
       description
-        "Contents of the opaque LSA";
+        "Enter the opaque-lsa context
+
+         Contents of the opaque LSA";
       uses ospfv2-lsdb-opaque-lsa-state;
       container grace-lsa {
         when "../type = 'srl_nokia-ospf-types:grace-lsa'" {
@@ -358,11 +384,15 @@ module srl_nokia-ospf-lsdb {
              to be of that type.";
         }
         description
-          "The Grace LSA is utilised when a remote system is undergoing
+          "Enter the grace-lsa context
+
+           The Grace LSA is utilised when a remote system is undergoing
            graceful restart";
         container tlvs {
           description
-            "TLVs of the Grace LSA";
+            "Enter the tlvs context
+
+             TLVs of the Grace LSA";
           list tlv {
             description
               "TLV entry in the Grace LSA, advertised by a system undergoing
@@ -379,11 +409,15 @@ module srl_nokia-ospf-lsdb {
              type is specified to be an RI LSA";
         }
         description
-          "The router information LSA is utilised to advertise capabilities
+          "Enter the router-information context
+
+           The router information LSA is utilised to advertise capabilities
            of a system to other systems who receive the LSA";
         container tlvs {
           description
-            "The TLVs included within the Router Information LSA.";
+            "Enter the tlvs context
+
+             The TLVs included within the Router Information LSA.";
           list tlv {
             description
               "TLV entry in the Router Information LSA";
@@ -396,7 +430,9 @@ module srl_nokia-ospf-lsdb {
                    the TLV of the RI LSA is specified to be of this type";
               }
               description
-                "Information related to the capabilities of the advertising
+                "Enter the informational-capabilities context
+
+                 Information related to the capabilities of the advertising
                  router within the scope that the opaque RI LSA is being
                  advertised";
               uses ospfv2-lsdb-opaque-ri-informational-state;
@@ -408,7 +444,9 @@ module srl_nokia-ospf-lsdb {
                    the TLV of the RI LSA is specified to be of this type";
               }
               description
-                "Per-node administrative tags associated with the local system
+                "Enter the node-administrative-tags context
+
+                 Per-node administrative tags associated with the local system
                  specified by the operator";
               uses ospfv2-lsdb-opaque-ri-admintag-state;
             }
@@ -422,14 +460,18 @@ module srl_nokia-ospf-lsdb {
              type is specified to be an extended prefix LSA";
         }
         description
-          "An OSPFv2 Extended Prefix Opaque LSA, used to encapsulate
+          "Enter the extended-prefix context
+
+           An OSPFv2 Extended Prefix Opaque LSA, used to encapsulate
            TLV attributes associated with a prefix advertised in OSPF.";
         reference
           "RFC7684 - OSPFv2 Prefix/Link Attribute Advertisement";
         uses ospfv2-lsdb-extended-prefix-state;
         container tlvs {
           description
-            "TLVs contained within the Extended Prefix LSA";
+            "Enter the tlvs context
+
+             TLVs contained within the Extended Prefix LSA";
           list tlv {
             description
               "A TLV contained within the extended prefix LSA";
@@ -441,7 +483,9 @@ module srl_nokia-ospf-lsdb {
                    sub-TLV is specified as such";
               }
               description
-                "State parameters relating to the extended prefix range
+                "Enter the extended-prefix-range context
+
+                 State parameters relating to the extended prefix range
                  sub-TLV of the extended prefix LSA";
               uses ospfv2-lsdb-extended-prefix-range-state;
             }
@@ -451,14 +495,18 @@ module srl_nokia-ospf-lsdb {
       }
       container extended-link {
         description
-          "The OSPFv2 Extended Link Opaque LSA, used to encapsulate TLV
+          "Enter the extended-link context
+
+           The OSPFv2 Extended Link Opaque LSA, used to encapsulate TLV
            attributes associated with a link advertised in OSPF.";
         reference
           "RFC7684 - OSPFv2 Prefix/Link Attribute Advertisement";
         uses ospfv2-lsdb-extended-link-state;
         container tlvs {
           description
-            "TLVs contained within the Extended Link LSA";
+            "Enter the tlvs context
+
+             TLVs contained within the Extended Link LSA";
           list tlv {
             description
               "List of TLVs within the Extended Link LSA";
@@ -936,11 +984,15 @@ module srl_nokia-ospf-lsdb {
     container lsdb {
       config false;
       description
-        "The link-state database for the OSPFv2 area";
+        "Enter the lsdb context
+
+         The link-state database for the OSPFv2 area";
       uses ospf-lsdb-area-state;
       container lsa-types {
         description
-          "Enclosing container for a list of LSA types that are
+          "Enter the lsa-types context
+
+           Enclosing container for a list of LSA types that are
            in the LSDB for the specified area";
         list lsa-type {
           key "type";
@@ -950,7 +1002,9 @@ module srl_nokia-ospf-lsdb {
           uses ospf-lsdb-lsa-type-state;
           container lsas {
             description
-              "Enclosing container for a list of the LSAs of
+              "Enter the lsas context
+
+               Enclosing container for a list of the LSAs of
                the specified type received by the system";
             list lsa {
               key "advertising-router link-state-id";
@@ -1022,10 +1076,14 @@ module srl_nokia-ospf-lsdb {
     container lsdb {
       config false;
       description
-        "The link-state database for the OSPF AS";
+        "Enter the lsdb context
+
+         The link-state database for the OSPF AS";
       container lsa-types {
         description
-          "Enclosing container for a list of LSA types that are
+          "Enter the lsa-types context
+
+           Enclosing container for a list of LSA types that are
            in the LSDB for the specified AS";
         list lsa-type {
           key "type";
@@ -1034,7 +1092,9 @@ module srl_nokia-ospf-lsdb {
           uses ospf-lsdb-lsa-type-state;
           container lsas {
             description
-              "Enclosing container for a list of the LSAs of
+              "Enter the lsas context
+
+               Enclosing container for a list of the LSAs of
                the specified type received by the system";
             list lsa {
               key "advertising-router link-state-id";
@@ -1082,10 +1142,14 @@ module srl_nokia-ospf-lsdb {
     container lsdb {
       config false;
       description
-        "The link-state database for the OSPF interface link";
+        "Enter the lsdb context
+
+         The link-state database for the OSPF interface link";
       container lsa-types {
         description
-          "Enclosing container for a list of LSA types that are
+          "Enter the lsa-types context
+
+           Enclosing container for a list of LSA types that are
            in the LSDB for the specified link";
         list lsa-type {
           key "type";
@@ -1095,7 +1159,9 @@ module srl_nokia-ospf-lsdb {
           uses ospf-lsdb-lsa-type-state;
           container lsas {
             description
-              "Enclosing container for a list of the LSAs of
+              "Enter the lsas context
+
+               Enclosing container for a list of the LSAs of
                the specified type received by the system";
             list lsa {
               key "advertising-router link-state-id";

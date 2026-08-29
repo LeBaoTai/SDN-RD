@@ -24,6 +24,10 @@ module srl_nokia-lsp-ping-trace {
   description
     "Model for LSP ping and trace telemetry state";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-03-31 {
     description
       "SRLinux 25.3.1";
@@ -122,10 +126,14 @@ module srl_nokia-lsp-ping-trace {
       }
       container statistics {
         description
-          "Summary statistics for the test";
+          "Enter the statistics context
+
+           Summary statistics for the test";
         container round-trip-time {
           description
-            "Statistics for the round trip time, considering all the probes sent in the test";
+            "Enter the round-trip-time context
+
+             Statistics for the round trip time, considering all the probes sent in the test";
           leaf minimum {
             srl_nokia-ext:show-importance "high";
             description
@@ -464,7 +472,9 @@ module srl_nokia-lsp-ping-trace {
   grouping ping-trace-reply {
     container reply {
       description
-        "Details about the reply message for this sequence number or hop";
+        "Enter the reply context
+
+         Details about the reply message for this sequence number or hop";
       leaf received {
         description
           "Reads true if the reply message was received";
@@ -517,7 +527,9 @@ module srl_nokia-lsp-ping-trace {
   grouping sr-isis-ping {
     container sr-isis {
       description
-        "Container of LSP ping results for different SR-ISIS tunnels";
+        "Enter the sr-isis context
+
+         Container of LSP ping results for different SR-ISIS tunnels";
       list prefix-sid {
         key "prefix";
         leaf prefix {
@@ -536,7 +548,9 @@ module srl_nokia-lsp-ping-trace {
   grouping sr-isis-trace {
     container sr-isis {
       description
-        "Container of LSP trace results for different SR-ISIS tunnels";
+        "Enter the sr-isis context
+
+         Container of LSP trace results for different SR-ISIS tunnels";
       list prefix-sid {
         key "prefix";
         leaf prefix {
@@ -555,7 +569,9 @@ module srl_nokia-lsp-ping-trace {
   grouping ldp-ping {
     container ldp {
       description
-        "Container of LSP ping results for different LDP tunnels";
+        "Enter the ldp context
+
+         Container of LSP ping results for different LDP tunnels";
       list fec {
         key "prefix";
         leaf prefix {
@@ -575,7 +591,9 @@ module srl_nokia-lsp-ping-trace {
     container te-policy {
       if-feature "srl_nokia-feat:mpls-oam-uncolored-tepolicy";
       description
-        "Parameters required to ping the endpoint of a TE-Policy tunnel";
+        "Enter the te-policy context
+
+         Parameters required to ping the endpoint of a TE-Policy tunnel";
       container sr-uncolored {
         list policy {
           key "policy-name protocol-origin";
@@ -593,6 +611,8 @@ module srl_nokia-lsp-ping-trace {
           }
           uses ping-session-info;
         }
+        description
+          "Enter the sr-uncolored context";
       }
       container sr-colored {
         if-feature "srl_nokia-feat:mpls-oam-colored-te-policy";
@@ -612,6 +632,8 @@ module srl_nokia-lsp-ping-trace {
           }
           uses ping-session-info;
         }
+        description
+          "Enter the sr-colored context";
       }
     }
   }
@@ -619,7 +641,9 @@ module srl_nokia-lsp-ping-trace {
   grouping ldp-trace {
     container ldp {
       description
-        "Container of LSP trace results for different LDP tunnels";
+        "Enter the ldp context
+
+         Container of LSP trace results for different LDP tunnels";
       list fec {
         key "prefix";
         leaf prefix {
@@ -639,7 +663,9 @@ module srl_nokia-lsp-ping-trace {
     container te-policy {
       if-feature "srl_nokia-feat:mpls-oam-uncolored-tepolicy";
       description
-        "Parameters required to trace the endpoint of a TE-Policy tunnel";
+        "Enter the te-policy context
+
+         Parameters required to trace the endpoint of a TE-Policy tunnel";
       container sr-uncolored {
         list policy {
           key "policy-name protocol-origin";
@@ -657,6 +683,8 @@ module srl_nokia-lsp-ping-trace {
           }
           uses trace-session-info;
         }
+        description
+          "Enter the sr-uncolored context";
       }
       container sr-colored {
         if-feature "srl_nokia-feat:mpls-oam-colored-te-policy";
@@ -676,6 +704,8 @@ module srl_nokia-lsp-ping-trace {
           }
           uses trace-session-info;
         }
+        description
+          "Enter the sr-colored context";
       }
     }
   }
@@ -685,7 +715,9 @@ module srl_nokia-lsp-ping-trace {
       if-feature "srl_nokia-feat:mpls-oam";
       config false;
       description
-        "Container of last ping results for different MPLS and segment routing tunnels";
+        "Enter the lsp-ping context
+
+         Container of last ping results for different MPLS and segment routing tunnels";
       uses sr-isis-ping;
       uses ldp-ping;
       uses te-policy-ping;
@@ -697,7 +729,9 @@ module srl_nokia-lsp-ping-trace {
       if-feature "srl_nokia-feat:mpls-oam";
       config false;
       description
-        "Container of last trace results for different MPLS and segment routing tunnels";
+        "Enter the lsp-trace context
+
+         Container of last trace results for different MPLS and segment routing tunnels";
       uses sr-isis-trace;
       uses ldp-trace;
       uses te-policy-trace;

@@ -12,9 +12,9 @@ module openconfig-srl-augments {
   description
     "SRL augments to the OpenConfig models";
 
-  revision 2026-03-31 {
+  revision 2026-07-31 {
     description
-      "SRLinux 26.3.1";
+      "SRLinux 26.7.1";
   }
   revision 2024-07-31 {
     description

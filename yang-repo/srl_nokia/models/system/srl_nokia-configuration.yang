@@ -27,6 +27,10 @@ module srl_nokia-configuration {
   description
     "This module defines configuration and operational state data related to the system configuration.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -348,7 +352,9 @@ module srl_nokia-configuration {
   grouping configuration-top {
     container configuration {
       description
-        "Top-level container for configuration and state data related to the system configuration";
+        "Enter the configuration context
+
+         Top-level container for configuration and state data related to the system configuration";
       leaf last-change {
         config false;
         type srl-comm:date-and-time-delta;

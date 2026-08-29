@@ -33,6 +33,10 @@ module srl_nokia-acl-gbp {
   description
     "A model for ACL of Group Based Policy of a network instance";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -47,7 +51,9 @@ module srl_nokia-acl-gbp {
       "ACL entry statistics";
     container statistics {
       description
-        "Container for per-entry statistics";
+        "Enter the statistics context
+
+         Container for per-entry statistics";
       config false;
       srl_nokia-ext:delivery-node-override "true";
       leaf last-clear {
@@ -84,10 +90,16 @@ module srl_nokia-acl-gbp {
         srl_nokia-ext:delivery-node-override "true";
         if-feature "srl_nokia-feat:acl-group-based-policy-policer and not srl_nokia-feat:vsrl";
         description
-          "Policer stats for traffic matching the entry:
+          "Enter the policer context
+
+           Policer stats for traffic matching the entry:
 
            Statistics for policer configured with scope=global and entry-specific=true, and acl configured with subinterface-specific=false.";
         uses srl_nokia-acl:acl-policer-statistics;
+      }
+      action clear {
+        description
+          "Reset all aggregate and per-interface statistics associated with this particular entry to zero";
       }
     }
   }
@@ -97,6 +109,15 @@ module srl_nokia-acl-gbp {
       presence "Container for Group Based Policy ACL definition for this network-instance";
       description
         "Group Based Policy (GBP) ACL definition for this network-instance";
+      container statistics {
+        config false;
+        action clear {
+          description
+            "Reset all statistics of all entries of the ACL filter to zero";
+        }
+        description
+          "Enter the statistics context";
+      }
       list entry {
         key "sequence-id";
         description
@@ -116,7 +137,9 @@ module srl_nokia-acl-gbp {
         }
         container match {
           description
-            "Container for the conditions that determine whether a packet matches this entry";
+            "Enter the match context
+
+             Container for the conditions that determine whether a packet matches this entry";
           leaf-list source-group {
             type leafref {
               path "../../../../srl_nokia-gbp:group/srl_nokia-gbp:name";
@@ -154,7 +177,9 @@ module srl_nokia-acl-gbp {
           }
           container source-port {
             description
-              "A packet matches this condition if its source TCP or UDP port number matches the value or range that is specified
+              "Enter the source-port context
+
+               A packet matches this condition if its source TCP or UDP port number matches the value or range that is specified
 
                The rule should also have a condition that the IP protocol equals 6 (TCP) or 17 (UDP) in order for this to be interpreted correctly.";
             choice port {
@@ -184,7 +209,9 @@ module srl_nokia-acl-gbp {
               case range {
                 container range {
                   description
-                    "Container used to specify a contiguous range of TCP/UDP port numbers";
+                    "Enter the range context
+
+                     Container used to specify a contiguous range of TCP/UDP port numbers";
                   leaf start {
                     type srl_nokia-pkt-match-types:l4-port-type;
                     description
@@ -221,7 +248,9 @@ module srl_nokia-acl-gbp {
           }
           container destination-port {
             description
-              "A packet matches this condition if its destination TCP or UDP port number matches the value or range that is specified
+              "Enter the destination-port context
+
+               A packet matches this condition if its destination TCP or UDP port number matches the value or range that is specified
 
                The rule should also have a condition that the IP protocol equals 6 (TCP) or 17 (UDP) in order for this to be interpreted correctly.";
             choice port {
@@ -251,7 +280,9 @@ module srl_nokia-acl-gbp {
               case range {
                 container range {
                   description
-                    "Container used to specify a contiguous range of TCP/UDP port numbers";
+                    "Enter the range context
+
+                     Container used to specify a contiguous range of TCP/UDP port numbers";
                   leaf start {
                     type srl_nokia-pkt-match-types:l4-port-type;
                     description
@@ -300,7 +331,9 @@ module srl_nokia-acl-gbp {
         }
         container action {
           description
-            "Container for the actions to be applied to packets matching the filter entry";
+            "Enter the action context
+
+             Container for the actions to be applied to packets matching the filter entry";
           choice action {
             container accept {
               presence "Accept matching packets and forward them towards their normal destination";
@@ -309,7 +342,9 @@ module srl_nokia-acl-gbp {
               container rate-limit {
                 if-feature "srl_nokia-feat:acl-group-based-policy-policer";
                 description
-                  "Rate-limit accepted packets";
+                  "Enter the rate-limit context
+
+                   Rate-limit accepted packets";
                 leaf policer {
                   if-feature "srl_nokia-feat:acl-policer";
                   type leafref {

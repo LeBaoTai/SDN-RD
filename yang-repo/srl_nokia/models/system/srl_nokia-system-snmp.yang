@@ -27,6 +27,10 @@ module srl_nokia-system-snmp {
   description
     "This module defines SNMP configuration and state";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -185,7 +189,9 @@ module srl_nokia-system-snmp {
   grouping user-authentication {
     container authentication {
       description
-        "Authentication parameters for this user";
+        "Enter the authentication context
+
+         Authentication parameters for this user";
       leaf protocol {
         type auth-protocol;
         default "hmac-md5-96";
@@ -210,7 +216,9 @@ module srl_nokia-system-snmp {
   grouping user-privacy {
     container privacy {
       description
-        "Privacy parameters for this user";
+        "Enter the privacy context
+
+         Privacy parameters for this user";
       leaf protocol {
         type priv-protocol;
         default "cbc-des";
@@ -581,7 +589,9 @@ module srl_nokia-system-snmp {
       if-feature "srl_nokia-feat:snmp-counters";
       config false;
       description
-        "Container for snmp statistics, as defined by RFC 1213, RFC 3418, RFC 3414 and RFC 3412";
+        "Enter the statistics context
+
+         Container for snmp statistics, as defined by RFC 1213, RFC 3418, RFC 3414 and RFC 3412";
       leaf snmp-unknown-security-models {
         type srl-comm:zero-based-counter32;
         description
@@ -761,7 +771,9 @@ module srl_nokia-system-snmp {
   grouping snmp-statistics-top {
     container snmp {
       description
-        "Top-level container for SNMP statistics per network-instance";
+        "Enter the snmp context
+
+         Top-level container for SNMP statistics per network-instance";
       uses snmp-statistics;
     }
   }

@@ -24,6 +24,10 @@ module srl_nokia-vxlan-tunnel-vtep {
   description
     "Config state for vxlan tunnel VXLAN termination endpoint's in SRLinux.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-07-31 {
     description
       "SRLinux 24.7.1";
@@ -46,7 +50,9 @@ module srl_nokia-vxlan-tunnel-vtep {
       srl_nokia-ext:first-released "21.3.1";
       if-feature "srl_nokia-feat:vxlan-stats";
       description
-        "Container for vxlan-tunnel global statistics.";
+        "Enter the statistics context
+
+         Container for vxlan-tunnel global statistics.";
       leaf admin-state {
         type srl_nokia-comm:admin-state;
         default "disable";
@@ -112,7 +118,9 @@ module srl_nokia-vxlan-tunnel-vtep {
       if-feature "srl_nokia-feat:vxlan-stats";
       config false;
       description
-        "Container for vxlan-tunnel per VTEP (Vxlan Termination EndPoint) statistics.";
+        "Enter the statistics context
+
+         Container for vxlan-tunnel per VTEP (Vxlan Termination EndPoint) statistics.";
       leaf in-octets {
         type srl_nokia-comm:zero-based-counter64;
         description
@@ -196,6 +204,8 @@ module srl_nokia-vxlan-tunnel-vtep {
         uses vxlan-tunnel-vtep-statistics;
       }
       uses vxlan-tunnel-global-statistics;
+      description
+        "Enter the vxlan-tunnel context";
     }
   }
 

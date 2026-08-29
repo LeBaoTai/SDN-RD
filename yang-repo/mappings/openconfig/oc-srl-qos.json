@@ -6,8 +6,7 @@
     },
     {
       "oc": "/qos/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/interfaces",
@@ -15,53 +14,43 @@
     },
     {
       "oc": "/qos/interfaces/interface",
-      "srlinux": "/qos/interfaces/interface",
-      "feature-flagged": true
+      "srlinux": "/qos/interfaces/interface"
     },
     {
       "oc": "/qos/interfaces/interface/interface-id",
-      "srlinux": "/qos/interfaces/interface/interface-id",
-      "feature-flagged": true
+      "srlinux": "/qos/interfaces/interface/interface-id"
     },
     {
       "oc": "/qos/interfaces/interface/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/interfaces/interface/{config,state}/interface-id",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/interfaces/interface/interface-ref",
-      "srlinux": "/qos/interfaces/interface/interface-ref",
-      "feature-flagged": true
+      "srlinux": "/qos/interfaces/interface/interface-ref"
     },
     {
       "oc": "/qos/interfaces/interface/interface-ref/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/interfaces/interface/interface-ref/{config,state}/interface",
-      "srlinux": "/qos/interfaces/interface/interface-ref/interface",
-      "feature-flagged": true
+      "srlinux": "/qos/interfaces/interface/interface-ref/interface"
     },
     {
       "oc": "/qos/interfaces/interface/interface-ref/{config,state}/subinterface",
-      "srlinux": "/qos/interfaces/interface/interface-ref/subinterface",
-      "feature-flagged": true
+      "srlinux": "/qos/interfaces/interface/interface-ref/subinterface"
     },
     {
       "oc": "/qos/interfaces/interface/input",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/interfaces/interface/input/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/interfaces/interface/input/{config,state}/buffer-allocation-profile",
@@ -77,18 +66,15 @@
     },
     {
       "oc": "/qos/interfaces/interface/input/classifiers",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/interfaces/interface/input/classifiers/classifier",
-      "srlinux": "/qos/interfaces/interface/input/classifiers/classifier",
-      "feature-flagged": true
+      "srlinux": "/qos/interfaces/interface/input/classifiers/classifier"
     },
     {
       "oc": "/qos/interfaces/interface/input/classifiers/classifier/type",
       "srlinux": "/qos/interfaces/interface/input/classifiers/classifier/type",
-      "feature-flagged": true,
       "mapping": [
         {
           "IPV4": "ipv4"
@@ -100,18 +86,15 @@
     },
     {
       "oc": "/qos/interfaces/interface/input/classifiers/classifier/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/interfaces/interface/input/classifiers/classifier/{config,state}/name",
-      "srlinux": "/qos/interfaces/interface/input/classifiers/classifier/name",
-      "feature-flagged": true
+      "srlinux": "/qos/interfaces/interface/input/classifiers/classifier/name"
     },
     {
       "oc": "/qos/interfaces/interface/input/classifiers/classifier/{config,state}/type",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/interfaces/interface/input/classifiers/classifier/terms",
@@ -311,8 +294,7 @@
     },
     {
       "oc": "/qos/interfaces/interface/output/{config,state}/buffer-allocation-profile",
-      "srlinux": "/qos/interfaces/interface/output/buffer-allocation-profile",
-      "feature-flagged": true
+      "srlinux": "/qos/interfaces/interface/output/buffer-allocation-profile"
     },
     {
       "oc": "/qos/interfaces/interface/output/{config,state}/multicast-buffer-allocation-profile",
@@ -396,33 +378,27 @@
     },
     {
       "oc": "/qos/interfaces/interface/output/queues/queue",
-      "srlinux": "/qos/interfaces/interface/output/queues/queue",
-      "feature-flagged": true
+      "srlinux": "/qos/interfaces/interface/output/queues/queue"
     },
     {
       "oc": "/qos/interfaces/interface/output/queues/queue/name",
-      "srlinux": "/qos/interfaces/interface/output/queues/queue/queue-name",
-      "feature-flagged": true
+      "srlinux": "/qos/interfaces/interface/output/queues/queue/queue-name"
     },
     {
       "oc": "/qos/interfaces/interface/output/queues/queue/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/interfaces/interface/output/queues/queue/{config,state}/name",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/interfaces/interface/output/queues/queue/{config,state}/queue-management-profile",
-      "srlinux": "/qos/interfaces/interface/output/queues/queue/queue-management-profile",
-      "feature-flagged": true
+      "srlinux": "/qos/interfaces/interface/output/queues/queue/queue-management-profile"
     },
     {
       "oc": "/qos/interfaces/interface/output/queues/queue/state/max-queue-len",
-      "srlinux": "/qos/interfaces/interface/output/queues/queue/queue-depth/maximum-burst-size",
-      "feature-flagged": true
+      "srlinux": "/qos/interfaces/interface/output/queues/queue/queue-depth/maximum-burst-size"
     },
     {
       "oc": "/qos/interfaces/interface/output/queues/queue/state/avg-queue-len",
@@ -430,13 +406,11 @@
     },
     {
       "oc": "/qos/interfaces/interface/output/queues/queue/state/ecn-marked-pkts",
-      "srlinux": "/qos/interfaces/interface/output/queues/queue/queue-statistics/aggregate-statistics/ecn-marked-packets",
-      "feature-flagged": true
+      "srlinux": "/qos/interfaces/interface/output/queues/queue/queue-statistics/aggregate-statistics/ecn-marked-packets"
     },
     {
       "oc": "/qos/interfaces/interface/output/queues/queue/state/ecn-marked-octets",
-      "srlinux": "/qos/interfaces/interface/output/queues/queue/queue-statistics/aggregate-statistics/ecn-marked-octets",
-      "feature-flagged": true
+      "srlinux": "/qos/interfaces/interface/output/queues/queue/queue-statistics/aggregate-statistics/ecn-marked-octets"
     },
     {
       "oc": "/qos/interfaces/interface/output/queues/queue/state/ecn-selected-pkts",
@@ -448,38 +422,31 @@
     },
     {
       "oc": "/qos/interfaces/interface/output/queues/queue/state/transmit-pkts",
-      "srlinux": "/qos/interfaces/interface/output/queues/queue/queue-statistics/aggregate-statistics/transmitted-packets",
-      "feature-flagged": true
+      "srlinux": "/qos/interfaces/interface/output/queues/queue/queue-statistics/aggregate-statistics/transmitted-packets"
     },
     {
       "oc": "/qos/interfaces/interface/output/queues/queue/state/transmit-octets",
-      "srlinux": "/qos/interfaces/interface/output/queues/queue/queue-statistics/aggregate-statistics/transmitted-octets",
-      "feature-flagged": true
+      "srlinux": "/qos/interfaces/interface/output/queues/queue/queue-statistics/aggregate-statistics/transmitted-octets"
     },
     {
       "oc": "/qos/interfaces/interface/output/queues/queue/state/dropped-pkts",
-      "srlinux": "/qos/interfaces/interface/output/queues/queue/queue-statistics/aggregate-statistics/dropped-packets",
-      "feature-flagged": true
+      "srlinux": "/qos/interfaces/interface/output/queues/queue/queue-statistics/aggregate-statistics/dropped-packets"
     },
     {
       "oc": "/qos/interfaces/interface/output/queues/queue/state/dropped-octets",
-      "srlinux": "/qos/interfaces/interface/output/queues/queue/queue-statistics/aggregate-statistics/dropped-octets",
-      "feature-flagged": true
+      "srlinux": "/qos/interfaces/interface/output/queues/queue/queue-statistics/aggregate-statistics/dropped-octets"
     },
     {
       "oc": "/qos/interfaces/interface/output/scheduler-policy",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/interfaces/interface/output/scheduler-policy/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/interfaces/interface/output/scheduler-policy/{config,state}/name",
-      "srlinux": "/qos/interfaces/interface/output/scheduler/scheduler-policy",
-      "feature-flagged": true
+      "srlinux": "/qos/interfaces/interface/output/scheduler/scheduler-policy"
     },
     {
       "oc": "/qos/interfaces/interface/output/scheduler-policy/schedulers",
@@ -491,8 +458,7 @@
     },
     {
       "oc": "/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/sequence",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/interfaces/interface/output/scheduler-policy/schedulers/scheduler/state",
@@ -532,28 +498,23 @@
     },
     {
       "oc": "/qos/classifiers/classifier",
-      "srlinux": "/qos/classifiers/multifield-classifier",
-      "feature-flagged": true
+      "srlinux": "/qos/classifiers/multifield-classifier"
     },
     {
       "oc": "/qos/classifiers/classifier/name",
-      "srlinux": "/qos/classifiers/multifield-classifier/name",
-      "feature-flagged": true
+      "srlinux": "/qos/classifiers/multifield-classifier/name"
     },
     {
       "oc": "/qos/classifiers/classifier/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/classifiers/classifier/{config,state}/name",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/classifiers/classifier/{config,state}/type",
       "srlinux": "/qos/classifiers/multifield-classifier/type",
-      "feature-flagged": true,
       "mapping": [
         {
           "IPV4": "ipv4"
@@ -565,33 +526,27 @@
     },
     {
       "oc": "/qos/classifiers/classifier/terms",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term",
-      "srlinux": "/qos/classifiers/multifield-classifier/entry",
-      "feature-flagged": true
+      "srlinux": "/qos/classifiers/multifield-classifier/entry"
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/id",
-      "srlinux": "/qos/classifiers/multifield-classifier/entry/sequence-id",
-      "feature-flagged": true
+      "srlinux": "/qos/classifiers/multifield-classifier/entry/sequence-id"
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/{config,state}/id",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions",
-      "srlinux": "/qos/classifiers/multifield-classifier/entry/match",
-      "feature-flagged": true
+      "srlinux": "/qos/classifiers/multifield-classifier/entry/match"
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/l2",
@@ -623,18 +578,15 @@
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/ipv4",
-      "srlinux": "/qos/classifiers/multifield-classifier/entry/match/ipv4",
-      "feature-flagged": true
+      "srlinux": "/qos/classifiers/multifield-classifier/entry/match/ipv4"
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/ipv4/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/ipv4/{config,state}/source-address",
-      "srlinux": "/qos/classifiers/multifield-classifier/entry/match/ipv4/source-ip/prefix",
-      "feature-flagged": true
+      "srlinux": "/qos/classifiers/multifield-classifier/entry/match/ipv4/source-ip/prefix"
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/ipv4/{config,state}/source-address-prefix-set",
@@ -642,8 +594,7 @@
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/ipv4/{config,state}/destination-address",
-      "srlinux": "/qos/classifiers/multifield-classifier/entry/match/ipv4/destination-ip/prefix",
-      "feature-flagged": true
+      "srlinux": "/qos/classifiers/multifield-classifier/entry/match/ipv4/destination-ip/prefix"
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/ipv4/{config,state}/destination-address-prefix-set",
@@ -655,13 +606,11 @@
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/ipv4/{config,state}/dscp-set",
-      "srlinux": "/qos/classifiers/multifield-classifier/entry/match/ipv4/dscp-set",
-      "feature-flagged": true
+      "srlinux": "/qos/classifiers/multifield-classifier/entry/match/ipv4/dscp-set"
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/ipv4/{config,state}/dscp-set/dscp-set",
       "srlinux": "/qos/classifiers/multifield-classifier/entry/match/ipv4/dscp-set/dscp-set",
-      "feature-flagged": true,
       "mapping": [
         {
           "0": "CS0"
@@ -737,7 +686,6 @@
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/ipv4/{config,state}/protocol",
       "srlinux": "/qos/classifiers/multifield-classifier/entry/match/ipv4/protocol",
-      "feature-flagged": true,
       "transform": "ip-protocol"
     },
     {
@@ -754,18 +702,15 @@
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/ipv6",
-      "srlinux": "/qos/classifiers/multifield-classifier/entry/match/ipv6",
-      "feature-flagged": true
+      "srlinux": "/qos/classifiers/multifield-classifier/entry/match/ipv6"
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/ipv6/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/ipv6/{config,state}/source-address",
-      "srlinux": "/qos/classifiers/multifield-classifier/entry/match/ipv6/source-ip/prefix",
-      "feature-flagged": true
+      "srlinux": "/qos/classifiers/multifield-classifier/entry/match/ipv6/source-ip/prefix"
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/ipv6/{config,state}/source-address-prefix-set",
@@ -777,8 +722,7 @@
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/ipv6/{config,state}/destination-address",
-      "srlinux": "/qos/classifiers/multifield-classifier/entry/match/ipv6/destination-ip/prefix",
-      "feature-flagged": true
+      "srlinux": "/qos/classifiers/multifield-classifier/entry/match/ipv6/destination-ip/prefix"
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/ipv6/{config,state}/destination-address-prefix-set",
@@ -794,13 +738,11 @@
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/ipv6/{config,state}/dscp-set",
-      "srlinux": "/qos/classifiers/multifield-classifier/entry/match/ipv6/dscp-set",
-      "feature-flagged": true
+      "srlinux": "/qos/classifiers/multifield-classifier/entry/match/ipv6/dscp-set"
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/ipv6/{config,state}/dscp-set/dscp-set",
       "srlinux": "/qos/classifiers/multifield-classifier/entry/match/ipv6/dscp-set/dscp-set",
-      "feature-flagged": true,
       "mapping": [
         {
           "0": "CS0"
@@ -876,7 +818,6 @@
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/ipv6/{config,state}/protocol",
       "srlinux": "/qos/classifiers/multifield-classifier/entry/match/ipv6/next-header",
-      "feature-flagged": true,
       "transform": "ip-protocol"
     },
     {
@@ -893,18 +834,15 @@
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/transport",
-      "srlinux": "/qos/classifiers/multifield-classifier/entry/match/transport",
-      "feature-flagged": true
+      "srlinux": "/qos/classifiers/multifield-classifier/entry/match/transport"
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/transport/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/transport/{config,state}/source-port",
       "srlinux": "/qos/classifiers/multifield-classifier/entry/match/transport/source-port/value",
-      "feature-flagged": true,
       "special-handling": "the operator needs to be set to 'eq'"
     },
     {
@@ -914,7 +852,6 @@
     {
       "oc": "/qos/classifiers/classifier/terms/term/conditions/transport/{config,state}/destination-port",
       "srlinux": "/qos/classifiers/multifield-classifier/entry/match/transport/destination-port/value",
-      "feature-flagged": true,
       "special-handling": "the operator needs to be set to 'eq'"
     },
     {
@@ -976,43 +913,35 @@
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/actions",
-      "srlinux": "/qos/classifiers/multifield-classifier/entry/action",
-      "feature-flagged": true
+      "srlinux": "/qos/classifiers/multifield-classifier/entry/action"
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/actions/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/actions/{config,state}/target-group",
-      "srlinux": "/qos/classifiers/multifield-classifier/entry/action/forwarding-class",
-      "feature-flagged": true
+      "srlinux": "/qos/classifiers/multifield-classifier/entry/action/forwarding-class"
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/actions/remark",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/actions/remark/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/actions/remark/{config,state}/set-dscp",
-      "srlinux": "/qos/classifiers/multifield-classifier/entry/action/rewrite/set-dscp",
-      "feature-flagged": true
+      "srlinux": "/qos/classifiers/multifield-classifier/entry/action/rewrite/set-dscp"
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/actions/remark/{config,state}/set-dot1p",
-      "supported": false,
-      "feature-flagged": true
+      "supported": false
     },
     {
       "oc": "/qos/classifiers/classifier/terms/term/actions/remark/{config,state}/set-mpls-tc",
-      "supported": false,
-      "feature-flagged": true
+      "supported": false
     },
     {
       "oc": "/qos/forwarding-groups",
@@ -1020,18 +949,15 @@
     },
     {
       "oc": "/qos/forwarding-groups/forwarding-group",
-      "srlinux": "/qos/forwarding-classes/forwarding-class",
-      "feature-flagged": true
+      "srlinux": "/qos/forwarding-classes/forwarding-class"
     },
     {
       "oc": "/qos/forwarding-groups/forwarding-group/name",
-      "srlinux": "/qos/forwarding-classes/forwarding-class/name",
-      "feature-flagged": true
+      "srlinux": "/qos/forwarding-classes/forwarding-class/name"
     },
     {
       "oc": "/qos/forwarding-groups/forwarding-group/{config,state}",
-      "pretranslate-transform": "qos-forwarding-class-transform",
-      "feature-flagged": true
+      "pretranslate-transform": "qos-forwarding-class-transform"
     },
     {
       "srlinux": "/qos/forwarding-classes/forwarding-class/forwarding-class-index",
@@ -1043,28 +969,23 @@
     },
     {
       "oc": "/qos/forwarding-groups/forwarding-group/{config,state}/name",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/forwarding-groups/forwarding-group/{config,state}/fabric-priority",
-      "supported": false,
-      "feature-flagged": true
+      "supported": false
     },
     {
       "oc": "/qos/forwarding-groups/forwarding-group/{config,state}/output-queue",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/forwarding-groups/forwarding-group/{config,state}/unicast-output-queue",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/forwarding-groups/forwarding-group/{config,state}/multicast-output-queue",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/queues",
@@ -1072,28 +993,23 @@
     },
     {
       "oc": "/qos/queues/queue",
-      "srlinux": "/qos/queues/queue",
-      "feature-flagged": true
+      "srlinux": "/qos/queues/queue"
     },
     {
       "oc": "/qos/queues/queue/name",
-      "srlinux": "/qos/queues/queue/name",
-      "feature-flagged": true
+      "srlinux": "/qos/queues/queue/name"
     },
     {
       "oc": "/qos/queues/queue/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/queues/queue/{config,state}/name",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/queues/queue/{config,state}/queue-id",
-      "srlinux": "/qos/queues/queue/queue-index",
-      "feature-flagged": true
+      "srlinux": "/qos/queues/queue/queue-index"
     },
     {
       "oc": "/qos/scheduler-policies",
@@ -1101,38 +1017,31 @@
     },
     {
       "oc": "/qos/scheduler-policies/scheduler-policy",
-      "srlinux": "/qos/scheduler-policies/scheduler-policy",
-      "feature-flagged": true
+      "srlinux": "/qos/scheduler-policies/scheduler-policy"
     },
     {
       "oc": "/qos/scheduler-policies/scheduler-policy/name",
-      "srlinux": "/qos/scheduler-policies/scheduler-policy/name",
-      "feature-flagged": true
+      "srlinux": "/qos/scheduler-policies/scheduler-policy/name"
     },
     {
       "oc": "/qos/scheduler-policies/scheduler-policy/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/scheduler-policies/scheduler-policy/{config,state}/name",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/scheduler-policies/scheduler-policy/schedulers",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/scheduler-policies/scheduler-policy/schedulers/scheduler",
-      "srlinux": "/qos/scheduler-policies/scheduler-policy/scheduler",
-      "feature-flagged": true
+      "srlinux": "/qos/scheduler-policies/scheduler-policy/scheduler"
     },
     {
       "oc": "/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/sequence",
       "srlinux": "/qos/scheduler-policies/scheduler-policy/scheduler/sequence",
-      "feature-flagged": true,
       "deviations": {
         "add": {
           "must": [
@@ -1146,13 +1055,11 @@
     },
     {
       "oc": "/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/{config,state}/sequence",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/{config,state}/type",
@@ -1161,38 +1068,31 @@
     {
       "oc": "/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/{config,state}/priority",
       "srlinux": "/qos/scheduler-policies/scheduler-policy/scheduler/priority",
-      "transform": "uppercase-to-lowercase",
-      "feature-flagged": true
+      "transform": "uppercase-to-lowercase"
     },
     {
       "oc": "/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input",
-      "srlinux": "/qos/scheduler-policies/scheduler-policy/scheduler/input",
-      "feature-flagged": true
+      "srlinux": "/qos/scheduler-policies/scheduler-policy/scheduler/input"
     },
     {
       "oc": "/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input/id",
-      "srlinux": "/qos/scheduler-policies/scheduler-policy/scheduler/input/id",
-      "feature-flagged": true
+      "srlinux": "/qos/scheduler-policies/scheduler-policy/scheduler/input/id"
     },
     {
       "oc": "/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input/{config,state}/id",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input/{config,state}/input-type",
       "srlinux": "/qos/scheduler-policies/scheduler-policy/scheduler/input/input-type",
-      "feature-flagged": true,
       "transform": "uppercase-to-lowercase",
       "deviations": {
         "add": {
@@ -1207,13 +1107,11 @@
     },
     {
       "oc": "/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input/{config,state}/queue",
-      "srlinux": "/qos/scheduler-policies/scheduler-policy/scheduler/input/queue-name",
-      "feature-flagged": true
+      "srlinux": "/qos/scheduler-policies/scheduler-policy/scheduler/input/queue-name"
     },
     {
       "oc": "/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/inputs/input/{config,state}/weight",
-      "srlinux": "/qos/scheduler-policies/scheduler-policy/scheduler/input/weight",
-      "feature-flagged": true
+      "srlinux": "/qos/scheduler-policies/scheduler-policy/scheduler/input/weight"
     },
     {
       "oc": "/qos/scheduler-policies/scheduler-policy/schedulers/scheduler/output",
@@ -1429,53 +1327,43 @@
     },
     {
       "oc": "/qos/buffer-allocation-profiles",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/buffer-allocation-profiles/buffer-allocation-profile",
-      "srlinux": "/qos/buffer-management/buffer-allocation-profile",
-      "feature-flagged": true
+      "srlinux": "/qos/buffer-management/buffer-allocation-profile"
     },
     {
       "oc": "/qos/buffer-allocation-profiles/buffer-allocation-profile/name",
-      "srlinux": "/qos/buffer-management/buffer-allocation-profile/name",
-      "feature-flagged": true
+      "srlinux": "/qos/buffer-management/buffer-allocation-profile/name"
     },
     {
       "oc": "/qos/buffer-allocation-profiles/buffer-allocation-profile/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/buffer-allocation-profiles/buffer-allocation-profile/{config,state}/name",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues",
-      "srlinux": "/qos/buffer-management/buffer-allocation-profile/queues",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue",
-      "srlinux": "/qos/buffer-management/buffer-allocation-profile/queues/queue",
-      "feature-flagged": true
+      "srlinux": "/qos/buffer-management/buffer-allocation-profile/queues/queue"
     },
     {
       "oc": "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/name",
-      "srlinux": "/qos/buffer-management/buffer-allocation-profile/queues/queue/queue-name",
-      "feature-flagged": true
+      "srlinux": "/qos/buffer-management/buffer-allocation-profile/queues/queue/queue-name"
     },
     {
       "oc": "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/{config,state}/name",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/{config,state}/dedicated-buffer",
@@ -1495,13 +1383,11 @@
     },
     {
       "oc": "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/{config,state}/static-shared-buffer-limit",
-      "srlinux": "/qos/buffer-management/buffer-allocation-profile/queues/queue/maximum-burst-size",
-      "feature-flagged": true
+      "srlinux": "/qos/buffer-management/buffer-allocation-profile/queues/queue/maximum-burst-size"
     },
     {
       "oc": "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/{config,state}/static-shared-buffer-limit-temporal",
-      "srlinux": "/qos/buffer-management/buffer-allocation-profile/queues/queue/maximum-burst-size-delay",
-      "feature-flagged": true
+      "srlinux": "/qos/buffer-management/buffer-allocation-profile/queues/queue/maximum-burst-size-delay"
     },
     {
       "oc": "/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/{config,state}/dynamic-limit-scaling-factor",
@@ -1509,38 +1395,31 @@
     },
     {
       "oc": "/qos/queue-management-profiles",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/queue-management-profiles/queue-management-profile",
-      "srlinux": "/qos/buffer-management/queue-management-profile",
-      "feature-flagged": true
+      "srlinux": "/qos/buffer-management/queue-management-profile"
     },
     {
       "oc": "/qos/queue-management-profiles/queue-management-profile/name",
-      "srlinux": "/qos/buffer-management/queue-management-profile/name",
-      "feature-flagged": true
+      "srlinux": "/qos/buffer-management/queue-management-profile/name"
     },
     {
       "oc": "/qos/queue-management-profiles/queue-management-profile/{config,state}",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/queue-management-profiles/queue-management-profile/{config,state}/name",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/queue-management-profiles/queue-management-profile/wred",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/queue-management-profiles/queue-management-profile/wred/uniform",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/queue-management-profiles/queue-management-profile/wred/uniform/{config,state}",
@@ -1551,43 +1430,35 @@
     {
       "oc": "",
       "srlinux": "/qos/buffer-management/queue-management-profile/wred/wred-slope",
-      "feature-flagged": true,
       "pretranslate-transform": "qos-wred-transform"
     },
     {
       "oc": "/qos/queue-management-profiles/queue-management-profile/wred/uniform/{config,state}/min-threshold",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/queue-management-profiles/queue-management-profile/wred/uniform/{config,state}/max-threshold",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/queue-management-profiles/queue-management-profile/wred/uniform/{config,state}/min-threshold-percent",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/queue-management-profiles/queue-management-profile/wred/uniform/{config,state}/max-threshold-percent",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/queue-management-profiles/queue-management-profile/wred/uniform/{config,state}/enable-ecn",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/queue-management-profiles/queue-management-profile/wred/uniform/{config,state}/drop",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/queue-management-profiles/queue-management-profile/wred/uniform/{config,state}/weight",
       "srlinux": "",
-      "feature-flagged": true,
       "deviations": {
         "add": {
           "must": [
@@ -1605,8 +1476,7 @@
     },
     {
       "oc": "/qos/queue-management-profiles/queue-management-profile/wred/uniform/{config,state}/max-drop-probability-percent",
-      "srlinux": "",
-      "feature-flagged": true
+      "srlinux": ""
     },
     {
       "oc": "/qos/queue-management-profiles/queue-management-profile/red",

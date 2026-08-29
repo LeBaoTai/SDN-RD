@@ -24,6 +24,10 @@ module srl_nokia-network-instance-leaking {
   description
     "YANG model for inter-network-instance route leaking";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -36,10 +40,14 @@ module srl_nokia-network-instance-leaking {
   grouping inter-instance-policies-top {
     container inter-instance-policies {
       description
-        "Policies for leaking routes between this network instance and other network instances";
+        "Enter the inter-instance-policies context
+
+         Policies for leaking routes between this network instance and other network instances";
       container apply-policy {
         description
-          "Container for specifying route leaking import and export policies";
+          "Enter the apply-policy context
+
+           Container for specifying route leaking import and export policies";
         leaf-list import-policy {
           ordered-by user;
           max-elements 1;

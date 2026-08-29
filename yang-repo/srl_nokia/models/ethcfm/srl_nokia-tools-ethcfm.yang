@@ -24,6 +24,10 @@ module srl_nokia-tools-ethcfm {
   description
     "This module defines the tools commands to start Ethernet CFM on-demand tests and clear operational state.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-10-31 {
     description
       "SRLinux 24.10.1";
@@ -261,17 +265,21 @@ module srl_nokia-tools-ethcfm {
             }
             container on-demand {
               description
-                "Enter Eth-CFM tests context";
+                "Enter the on-demand context";
               choice type {
                 container loopback {
                   description
-                    "Perform an Eth-CFM loopback test";
+                    "Enter the loopback context
+
+                     Perform an Eth-CFM loopback test";
                   uses eth-cfm-test-target;
                   uses eth-cfm-loopback;
                 }
                 container linktrace {
                   description
-                    "Perform an Eth-CFM linktrace test";
+                    "Enter the linktrace context
+
+                     Perform an Eth-CFM linktrace test";
                   uses eth-cfm-test-target-unicast;
                   uses eth-cfm-linktrace;
                 }

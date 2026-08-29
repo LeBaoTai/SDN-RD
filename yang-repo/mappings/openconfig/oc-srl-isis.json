@@ -69,8 +69,7 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/global/{config,state}/weighted-ecmp",
       "srlinux": "/network-instance/protocols/isis/instance/weighted-ecmp/admin-state",
-      "transform": "bool-to-admin-state",
-      "feature-flagged": true
+      "transform": "bool-to-admin-state"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/global/{config,state}/poi-tlv",
@@ -313,7 +312,8 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/global/afi-safi",
-      "pretranslate-transform": "oc-isis-glb-afi-safi-transform"
+      "pretranslate-transform": "oc-isis-glb-afi-safi-transform",
+      "state-request-from-here": true
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/global/afi-safi/af",
@@ -1740,8 +1740,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth",
-      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth/state",
@@ -1750,13 +1749,11 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth/state/bandwidth",
       "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth/bandwidth",
-      "transform": "ieeefloat32-to-uint64",
-      "feature-flagged": true
+      "transform": "ieeefloat32-to-uint64"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth",
-      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth/state",
@@ -1765,23 +1762,19 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth/state/bandwidth",
       "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth/bandwidth",
-      "transform": "ieeefloat32-to-uint64",
-      "feature-flagged": true
+      "transform": "ieeefloat32-to-uint64"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth",
-      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority",
-      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/priority",
-      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/priority",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/priority"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state",
@@ -1794,8 +1787,7 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/bandwidth",
       "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/bandwidth",
-      "transform": "ieeefloat32-to-uint64",
-      "feature-flagged": true
+      "transform": "ieeefloat32-to-uint64"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/ipv6-interface-address",
@@ -2127,8 +2119,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth",
-      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/state",
@@ -2137,13 +2128,11 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/state/bandwidth",
       "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/bandwidth",
-      "transform": "ieeefloat32-to-uint64",
-      "feature-flagged": true
+      "transform": "ieeefloat32-to-uint64"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/available-bandwidth",
-      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/available-bandwidth",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/available-bandwidth"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/available-bandwidth/state",
@@ -2156,13 +2145,11 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/available-bandwidth/state/bandwidth",
       "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/available-bandwidth/bandwidth",
-      "transform": "ieeefloat32-to-uint64",
-      "feature-flagged": true
+      "transform": "ieeefloat32-to-uint64"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth",
-      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state",
@@ -2175,8 +2162,7 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/bandwidth",
       "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/bandwidth",
-      "transform": "ieeefloat32-to-uint64",
-      "feature-flagged": true
+      "transform": "ieeefloat32-to-uint64"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/extended-is-reachability/neighbors/neighbor/instances/instance/undefined-subtlvs",
@@ -2984,8 +2970,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth",
-      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth/state",
@@ -2994,13 +2979,11 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth/state/bandwidth",
       "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-link-bandwidth/bandwidth",
-      "transform": "ieeefloat32-to-uint64",
-      "feature-flagged": true
+      "transform": "ieeefloat32-to-uint64"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth",
-      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth/state",
@@ -3009,23 +2992,19 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth/state/bandwidth",
       "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/max-reservable-link-bandwidth/bandwidth",
-      "transform": "ieeefloat32-to-uint64",
-      "feature-flagged": true
+      "transform": "ieeefloat32-to-uint64"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth",
-      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority",
-      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/priority",
-      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/priority",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/priority"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state",
@@ -3038,8 +3017,7 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/state/bandwidth",
       "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/unreserved-bandwidth/setup-priority/bandwidth",
-      "transform": "ieeefloat32-to-uint64",
-      "feature-flagged": true
+      "transform": "ieeefloat32-to-uint64"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/ipv6-interface-address",
@@ -3363,8 +3341,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth",
-      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/state",
@@ -3373,13 +3350,11 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/state/bandwidth",
       "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/residual-bandwidth/bandwidth",
-      "transform": "ieeefloat32-to-uint64",
-      "feature-flagged": true
+      "transform": "ieeefloat32-to-uint64"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/available-bandwidth",
-      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/available-bandwidth",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/available-bandwidth"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/available-bandwidth/state",
@@ -3392,13 +3367,11 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/available-bandwidth/state/bandwidth",
       "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/available-bandwidth/bandwidth",
-      "transform": "ieeefloat32-to-uint64",
-      "feature-flagged": true
+      "transform": "ieeefloat32-to-uint64"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth",
-      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state",
@@ -3411,8 +3384,7 @@
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/state/bandwidth",
       "srlinux": "/network-instance/protocols/isis/instance/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/subtlvs/subtlv/utilized-bandwidth/bandwidth",
-      "transform": "ieeefloat32-to-uint64",
-      "feature-flagged": true
+      "transform": "ieeefloat32-to-uint64"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/levels/level/link-state-database/lsp/tlvs/tlv/mt-isn/neighbors/neighbor/instances/instance/undefined-subtlvs",
@@ -4111,8 +4083,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/interface-ref",
-      "srlinux": "/network-instance/protocols/isis/instance/interface/interface-ref",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/interface/interface-ref"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/interface-ref/{config,state}",
@@ -4120,13 +4091,11 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/interface-ref/{config,state}/interface",
-      "srlinux": "/network-instance/protocols/isis/instance/interface/interface-ref/interface",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/interface/interface-ref/interface"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/interface-ref/{config,state}/subinterface",
-      "srlinux": "/network-instance/protocols/isis/instance/interface/interface-ref/subinterface",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/interface/interface-ref/subinterface"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/{config,state}",
@@ -4287,7 +4256,8 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/afi-safi",
-      "pretranslate-transform": "oc-isis-intf-afi-safi-transform"
+      "pretranslate-transform": "oc-isis-intf-afi-safi-transform",
+      "state-request-from-here": true
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/afi-safi/af",
@@ -4325,7 +4295,8 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level",
-      "srlinux": "/network-instance/protocols/isis/instance/interface/level"
+      "srlinux": "/network-instance/protocols/isis/instance/interface/level",
+      "add-to-cache": true
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/level-number",
@@ -4341,8 +4312,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/{config,state}/passive",
-      "srlinux": "/network-instance/protocols/isis/instance/interface/level/passive",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/interface/level/passive"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/{config,state}/priority",
@@ -4643,7 +4613,8 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi",
-      "pretranslate-transform": "oc-isis-intf-lvl-afi-safi-transform"
+      "pretranslate-transform": "oc-isis-intf-lvl-afi-safi-transform",
+      "state-request-from-here": true
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af",
@@ -4659,6 +4630,14 @@
     },
     {
       "srlinux": "/network-instance/protocols/isis/instance/interface/level/ipv6-unicast-metric",
+      "pretranslate-transform": "srl-isis-intf-lvl-afi-safi-transform"
+    },
+    {
+      "srlinux": "/network-instance/protocols/isis/instance/interface/level/ipv4-unicast",
+      "pretranslate-transform": "srl-isis-intf-lvl-afi-safi-transform"
+    },
+    {
+      "srlinux": "/network-instance/protocols/isis/instance/interface/level/ipv6-unicast",
       "pretranslate-transform": "srl-isis-intf-lvl-afi-safi-transform"
     },
     {
@@ -4753,8 +4732,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/weighted-ecmp",
-      "srlinux": "/network-instance/protocols/isis/instance/interface/weighted-ecmp",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/interface/weighted-ecmp"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/weighted-ecmp/{config,state}",
@@ -4762,8 +4740,7 @@
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/weighted-ecmp/{config,state}/load-balancing-weight",
-      "srlinux": "/network-instance/protocols/isis/instance/interface/weighted-ecmp/load-balancing-weight",
-      "feature-flagged": true
+      "srlinux": "/network-instance/protocols/isis/instance/interface/weighted-ecmp/load-balancing-weight"
     },
     {
       "oc": "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/enable-bfd",

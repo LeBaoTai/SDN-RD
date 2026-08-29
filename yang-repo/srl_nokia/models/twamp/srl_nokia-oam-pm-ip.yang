@@ -43,6 +43,10 @@ module srl_nokia-oam-pm-ip {
     "This YANG module contains the management data definitions for
      IP Performance Monitoring.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-03-31 {
     description
       "SRLinux 25.3.1";
@@ -63,9 +67,13 @@ module srl_nokia-oam-pm-ip {
       uses srl_nokia-oam-pm:oam-pm-resources;
       container delay {
         uses srl_nokia-oam-pm:bin-group;
+        description
+          "Enter the delay context";
       }
       container loss {
         uses srl_nokia-oam-pm:loss-events;
+        description
+          "Enter the loss context";
       }
       list session {
         key "session-name";
@@ -197,6 +205,8 @@ module srl_nokia-oam-pm-ip {
 
                      The subinterface mut be a valid route to reach the destination";
                 }
+                description
+                  "Enter the interface-ref context";
               }
             }
           }
@@ -249,6 +259,8 @@ module srl_nokia-oam-pm-ip {
                 "Indicates the count of packets in this sample window with the M (Malformed) bit set in
                  the flags field of the TLV.";
             }
+            description
+              "Enter the statistics context";
           }
           container delay {
             leaf bin-group {
@@ -282,10 +294,14 @@ module srl_nokia-oam-pm-ip {
                 uses srl_nokia-oam-pm:mi-common-state;
                 container statistics {
                   uses srl_nokia-oam-pm:mi-delay-statistics;
+                  description
+                    "Enter the statistics context";
                 }
               }
             }
             uses srl_nokia-oam-pm:delay-events-state;
+            description
+              "Enter the delay context";
           }
           container loss {
             uses srl_nokia-oam-pm:frame-loss-configuration;
@@ -320,16 +336,26 @@ module srl_nokia-oam-pm-ip {
                   container forward {
                     uses srl_nokia-oam-pm:mi-forward-loss;
                     uses srl_nokia-oam-pm:mi-directional-loss-statistics;
+                    description
+                      "Enter the forward context";
                   }
                   container backward {
                     uses srl_nokia-oam-pm:mi-backward-loss;
                     uses srl_nokia-oam-pm:mi-directional-loss-statistics;
+                    description
+                      "Enter the backward context";
                   }
+                  description
+                    "Enter the statistics context";
                 }
               }
             }
             uses srl_nokia-oam-pm:loss-events-state;
+            description
+              "Enter the loss context";
           }
+          description
+            "Enter the stamp context";
         }
       }
     }

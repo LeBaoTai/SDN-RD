@@ -24,6 +24,10 @@ module srl_nokia-dot1x {
   description
     "This module models dot1x configuration under a interface or a sub-interface";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -64,7 +68,9 @@ module srl_nokia-dot1x {
       "Top-level grouping for system dot1x";
     container dot1x {
       description
-        "Enclosing container for system dot1x";
+        "Enter the dot1x context
+
+         Enclosing container for system dot1x";
       if-feature "srl_nokia-feat:dot1x-tunnel";
       config false;
     }

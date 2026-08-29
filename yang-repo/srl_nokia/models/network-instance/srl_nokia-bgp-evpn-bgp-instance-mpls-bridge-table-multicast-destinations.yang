@@ -24,6 +24,10 @@ module srl_nokia-bgp-evpn-bgp-instance-mpls-bridge-table-multicast-destinations 
   description
     "Model for bridge-table multicast destinations on the bgp-evpn mpls instance";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2023-10-31 {
     description
       "SRLinux 23.10.1";
@@ -89,7 +93,9 @@ module srl_nokia-bgp-evpn-bgp-instance-mpls-bridge-table-multicast-destinations 
   grouping evpn-mpls-bridge-table-multicast-destinations-limits-top {
     container multicast-limit {
       description
-        "Multicast limits per vxlan interface.";
+        "Enter the multicast-limit context
+
+         Multicast limits per vxlan interface.";
       leaf maximum-entries {
         type int32;
         description
@@ -108,6 +114,8 @@ module srl_nokia-bgp-evpn-bgp-instance-mpls-bridge-table-multicast-destinations 
       config false;
       uses evpn-mpls-bridge-table-multicast-destinations-limits-top;
       uses evpn-mpls-bridge-table-multicast-destinations-destination-top;
+      description
+        "Enter the multicast-destinations context";
     }
   }
 

@@ -21,6 +21,10 @@ module srl_nokia-platform-redundancy {
   description
     "This module defines configuration and operational state data related platform redundancy.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -107,7 +111,9 @@ module srl_nokia-platform-redundancy {
   grouping redundancy-synchronization-top {
     container synchronization {
       description
-        "Top-level container for redundancy synchronization";
+        "Enter the synchronization context
+
+         Top-level container for redundancy synchronization";
       leaf state {
         type sync-state;
         config false;
@@ -131,7 +137,9 @@ module srl_nokia-platform-redundancy {
       }
       container overlay {
         description
-          "Top-level container for overlay synchronization";
+          "Enter the overlay context
+
+           Top-level container for overlay synchronization";
         leaf synchronization-frequency {
           type uint32 {
             range "30..65535";
@@ -169,11 +177,15 @@ module srl_nokia-platform-redundancy {
       "Grouping for global redundancy configuration and state";
     container redundancy {
       description
-        "Top-level container for platform redundancy";
+        "Enter the redundancy context
+
+         Top-level container for platform redundancy";
       container control-plane {
         if-feature "srl-feat:redundant-cpms";
         description
-          "Top-level container for control plane redundancy";
+          "Enter the control-plane context
+
+           Top-level container for control plane redundancy";
         uses redundancy-configuration-top;
         uses redundancy-state-top;
         uses redundancy-synchronization-top;
@@ -193,16 +205,6 @@ module srl_nokia-platform-redundancy {
             description
               "Linecard";
           }
-          leaf forwarding-state {
-            type enumeration {
-              enum active;
-              enum standby;
-              enum synchronizing;
-            }
-            config false;
-            description
-              "Forwarding state of line card";
-          }
           leaf-list mda-binding {
             type string {
               length "1";
@@ -211,11 +213,11 @@ module srl_nokia-platform-redundancy {
             description
               "MDAs serviced via given Line Card";
           }
-          leaf active-up-time {
+          leaf forwarding-since {
             type srl-comm:date-and-time-delta;
             config false;
             description
-              "Date and time since in active state";
+              "Date and time since given IOM is in active forwarding mode. Can be forwarding for half of the node or can be forwarding for the entire node";
           }
         }
         leaf forwarding-takeover {
@@ -231,6 +233,30 @@ module srl_nokia-platform-redundancy {
              If the first CPIOM times out, then the second CPIOM assumes forwarding operations of all MDAs.
              When CPM and IOM sync is completed among two CPIOMs and if forwarding-takeover is enabled, half of the MDAs are re-homed and forwarding is shared among two CPIOMs";
         }
+        leaf forwarder {
+          config false;
+          type enumeration {
+            enum iom-A {
+              description
+                "Forwarding functionality for all MDAs is handled via IOM A.
+                 When a new MDA is plugged in, iom A assumes forwarding functionality.";
+            }
+            enum iom-B {
+              description
+                "Forwarding functionality for all MDAs is handled via IOM B.
+                 When a new MDA is plugged in, iom B assumes forwarding functionality.";
+            }
+            enum both {
+              description
+                "Forwarding functionality is distributed among iom A and iom B. Each IOM owns the forwarding operations for half of the MDAs.
+                 When a new MDA is plugged in, distributed ownership model is maintained. Forwarding for MDAs in odd slots is carried out via iom A whereas iom B is the forwarding owner for MDAs in even slots.";
+            }
+          }
+          description
+            "Displays the forwarding ownership for the node.";
+        }
+        description
+          "Enter the linecard context";
       }
     }
   }

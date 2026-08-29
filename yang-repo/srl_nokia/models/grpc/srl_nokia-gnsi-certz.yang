@@ -24,6 +24,10 @@ module srl_nokia-gnsi-certz {
   description
     "This module defines configuration and operational state data related to the Certz service within gNSI.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -62,7 +66,9 @@ module srl_nokia-gnsi-certz {
     container certz {
       config false;
       description
-        "Information relating to the active certificate and bundle/s as provided via Certz
+        "Enter the certz context
+
+         Information relating to the active certificate and bundle/s as provided via Certz
 
          State is provided by the gNSI Certz service, and can be changed using the gNSI.Certz.Rotate RPC";
       leaf ssl-profile-id {
@@ -72,19 +78,25 @@ module srl_nokia-gnsi-certz {
       }
       container certificate {
         description
-          "State relating to the active certificate provided via Certz";
+          "Enter the certificate context
+
+           State relating to the active certificate provided via Certz";
         uses artifact-common;
       }
       container trust-anchor {
         description
-          "State relating to the active trust anchor provided via Certz
+          "Enter the trust-anchor context
+
+           State relating to the active trust anchor provided via Certz
 
            This is equivalent to the certificate authority bundle, and is the list of certificates used to validate clients in mTLS, and to validate servers in outbound TLS.";
         uses artifact-common;
       }
       container crl {
         description
-          "State relating to the active certificate revocation list provided via Certz
+          "Enter the crl context
+
+           State relating to the active certificate revocation list provided via Certz
 
            The list of certificates provided will not be used to validate mTLS or servers, even if those certificates exist within the trust anchor.";
         uses artifact-common;

@@ -24,6 +24,10 @@ module srl_nokia-system-info {
   description
     "This module defines configuration and state related to miscellaneous system information";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -52,7 +56,9 @@ module srl_nokia-system-info {
   grouping information-top {
     container information {
       description
-        "Top-level container for system information configuration and state";
+        "Enter the information context
+
+         Top-level container for system information configuration and state";
       leaf contact {
         type string;
         description

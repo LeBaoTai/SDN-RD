@@ -36,6 +36,10 @@ module srl_nokia-interfaces-l2cp {
   description
     "This module defines configuration and operational state related to the Layer-2 Control Protocols";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-03-31 {
     description
       "SRLinux 25.3.1";
@@ -56,7 +60,9 @@ module srl_nokia-interfaces-l2cp {
       if-feature "srl_nokia-feat:l2cp-transparency-stats";
       config false;
       description
-        "Container for Layer-2 Control Plane protocol statistics.";
+        "Enter the l2cp-statistics context
+
+         Container for Layer-2 Control Plane protocol statistics.";
       leaf total-in-packets {
         type srl_nokia-comm:zero-based-counter64;
         description
@@ -100,7 +106,9 @@ module srl_nokia-interfaces-l2cp {
       }
       container lldp {
         description
-          "Container for LLDP.";
+          "Enter the lldp context
+
+           Container for LLDP.";
         leaf in-tunneled-packets {
           type srl_nokia-comm:zero-based-counter64;
           description
@@ -127,7 +135,9 @@ module srl_nokia-interfaces-l2cp {
       }
       container lacp {
         description
-          "Container for LACP.";
+          "Enter the lacp context
+
+           Container for LACP.";
         leaf in-tunneled-packets {
           type srl_nokia-comm:zero-based-counter64;
           description
@@ -155,7 +165,9 @@ module srl_nokia-interfaces-l2cp {
       container xstp {
         if-feature "srl_nokia-feat:l2cp-transparency-xstp";
         description
-          "Container for Spanning Tree Protocols.";
+          "Enter the xstp context
+
+           Container for Spanning Tree Protocols.";
         leaf in-tunneled-packets {
           type srl_nokia-comm:zero-based-counter64;
           description
@@ -182,7 +194,9 @@ module srl_nokia-interfaces-l2cp {
       }
       container ptp {
         description
-          "Container for Precision Time Protocol Peer-Delay protocol.";
+          "Enter the ptp context
+
+           Container for Precision Time Protocol Peer-Delay protocol.";
         leaf in-tunneled-packets {
           type srl_nokia-comm:zero-based-counter64;
           description
@@ -210,7 +224,9 @@ module srl_nokia-interfaces-l2cp {
       container esmc {
         if-feature "srl_nokia-feat:l2cp-transparency-esmc";
         description
-          "Container for Ethernet Synchronization Messaging Channel protocol
+          "Enter the esmc context
+
+           Container for Ethernet Synchronization Messaging Channel protocol
 
            ESMC frames are identified by a Ethertype 0x8809 and slow protocol subtype 0x0A.";
         leaf in-tunneled-packets {
@@ -236,7 +252,9 @@ module srl_nokia-interfaces-l2cp {
       container elmi {
         if-feature "srl_nokia-feat:l2cp-transparency-elmi";
         description
-          "Container for Ethernet local management interface frames
+          "Enter the elmi context
+
+           Container for Ethernet local management interface frames
 
            ELMI frames are identified by MAC DA 01-80-C2-00-00-07 and Ethertype 0x88ee.";
         leaf in-tunneled-packets {
@@ -262,7 +280,9 @@ module srl_nokia-interfaces-l2cp {
       container efm-oam {
         if-feature "srl_nokia-feat:l2cp-transparency-efm-oam";
         description
-          "Container for Ethernet in the First Mile OAM frames
+          "Enter the efm-oam context
+
+           Container for Ethernet in the First Mile OAM frames
 
            EFM-OAM frames are identified by a Ethertype value 0x8809 and slow protocol subtype 0x03.";
         leaf in-tunneled-packets {
@@ -294,7 +314,9 @@ module srl_nokia-interfaces-l2cp {
     container l2cp-transparency {
       config false;
       description
-        "Enclosing container for system level Layer-2 Control Protocol transparency.";
+        "Enter the l2cp-transparency context
+
+         Enclosing container for system level Layer-2 Control Protocol transparency.";
       uses l2cp-statistics;
     }
   }
@@ -332,7 +354,9 @@ module srl_nokia-interfaces-l2cp {
       }
       container lldp {
         description
-          "Container for L2CP transparency of the Link Layer Discovery Protocol";
+          "Enter the lldp context
+
+           Container for L2CP transparency of the Link Layer Discovery Protocol";
         leaf tunnel {
           must ". = false() or (/srl_nokia-system:system/srl_nokia-lldp:lldp/srl_nokia-lldp:interface[srl_nokia-lldp:name=current()/../../../../srl_nokia-if:name]/srl_nokia-lldp:admin-state = 'disable') or (not(/srl_nokia-system:system/srl_nokia-lldp:lldp/srl_nokia-lldp:interface[srl_nokia-lldp:name=current()/../../../../srl_nokia-if:name]/srl_nokia-lldp:admin-state = 'enable') and not(/srl_nokia-system:system/srl_nokia-lldp:lldp/srl_nokia-lldp:admin-state = 'enable'))" {
             error-message "this interface must not have lldp enabled";
@@ -354,7 +378,9 @@ module srl_nokia-interfaces-l2cp {
       }
       container lacp {
         description
-          "Container for L2CP transparency of the Link Aggregation Control Protocol";
+          "Enter the lacp context
+
+           Container for L2CP transparency of the Link Aggregation Control Protocol";
         leaf tunnel {
           must '. = false() or not (../../../srl_nokia-if:aggregate-id) or not (/srl_nokia-if:interface[srl_nokia-if:name=current()/../../../srl_nokia-if:aggregate-id]/srl_nokia-if-lag:lag/srl_nokia-lacp:lacp)' {
             error-message "this interface must not be part of an lacp enabled lag";
@@ -378,7 +404,9 @@ module srl_nokia-interfaces-l2cp {
       container xstp {
         if-feature "srl_nokia-feat:l2cp-transparency-xstp";
         description
-          "Container for the configuration of all the Spanning Tree Protocols.
+          "Enter the xstp context
+
+           Container for the configuration of all the Spanning Tree Protocols.
 
            It includes Spanning Tree Protocol (STP), Rapid RSTP (RSTP) and Multiple STP (MSTP)";
         leaf tunnel {
@@ -399,7 +427,9 @@ module srl_nokia-interfaces-l2cp {
       }
       container ptp {
         description
-          "Container for the configuration of Precision Time Protocol Peer-Delay frames.";
+          "Enter the ptp context
+
+           Container for the configuration of Precision Time Protocol Peer-Delay frames.";
         leaf tunnel {
           type boolean;
           default "false";
@@ -419,7 +449,9 @@ module srl_nokia-interfaces-l2cp {
       container esmc {
         if-feature "srl_nokia-feat:l2cp-transparency-esmc";
         description
-          "Container for the configuration of Ethernet synchronization messaging channel frames";
+          "Enter the esmc context
+
+           Container for the configuration of Ethernet synchronization messaging channel frames";
         leaf tunnel {
           must ". = false() or (not (../../../srl_nokia-if:synce/srl_nokia-if:ssm/srl_nokia-if:admin-state = 'enable'))" {
             error-message "this interface must not be configured for esmc messaging";
@@ -442,7 +474,9 @@ module srl_nokia-interfaces-l2cp {
       container elmi {
         if-feature "srl_nokia-feat:l2cp-transparency-elmi";
         description
-          "Container for the configuration of Ethernet local management interface frames";
+          "Enter the elmi context
+
+           Container for the configuration of Ethernet local management interface frames";
         leaf tunnel {
           type boolean;
           default "false";
@@ -462,7 +496,9 @@ module srl_nokia-interfaces-l2cp {
       container efm-oam {
         if-feature "srl_nokia-feat:l2cp-transparency-efm-oam";
         description
-          "Container for the configuration of Ethernet in the First Mile OAM frames";
+          "Enter the efm-oam context
+
+           Container for the configuration of Ethernet in the First Mile OAM frames";
         leaf tunnel {
           type boolean;
           default "false";

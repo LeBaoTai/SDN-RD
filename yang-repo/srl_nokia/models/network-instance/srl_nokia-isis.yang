@@ -57,6 +57,10 @@ module srl_nokia-isis {
   description
     "This yang file models configuration and state of the IS-IS protocol";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -193,27 +197,37 @@ module srl_nokia-isis {
   grouping isis-instance-level-authentication {
     container authentication {
       description
-        "Container for specifying authentication options that apply to the entire IS-IS instance or to an entire level.
+        "Enter the authentication context
+
+         Container for specifying authentication options that apply to the entire IS-IS instance or to an entire level.
 
          The settings in this container only apply to PDUs without an authentication behavior specified at a more granular level.";
       container csnp-authentication {
         description
-          "Container with options to control the authentication of CSNP PDUs";
+          "Enter the csnp-authentication context
+
+           Container with options to control the authentication of CSNP PDUs";
         uses isis-authentication-pdu-options;
       }
       container psnp-authentication {
         description
-          "Container with options to control the authentication of PSNP PDUs";
+          "Enter the psnp-authentication context
+
+           Container with options to control the authentication of PSNP PDUs";
         uses isis-authentication-pdu-options;
       }
       container hello-authentication {
         description
-          "Container with options to control the authentication of Hello PDUs";
+          "Enter the hello-authentication context
+
+           Container with options to control the authentication of Hello PDUs";
         uses isis-authentication-pdu-options;
       }
       container lsp-authentication {
         description
-          "Container with options to control the authentication of Link State PDUs";
+          "Enter the lsp-authentication context
+
+           Container with options to control the authentication of Link State PDUs";
         uses isis-authentication-pdu-options;
       }
       choice auth-type {
@@ -233,7 +247,9 @@ module srl_nokia-isis {
         case direct-key {
           container key {
             description
-              "Container to specify the secret key and crypto algorithm to use for the authentication of PDUs when the behavior is controlled at this level of the configuration hierarchy";
+              "Enter the key context
+
+               Container to specify the secret key and crypto algorithm to use for the authentication of PDUs when the behavior is controlled at this level of the configuration hierarchy";
             leaf crypto-algorithm {
               description
                 "The cryptographic algorithm used with the keying material to secure the messages.";
@@ -255,7 +271,9 @@ module srl_nokia-isis {
   grouping isis-instance-lfa {
     container loopfree-alternate {
       description
-        "Loopfree-alternate related context for the instance.";
+        "Enter the loopfree-alternate context
+
+         Loopfree-alternate related context for the instance.";
       leaf admin-state {
         description
           "When set, loopfree-alternate protection is enabled for
@@ -280,7 +298,9 @@ module srl_nokia-isis {
       }
       container exclude {
         description
-          "Set the exclude context for LFA SPF computation";
+          "Enter the exclude context
+
+           Set the exclude context for LFA SPF computation";
         leaf-list prefix-policy {
           description
             "Policy to exclude prefixes from LFA SPF calculation";
@@ -293,7 +313,9 @@ module srl_nokia-isis {
       }
       container multi-homed-prefix {
         description
-          "Multi-homed-prefix context";
+          "Enter the multi-homed-prefix context
+
+           Multi-homed-prefix context";
         leaf admin-state {
           description
             "When set, multi-homed prefix context is enabled for
@@ -323,7 +345,9 @@ module srl_nokia-isis {
       }
       container remote-lfa {
         description
-          "Remote LFA context";
+          "Enter the remote-lfa context
+
+           Remote LFA context";
         leaf admin-state {
           description
             "When set, remote lfa protection is enabled for the
@@ -347,7 +371,9 @@ module srl_nokia-isis {
         }
         container node-protect {
           description
-            "Node protect context";
+            "Enter the node-protect context
+
+             Node protect context";
           leaf admin-state {
             description
               "When set, the IS-IS instance enables node protection
@@ -375,7 +401,9 @@ module srl_nokia-isis {
       }
       container ti-lfa {
         description
-          "ti-lfa context";
+          "Enter the ti-lfa context
+
+           ti-lfa context";
         leaf admin-state {
           description
             "When set, ti-lfa protection is enabled for the ISIS instance.
@@ -403,7 +431,9 @@ module srl_nokia-isis {
         }
         container node-protect {
           description
-            "Node-protect context";
+            "Enter the node-protect context
+
+             Node-protect context";
           leaf admin-state {
             description
               "When set to enabled, the IS-IS instance
@@ -422,10 +452,14 @@ module srl_nokia-isis {
   grouping isis-interface-authentication {
     container authentication {
       description
-        "Container for specifying authentication options that apply to the IS-IS instance.";
+        "Enter the authentication context
+
+         Container for specifying authentication options that apply to the IS-IS instance.";
       container hello-authentication {
         description
-          "Container with options to control the authentication of Hello PDUs";
+          "Enter the hello-authentication context
+
+           Container with options to control the authentication of Hello PDUs";
         uses isis-authentication-pdu-options;
       }
       choice auth-type {
@@ -445,7 +479,9 @@ module srl_nokia-isis {
         case direct-key {
           container key {
             description
-              "Container to specify the secret key and crypto algorithm to use for the authentication of Hello PDUs on this interface";
+              "Enter the key context
+
+               Container to specify the secret key and crypto algorithm to use for the authentication of Hello PDUs on this interface";
             leaf crypto-algorithm {
               description
                 "The cryptographic algorithm used with the keying material to secure the messages.";
@@ -499,7 +535,9 @@ module srl_nokia-isis {
     }
     container timers {
       description
-        "Container for IS-IS hello timers applicable at interface level";
+        "Enter the timers context
+
+         Container for IS-IS hello timers applicable at interface level";
       leaf hello-interval {
         description
           "ISIS hello-interval value.
@@ -554,7 +592,9 @@ module srl_nokia-isis {
     container statistics {
       config false;
       description
-        "Interface per level statistics";
+        "Enter the statistics context
+
+         Interface per level statistics";
       list pdu {
         config false;
         description
@@ -574,7 +614,9 @@ module srl_nokia-isis {
     container interface-ref {
       if-feature "srl-feat:interface-references";
       description
-        "Reference to a subinterface";
+        "Enter the interface-ref context
+
+         Reference to a subinterface";
       leaf interface {
         type leafref {
           path "/srl_nokia-if:interface/srl_nokia-if:name";
@@ -652,7 +694,7 @@ module srl_nokia-isis {
       container normalization {
         if-feature "srl-feat:isis-delay-normalization";
         description
-          "Enter the delay normalization context";
+          "Enter the normalization context";
         leaf admin-state {
           description
             "Enable or disable delay-normalization";
@@ -711,7 +753,9 @@ module srl_nokia-isis {
     }
     container timers {
       description
-        "Container to specify IS-IS interface-level timers for LSP generation and sequence-number PDUs";
+        "Enter the timers context
+
+         Container to specify IS-IS interface-level timers for LSP generation and sequence-number PDUs";
       leaf csnp-interval {
         description
           "The interval, specified in seconds, at which periodic CSNP packets should be transmitted by the local IS on this interface.";
@@ -763,6 +807,8 @@ module srl_nokia-isis {
           error-message "include-bfd-tlv can be set only if enable-bfd is set to true.";
         }
       }
+      description
+        "Enter the ipv4-unicast context";
     }
     container ipv6-unicast {
       leaf admin-state {
@@ -788,10 +834,14 @@ module srl_nokia-isis {
           error-message "include-bfd-tlv can be set only if enable-bfd is set to true.";
         }
       }
+      description
+        "Enter the ipv6-unicast context";
     }
     container trace-options {
       description
-        "Interface level debug trace options for IS-IS";
+        "Enter the trace-options context
+
+         Interface level debug trace options for IS-IS";
       leaf-list trace {
         description
           "List of tracing options";
@@ -820,14 +870,16 @@ module srl_nokia-isis {
         "Container with interface-specific segment routing options";
       container mpls {
         description
-          "SR-MPLS interface options";
+          "Enter the mpls context
+
+           SR-MPLS interface options";
         container ipv4-node-sid {
           presence "IPv4 Node SID Container.";
           description
             "Configuration of IPv4 node SID.
 
              The (primary) IPv4 address of this interface is advertised as a prefix SID with the node-SID flag set. The associated label is derived from the label index configured in this container.";
-          must "(../../../srl_nokia-isis:interface-name = 'system0.0') or (starts-with(../../../srl_nokia-isis:interface-name, 'lo')) or (../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface = 'system0') or (starts-with(../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface, 'lo'))" {
+          must "(../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface and ((../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface = 'system0') or (starts-with(../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface, 'lo')))) or (not(../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface) and ((../../../srl_nokia-isis:interface-name = 'system0.0') or (starts-with(../../../srl_nokia-isis:interface-name, 'lo'))))" {
             error-message "The node SID can only be associated with the system0.0 or loopback subinterface";
           }
           leaf index {
@@ -849,7 +901,7 @@ module srl_nokia-isis {
             "Configuration of IPv6 node SID.
 
              The (primary) IPv6 address of this interface is advertised as a prefix SID with the node-SID flag set. The associated label is derived from the label index configured in this container.";
-          must "(../../../srl_nokia-isis:interface-name = 'system0.0') or (starts-with(../../../srl_nokia-isis:interface-name, 'lo')) or (../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface = 'system0') or (starts-with(../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface, 'lo'))" {
+          must "(../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface and ((../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface = 'system0') or (starts-with(../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface, 'lo')))) or (not(../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface) and ((../../../srl_nokia-isis:interface-name = 'system0.0') or (starts-with(../../../srl_nokia-isis:interface-name, 'lo'))))" {
             error-message "The node SID can only be associated with the system0.0 or loopback subinterface";
           }
           leaf index {
@@ -871,7 +923,7 @@ module srl_nokia-isis {
           description
             "The IPv4 adjacency SID associated with the interface";
           uses adj-sid-common;
-          must "not((../../../srl_nokia-isis:interface-name = 'system0.0') or (starts-with(../../../srl_nokia-isis:interface-name, 'lo')) or (../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface = 'system0') or (starts-with(../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface, 'lo')))" {
+          must "not((../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface and ((../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface = 'system0') or (starts-with(../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface, 'lo')))) or (not(../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface) and ((../../../srl_nokia-isis:interface-name = 'system0.0') or (starts-with(../../../srl_nokia-isis:interface-name, 'lo')))))" {
             error-message "The adjacency sid cannot be associated with the system0.0 or loopback subinterface";
           }
         }
@@ -881,7 +933,7 @@ module srl_nokia-isis {
           description
             "The IPv6 adjacency SID associated with the interface";
           uses adj-sid-common;
-          must "not((../../../srl_nokia-isis:interface-name = 'system0.0') or (starts-with(../../../srl_nokia-isis:interface-name, 'lo')) or (../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface = 'system0') or (starts-with(../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface, 'lo')))" {
+          must "not((../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface and ((../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface = 'system0') or (starts-with(../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface, 'lo')))) or (not(../../../srl_nokia-isis:interface-ref/srl_nokia-isis:interface) and ((../../../srl_nokia-isis:interface-name = 'system0.0') or (starts-with(../../../srl_nokia-isis:interface-name, 'lo')))))" {
             error-message "The adjacency sid cannot be associated with the system0.0 or loopback subinterface";
           }
         }
@@ -909,6 +961,8 @@ module srl_nokia-isis {
         }
         default "auto";
       }
+      description
+        "Enter the weighted-ecmp context";
     }
     list level {
       description
@@ -925,7 +979,9 @@ module srl_nokia-isis {
   grouping multi-part-tlv {
     container multi-part-tlv {
       description
-        "Enable/disable Multi-Part TLV behavior and view stats.";
+        "Enter the multi-part-tlv context
+
+         Enable/disable Multi-Part TLV behavior and view stats.";
       leaf neighbor {
         description
           "Enable/disable Multi-Part for Neighbor TLVs (e.g., 22 / 222).";
@@ -943,7 +999,9 @@ module srl_nokia-isis {
       container statistics {
         config false;
         description
-          "Per-level, per-TLV counters for Multi-Part handling.";
+          "Enter the statistics context
+
+           Per-level, per-TLV counters for Multi-Part handling.";
         list tlv {
           key "tlv-type level-number";
           description
@@ -1013,6 +1071,10 @@ module srl_nokia-isis {
         error-message "Max ECMP paths cannot be greater than 8 on 7215 A1 platform.";
         srl_nokia-ext:if-feature "srl_nokia-features:platform-7215-a1";
       }
+      must '(. <= 16)' {
+        srl_nokia-ext:if-feature "srl_nokia-features:platform-vsrl";
+        error-message "Max ECMP paths cannot be greater than 16 on the VSRL platform.";
+      }
     }
     container weighted-ecmp {
       if-feature "srl-feat:isis-ucmp";
@@ -1046,6 +1108,8 @@ module srl_nokia-isis {
           srl_nokia-ext:if-feature "srl_nokia-features:fpcx";
         }
       }
+      description
+        "Enter the weighted-ecmp context";
     }
     leaf poi-tlv {
       description
@@ -1105,7 +1169,9 @@ module srl_nokia-isis {
     }
     container attached-bit {
       description
-        "This container provides option for handling the ATTached bit in L1 LSPs";
+        "Enter the attached-bit context
+
+         This container provides option for handling the ATTached bit in L1 LSPs";
       leaf ignore {
         description
           "When set to true, if the attached bit is set on an incoming Level 1 LSP, the local system ignores it.
@@ -1122,7 +1188,9 @@ module srl_nokia-isis {
     }
     container overload {
       description
-        "Specifies isis routing instance behavior regarding overload";
+        "Enter the overload context
+
+         Specifies isis routing instance behavior regarding overload";
       leaf advertise-interlevel {
         description
           "When set to true, L1->L2 and L2->L1 inter-level routes continue to be advertised when the router is in overload.";
@@ -1137,7 +1205,9 @@ module srl_nokia-isis {
       }
       container immediate {
         description
-          "Options for advertising an overloaded state immediately";
+          "Enter the immediate context
+
+           Options for advertising an overloaded state immediately";
         leaf set-bit {
           description
             "When set to true, the Overload bit is set";
@@ -1156,7 +1226,9 @@ module srl_nokia-isis {
       }
       container on-boot {
         description
-          "Options for advertising an overloaded state whenever the IS-IS process restarts";
+          "Enter the on-boot context
+
+           Options for advertising an overloaded state whenever the IS-IS process restarts";
         leaf set-bit {
           description
             "When set to true, the Overload bit is set";
@@ -1256,7 +1328,9 @@ module srl_nokia-isis {
     }
     container timers {
       description
-        "Container for IS-IS timers applicable at the instance level";
+        "Enter the timers context
+
+         Container for IS-IS timers applicable at the instance level";
       leaf lsp-lifetime {
         description
           "Time interval in seconds that the LSPs originated by this IS (router) remain valid in the LSDB before they must be refreshed or else they are purged.";
@@ -1268,7 +1342,9 @@ module srl_nokia-isis {
       }
       container lsp-refresh {
         description
-          "Configure LSP refresh timers.";
+          "Enter the lsp-refresh context
+
+           Configure LSP refresh timers.";
         leaf interval {
           description
             "Time interval in seconds since the last advertisement of its LSP when the router attempts to refresh the LSP.
@@ -1289,7 +1365,9 @@ module srl_nokia-isis {
       }
       container spf {
         description
-          "Container with options for specifying SPF timer values";
+          "Enter the spf context
+
+           Container with options for specifying SPF timer values";
         leaf initial-wait {
           description
             "Time interval between the detection of topology change and when the SPF algorithm runs.
@@ -1326,7 +1404,9 @@ module srl_nokia-isis {
       }
       container lsp-generation {
         description
-          "Container with options for specifying LSP generation timer values";
+          "Enter the lsp-generation context
+
+           Container with options for specifying LSP generation timer values";
         leaf initial-wait {
           description
             "Time interval between the detection of topology change and when the new LSP is generated.
@@ -1364,7 +1444,9 @@ module srl_nokia-isis {
     }
     container trace-options {
       description
-        "Instance level debug trace options for IS-IS";
+        "Enter the trace-options context
+
+         Instance level debug trace options for IS-IS";
       leaf-list trace {
         description
           "List of tracing options";
@@ -1389,7 +1471,9 @@ module srl_nokia-isis {
     }
     container transport {
       description
-        "This container defines ISIS transport.";
+        "Enter the transport context
+
+         This container defines ISIS transport.";
       leaf lsp-mtu-size {
         description
           "Sets the maximum size of LSPs generated by this router";
@@ -1402,17 +1486,33 @@ module srl_nokia-isis {
     }
     container ipv4-unicast {
       description
-        "Enables/disables IPv4 routing in this ISIS instance.";
+        "Enter the ipv4-unicast context
+
+         Enables/disables IPv4 routing in this ISIS instance.";
       leaf admin-state {
         description
           "When set to true, the IS-IS instance supports IPv4 unicast routing";
         type srl_nokia-comm:admin-state;
         default "enable";
       }
+      leaf suppress-interface-ip {
+        if-feature "srl-feat:isis-advertise-passive-only";
+        description
+          "Suppress advertisement of IPv4 interface prefixes
+
+           When set to non-passive, IS-IS must suppress LSP PDU advertisement of IPv4 prefixes that correspond to any IS-IS interface not configured as passive.";
+        type enumeration {
+          enum none;
+          enum non-passive;
+        }
+        default "none";
+      }
     }
     container ipv6-unicast {
       description
-        "Enables/disables IPv6 routing in this ISIS instance.";
+        "Enter the ipv6-unicast context
+
+         Enables/disables IPv6 routing in this ISIS instance.";
       leaf admin-state {
         description
           "When set to true, the IS-IS instance supports IPv6 unicast routing";
@@ -1429,10 +1529,24 @@ module srl_nokia-isis {
           error-message "multi-topology can be set only if ipv6 is enabled.";
         }
       }
+      leaf suppress-interface-ip {
+        if-feature "srl-feat:isis-advertise-passive-only";
+        description
+          "Suppress advertisement of IPv6 interface prefixes
+
+           When set to non-passive, IS-IS must suppress LSP PDU advertisement of IPv6 prefixes that correspond to any IS-IS interface not configured as passive.";
+        type enumeration {
+          enum none;
+          enum non-passive;
+        }
+        default "none";
+      }
     }
     container graceful-restart {
       description
-        "Container for options related to IS-IS graceful restart";
+        "Enter the graceful-restart context
+
+         Container for options related to IS-IS graceful restart";
       reference
         "RFC 5306: Restart Signaling for IS-IS.";
       leaf helper-mode {
@@ -1456,7 +1570,9 @@ module srl_nokia-isis {
     }
     container auto-cost {
       description
-        "Container for options related to automated and derived interface metrics";
+        "Enter the auto-cost context
+
+         Container for options related to automated and derived interface metrics";
       leaf reference-bandwidth {
         description
           "Configures the reference bandwidth that provides the basis for interface metrics based on link bandwidth.
@@ -1489,7 +1605,9 @@ module srl_nokia-isis {
   grouping inst-traffic-engineering-config {
     container traffic-engineering {
       description
-        "container for traffic engineering information";
+        "Enter the traffic-engineering context
+
+         container for traffic engineering information";
       uses srl_nokia-te:igp-instance-te-advertisement {
         if-feature "srl-feat:traffic-engineering";
       }
@@ -1552,7 +1670,9 @@ module srl_nokia-isis {
     }
     container route-preference {
       description
-        "Specify the route preference (admin distance) for IP routes asssociated with the level";
+        "Enter the route-preference context
+
+         Specify the route preference (admin distance) for IP routes asssociated with the level";
       leaf external {
         description
           "Specify the route preference of external routes carried in this level.
@@ -1574,7 +1694,9 @@ module srl_nokia-isis {
     }
     container trace-options {
       description
-        "Level debug trace options for IS-IS";
+        "Enter the trace-options context
+
+         Level debug trace options for IS-IS";
       leaf-list trace {
         description
           "List of tracing options";
@@ -1596,7 +1718,9 @@ module srl_nokia-isis {
     container statistics {
       config false;
       description
-        "Per level statistics in an ISIS instance";
+        "Enter the statistics context
+
+         Per level statistics in an ISIS instance";
       leaf authentication-failures {
         description
           "Number of times an IS-IS control PDU associated with this level had the correct auth type but failed to pass authentication validation";
@@ -1668,10 +1792,14 @@ module srl_nokia-isis {
   grouping isis-interlevel-import-export-config {
     container inter-level-propagation-policies {
       description
-        "Container with options to control the propagation of prefixes between levels";
+        "Enter the inter-level-propagation-policies context
+
+         Container with options to control the propagation of prefixes between levels";
       container level1-to-level2 {
         description
-          "Container with options to control the propagation of prefixes from level 1 to level 2.
+          "Enter the level1-to-level2 context
+
+           Container with options to control the propagation of prefixes from level 1 to level 2.
 
            By default all L1 prefixes are propagated without summarizarion into L2.";
         list summary-address {
@@ -1724,7 +1852,9 @@ module srl_nokia-isis {
     container entropy-label {
       if-feature "srl-feat:entropy-bgp-sr";
       description
-        "Options for configuring control and data plane aspects of entropy label";
+        "Enter the entropy-label context
+
+         Options for configuring control and data plane aspects of entropy label";
       leaf advertise-capability {
         description
           "Advertise the Entropy Label Capability";
@@ -1747,7 +1877,9 @@ module srl_nokia-isis {
     container maximum-sid-depth {
       if-feature "srl-feat:traffic-engineering";
       description
-        "Container to configure advertise multiple types of Maximum SID Depths (MSDs).
+        "Enter the maximum-sid-depth context
+
+         Container to configure advertise multiple types of Maximum SID Depths (MSDs).
 
          maximum-sid-depth advertisements allow entities (e.g., centralized controllers) to
          determine whether a particular Segment ID (SID) stack can be
@@ -1782,7 +1914,9 @@ module srl_nokia-isis {
     container segment-routing {
       if-feature "srl-feat:segment-routing";
       description
-        "Container used to configure segment-routing";
+        "Enter the segment-routing context
+
+         Container used to configure segment-routing";
       container mpls {
         presence "Enable SR-MPLS extensions in IS-IS";
         must "../../../../../srl_nokia-netinst:type = 'srl_nokia-netinst:default'" {
@@ -1804,6 +1938,8 @@ module srl_nokia-isis {
               error-message "Dynamic adj sid-s can be enabled on all interfaces only when the Dynamic SRLB is configured.";
             }
           }
+          description
+            "Enter the dynamic-adjacency-sids context";
         }
         uses isis-inst-entropy-label;
         uses isis-inst-maximum-segment-depth;
@@ -1889,7 +2025,9 @@ module srl_nokia-isis {
           if-feature "srl-feat:segment-routing-isis-lsp-stats";
           config false;
           description
-            "SID statistics";
+            "Enter the sid-statistics context
+
+             SID statistics";
           list label {
             key "label";
             description
@@ -2105,7 +2243,9 @@ module srl_nokia-isis {
     container statistics {
       config false;
       description
-        "Instance level statistics";
+        "Enter the statistics context
+
+         Instance level statistics";
       leaf spf-runs {
         config false;
         description
@@ -2167,7 +2307,9 @@ module srl_nokia-isis {
     container restarting-neighbor-list {
       config false;
       description
-        "The list of neighbors that have restarted recently and that are currently being helped.";
+        "Enter the restarting-neighbor-list context
+
+         The list of neighbors that have restarted recently and that are currently being helped.";
       list neighbor {
         description
           "The list of neighbors that have restarted recently and that are currently being helped.";
@@ -2193,7 +2335,9 @@ module srl_nokia-isis {
   grouping neighbor-sub-tlvs {
     container sub-tlvs {
       description
-        "SubTLVs of TLV 22 and TLV 222";
+        "Enter the sub-tlvs context
+
+         SubTLVs of TLV 22 and TLV 222";
       leaf admin-group {
         if-feature "srl-feat:traffic-engineering";
         description
@@ -2230,7 +2374,9 @@ module srl_nokia-isis {
       container link-msd {
         if-feature "srl-feat:segment-routing";
         description
-          "The maximum segment depth of the link to the neighbor. Sub-TLV = 15.";
+          "Enter the link-msd context
+
+           The maximum segment depth of the link to the neighbor. Sub-TLV = 15.";
         list msd-info {
           description
             "List of MSD entries";
@@ -2259,7 +2405,9 @@ module srl_nokia-isis {
       container application-specific-link-attributes {
         if-feature "srl-feat:traffic-engineering";
         description
-          "Application Specific Link Attributes. Sub-TLV = 16.";
+          "Enter the application-specific-link-attributes context
+
+           Application Specific Link Attributes. Sub-TLV = 16.";
         reference
           "RFC8919";
         leaf legacy {
@@ -2303,7 +2451,9 @@ module srl_nokia-isis {
           }
           container min-max-unidirectional-link-delay {
             description
-              "The minimum and maximum delay between two directly connected IS-IS neighbors.";
+              "Enter the min-max-unidirectional-link-delay context
+
+               The minimum and maximum delay between two directly connected IS-IS neighbors.";
             leaf anomolous {
               description
                 "If the A bit is cleared, the values represent steady-state link performance.";
@@ -2322,6 +2472,8 @@ module srl_nokia-isis {
               units "microseconds";
             }
           }
+          description
+            "Enter the sub-sub-tlvs context";
         }
       }
       leaf te-default-metric {
@@ -2432,7 +2584,9 @@ module srl_nokia-isis {
       container min-max-unidirectional-link-delay {
         if-feature "srl-feat:traffic-engineering";
         description
-          "The minimum and maximum delay between two directly connected IS-IS neighbors. Sub-TLV = 34.";
+          "Enter the min-max-unidirectional-link-delay context
+
+           The minimum and maximum delay between two directly connected IS-IS neighbors. Sub-TLV = 34.";
         leaf anomolous {
           description
             "If the A bit is cleared, the values represent steady-state link performance.";
@@ -2457,7 +2611,9 @@ module srl_nokia-isis {
   grouping prefix-sub-tlvs {
     container sub-tlvs {
       description
-        "SubTLVs of TLV 135, TLV 235, TLV 236 and TLV 237";
+        "Enter the sub-tlvs context
+
+         SubTLVs of TLV 135, TLV 235, TLV 236 and TLV 237";
       leaf-list route-tag-32bit {
         description
           "List of 32-bit administrative tag values associated with the IPv4 prefix.";
@@ -2473,7 +2629,9 @@ module srl_nokia-isis {
       container segment-routing-prefix-sid {
         if-feature "srl-feat:segment-routing";
         description
-          "Carries a segment routing prefix SID";
+          "Enter the segment-routing-prefix-sid context
+
+           Carries a segment routing prefix SID";
         leaf re-advertised {
           description
             "If set the prefix to which this Prefix-SID is attached has been propagated by the router from either another level or from another protocol.";
@@ -2521,7 +2679,9 @@ module srl_nokia-isis {
       container prefix-attribute-flags {
         if-feature "srl-feat:traffic-engineering";
         description
-          "This sub-TLV supports the advertisement of additional flags associated with a given prefix advertisement.";
+          "Enter the prefix-attribute-flags context
+
+           This sub-TLV supports the advertisement of additional flags associated with a given prefix advertisement.";
         leaf external-prefix {
           description
             "Set if the prefix has been redistributed from another protocol (or another IS-IS instance).";
@@ -2578,6 +2738,49 @@ module srl_nokia-isis {
         "The remaining holding time for this adjacency-sid.";
       type uint16;
       units "seconds";
+    }
+    list adjacency-sid {
+      description
+        "List of adjacency Segment IDs.";
+      config false;
+      key "value";
+      leaf value {
+        description
+          "Value of the Adj-SID.";
+        type uint32;
+      }
+      leaf address-family {
+        description
+          "Address-family associated with the segment ID.";
+        type srl_nokia-isis-types:isis-address-family;
+      }
+      leaf backup {
+        description
+          "Backup flag. When set, the Adj-SID refers to an adjacency being protected (e.g.: using IPFRR or MPLS-FRR).";
+        type boolean;
+      }
+      leaf local {
+        description
+          "Local flag. When set, the value carried by the SID has local significance. By default the flag is SET.";
+        type boolean;
+      }
+      leaf persistent {
+        description
+          "Persistent Flag. When set, the P-Flag indicates that the Adj-SID is persistently allocated.
+
+           i.e., the Adj-SID value remains consistent across router restart and/or interface flap.";
+        type boolean;
+      }
+      leaf set {
+        description
+          "Set flag. When set, the S-Flag indicates that the Adj-SID refers to a set of adjacencies.";
+        type boolean;
+      }
+      leaf weight {
+        description
+          "Weight associated with the adjacency SID.";
+        type uint8;
+      }
     }
     leaf last-up-down-transition {
       description
@@ -2682,7 +2885,9 @@ module srl_nokia-isis {
     container statistics {
       config false;
       description
-        "Statistics associated with this IS-IS interface.";
+        "Enter the statistics context
+
+         Statistics associated with this IS-IS interface.";
       leaf adjacency-changes {
         description
           "Number of times an adjacency state change has occurred on this circuit(summed across all adjacencies).";
@@ -2742,7 +2947,9 @@ module srl_nokia-isis {
   grouping isis-nsf-config {
     container non-stop-forwarding {
       description
-        "Container to configure non-stop-forwarding";
+        "Enter the non-stop-forwarding context
+
+         Container to configure non-stop-forwarding";
       leaf admin-state {
         description
           "Used to administratively enable or disable the IS-IS non-stop forwarding functionality.";
@@ -2811,7 +3018,9 @@ module srl_nokia-isis {
         }
         container hostnames {
           description
-            "Container to list hostnames along with their associated system ID";
+            "Enter the hostnames context
+
+             Container to list hostnames along with their associated system ID";
           config false;
           list system-id {
             description
@@ -2883,7 +3092,9 @@ module srl_nokia-isis {
     container sid-database {
       config false;
       description
-        "Database of all prefix SIDs associated with the IS-IS instance.";
+        "Enter the sid-database context
+
+         Database of all prefix SIDs associated with the IS-IS instance.";
       list prefix-sid {
         description
           "List of prefix SIDs";
@@ -2955,7 +3166,9 @@ module srl_nokia-isis {
           }
           container flags {
             description
-              "Flags that characterize the prefix SID";
+              "Enter the flags context
+
+               Flags that characterize the prefix SID";
             leaf re-advertised {
               description
                 "If set the prefix to which this Prefix-SID is attached was propagated from another level or from another protocol.";
@@ -2992,7 +3205,9 @@ module srl_nokia-isis {
       "Grouping for micro-loop-avoidance functionality";
     container micro-loop-avoidance {
       description
-        "Enable the micro-loop-avoidance context";
+        "Enter the micro-loop-avoidance context
+
+         Enable the micro-loop-avoidance context";
       leaf admin-state {
         description
           "When set, micro-loop-avoidance is enabled for
@@ -3015,7 +3230,9 @@ module srl_nokia-isis {
       container remaining-fib-delay {
         config false;
         description
-          "Remaining FIB delay before programming new primary next-hops.
+          "Enter the remaining-fib-delay context
+
+           Remaining FIB delay before programming new primary next-hops.
            specified per topology (e.g., mt0 and mt2).";
         leaf mt0 {
           config false;
@@ -3043,7 +3260,9 @@ module srl_nokia-isis {
     container topology {
       config false;
       description
-        "This context enters IS-IS topology state information.";
+        "Enter the topology context
+
+         This context enters IS-IS topology state information.";
       list path {
         key "topology isis-level system-id";
         description

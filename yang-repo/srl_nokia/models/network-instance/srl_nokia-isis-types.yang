@@ -11,6 +11,10 @@ module srl_nokia-isis-types {
   description
     "This yang file contains common ISIS types and identities";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -87,6 +91,7 @@ module srl_nokia-isis-types {
       "This type defines ISIS wide metric.";
     type uint32 {
       range "0..16777215";
+      // (Note)(20240716) Actual yang has range 0..16777215 and is to be fixed by R&D
     }
   }
 
@@ -398,5 +403,20 @@ module srl_nokia-isis-types {
     description
       "This type defines interface circuit ID.";
     type uint32;
+  }
+
+  typedef isis-address-family {
+    description
+      "This type defines the type of ISIS address family";
+    type enumeration {
+      enum ipv4 {
+        description
+          "IPv4 Address family.";
+      }
+      enum ipv6 {
+        description
+          "IPv6 Address family.";
+      }
+    }
   }
 }

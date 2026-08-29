@@ -36,6 +36,10 @@ module srl_nokia-interfaces-bridge-table-stp {
   description
     "This yang file provides Stp configuration under interface's bridge table.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -53,7 +57,9 @@ module srl_nokia-interfaces-bridge-table-stp {
     container statistics {
       config false;
       description
-        "Packet transmition statistics";
+        "Enter the statistics context
+
+         Packet transmition statistics";
       leaf bad-bpdus-received {
         type srl_nokia-comm:zero-based-counter64;
         description
@@ -185,10 +191,10 @@ module srl_nokia-interfaces-bridge-table-stp {
         "Configuration and state of the STP protocol";
       presence "Configure Interface STP";
       must 'not(/srl_nokia-if:interface[srl_nokia-if:name=current()/../../../srl_nokia-if:name]/srl_nokia-if:ethernet/srl_nokia-if:l2cp-transparency/srl_nokia-if-l2cp:tunnel-all-l2cp)' {
-        error-message "STP cannot be enabled on interfaces that are configured with tunnel-all-l2cp";
+        error-message "STP and tunnel-all-l2cp cannot be enabled on the same interface";
       }
       must 'not(/srl_nokia-if:interface[srl_nokia-if:name=current()/../../../srl_nokia-if:name]/srl_nokia-if:ethernet/srl_nokia-if:l2cp-transparency/srl_nokia-if-l2cp:xstp/srl_nokia-if-l2cp:tunnel)' {
-        error-message "STP cannot be enabled on interfaces that are configured with xSTP tunnel";
+        error-message "STP and xSTP tunnel cannot be enabled on the same interface";
       }
       must 'not(../../srl_nokia-if-vlan:vlan/srl_nokia-if-vlan:encap/srl_nokia-if-vlan:single-tagged-range)' {
         error-message "STP cannot be enabled on sub-interface with encap vlan-range enabled";
@@ -220,6 +226,8 @@ module srl_nokia-interfaces-bridge-table-stp {
       "Top level grouping for state info of mgmt-stp managed interface";
     container managed-stp {
       uses managed-interface-stp-state;
+      description
+        "Enter the managed-stp context";
     }
   }
 

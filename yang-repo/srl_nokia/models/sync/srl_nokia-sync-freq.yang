@@ -22,6 +22,10 @@ module srl_nokia-sync-freq {
     "Nokia SR Linux Support
      Web: <http://www.nokia.com>";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-10-31 {
     description
       "SRLinux 24.10.1";
@@ -90,7 +94,9 @@ module srl_nokia-sync-freq {
       }
       container source {
         description
-          "Source for this input frequency reference
+          "Enter the source context
+
+           Source for this input frequency reference
 
            This shall be either a leafref to an interface or an application.  The leafref must point to an existing physical ethernet interface.";
         choice interface-or-other {

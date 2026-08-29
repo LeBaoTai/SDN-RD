@@ -11,6 +11,10 @@ module srl_nokia-lldp-types {
   description
     "This module defines types related to the LLDP protocol model.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -245,6 +249,35 @@ module srl_nokia-lldp-types {
       "Priority Flow Control";
     reference
       "IEEE Std 802.1Q Clause 38";
+  }
+
+  identity CSIG_CAPABALE {
+    description
+      "A base identity which describes the CSIG Capabilities";
+  }
+
+  identity CSIG_NO {
+    base CSIG_CAPABALE;
+    description
+      "CSIG not available on this port 0x0";
+  }
+
+  identity CSIG_COMPACT_ONLY {
+    base CSIG_CAPABALE;
+    description
+      "Only CSIG compact available on this port 0x1";
+  }
+
+  identity CSIG_WIDE_ONLY {
+    base CSIG_CAPABALE;
+    description
+      "ONLY CSIG wide available on this port 0x2";
+  }
+
+  identity CSIG_BOTH {
+    base CSIG_CAPABALE;
+    description
+      "Both CSIG wide and CSIG compact available on this port 0x3";
   }
 
   identity LINK_AGGREGATION_PORT_TYPE {

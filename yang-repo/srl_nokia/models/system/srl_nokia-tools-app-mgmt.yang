@@ -15,6 +15,10 @@ module srl_nokia-tools-app-mgmt {
   description
     "Model for operational commands for app-management.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2022-03-31 {
     description
       "SRLinux 22.3.1";
@@ -27,7 +31,9 @@ module srl_nokia-tools-app-mgmt {
   grouping tools-app-mgmt-stats-top {
     container statistics {
       description
-        "Top-level grouping of operational commands related to application statistics";
+        "Enter the statistics context
+
+         Top-level grouping of operational commands related to application statistics";
       leaf clear {
         type empty;
         description

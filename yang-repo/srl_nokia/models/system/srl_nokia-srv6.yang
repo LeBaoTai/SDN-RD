@@ -27,6 +27,10 @@ module srl_nokia-srv6 {
   description
     "This YANG file covers the non-protocol specific segment routing v6 enhancements to SRL";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -273,9 +277,9 @@ module srl_nokia-srv6 {
               default "psp";
               description
                 "Segment Routing Header (SRH) mode";
-              must '. = "usp-usd"' {
+              must '. = "psp-usp-usd"' {
                 srl_nokia-ext:if-feature "srl_nokia-features:srv6-usid-basic";
-                error-message "Only support usp-usd on this platform.";
+                error-message "Only support psp-usp-usd on this platform.";
               }
             }
             leaf value {

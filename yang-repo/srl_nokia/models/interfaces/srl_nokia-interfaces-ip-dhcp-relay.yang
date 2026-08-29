@@ -24,6 +24,10 @@ module srl_nokia-interfaces-ip-dhcp-relay {
   description
     "Model for managing DHCP relay and DHCPv6 relay on IP and IRB subinterfaces";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -170,7 +174,7 @@ module srl_nokia-interfaces-ip-dhcp-relay {
         type boolean;
         default "false";
         description
-          "When this is set, the format of the option 82 suboption 1 circuit-id will be changed to indicate the L2 interface the packet came from, format=system_name/MAC_VRF_instance/L2-interface_id:vlan_id";
+          "When this is set, the format of the option 82 suboption 1 circuit-id will be changed to indicate the L2 interface the packet came from, format=system_name/MAC_VRF_instance_name/L2_interface_name/sub_interface_id:vlan_id";
       }
       leaf-list server {
         type hostv4;
@@ -213,7 +217,9 @@ module srl_nokia-interfaces-ip-dhcp-relay {
       }
       container trace-options {
         description
-          "Container for tracing DHCPv4 relay operations on the subinterface";
+          "Enter the trace-options context
+
+           Container for tracing DHCPv4 relay operations on the subinterface";
         leaf-list trace {
           type enumeration {
             enum messages {
@@ -228,6 +234,8 @@ module srl_nokia-interfaces-ip-dhcp-relay {
       container dns-resolution {
         config false;
         uses dhcp-relay-dns-resolution;
+        description
+          "Enter the dns-resolution context";
       }
       container statistics {
         config false;
@@ -261,6 +269,8 @@ module srl_nokia-interfaces-ip-dhcp-relay {
           description
             "Total discarded dhcp packets from DHCP server(s) towards dhcp client(s)";
         }
+        description
+          "Enter the statistics context";
       }
     }
   }
@@ -314,7 +324,7 @@ module srl_nokia-interfaces-ip-dhcp-relay {
         type boolean;
         default "false";
         description
-          "When this is set, the format of the option 18 interface-id will be changed to indicate the L2 interface the packet came from, format=system_name/MAC_VRF_instance/L2-interface_id:vlan_id";
+          "When this is set, the format of the option 18 interface-id will be changed to indicate the L2 interface the packet came from, format=system_name/MAC_VRF_instance_name/L2_interface_name/sub_interface_id:vlan_id";
       }
       leaf-list server {
         type hostv6;
@@ -341,7 +351,9 @@ module srl_nokia-interfaces-ip-dhcp-relay {
       }
       container trace-options {
         description
-          "Container for tracing DHCPv6 relay operations on the subinterface";
+          "Enter the trace-options context
+
+           Container for tracing DHCPv6 relay operations on the subinterface";
         leaf-list trace {
           type enumeration {
             enum messages {
@@ -356,6 +368,8 @@ module srl_nokia-interfaces-ip-dhcp-relay {
       container dns-resolution {
         config false;
         uses dhcp-relay-dns-resolution;
+        description
+          "Enter the dns-resolution context";
       }
       container statistics {
         config false;
@@ -389,6 +403,8 @@ module srl_nokia-interfaces-ip-dhcp-relay {
           description
             "Total discarded dhcp packets from DHCP server(s) towards dhcp client(s)";
         }
+        description
+          "Enter the statistics context";
       }
     }
   }

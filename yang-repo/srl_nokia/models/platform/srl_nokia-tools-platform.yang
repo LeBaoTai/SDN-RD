@@ -18,6 +18,10 @@ module srl_nokia-tools-platform {
   description
     "Model for operational commands for platform.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -70,7 +74,9 @@ module srl_nokia-tools-platform {
   grouping locator-tools {
     container locator {
       description
-        "Operational commands for the locator LED";
+        "Enter the locator context
+
+         Operational commands for the locator LED";
       container enable {
         presence "Activate the locator LED for this component";
         description
@@ -176,7 +182,9 @@ module srl_nokia-tools-platform {
     container disk-encryption {
       if-feature "srl-feat:disk-encryption";
       description
-        "Operational commands related to Disk Encryption";
+        "Enter the disk-encryption context
+
+         Operational commands related to Disk Encryption";
       list control {
         description
           "Operational commands related to Disk Encryption for control modules";
@@ -211,7 +219,9 @@ module srl_nokia-tools-platform {
   grouping tools-platform-top {
     container chassis {
       description
-        "Operational commands related to the chassis";
+        "Enter the chassis context
+
+         Operational commands related to the chassis";
       container reboot {
         presence "Trigger a reboot of the chassis";
         description
@@ -322,14 +332,18 @@ module srl_nokia-tools-platform {
     container trust {
       if-feature "srl-feat:secure-boot or srl-feat:measured-boot or srl-feat:disk-encryption";
       description
-        "Operational commands related to Platform Trust";
+        "Enter the trust context
+
+         Operational commands related to Platform Trust";
       uses disk-encryption;
     }
   }
 
   container platform {
     description
-      "Top-level container for platform operational commands";
+      "Enter the platform context
+
+       Top-level container for platform operational commands";
     uses tools-platform-top;
   }
 }

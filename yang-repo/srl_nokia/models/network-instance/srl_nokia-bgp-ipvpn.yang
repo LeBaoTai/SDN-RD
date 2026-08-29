@@ -45,6 +45,10 @@ module srl_nokia-bgp-ipvpn {
   description
     "This yang file models configuration and state of the bgp-ipvpn protocol";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -83,7 +87,9 @@ module srl_nokia-bgp-ipvpn {
       "Options for controlling next-hop resolution procedures for VPN families";
     container next-hop-resolution {
       description
-        "Options related to the resolution of IPv4 or IPv6 BGP next-hops to Tunnels";
+        "Enter the next-hop-resolution context
+
+         Options related to the resolution of IPv4 or IPv6 BGP next-hops to Tunnels";
       leaf-list allowed-tunnel-types {
         min-elements 1;
         type identityref {
@@ -104,7 +110,9 @@ module srl_nokia-bgp-ipvpn {
     container internal-tags {
       if-feature "srl-feat:internal-tags and srl-feat:ipvpn-route-internal-tags";
       description
-        "Configuration and state of internal tags";
+        "Enter the internal-tags context
+
+         Configuration and state of internal tags";
       leaf-list set-tag-set {
         max-elements 1;
         type leafref {
@@ -168,9 +176,6 @@ module srl_nokia-bgp-ipvpn {
           "D-PATH Domain ID of the received IPVPN route that is added to the D-PATH Attribute when the route is readvertised";
       }
       uses route-internal-tags;
-      uses srl-bgp:bgp-group-based-policy {
-        if-feature "srl-feat:bgp-group-based-policy";
-      }
       leaf oper-state {
         config false;
         srl_nokia-ext:show-importance "high";

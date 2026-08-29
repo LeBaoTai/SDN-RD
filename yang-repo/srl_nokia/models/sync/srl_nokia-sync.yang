@@ -25,6 +25,10 @@ module srl_nokia-sync {
     "Nokia SR Linux Support
      Web: <http://www.nokia.com>";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-03-31 {
     description
       "SRLinux 24.3.1";
@@ -58,23 +62,35 @@ module srl_nokia-sync {
     container sync {
       if-feature "srl_nokia-feat:sync";
       description
-        "Context to configure sync parameters and report sessions state";
+        "Enter the sync context
+
+         Context to configure sync parameters and report sessions state";
       container freq-references {
         uses srl_nokia-sync-freq:freq-references-top;
+        description
+          "Enter the freq-references context";
       }
       container freq-clock {
         uses srl_nokia-sync-freq:freq-clock-top;
+        description
+          "Enter the freq-clock context";
       }
       container ptp {
         uses srl_nokia-sync-ptp:ptp-instance-top;
+        description
+          "Enter the ptp context";
       }
       container gnss {
         if-feature "srl_nokia-feat:sync-gnss";
         uses srl_nokia-sync-interfaces:gnss-interface-top;
+        description
+          "Enter the gnss context";
       }
       container one-pps {
         if-feature "srl_nokia-feat:sync-one-pps";
         uses srl_nokia-sync-interfaces:one-pps-interface-top;
+        description
+          "Enter the one-pps context";
       }
     }
   }

@@ -48,6 +48,10 @@ module srl_nokia-ospf {
   description
     "This yang file models configuration and state of the OSPF protocol";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -112,7 +116,9 @@ module srl_nokia-ospf {
   grouping inst-traffic-engineering-config {
     container traffic-engineering {
       description
-        "container for traffic engineering information";
+        "Enter the traffic-engineering context
+
+         container for traffic engineering information";
       uses srl_nokia-te:igp-instance-te-advertisement {
         if-feature "srl-feat:traffic-engineering-ospf";
       }
@@ -180,6 +186,8 @@ module srl_nokia-ospf {
           "the value of num-restarts indicates the number of times the neighbor has attempted restart.";
         type yang:counter32;
       }
+      description
+        "Enter the statistics context";
     }
   }
 
@@ -489,7 +497,9 @@ module srl_nokia-ospf {
         "Enter the trace-options context";
       container trace {
         description
-          "Tracing parameter flags";
+          "Enter the trace context
+
+           Tracing parameter flags";
         uses ospf-adjacencies-tracing-config;
         uses ospf-interfaces-tracing-config;
         uses ospf-packet-tracing-config;
@@ -612,7 +622,9 @@ module srl_nokia-ospf {
     }
     container authentication {
       description
-        "Container with authentication options that apply to all peers in this peer-group";
+        "Enter the authentication context
+
+         Container with authentication options that apply to all peers in this peer-group";
       leaf keychain {
         description
           "Reference to a keychain. The keychain type must be ospf";
@@ -631,7 +643,9 @@ module srl_nokia-ospf {
     container failure-detection {
       if-feature "srl-feat:bfd";
       description
-        "Options related to methods of detecting BGP session failure";
+        "Enter the failure-detection context
+
+         Options related to methods of detecting BGP session failure";
       leaf enable-bfd {
         description
           "Enables the use of BFD for livliness detection";
@@ -735,7 +749,9 @@ module srl_nokia-ospf {
     container lsa-totals {
       config false;
       description
-        "The number of LSAs of each type in this interface's database";
+        "Enter the lsa-totals context
+
+         The number of LSAs of each type in this interface's database";
       leaf link-opaque-lsa {
         description
           "The number of link opaque LSAs in this interface's database.";
@@ -763,7 +779,9 @@ module srl_nokia-ospf {
     container packets {
       config false;
       description
-        "Packet counters";
+        "Enter the packets context
+
+         Packet counters";
       leaf tx-total {
         config false;
         description
@@ -852,7 +870,9 @@ module srl_nokia-ospf {
     container bad-packets {
       config false;
       description
-        "Bad packets counters";
+        "Enter the bad-packets context
+
+         Bad packets counters";
       leaf bad-version {
         config false;
         description
@@ -1225,7 +1245,9 @@ module srl_nokia-ospf {
         "Enter the trace-options context";
       container trace {
         description
-          "Tracing parameter flags";
+          "Enter the trace context
+
+           Tracing parameter flags";
         uses ospf-adjacencies-tracing-config;
         uses ospf-graceful-restart-tracing-config;
         uses ospf-interfaces-tracing-config;
@@ -1309,6 +1331,10 @@ module srl_nokia-ospf {
         srl_nokia-ext:if-feature "srl_nokia-features:platform-7215-a1";
         error-message "ECMP value cannot be greater than 8 on the 7215 IXS-A1 platform.";
       }
+      must '(. <= 16)' {
+        srl_nokia-ext:if-feature "srl_nokia-features:platform-vsrl";
+        error-message "ECMP value cannot be greater than 16 on the VSRL platform.";
+      }
     }
     leaf advertise-router-capability {
       description
@@ -1338,7 +1364,13 @@ module srl_nokia-ospf {
     container asbr {
       presence "Configure the router as an ASBR (Autonomous System Boundary Router)";
       description
-        "Configure the router as an ASBR (Autonomous System Boundary Router)";
+        "Configure the router as an ASBR (Autonomous System Boundary Router).
+
+         On ip-vrf network-instances the OSPF instance is always an ASBR
+         regardless of whether this container is configured; presence and absence
+         have no effect on the effective AS-border-router status, which is
+         reported via the read-only as-border-router state leaf. Sub-leaves such
+         as trace-path remain effective when configured.";
       leaf trace-path {
         type union {
           type int32 {
@@ -1404,7 +1436,9 @@ module srl_nokia-ospf {
     }
     container graceful-restart {
       description
-        "Container for options related to OSPF graceful restart";
+        "Enter the graceful-restart context
+
+         Container for options related to OSPF graceful restart";
       leaf helper-mode {
         description
           "Enable or disable the OSPF graceful restart helper function
@@ -1492,7 +1526,11 @@ module srl_nokia-ospf {
           type srl_nokia-comm:percentage;
           default "0";
         }
+        description
+          "Enter the rtr-adv-lsa-limit context";
       }
+      description
+        "Enter the overload context";
     }
     uses ospf-global-timers;
     uses ospf-global-trace-options;
@@ -1508,7 +1546,9 @@ module srl_nokia-ospf {
     container lsa-totals {
       config false;
       description
-        "The number of LSAs of each type in this instance's AS database";
+        "Enter the lsa-totals context
+
+         The number of LSAs of each type in this instance's AS database";
       leaf as-external-lsa {
         description
           "The number of AS External LSAs in this instance's AS database.";
@@ -1734,7 +1774,9 @@ module srl_nokia-ospf {
     container spf {
       config false;
       description
-        "SPF related information";
+        "Enter the spf context
+
+         SPF related information";
       leaf full-spf-runs {
         config false;
         description
@@ -1795,7 +1837,9 @@ module srl_nokia-ospf {
       container last-full-spf {
         config false;
         description
-          "Information about the last full SPF run";
+          "Enter the last-full-spf context
+
+           Information about the last full SPF run";
         leaf run-time {
           config false;
           description
@@ -1851,7 +1895,9 @@ module srl_nokia-ospf {
       container last-ext-spf {
         config false;
         description
-          "Information about the last external SPF run";
+          "Enter the last-ext-spf context
+
+           Information about the last external SPF run";
         leaf run-time {
           config false;
           description
@@ -1905,7 +1951,9 @@ module srl_nokia-ospf {
     container lsa-totals {
       config false;
       description
-        "The number of LSAs of each type in this area's database";
+        "Enter the lsa-totals context
+
+         The number of LSAs of each type in this area's database";
       leaf router-lsa {
         config false;
         description
@@ -2024,7 +2072,9 @@ module srl_nokia-ospf {
     container lsa-filter-totals {
       config false;
       description
-        "The number of LSAs not sent due to area policy.";
+        "Enter the lsa-filter-totals context
+
+         The number of LSAs not sent due to area policy.";
       leaf export-filtered {
         config false;
         description
@@ -2043,7 +2093,9 @@ module srl_nokia-ospf {
   grouping ospf-instance-lfa {
     container loopfree-alternate {
       description
-        "Loopfree-alternate related context for the instance.";
+        "Enter the loopfree-alternate context
+
+         Loopfree-alternate related context for the instance.";
       leaf admin-state {
         description
           "When set, loopfree-alternate protection is enabled for
@@ -2071,7 +2123,9 @@ module srl_nokia-ospf {
       }
       container exclude {
         description
-          "Set the exclude context for LFA SPF computation";
+          "Enter the exclude context
+
+           Set the exclude context for LFA SPF computation";
         leaf-list prefix-policy {
           description
             "Policy to exclude prefixes from LFA SPF calculation";
@@ -2085,7 +2139,9 @@ module srl_nokia-ospf {
       container remote-lfa {
         if-feature "srl-feat:ldp-remote-lfa-ospf";
         description
-          "Remote LFA context";
+          "Enter the remote-lfa context
+
+           Remote LFA context";
         leaf admin-state {
           description
             "When set, remote lfa protection is enabled for the
@@ -2115,7 +2171,9 @@ module srl_nokia-ospf {
         }
         container node-protect {
           description
-            "Node protect context";
+            "Enter the node-protect context
+
+             Node protect context";
           leaf admin-state {
             description
               "When set, the OSPF instance enables node protection
@@ -2143,6 +2201,48 @@ module srl_nokia-ospf {
             }
           }
         }
+      }
+    }
+  }
+
+  grouping ospf-ip-vrf-instance-config {
+    description
+      "Per-OSPF-instance configuration for Layer 3 VPN routing instances (network-instance
+       type ip-vrf, VPRN).";
+    leaf ignore-dn-bit {
+      description
+        "In an ip-vrf (VPRN), when true, this OSPF instance ignores the Down (DN) bit on
+         received LSAs when installing or using routes. Applies to both OSPFv2 (Type 3
+         summary, Type 5 / Type 7 external LSA options DN bit, RFC 4576) and OSPFv3
+         (prefix-options DN bit on inter-area-prefix and AS-external LSAs, RFC 6565);
+         the SR Linux model intentionally exposes a single version-agnostic knob because
+         the underlying behaviour is identical at the redistribute / SPF boundary.
+
+         In the default network-instance, the DN bit is not used by the protocol stack
+         for PE-CE loop prevention, so this leaf is a no-op there and is constrained to
+         false by a must statement.";
+      type boolean;
+      default "false";
+      must "(. = false()) or (../../../../srl_nokia-netinst:type = 'srl_nokia-netinst:ip-vrf')" {
+        error-message "ignore-dn-bit is supported only on network-instance of type ip-vrf";
+      }
+    }
+    leaf suppress-dn-bit {
+      description
+        "In an ip-vrf (VPRN), when true, this OSPF instance does not set the Down (DN) bit
+         on originated LSAs. Applies to both OSPFv2 (Type 3 summary, Type 5 / Type 7
+         external LSAs, RFC 4576) and OSPFv3 (inter-area-prefix and AS-external LSA
+         prefix-options, RFC 6565); the SR Linux model intentionally exposes a single
+         version-agnostic knob because the underlying behaviour is identical at the
+         LSA origination boundary.
+
+         In the default network-instance, originated LSAs do not carry the DN bit for
+         PE-CE loop prevention, so this leaf is a no-op there and is constrained to
+         false by a must statement.";
+      type boolean;
+      default "false";
+      must "(. = false()) or (../../../../srl_nokia-netinst:type = 'srl_nokia-netinst:ip-vrf')" {
+        error-message "suppress-dn-bit is supported only on network-instance of type ip-vrf";
       }
     }
   }
@@ -2178,6 +2278,9 @@ module srl_nokia-ospf {
         uses srl_nokia-ldp:ldp-sync-global-config;
         uses ospf-instance-lfa {
           if-feature "srl-feat:ldp-lfa-ospf";
+        }
+        uses ospf-ip-vrf-instance-config {
+          if-feature "srl-feat:ospf-vprn-dn-bit";
         }
         must './router-id or (../../../srl_nokia-netinst:router-id and ../../../srl_nokia-netinst:router-id != "0.0.0.0")' {
           error-message "Must have router-id defined in network-instance or in ospf-instance and it can not be 0.0.0.0";

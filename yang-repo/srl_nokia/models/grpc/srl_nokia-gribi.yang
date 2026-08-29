@@ -24,6 +24,10 @@ module srl_nokia-gribi {
   description
     "This module defines configuration and operational state data related to the gRIBI service";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-10-31 {
     description
       "SRLinux 24.10.1";
@@ -96,7 +100,9 @@ module srl_nokia-gribi {
   grouping gribi-session-info {
     container gribi {
       description
-        "Container for gRIBI related session info";
+        "Enter the gribi context
+
+         Container for gRIBI related session info";
       leaf persistence-mode {
         type enumeration {
           enum preserve {

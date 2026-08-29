@@ -33,6 +33,10 @@ module srl_nokia-pcep {
   description
     "Configuration and state related to the use and propagation of Path Computation Element(PCC) information.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -1184,7 +1188,9 @@ module srl_nokia-pcep {
     container statistics {
       config false;
       description
-        "Holds statistics of messages send to peer";
+        "Enter the statistics context
+
+         Holds statistics of messages send to peer";
       uses pcep-pcc-and-pce-peer-statistics-state;
     }
   }
@@ -1264,7 +1270,9 @@ module srl_nokia-pcep {
     }
     container state-timer {
       description
-        "Holds state timer information";
+        "Enter the state-timer context
+
+         Holds state timer information";
       leaf timer {
         description
           "Configure state-timer";
@@ -1289,10 +1297,21 @@ module srl_nokia-pcep {
         default "remove";
       }
     }
+    leaf max-pce-init-lsps {
+      if-feature "srl-feat:pcep-pcc-pce-init";
+      description
+        "Configure maximum PCE initiated LSPs";
+      type uint32 {
+        range "0..8191";
+      }
+      default "8191";
+    }
     container pce-associations {
       if-feature "srl-feat:pcep-pcc-pce-association";
       description
-        "Configure associations to be used with PCE";
+        "Enter the pce-associations context
+
+         Configure associations to be used with PCE";
       list diversity {
         description
           "List of diversity association parameters";
@@ -1432,7 +1451,9 @@ module srl_nokia-pcep {
   grouping pcep-pcc-top {
     container pcc {
       description
-        "Configure Path Computation Client (PCC) parameters";
+        "Enter the pcc context
+
+         Configure Path Computation Client (PCC) parameters";
       uses pcep-pcc-config;
       uses pcep-pcc-state;
       list peer {

@@ -21,6 +21,10 @@ module srl_nokia-tunnel-interfaces-vxlan-interface-bridge-table-multicast-destin
   description
     "Model for bridge-table multicast destinations on the vxlan-interface";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -78,7 +82,9 @@ module srl_nokia-tunnel-interfaces-vxlan-interface-bridge-table-multicast-destin
   grouping bridge-table-vxlan-interface-multicast-destinations-limits-top {
     container multicast-limit {
       description
-        "Multicast limits per vxlan interface.";
+        "Enter the multicast-limit context
+
+         Multicast limits per vxlan interface.";
       leaf maximum-entries {
         type int32;
         description
@@ -97,6 +103,8 @@ module srl_nokia-tunnel-interfaces-vxlan-interface-bridge-table-multicast-destin
       config false;
       uses bridge-table-vxlan-interface-multicast-destinations-limits-top;
       uses bridge-table-vxlan-interface-multicast-destinations-destination-top;
+      description
+        "Enter the multicast-destinations context";
     }
   }
 

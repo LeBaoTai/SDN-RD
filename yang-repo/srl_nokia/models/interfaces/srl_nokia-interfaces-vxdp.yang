@@ -21,6 +21,10 @@ module srl_nokia-interfaces-vxdp {
   description
     "This model describes configuration and state related to vXDP managed interfaces";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -62,7 +66,9 @@ module srl_nokia-interfaces-vxdp {
       "Configuration and state for Linux interfaces";
     container linux {
       description
-        "Top-level container for configuration and state related to Linux interfaces";
+        "Enter the linux context
+
+         Top-level container for configuration and state related to Linux interfaces";
       leaf device-name {
         description
           "Slow path device name of this interface in Linux
@@ -112,7 +118,9 @@ module srl_nokia-interfaces-vxdp {
     container pci {
       config false;
       description
-        "Top-level container for state related to PCI interfaces";
+        "Enter the pci context
+
+         Top-level container for state related to PCI interfaces";
       leaf address {
         description
           "PCI address of the interface, unpopulated if interface is not present on PCI
@@ -126,7 +134,9 @@ module srl_nokia-interfaces-vxdp {
       uses pci-device-metadata;
       container subsystem {
         description
-          "Top-level container for PCI subsystem state";
+          "Enter the subsystem context
+
+           Top-level container for PCI subsystem state";
         uses pci-device-metadata;
       }
     }

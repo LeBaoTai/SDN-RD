@@ -18,6 +18,10 @@ module srl_nokia-system-protocols {
   description
     "This yang file models system-wide protocol configuration and state.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-03-31 {
     description
       "SRLinux 25.3.1";
@@ -32,7 +36,9 @@ module srl_nokia-system-protocols {
       "Top-level grouping for system-wide protocol configuration and state.";
     container protocols {
       description
-        "The routing protocols that are supported by the system";
+        "Enter the protocols context
+
+         The routing protocols that are supported by the system";
     }
   }
 

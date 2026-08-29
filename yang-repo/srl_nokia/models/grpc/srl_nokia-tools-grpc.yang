@@ -27,6 +27,10 @@ module srl_nokia-tools-grpc {
   description
     "Model for operational commands on gRPC server instances";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -65,7 +69,9 @@ module srl_nokia-tools-grpc {
       }
       container statistics {
         description
-          "A collection of counters that were collected by the gRPC during
+          "Enter the statistics context
+
+           A collection of counters that were collected by the gRPC during
            the authentication process.";
         leaf clear {
           type empty;

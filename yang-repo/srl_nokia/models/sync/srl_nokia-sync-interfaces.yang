@@ -16,6 +16,10 @@ module srl_nokia-sync-interfaces {
     "Nokia SR Linux Support
      Web: <http://www.nokia.com>";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -224,7 +228,9 @@ module srl_nokia-sync-interfaces {
     container satellites-in-use {
       config false;
       description
-        "The list of satellites currently in use";
+        "Enter the satellites-in-use context
+
+         The list of satellites currently in use";
       leaf number-of-satellites-in-use {
         type uint8;
         description
@@ -269,7 +275,9 @@ module srl_nokia-sync-interfaces {
       "This struct containing all attributes for the GNSS reference";
     container constellation {
       description
-        "Selects which constellations to be used for GNSS";
+        "Enter the constellation context
+
+         Selects which constellations to be used for GNSS";
       leaf gps {
         type boolean;
         default "true";

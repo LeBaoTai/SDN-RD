@@ -36,6 +36,10 @@ module srl_nokia-service-activation-testhead {
   description
     "This module contains configuration and state data definitions for service activation testead (SAT)";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -55,7 +59,9 @@ module srl_nokia-service-activation-testhead {
     container statistics {
       config false;
       description
-        "Context for statistics";
+        "Enter the statistics context
+
+         Context for statistics";
       leaf stored-results-total {
         type uint16;
         description
@@ -64,7 +70,9 @@ module srl_nokia-service-activation-testhead {
       container results {
         config false;
         description
-          "Context for results";
+          "Enter the results context
+
+           Context for results";
         list service-test {
           key "test-name test-run";
           description
@@ -135,10 +143,14 @@ module srl_nokia-service-activation-testhead {
           }
           container test-duration {
             description
-              "Context for test duration";
+              "Enter the test-duration context
+
+               Context for test duration";
             container cir {
               description
-                "Context for the comitted information rate test";
+                "Enter the cir context
+
+                 Context for the comitted information rate test";
               leaf minutes-seconds {
                 type srl_nokia-sath-types:sath-mm-ss-string;
                 description
@@ -147,7 +159,9 @@ module srl_nokia-service-activation-testhead {
             }
             container cir-pir {
               description
-                "Context for the combined comitted information rate and the peak information rate test";
+                "Enter the cir-pir context
+
+                 Context for the combined comitted information rate and the peak information rate test";
               leaf minutes-seconds {
                 type srl_nokia-sath-types:sath-mm-ss-string;
                 description
@@ -156,7 +170,9 @@ module srl_nokia-service-activation-testhead {
             }
             container policing {
               description
-                "Context for policing test
+                "Enter the policing context
+
+                 Context for policing test
 
                  The test tansmits as 125% of the configured PIR rate, testing policing";
               leaf minutes-seconds {
@@ -167,7 +183,9 @@ module srl_nokia-service-activation-testhead {
             }
             container performance {
               description
-                "Context for performance test";
+                "Enter the performance context
+
+                 Context for performance test";
               leaf hours-minutes-seconds {
                 type srl_nokia-sath-types:sath-hh-mm-ss-string;
                 description
@@ -211,7 +229,9 @@ module srl_nokia-service-activation-testhead {
             container interface-ref {
               if-feature "srl_nokia-feat:interface-references";
               description
-                "Reference to interface subinterface when symbolic alias is configured";
+                "Enter the interface-ref context
+
+                 Reference to interface subinterface when symbolic alias is configured";
               leaf interface {
                 type leafref {
                   path "/srl_nokia-if:interface/srl_nokia-if:name";
@@ -381,7 +401,9 @@ module srl_nokia-service-activation-testhead {
             }
             container frame-mix {
               description
-                "Context for frame-mix";
+                "Enter the frame-mix context
+
+                 Context for frame-mix";
               leaf frame-size-template {
                 type srl_nokia-comm:restricted-name {
                   length "1..64";
@@ -399,7 +421,9 @@ module srl_nokia-service-activation-testhead {
             }
             container test-types {
               description
-                "Context for test-types";
+                "Enter the test-types context
+
+                 Context for test-types";
               leaf cir {
                 type boolean;
                 description
@@ -423,10 +447,14 @@ module srl_nokia-service-activation-testhead {
             }
             container frame-payload {
               description
-                "Context for frame-payload";
+                "Enter the frame-payload context
+
+                 Context for frame-payload";
               container data-pattern {
                 description
-                  "Context for data-pattern";
+                  "Enter the data-pattern context
+
+                   Context for data-pattern";
                 leaf repeat {
                   type union {
                     type srl_nokia-comm:hex-string;
@@ -446,10 +474,14 @@ module srl_nokia-service-activation-testhead {
                 }
                 container eth-cfm {
                   description
-                    "Context for ETH-CFM";
+                    "Enter the eth-cfm context
+
+                     Context for ETH-CFM";
                   container source {
                     description
-                      "Context for source";
+                      "Enter the source context
+
+                       Context for source";
                     leaf mep-id {
                       type srl_nokia-ethcfm-types:mep-id-type;
                       description
@@ -469,7 +501,9 @@ module srl_nokia-service-activation-testhead {
                 }
                 container s-tag {
                   description
-                    "Context for s-tag VLAN";
+                    "Enter the s-tag context
+
+                     Context for s-tag VLAN";
                   leaf dot1p {
                     type uint32 {
                       range "0..7";
@@ -492,7 +526,9 @@ module srl_nokia-service-activation-testhead {
                 }
                 container c-tag {
                   description
-                    "Context for c-tag VLAN";
+                    "Enter the c-tag context
+
+                     Context for c-tag VLAN";
                   leaf dot1p {
                     type uint32 {
                       range "0..7";
@@ -881,10 +917,14 @@ module srl_nokia-service-activation-testhead {
         }
         container test-duration {
           description
-            "Context for test duration";
+            "Enter the test-duration context
+
+             Context for test duration";
           container cir {
             description
-              "Context for the comitted information rate test";
+              "Enter the cir context
+
+               Context for the comitted information rate test";
             leaf minutes-seconds {
               type srl_nokia-sath-types:sath-mm-ss-string;
               default "05:00";
@@ -894,7 +934,9 @@ module srl_nokia-service-activation-testhead {
           }
           container cir-pir {
             description
-              "Context for the combined comitted information rate and the peak information rate test";
+              "Enter the cir-pir context
+
+               Context for the combined comitted information rate and the peak information rate test";
             leaf minutes-seconds {
               type srl_nokia-sath-types:sath-mm-ss-string;
               default "10:00";
@@ -904,7 +946,9 @@ module srl_nokia-service-activation-testhead {
           }
           container policing {
             description
-              "Context for policing test
+              "Enter the policing context
+
+               Context for policing test
 
                The test tansmits as 125% of the configured PIR rate, testing policing";
             leaf minutes-seconds {
@@ -916,7 +960,9 @@ module srl_nokia-service-activation-testhead {
           }
           container performance {
             description
-              "Context for performance test";
+              "Enter the performance context
+
+               Context for performance test";
             leaf hours-minutes-seconds {
               type srl_nokia-sath-types:sath-hh-mm-ss-string;
               default "00:15:00";
@@ -977,7 +1023,9 @@ module srl_nokia-service-activation-testhead {
           }
           container frame-mix {
             description
-              "Context frame mix";
+              "Enter the frame-mix context
+
+               Context frame mix";
             leaf frame-size-template {
               type leafref {
                 path "../../../../frame-size-template/fs-template-name";
@@ -997,7 +1045,9 @@ module srl_nokia-service-activation-testhead {
           }
           container test-types {
             description
-              "Context for test types";
+              "Enter the test-types context
+
+               Context for test types";
             leaf cir {
               type boolean;
               default "false";
@@ -1025,10 +1075,14 @@ module srl_nokia-service-activation-testhead {
           }
           container frame-payload {
             description
-              "Context for frame payload";
+              "Enter the frame-payload context
+
+               Context for frame payload";
             container data-pattern {
               description
-                "Context for data pattern";
+                "Enter the data-pattern context
+
+                 Context for data pattern";
               leaf repeat {
                 type union {
                   type srl_nokia-comm:hex-string {
@@ -1042,7 +1096,9 @@ module srl_nokia-service-activation-testhead {
             }
             container ethernet {
               description
-                "Context for Ethernet header";
+                "Enter the ethernet context
+
+                 Context for Ethernet header";
               leaf dst-mac {
                 type srl_nokia-comm:unicast-mac-address;
                 description
@@ -1073,6 +1129,8 @@ module srl_nokia-service-activation-testhead {
                     description
                       "The MEP identifier specific to the domain and association identifier";
                   }
+                  description
+                    "Enter the source context";
                 }
               }
               container s-tag {
@@ -1102,7 +1160,9 @@ module srl_nokia-service-activation-testhead {
               }
               container c-tag {
                 description
-                  "Context for c-tag";
+                  "Enter the c-tag context
+
+                   Context for c-tag";
                 leaf dot1p {
                   type uint32 {
                     range "0..7";

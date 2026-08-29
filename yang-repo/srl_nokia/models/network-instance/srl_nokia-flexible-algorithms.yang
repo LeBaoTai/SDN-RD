@@ -30,6 +30,10 @@ module srl_nokia-flexible-algorithms {
   description
     "This yang file models configuration and state of Segment Routing Flexible Algorithms";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -130,7 +134,9 @@ module srl_nokia-flexible-algorithms {
       "Top grouping for configuring admin groups";
     container extended-admin-groups {
       description
-        "Container for configuring admin groups";
+        "Enter the extended-admin-groups context
+
+         Container for configuring admin groups";
       list group {
         description
           "List of admin groups defined for this network instance";
@@ -172,7 +178,9 @@ module srl_nokia-flexible-algorithms {
       "Grouping for the flexible algorithms interface attributes";
     container interface-ref {
       description
-        "Reference to a subinterface";
+        "Enter the interface-ref context
+
+         Reference to a subinterface";
       leaf interface {
         type leafref {
           path "/srl_nokia-if:interface/srl_nokia-if:name";
@@ -303,17 +311,23 @@ module srl_nokia-flexible-algorithms {
         "Flex Algorithms definitions and the attributes";
       container flexible-algorithm-definitions {
         description
-          "Flexible Algorithms and their definitions";
+          "Enter the flexible-algorithm-definitions context
+
+           Flexible Algorithms and their definitions";
         uses flex-algo-definition-top;
       }
       container global-attributes {
         description
-          "Flexible Algorithm global attributes";
+          "Enter the global-attributes context
+
+           Flexible Algorithm global attributes";
         uses flex-algo-admin-groups-top;
       }
       container interface-attributes {
         description
-          "Flexible Algorithm interface attributes";
+          "Enter the interface-attributes context
+
+           Flexible Algorithm interface attributes";
         uses flex-algo-interface-attributes-top;
       }
     }

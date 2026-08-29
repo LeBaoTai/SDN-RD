@@ -27,6 +27,10 @@ module srl_nokia-tunnel-tables {
   description
     "A model describing the tunnel tables of a network instance.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -93,6 +97,11 @@ module srl_nokia-tunnel-tables {
         range "128..255";
       }
     }
+    leaf igp-instance-id {
+      description
+        "IGP protocol instance ID associated with the tunnel";
+      type uint32;
+    }
     leaf last-app-update {
       type srl_nokia-comm:date-and-time-delta;
       description
@@ -132,6 +141,8 @@ module srl_nokia-tunnel-tables {
         description
           "The destination UDP port number written into the outer IP/UDP header of VXLAN packets associated with this tunnel and originated by this router.";
       }
+      description
+        "Enter the vxlan context";
     }
   }
 
@@ -149,6 +160,79 @@ module srl_nokia-tunnel-tables {
         description
           "The IP address that identifies the source of the tunnel.";
       }
+      description
+        "Enter the ip-in-ip context";
+    }
+  }
+
+  grouping gre-tunnel-fields {
+    container gre {
+      leaf source-address {
+        type srl_nokia-comm:ip-address;
+        description
+          "The source IP address in the outer IP header added by GRE encapsulation";
+      }
+      leaf destination-address {
+        type srl_nokia-comm:ip-address;
+        description
+          "Destination IP address in the outer IP header added by GRE encapsulation";
+      }
+      leaf ip-ttl {
+        type uint8;
+        description
+          "IP TTL in the outer IP header added by GRE encapsulation";
+      }
+      leaf in-profile-dscp {
+        type srl_nokia-comm:dscp-value;
+        description
+          "DSCP value in the outer IP header except when the packet is out of profile";
+      }
+      leaf out-profile-dscp {
+        type srl_nokia-comm:dscp-value;
+        description
+          "DSCP value in the outer IP header when the packet was policed as out of profile";
+      }
+      description
+        "Enter the gre context";
+    }
+  }
+
+  grouping udp-tunnel-fields {
+    container udp {
+      leaf source-address {
+        type srl_nokia-comm:ip-address;
+        description
+          "The source IP address in the outer IP header added by GRE encapsulation";
+      }
+      leaf destination-address {
+        type srl_nokia-comm:ip-address;
+        description
+          "Destination IP address in the outer IP header added by GRE encapsulation";
+      }
+      leaf destination-udp-port {
+        type srl_nokia-comm:port-number;
+        description
+          "Destination UDP port number in the added UDP header
+
+           Usually this reflects the encoded payload type";
+      }
+      leaf ip-ttl {
+        type uint8;
+        description
+          "IP TTL in the outer IP header added by GRE encapsulation";
+      }
+      leaf in-profile-dscp {
+        type srl_nokia-comm:dscp-value;
+        description
+          "DSCP value in the outer IP header except when the packet is out of profile";
+      }
+      leaf out-profile-dscp {
+        type srl_nokia-comm:dscp-value;
+        description
+          "DSCP value in the outer IP header when the packet was policed as out of profile";
+      }
+      description
+        "Enter the udp context";
     }
   }
 
@@ -169,13 +253,17 @@ module srl_nokia-tunnel-tables {
         description
           "The total number of tunnels, active and inactive, belonging to this address family";
       }
+      description
+        "Enter the statistics context";
     }
   }
 
   grouping tunnel-summary {
     container tunnel-summary {
       description
-        "Tunnel summary information";
+        "Enter the tunnel-summary context
+
+         Tunnel summary information";
       list tunnel-type {
         key "type";
         leaf type {
@@ -207,7 +295,9 @@ module srl_nokia-tunnel-tables {
   grouping tunnel-tables-top {
     container ipv4 {
       description
-        "The container for the IPv4 tunnels associated with the network instance.";
+        "Enter the ipv4 context
+
+         The container for the IPv4 tunnels associated with the network instance.";
       list tunnel {
         key "ipv4-prefix type owner id";
         leaf ipv4-prefix {
@@ -235,13 +325,17 @@ module srl_nokia-tunnel-tables {
         uses tunnel-entry-common-fields;
         uses vxlan-fields;
         uses ip-in-ip-fields;
+        uses gre-tunnel-fields;
+        uses udp-tunnel-fields;
       }
       uses tunnel-statistics;
       uses tunnel-summary;
     }
     container ipv6 {
       description
-        "The container for the IPv6 tunnels associated with the network instance.";
+        "Enter the ipv6 context
+
+         The container for the IPv6 tunnels associated with the network instance.";
       list tunnel {
         key "ipv6-prefix type owner id";
         leaf ipv6-prefix {
@@ -269,6 +363,8 @@ module srl_nokia-tunnel-tables {
         uses tunnel-entry-common-fields;
         uses vxlan-fields;
         uses ip-in-ip-fields;
+        uses gre-tunnel-fields;
+        uses udp-tunnel-fields;
       }
       uses tunnel-statistics;
       uses tunnel-summary;

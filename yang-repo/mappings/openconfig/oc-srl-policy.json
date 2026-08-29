@@ -169,8 +169,7 @@
     {
       "oc": "",
       "srlinux": "/routing-policy/policy/statement/match/call-policy",
-      "pretranslate-transform": "routing-policy-call-policy-match-node-transform",
-      "feature-flagged": true
+      "pretranslate-transform": "routing-policy-call-policy-match-node-transform"
     },
     {
       "oc": "",
@@ -179,16 +178,6 @@
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/{config,state}/install-protocol-eq",
       "srlinux": "/routing-policy/policy/statement/match/protocol",
-      "deviations": {
-        "add": {
-          "must": [
-            {
-              "expression": ". != 'GRIBI'",
-              "error-message": "GRIBI is not supported in protocol match"
-            }
-          ]
-        }
-      },
       "mapping": [
         {
           "BGP": "bgp"
@@ -213,6 +202,9 @@
         },
         {
           "LOCAL": "host"
+        },
+        {
+          "GRIBI": "gribi"
         },
         {
           "<clear>": "arp-nd"
@@ -275,8 +267,7 @@
         {
           "INVERT": "invert"
         }
-      ],
-      "feature-flagged": true
+      ]
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-neighbor-set",
@@ -315,8 +306,7 @@
     },
     {
       "oc": "",
-      "srlinux": "/routing-policy/policy/statement/match/internal-tags/match-set-options",
-      "feature-flagged": true
+      "srlinux": "/routing-policy/policy/statement/match/internal-tags/match-set-options"
     },
     {
       "oc": "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-tag-set/{config,state}",

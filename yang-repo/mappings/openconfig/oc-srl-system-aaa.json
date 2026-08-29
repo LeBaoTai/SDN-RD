@@ -228,7 +228,6 @@
     {
       "oc": "/system/aaa/server-groups/server-group/servers/server/{config,state}/timeout",
       "srlinux": "/system/srl-aaa:aaa/srl-aaa:server-group/srl-aaa:server/srl-aaa:timeout",
-      "feature-flagged": true,
       "deviations": {
         "add": {
           "must": [
@@ -295,8 +294,7 @@
     },
     {
       "oc": "/system/aaa/server-groups/server-group/servers/server/tacacs/{config,state}/source-address",
-      "srlinux": "/system/srl-aaa:aaa/srl-aaa:server-group/srl-aaa:server/srl-aaa:tacacs/srl-aaa:source-address",
-      "feature-flagged": true
+      "srlinux": "/system/srl-aaa:aaa/srl-aaa:server-group/srl-aaa:server/srl-aaa:tacacs/srl-aaa:source-address"
     },
     {
       "oc": "/system/aaa/server-groups/server-group/servers/server/radius",

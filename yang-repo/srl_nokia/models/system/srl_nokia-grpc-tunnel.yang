@@ -39,6 +39,10 @@ module srl_nokia-grpc-tunnel {
   description
     "This module defines configuration and operational state data related to the gRPC-tunnel application.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -211,7 +215,9 @@ module srl_nokia-grpc-tunnel {
           }
           container id {
             description
-              "Target ID.";
+              "Enter the id context
+
+               Target ID.";
             choice id {
               mandatory true;
               case node-name {
@@ -232,7 +238,9 @@ module srl_nokia-grpc-tunnel {
               case custom {
                 container custom {
                   description
-                    "User-defined pattern composed of ordered tokens separated by a delimiter.";
+                    "Enter the custom context
+
+                     User-defined pattern composed of ordered tokens separated by a delimiter.";
                   leaf-list pattern {
                     min-elements 1;
                     type enumeration {
@@ -270,7 +278,9 @@ module srl_nokia-grpc-tunnel {
           }
           container type {
             description
-              "Target type.";
+              "Enter the type context
+
+               Target type.";
             choice type {
               mandatory true;
               case gnmi-gnoi-server {
@@ -329,6 +339,8 @@ module srl_nokia-grpc-tunnel {
                       path "/srl-netinst:network-instance/srl-netinst:name";
                     }
                   }
+                  description
+                    "Enter the custom context";
                 }
               }
             }

@@ -31,6 +31,10 @@ module srl_nokia-system-bridge-table-proxy-arp {
     "This module defines system bridge-table proxy ARP configuration and operational
      state data.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -94,6 +98,8 @@ module srl_nokia-system-bridge-table-proxy-arp {
         }
         uses bridge-table-proxy-table-statistics-type-common-top;
       }
+      description
+        "Enter the statistics context";
     }
   }
 
@@ -101,7 +107,9 @@ module srl_nokia-system-bridge-table-proxy-arp {
     container proxy-arp {
       config false;
       description
-        "system bridge-table proxy ARP information";
+        "Enter the proxy-arp context
+
+         system bridge-table proxy ARP information";
       uses bridge-table-proxy-table-statistics-common-top;
     }
   }
@@ -110,7 +118,9 @@ module srl_nokia-system-bridge-table-proxy-arp {
     container proxy-nd {
       config false;
       description
-        "system bridge-table proxy ND entry information";
+        "Enter the proxy-nd context
+
+         system bridge-table proxy ND entry information";
       uses bridge-table-proxy-table-statistics-common-top;
     }
   }

@@ -24,6 +24,10 @@ module srl_nokia-tools-mirroring {
   description
     "This module defines tools command for mirroring (SPAN/ERSPAN).";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -62,13 +66,17 @@ module srl_nokia-tools-mirroring {
   grouping mirror-destination-top {
     container mirror-destination {
       description
-        "Mirror destination";
+        "Enter the mirror-destination context
+
+         Mirror destination";
       container statistics {
         leaf clear {
           description
             "Clears the mirror destination statistics";
           type empty;
         }
+        description
+          "Enter the statistics context";
       }
     }
   }

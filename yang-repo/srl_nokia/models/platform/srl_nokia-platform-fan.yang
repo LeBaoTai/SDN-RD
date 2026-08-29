@@ -24,6 +24,10 @@ module srl_nokia-platform-fan {
   description
     "This module defines configuration and operational state data related to fans.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -79,11 +83,17 @@ module srl_nokia-platform-fan {
         description
           "Average configured fan speed percentage of all fans in the fan tray, based on temperature sensor readings";
       }
+      leaf operational-speed {
+        if-feature "srl-feat:operational-fan-speed";
+        type srl-comm:percentage;
+        description
+          "Average operational fan speed percentage of all fans in the fan tray";
+      }
       leaf speed-rpm {
         if-feature "srl-feat:platform-7250-ixr or srl-feat:platform-7250-ixr-e-unified or srl-feat:platform-7250-ixr-18e-unified";
         type uint16;
         description
-          "Maximum RPM of all fans in the fan tray";
+          "Average operational RPM of all fans in the fan tray";
       }
       list fan {
         if-feature "srl-feat:individual-fan-state";
@@ -103,12 +113,20 @@ module srl_nokia-platform-fan {
           description
             "Configured speed percentage of the fan, based on temperature sensor readings";
         }
+        leaf operational-speed {
+          if-feature "srl-feat:operational-fan-speed";
+          type srl-comm:percentage;
+          description
+            "Average operational fan speed percentage of the fan";
+        }
         leaf speed-rpm {
           type uint16;
           description
-            "RPM of the fan";
+            "Operational RPM of the fan";
         }
       }
+      description
+        "Enter the fan context";
     }
     leaf oper-reason {
       description

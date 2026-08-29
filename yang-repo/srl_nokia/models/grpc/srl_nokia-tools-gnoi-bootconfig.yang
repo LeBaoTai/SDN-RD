@@ -11,6 +11,10 @@ module srl_nokia-tools-gnoi-bootconfig {
   description
     "Model for managing gNOI BootConfig";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -23,7 +27,9 @@ module srl_nokia-tools-gnoi-bootconfig {
   grouping tools-gnoi-bootconfig-top {
     container bootconfig {
       description
-        "gNOI BootConfig tools commands";
+        "Enter the bootconfig context
+
+         gNOI BootConfig tools commands";
       leaf remove {
         description
           "Remove all BootConfig data from the system";
@@ -31,7 +37,9 @@ module srl_nokia-tools-gnoi-bootconfig {
       }
       container set {
         description
-          "Set BootConfig data";
+          "Enter the set context
+
+           Set BootConfig data";
         container boot-config {
           presence "The boot config data to set";
           description
@@ -60,7 +68,9 @@ module srl_nokia-tools-gnoi-bootconfig {
       }
       container get {
         description
-          "Get BootConfig data";
+          "Enter the get context
+
+           Get BootConfig data";
         container boot-config {
           presence "The boot config data to get";
           description

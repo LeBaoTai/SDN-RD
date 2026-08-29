@@ -27,6 +27,10 @@ module srl_nokia-system-network-instance-bgp-vpn {
   description
     "This yang file models configuration and state of the bgp-vpn protocols in the system newtrok-instance.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -64,7 +68,9 @@ module srl_nokia-system-network-instance-bgp-vpn {
         }
         container route-distinguisher {
           description
-            "Route Distinguisher (RD) of the bgp-vpn instance.";
+            "Enter the route-distinguisher context
+
+             Route Distinguisher (RD) of the bgp-vpn instance.";
           leaf rd {
             config false;
             srl_nokia-ext:show-importance "high";
@@ -89,7 +95,9 @@ module srl_nokia-system-network-instance-bgp-vpn {
         }
         container route-target {
           description
-            "Route Target (RT) of the system bgp-vpn instance.";
+            "Enter the route-target context
+
+             Route Target (RT) of the system bgp-vpn instance.";
           leaf export-route-target-origin {
             config false;
             srl_nokia-ext:show-importance "high";

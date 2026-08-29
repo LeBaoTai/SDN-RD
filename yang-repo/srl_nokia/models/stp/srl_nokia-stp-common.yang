@@ -33,6 +33,10 @@ module srl_nokia-stp-common {
   description
     "This yang file models configuration and state of the stp protocol";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -415,7 +419,9 @@ module srl_nokia-stp-common {
   grouping stp-common-events {
     container trace-options {
       description
-        "Interface Stp debug trace options";
+        "Enter the trace-options context
+
+         Interface Stp debug trace options";
       leaf-list trace {
         description
           "List of tracing options";

@@ -33,6 +33,10 @@ module srl_nokia-next-hop-groups {
   description
     "This yang file gives a description of next-hop-groups configuration.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";
@@ -96,7 +100,9 @@ module srl_nokia-next-hop-groups {
   grouping next-hop-group-flex-algo {
     container tunnel-resolution {
       description
-        "Options for controlling next-hop resolution via MPLS-aware tunnels";
+        "Enter the tunnel-resolution context
+
+         Options for controlling next-hop resolution via MPLS-aware tunnels";
       leaf algorithm {
         description
           "Specifies the flexible algorithm.";
@@ -245,7 +251,9 @@ module srl_nokia-next-hop-groups {
           container interface-ref {
             if-feature "srl_nokia-feat:static-next-hop-unnumbered-interface";
             description
-              "Reference to the subinterface used for an unnumbered IP next-hop";
+              "Enter the interface-ref context
+
+               Reference to the subinterface used for an unnumbered IP next-hop";
             leaf interface {
               type leafref {
                 path "/srl_nokia-if:interface/srl_nokia-if:name";
@@ -315,6 +323,8 @@ module srl_nokia-next-hop-groups {
                   "The remote discriminator to be used for the associated BFD session";
               }
             }
+            description
+              "Enter the failure-detection context";
           }
           leaf encapsulate-header {
             if-feature "srl_nokia-feat:static-next-hop-group-gre-tunnel";
@@ -338,7 +348,9 @@ module srl_nokia-next-hop-groups {
             }
             if-feature "srl_nokia-feat:static-next-hop-group-gre-tunnel";
             description
-              "Parameters relating to GRE encapsulation";
+              "Enter the gre context
+
+               Parameters relating to GRE encapsulation";
             leaf source-ip {
               type srl_nokia-comm:ip-address-unicast;
               description

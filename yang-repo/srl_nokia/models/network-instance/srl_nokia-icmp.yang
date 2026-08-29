@@ -15,6 +15,10 @@ module srl_nokia-icmp {
   description
     "A model for ICMP statistics of a network instance.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -38,10 +42,14 @@ module srl_nokia-icmp {
       container statistics {
         config false;
         description
-          "ICMP version 4 statistics";
+          "Enter the statistics context
+
+           ICMP version 4 statistics";
         container total {
           description
-            "Aggregate statistics, counting all ICMP message types";
+            "Enter the total context
+
+             Aggregate statistics, counting all ICMP message types";
           leaf in-packets {
             type srl_nokia-comm:zero-based-counter64;
             description
@@ -125,6 +133,8 @@ module srl_nokia-icmp {
             "Timestamp of the last time the interface counters were cleared.";
         }
       }
+      description
+        "Enter the icmp context";
     }
   }
 
@@ -134,10 +144,14 @@ module srl_nokia-icmp {
       container statistics {
         config false;
         description
-          "ICMP version 6 statistics";
+          "Enter the statistics context
+
+           ICMP version 6 statistics";
         container total {
           description
-            "Aggregate statistics, counting all ICMP message types";
+            "Enter the total context
+
+             Aggregate statistics, counting all ICMP message types";
           leaf in-packets {
             type srl_nokia-comm:zero-based-counter64;
             description
@@ -220,6 +234,8 @@ module srl_nokia-icmp {
             "Timestamp of the last time the interface counters were cleared.";
         }
       }
+      description
+        "Enter the icmp6 context";
     }
   }
 }

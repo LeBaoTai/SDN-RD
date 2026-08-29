@@ -24,6 +24,10 @@ module srl_nokia-license {
   description
     "This module defines configuration and operational state data for licenses.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-03-31 {
     description
       "SRLinux 24.3.1";
@@ -106,6 +110,22 @@ module srl_nokia-license {
       type boolean;
       description
         "Indicates if the license is actively in use";
+    }
+    container entitlements {
+      config false;
+      description
+        "Enter the entitlements context
+
+         Operational state data for feature entitlements granted by this license
+
+         This container reflects the right-to-use (RTU) entitlements encoded within
+         the license key. Additional entitlements may be added here as features are
+         introduced.";
+      leaf lawful-intercept {
+        type boolean;
+        description
+          "Indicates if this license grants the right-to-use (RTU) for lawful intercept functionality";
+      }
     }
   }
 

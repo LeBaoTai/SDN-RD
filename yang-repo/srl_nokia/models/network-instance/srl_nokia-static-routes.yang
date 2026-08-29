@@ -6,6 +6,9 @@ module srl_nokia-static-routes {
   import srl_nokia-common {
     prefix srl_nokia-comm;
   }
+  import srl_nokia-extensions {
+    prefix srl_nokia-ext;
+  }
   import srl_nokia-features {
     prefix srl_nokia-feat;
   }
@@ -36,6 +39,10 @@ module srl_nokia-static-routes {
   description
     "This yang file gives a description of static route configuration.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -68,6 +75,12 @@ module srl_nokia-static-routes {
   grouping static-route-top {
     container static-routes {
       presence "Configure Static Routes";
+      leaf instance-name {
+        if-feature "srl_nokia-feat:network-instance-protocol-instance-names";
+        type srl_nokia-comm:name;
+        description
+          "The name of the static routing instance (optional)";
+      }
       leaf admin-state {
         type srl_nokia-comm:admin-state;
         default "enable";
@@ -152,7 +165,9 @@ module srl_nokia-static-routes {
         }
         container group-based-policy {
           description
-            "Micro Segmentation Group Based Policy associations for the static route";
+            "Enter the group-based-policy context
+
+             Micro Segmentation Group Based Policy associations for the static route";
           if-feature "srl_nokia-feat:static-route-group-based-policy";
           leaf-list group {
             description
@@ -176,6 +191,8 @@ module srl_nokia-static-routes {
               error-message "next-longest cannot be enabled with a next-hop-group";
             }
           }
+          description
+            "Enter the follow context";
         }
       }
     }
@@ -269,7 +286,9 @@ module srl_nokia-static-routes {
               presence "For paclets sent to this next-hop, forward them on the specified unnumbered interface";
               container interface-ref {
                 description
-                  "Reference to the subinterface used for an unnumbered IP next-hop";
+                  "Enter the interface-ref context
+
+                   Reference to the subinterface used for an unnumbered IP next-hop";
                 leaf interface {
                   type leafref {
                     path "/srl_nokia-if:interface/srl_nokia-if:name";
@@ -306,9 +325,12 @@ module srl_nokia-static-routes {
           }
         }
         container failure-detection {
-          if-feature "srl_nokia-feat:bfd";
+          if-feature "srl_nokia-feat:bfd or srl_nokia-feat:static-next-hop-cpe";
+          must 'not(./enable-bfd and ./cpe-check)' {
+            error-message "BFD and CPE check for a single next-hop not supported";
+          }
           container enable-bfd {
-            if-feature "srl_nokia-feat:bfd or srl_nokia-feat:static-next-hop-cpe";
+            if-feature "srl_nokia-feat:bfd";
             presence "Enable BFD for this next hop";
             must '../../ip-address' {
               error-message "BFD requires the next-hop to have ip-address configured";
@@ -383,10 +405,23 @@ module srl_nokia-static-routes {
                 "Number of padding bytes to add to each CPE Check probe packet";
             }
           }
+          description
+            "Enter the failure-detection context";
+        }
+        leaf next-hop-network-instance {
+          if-feature "srl_nokia-feat:static-next-hop-mpls-over-gre";
+          type leafref {
+            path "/srl_nokia-netinst:network-instance/srl_nokia-netinst:name";
+          }
+          description
+            "The network-instance where encapsulated packets should be forwarded or where next-hop IP address should be resolved";
+          must "/srl_nokia-netinst:network-instance[srl_nokia-netinst:name=current()]/srl_nokia-netinst:type = 'default'" {
+            error-message "only network-instance of type default is supported";
+          }
         }
         list encap-header {
-          if-feature "srl_nokia-feat:static-nhg-udp-tunnel";
-          max-elements 1;
+          if-feature "srl_nokia-feat:static-nhg-udp-tunnel or srl_nokia-feat:static-next-hop-mpls-over-gre";
+          max-elements 2;
           description
             "The list of headers added on top of a packet ordered by the index value
 
@@ -401,26 +436,136 @@ module srl_nokia-static-routes {
             type srl_nokia-comm:encapsulation-header-type;
             description
               "Defines which type of packet header should be added";
-            must ". = 'udp-v4'" {
-              error-message "only UDP-V4 is supported";
+            must ". = 'udp-v4' or . = 'mpls' or . = 'gre'" {
+              error-message "encap-header type is not supported";
             }
-            must "not((. = 'udp-v4') and ../../failure-detection/enable-bfd)" {
-              error-message "BFD not supported for next-hops with UDP encapsulation";
+            must "not(. = 'udp-v4')" {
+              srl_nokia-ext:if-feature "not srl_nokia-feat:static-nhg-udp-tunnel";
+              error-message "udp-v4 encapsulation for static next-hop is not supported";
+            }
+            must "not(. = 'gre')" {
+              srl_nokia-ext:if-feature "not srl_nokia-feat:static-next-hop-mpls-over-gre";
+              error-message "gre encapsulation for static next-hop is not supported";
+            }
+            must "not(. = 'mpls')" {
+              srl_nokia-ext:if-feature "not srl_nokia-feat:static-next-hop-mpls-over-gre";
+              error-message "mpls encapsulation for static next-hop is not supported";
+            }
+            must 'not(../../failure-detection/enable-bfd)' {
+              error-message "BFD not supported for encap-header next-hops";
             }
             must "not((. = 'udp-v4') and (not(../udp-v4/source-ip) or not(../udp-v4/destination-ip) or not(../udp-v4/ip-ttl)))" {
-              error-message "at least ../udp-v4/source-ip, ../udp-v4/destination-ip and ../udp-v4/ip-ttl must be configured for udp-v4 encapsulation";
+              srl_nokia-ext:if-feature "srl_nokia-feat:static-nhg-udp-tunnel";
+              error-message "at least source-ip, destination-ip and ip-ttl must be configured for udp-v4 encapsulation";
             }
-            must "not((. = 'udp-v4') and (../../ip-address or ../../drop or ../../local-link/interface-ref/interface))" {
-              error-message "udp-v4 encapsulation cannot be combined with next-hop ip-address, drop or local-link";
+            must "not((. = 'mpls') and (not(../mpls/label)))" {
+              error-message "a label value must be specified when type is mpls";
+            }
+            must "not((. = 'gre') and (not(../gre/source-ip) or not(../gre/destination-ip) or not(../gre/ip-ttl) or not(../gre/dscp or (../gre/dscp = 0))))" {
+              srl_nokia-ext:if-feature "srl_nokia-feat:static-next-hop-mpls-over-gre";
+              error-message "at least source-ip, destination-ip, ip-ttl and dscp must be configured for gre encapsulation";
+            }
+            must 'not((../../ip-address or ../../drop or ../../local-link/interface-ref/interface))' {
+              error-message "encapsulation cannot be combined with next-hop ip-address, drop or local-link";
             }
             must "not((. = 'udp-v4') and not(/srl_nokia-netinst:network-instance[srl_nokia-netinst:name = current()/../../../../srl_nokia-netinst:name]/srl_nokia-netinst:type = 'srl_nokia-netinst:default'))" {
               error-message "udp-v4 encapsulation only supported on default network instance";
             }
           }
-          container udp-v4 {
-            when "../type = 'udp-v4'";
+          container gre {
+            if-feature "srl_nokia-feat:static-next-hop-mpls-over-gre";
             description
-              "Container of nodes for UDP in IPv4 encapsulation
+              "Enter the gre context
+
+               Container of nodes for GRE encapsulation
+
+               When this container is used, an IPv4 header with a GRE header is added to the encapsulation list.";
+            leaf source-ip {
+              type srl_nokia-comm:ipv4-address-unicast;
+              must '../../type = "gre"' {
+                error-message "only relevant for GRE encapsulation";
+              }
+              description
+                "The source IPv4 address for IP/GRE encapsulation";
+            }
+            leaf destination-ip {
+              type srl_nokia-comm:ipv4-address-unicast;
+              must '../../type = "gre"' {
+                error-message "only relevant for GRE encapsulation";
+              }
+              description
+                "Destination IPv4 address for IP/GRE encapsulation";
+            }
+            leaf dscp {
+              type srl_nokia-comm:dscp-value;
+              must '../../type = "gre"' {
+                error-message "only relevant for GRE encapsulation";
+              }
+              description
+                "DSCP value to write into the outer IP header";
+            }
+            leaf in-profile-dscp {
+              if-feature "srl_nokia-feat:mpls-over-ip-dscp-marking-enhancements";
+              type srl_nokia-comm:dscp-value;
+              must '../../type = "gre"' {
+                error-message "only relevant for GRE encapsulation";
+              }
+              description
+                "DSCP value to write into the outer IP header when the packet has low drop-probability";
+            }
+            leaf out-profile-dscp {
+              if-feature "srl_nokia-feat:mpls-over-ip-dscp-marking-enhancements";
+              type srl_nokia-comm:dscp-value;
+              must '../../type = "gre"' {
+                error-message "only relevant for GRE encapsulation";
+              }
+              description
+                "DSCP value to write into the outer IP header when the packet has medium drop-probability";
+            }
+            leaf ip-ttl {
+              type uint8 {
+                range "1..255";
+              }
+              must '../../type = "gre"' {
+                error-message "only relevant for gre encapsulation";
+              }
+              description
+                "Initial IP TTL value that is used in the outer header during packet encapsulation";
+            }
+          }
+          container mpls {
+            if-feature "srl_nokia-feat:static-next-hop-mpls-over-gre";
+            description
+              "Enter the mpls context
+
+               Container of nodes for MPLS encapsulation
+
+               When this container is used, an MPLS header is added to the encapsulation list.";
+            leaf label {
+              type srl_nokia-comm:mpls-label-with-implicit-and-explicit-null;
+              description
+                "The MPLS label value to encode in the label stack";
+              must '../../type = "mpls"' {
+                error-message "only relevant for MPLS encapsulation";
+              }
+            }
+            leaf traffic-class {
+              type uint8 {
+                range "0..7";
+              }
+              default "0";
+              description
+                "The value of the MPLS traffic class (TC) bits written into each pushed label";
+              must '(../../type = "mpls") or (current() = 0)' {
+                error-message "only relevant for MPLS encapsulation";
+              }
+            }
+          }
+          container udp-v4 {
+            description
+              "Enter the udp-v4 context
+
+               Container of nodes for UDP in IPv4 encapsulation
 
                When this container is used, an IPv4 header with a UDP header is added to the encapsulation list.";
             leaf source-ip {

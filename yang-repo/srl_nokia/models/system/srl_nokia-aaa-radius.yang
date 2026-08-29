@@ -29,6 +29,10 @@ module srl_nokia-aaa-radius {
      related to the RADIUS protocol for authentication,
      authorization, and accounting.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-03-31 {
     description
       "SRLinux 25.3.1";
@@ -104,7 +108,9 @@ module srl_nokia-aaa-radius {
       "Top-level grouping for RADIUS server data";
     container radius {
       description
-        "Top-level container for RADIUS server data";
+        "Enter the radius context
+
+         Top-level container for RADIUS server data";
       uses aaa-radius-server-config;
     }
   }

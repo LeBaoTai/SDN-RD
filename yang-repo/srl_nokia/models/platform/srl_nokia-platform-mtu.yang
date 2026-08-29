@@ -27,6 +27,10 @@ module srl_nokia-platform-mtu {
   description
     "This module defines configuration and operational state related to MTU resources in the system";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-10-31 {
     description
       "SRLinux 24.10.1";
@@ -96,6 +100,8 @@ module srl_nokia-platform-mtu {
             "Sets the threshold that triggers the generation of a NOTICE log whenever the utilization of the MTU resource in any linecard/complex/core reaches this value in a falling direction and this is the first trigger since the last rising-threshold-log was triggered.";
         }
       }
+      description
+        "Enter the mtu context";
     }
   }
 
@@ -122,6 +128,8 @@ module srl_nokia-platform-mtu {
             "The number of resources that are unused and available";
         }
       }
+      description
+        "Enter the mtu context";
     }
   }
 

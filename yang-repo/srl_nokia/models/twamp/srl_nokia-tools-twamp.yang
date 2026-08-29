@@ -18,6 +18,10 @@ module srl_nokia-tools-twamp {
   description
     "This module defines the tools commands available for TWAMP Server/Session Reflector";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-07-31 {
     description
       "SRLinux 24.7.1";
@@ -39,6 +43,8 @@ module srl_nokia-tools-twamp {
               "Clear all TWAMP test session transmit and receive packet counts and all error counts";
           }
         }
+        description
+          "Enter the server context";
       }
     }
   }

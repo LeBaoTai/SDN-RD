@@ -7,6 +7,10 @@ module openconfig-srl-deviations {
     prefix openconfig-acl;
   }
 
+  import openconfig-alarms {
+    prefix openconfig-alarms;
+  }
+
   import openconfig-bgp-policy {
     prefix openconfig-bgp-policy;
   }
@@ -173,7 +177,7 @@ module openconfig-srl-deviations {
      Web: <http://www.nokia.com>";
   description
     "This module contains deviations related to openconfig on SR Linux";
-  revision 2026-03-31 {
+  revision 2026-07-31 {
     description "yang deviations";
   }
 
@@ -405,15 +409,69 @@ module openconfig-srl-deviations {
     }
   }
 
-  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:ip-in-ip/openconfig-network-instance:state/openconfig-network-instance:dst-ip" {
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:encap-headers/openconfig-network-instance:encap-header/openconfig-network-instance:gre/openconfig-network-instance:state/openconfig-network-instance:dst-ip" {
     deviate replace {
       type srl_nokia-common:ip-address;
     }
   }
 
-  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:ip-in-ip/openconfig-network-instance:state/openconfig-network-instance:src-ip" {
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:encap-headers/openconfig-network-instance:encap-header/openconfig-network-instance:gre/openconfig-network-instance:state/openconfig-network-instance:src-ip" {
     deviate replace {
       type srl_nokia-common:ip-address;
+    }
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:encap-headers/openconfig-network-instance:encap-header/openconfig-network-instance:ipv4/openconfig-network-instance:state/openconfig-network-instance:dst-ip" {
+    deviate replace {
+      type srl_nokia-common:ipv4-address;
+    }
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:encap-headers/openconfig-network-instance:encap-header/openconfig-network-instance:ipv4/openconfig-network-instance:state/openconfig-network-instance:src-ip" {
+    deviate replace {
+      type srl_nokia-common:ipv4-address;
+    }
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:encap-headers/openconfig-network-instance:encap-header/openconfig-network-instance:ipv6/openconfig-network-instance:state/openconfig-network-instance:dst-ip" {
+    deviate replace {
+      type srl_nokia-common:ipv6-address;
+    }
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:encap-headers/openconfig-network-instance:encap-header/openconfig-network-instance:ipv6/openconfig-network-instance:state/openconfig-network-instance:src-ip" {
+    deviate replace {
+      type srl_nokia-common:ipv6-address;
+    }
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:encap-headers/openconfig-network-instance:encap-header/openconfig-network-instance:state/openconfig-network-instance:type" {
+    deviate replace {
+      type srl_nokia-common:encapsulation-header-type;
+    }
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:encap-headers/openconfig-network-instance:encap-header/openconfig-network-instance:udp-v4/openconfig-network-instance:state/openconfig-network-instance:dst-ip" {
+    deviate replace {
+      type srl_nokia-common:ipv4-address;
+    }
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:encap-headers/openconfig-network-instance:encap-header/openconfig-network-instance:udp-v4/openconfig-network-instance:state/openconfig-network-instance:src-ip" {
+    deviate replace {
+      type srl_nokia-common:ipv4-address;
+    }
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:encap-headers/openconfig-network-instance:encap-header/openconfig-network-instance:udp-v6/openconfig-network-instance:state/openconfig-network-instance:dst-ip" {
+    deviate replace {
+      type srl_nokia-common:ipv6-address;
+    }
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:encap-headers/openconfig-network-instance:encap-header/openconfig-network-instance:udp-v6/openconfig-network-instance:state/openconfig-network-instance:src-ip" {
+    deviate replace {
+      type srl_nokia-common:ipv6-address;
     }
   }
 
@@ -906,6 +964,18 @@ module openconfig-srl-deviations {
   deviation "/openconfig-system:system/openconfig-system:dns/openconfig-system:servers/openconfig-system:server/openconfig-system:state/openconfig-system:address" {
     deviate replace {
       type srl_nokia-common:ip-address;
+    }
+  }
+
+  deviation "/openconfig-system:system/openconfig-system:logging/openconfig-system:remote-servers/openconfig-system:remote-server/openconfig-system:config/openconfig-system:host" {
+    deviate replace {
+      type srl_nokia-common:host-ietf;
+    }
+  }
+
+  deviation "/openconfig-system:system/openconfig-system:logging/openconfig-system:remote-servers/openconfig-system:remote-server/openconfig-system:state/openconfig-system:host" {
+    deviate replace {
+      type srl_nokia-common:host-ietf;
     }
   }
 
@@ -1537,22 +1607,6 @@ module openconfig-srl-deviations {
     }
   }
 
-  deviation "/openconfig-routing-policy:routing-policy/openconfig-routing-policy:policy-definitions/openconfig-routing-policy:policy-definition/openconfig-routing-policy:statements/openconfig-routing-policy:statement/openconfig-routing-policy:conditions/openconfig-routing-policy:config/openconfig-routing-policy:install-protocol-eq" {
-    deviate add {
-      must ". != 'GRIBI'" {
-        error-message "GRIBI is not supported in protocol match";
-      }
-    }
-  }
-
-  deviation "/openconfig-routing-policy:routing-policy/openconfig-routing-policy:policy-definitions/openconfig-routing-policy:policy-definition/openconfig-routing-policy:statements/openconfig-routing-policy:statement/openconfig-routing-policy:conditions/openconfig-routing-policy:state/openconfig-routing-policy:install-protocol-eq" {
-    deviate add {
-      must ". != 'GRIBI'" {
-        error-message "GRIBI is not supported in protocol match";
-      }
-    }
-  }
-
   deviation "/openconfig-system:system/openconfig-system:aaa/openconfig-system:server-groups/openconfig-system:server-group/openconfig-system:servers/openconfig-system:server/openconfig-system:config/openconfig-system:timeout" {
     deviate add {
       must ". >= 1 and . <= 3600" {
@@ -1797,6 +1851,12 @@ module openconfig-srl-deviations {
     }
   }
 
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:action/openconfig-network-instance:config/openconfig-network-instance:decapsulate-mpls-in-udp" {
+    deviate delete {
+      default false;
+    }
+  }
+
   deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:action/openconfig-network-instance:state/openconfig-network-instance:decapsulate-gre" {
     deviate delete {
       default false;
@@ -1804,6 +1864,12 @@ module openconfig-srl-deviations {
   }
 
   deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:action/openconfig-network-instance:state/openconfig-network-instance:decapsulate-gue" {
+    deviate delete {
+      default false;
+    }
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:action/openconfig-network-instance:state/openconfig-network-instance:decapsulate-mpls-in-udp" {
     deviate delete {
       default false;
     }
@@ -3381,6 +3447,22 @@ module openconfig-srl-deviations {
     deviate not-supported;
   }
 
+  deviation "/openconfig-interfaces:interfaces/openconfig-interfaces:interface/openconfig-if-ethernet:ethernet/openconfig-if-ethernet:state/openconfig-if-ethernet:post-fec-ber/openconfig-if-ethernet:avg" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-interfaces:interfaces/openconfig-interfaces:interface/openconfig-if-ethernet:ethernet/openconfig-if-ethernet:state/openconfig-if-ethernet:post-fec-ber/openconfig-if-ethernet:interval" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-interfaces:interfaces/openconfig-interfaces:interface/openconfig-if-ethernet:ethernet/openconfig-if-ethernet:state/openconfig-if-ethernet:pre-fec-ber/openconfig-if-ethernet:avg" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-interfaces:interfaces/openconfig-interfaces:interface/openconfig-if-ethernet:ethernet/openconfig-if-ethernet:state/openconfig-if-ethernet:pre-fec-ber/openconfig-if-ethernet:interval" {
+    deviate not-supported;
+  }
+
   deviation "/openconfig-interfaces:interfaces/openconfig-interfaces:interface/openconfig-if-ethernet:ethernet/openconfig-if-ethernet:state/openconfig-if-ethernet:standalone-link-training" {
     deviate not-supported;
   }
@@ -3797,14 +3879,6 @@ module openconfig-srl-deviations {
     deviate not-supported;
   }
 
-  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:ipv4-unicast/openconfig-network-instance:ipv4-entry/openconfig-network-instance:state/openconfig-network-instance:counters/openconfig-network-instance:octets-forwarded-backup" {
-    deviate not-supported;
-  }
-
-  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:ipv4-unicast/openconfig-network-instance:ipv4-entry/openconfig-network-instance:state/openconfig-network-instance:counters/openconfig-network-instance:packets-forwarded-backup" {
-    deviate not-supported;
-  }
-
   deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:ipv4-unicast/openconfig-network-instance:ipv4-entry/openconfig-network-instance:state/openconfig-network-instance:decapsulate-header" {
     deviate not-supported;
   }
@@ -3833,11 +3907,23 @@ module openconfig-srl-deviations {
     deviate not-supported;
   }
 
-  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:encap-headers" {
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:encap-headers/openconfig-network-instance:encap-header/openconfig-network-instance:vxlan/openconfig-network-instance:state/openconfig-network-instance:tunnel-src-ip-address" {
     deviate not-supported;
   }
 
   deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:gre" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:ip-in-ip" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:state/openconfig-network-instance:decapsulate-header" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:state/openconfig-network-instance:encapsulate-header" {
     deviate not-supported;
   }
 
@@ -3846,6 +3932,10 @@ module openconfig-srl-deviations {
   }
 
   deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:state/openconfig-network-instance:pop-top-label" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:afts/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:state/openconfig-network-instance:pushed-mpls-label-stack" {
     deviate not-supported;
   }
 
@@ -3933,7 +4023,99 @@ module openconfig-srl-deviations {
     deviate not-supported;
   }
 
-  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls" {
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:global" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:lsps/openconfig-network-instance:constrained-path" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:lsps/openconfig-network-instance:static-lsps/openconfig-network-instance:static-lsp/openconfig-network-instance:egress/openconfig-network-instance:config/openconfig-network-instance:interface" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:lsps/openconfig-network-instance:static-lsps/openconfig-network-instance:static-lsp/openconfig-network-instance:egress/openconfig-network-instance:config/openconfig-network-instance:metric" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:lsps/openconfig-network-instance:static-lsps/openconfig-network-instance:static-lsp/openconfig-network-instance:egress/openconfig-network-instance:config/openconfig-network-instance:next-hop" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:lsps/openconfig-network-instance:static-lsps/openconfig-network-instance:static-lsp/openconfig-network-instance:egress/openconfig-network-instance:config/openconfig-network-instance:push-label" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:lsps/openconfig-network-instance:static-lsps/openconfig-network-instance:static-lsp/openconfig-network-instance:egress/openconfig-network-instance:config/openconfig-network-instance:subinterface" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:lsps/openconfig-network-instance:static-lsps/openconfig-network-instance:static-lsp/openconfig-network-instance:egress/openconfig-network-instance:lsp-next-hops/openconfig-network-instance:lsp-next-hop/openconfig-network-instance:config/openconfig-network-instance:interface" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:lsps/openconfig-network-instance:static-lsps/openconfig-network-instance:static-lsp/openconfig-network-instance:egress/openconfig-network-instance:lsp-next-hops/openconfig-network-instance:lsp-next-hop/openconfig-network-instance:config/openconfig-network-instance:push-label" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:lsps/openconfig-network-instance:static-lsps/openconfig-network-instance:static-lsp/openconfig-network-instance:egress/openconfig-network-instance:lsp-next-hops/openconfig-network-instance:lsp-next-hop/openconfig-network-instance:config/openconfig-network-instance:subinterface" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:lsps/openconfig-network-instance:static-lsps/openconfig-network-instance:static-lsp/openconfig-network-instance:egress/openconfig-network-instance:lsp-next-hops/openconfig-network-instance:lsp-next-hop/openconfig-network-instance:state/openconfig-network-instance:interface" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:lsps/openconfig-network-instance:static-lsps/openconfig-network-instance:static-lsp/openconfig-network-instance:egress/openconfig-network-instance:lsp-next-hops/openconfig-network-instance:lsp-next-hop/openconfig-network-instance:state/openconfig-network-instance:push-label" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:lsps/openconfig-network-instance:static-lsps/openconfig-network-instance:static-lsp/openconfig-network-instance:egress/openconfig-network-instance:lsp-next-hops/openconfig-network-instance:lsp-next-hop/openconfig-network-instance:state/openconfig-network-instance:subinterface" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:lsps/openconfig-network-instance:static-lsps/openconfig-network-instance:static-lsp/openconfig-network-instance:egress/openconfig-network-instance:state/openconfig-network-instance:interface" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:lsps/openconfig-network-instance:static-lsps/openconfig-network-instance:static-lsp/openconfig-network-instance:egress/openconfig-network-instance:state/openconfig-network-instance:metric" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:lsps/openconfig-network-instance:static-lsps/openconfig-network-instance:static-lsp/openconfig-network-instance:egress/openconfig-network-instance:state/openconfig-network-instance:next-hop" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:lsps/openconfig-network-instance:static-lsps/openconfig-network-instance:static-lsp/openconfig-network-instance:egress/openconfig-network-instance:state/openconfig-network-instance:push-label" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:lsps/openconfig-network-instance:static-lsps/openconfig-network-instance:static-lsp/openconfig-network-instance:egress/openconfig-network-instance:state/openconfig-network-instance:subinterface" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:lsps/openconfig-network-instance:static-lsps/openconfig-network-instance:static-lsp/openconfig-network-instance:ingress" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:lsps/openconfig-network-instance:static-lsps/openconfig-network-instance:static-lsp/openconfig-network-instance:transit" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:lsps/openconfig-network-instance:unconstrained-path" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:signaling-protocols" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:te-global-attributes" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:mpls/openconfig-network-instance:te-interface-attributes" {
     deviate not-supported;
   }
 
@@ -3949,15 +4131,15 @@ module openconfig-srl-deviations {
     deviate not-supported;
   }
 
-  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:action/openconfig-network-instance:config/openconfig-network-instance:decapsulate-mpls-in-udp" {
-    deviate not-supported;
-  }
-
   deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:action/openconfig-network-instance:config/openconfig-network-instance:discard" {
     deviate not-supported;
   }
 
   deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:action/openconfig-network-instance:config/openconfig-network-instance:ip-ttl" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:action/openconfig-network-instance:config/openconfig-network-instance:log" {
     deviate not-supported;
   }
 
@@ -3973,7 +4155,19 @@ module openconfig-srl-deviations {
     deviate not-supported;
   }
 
-  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:action/openconfig-network-instance:state/openconfig-network-instance:decapsulate-mpls-in-udp" {
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:action/openconfig-network-instance:forwarding" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:action/openconfig-network-instance:ipv4" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:action/openconfig-network-instance:ipv6" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:action/openconfig-network-instance:mpls" {
     deviate not-supported;
   }
 
@@ -3985,7 +4179,19 @@ module openconfig-srl-deviations {
     deviate not-supported;
   }
 
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:action/openconfig-network-instance:state/openconfig-network-instance:log" {
+    deviate not-supported;
+  }
+
   deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:action/openconfig-network-instance:state/openconfig-network-instance:path-selection-group" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:config/openconfig-network-instance:address-family" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:config/openconfig-network-instance:description" {
     deviate not-supported;
   }
 
@@ -3998,6 +4204,10 @@ module openconfig-srl-deviations {
   }
 
   deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:ipv4/openconfig-network-instance:config/openconfig-network-instance:length" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:ipv4/openconfig-network-instance:config/openconfig-network-instance:source-address-prefix-set" {
     deviate not-supported;
   }
 
@@ -4017,6 +4227,10 @@ module openconfig-srl-deviations {
     deviate not-supported;
   }
 
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:ipv4/openconfig-network-instance:state/openconfig-network-instance:source-address-prefix-set" {
+    deviate not-supported;
+  }
+
   deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:ipv6/openconfig-network-instance:config/openconfig-network-instance:destination-flow-label" {
     deviate not-supported;
   }
@@ -4030,6 +4244,10 @@ module openconfig-srl-deviations {
   }
 
   deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:ipv6/openconfig-network-instance:config/openconfig-network-instance:length" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:ipv6/openconfig-network-instance:config/openconfig-network-instance:source-address-prefix-set" {
     deviate not-supported;
   }
 
@@ -4057,11 +4275,23 @@ module openconfig-srl-deviations {
     deviate not-supported;
   }
 
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:ipv6/openconfig-network-instance:state/openconfig-network-instance:source-address-prefix-set" {
+    deviate not-supported;
+  }
+
   deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:ipv6/openconfig-network-instance:state/openconfig-network-instance:source-flow-label" {
     deviate not-supported;
   }
 
   deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:l2" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:state/openconfig-network-instance:address-family" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:policy-forwarding/openconfig-network-instance:policies/openconfig-network-instance:policy/openconfig-network-instance:rules/openconfig-network-instance:rule/openconfig-network-instance:state/openconfig-network-instance:description" {
     deviate not-supported;
   }
 
@@ -5053,11 +5283,27 @@ module openconfig-srl-deviations {
     deviate not-supported;
   }
 
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:protocols/openconfig-network-instance:protocol/openconfig-network-instance:static-routes/openconfig-network-instance:static/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:config/openconfig-local-routing-network-instance:next-network-instance" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:protocols/openconfig-network-instance:protocol/openconfig-network-instance:static-routes/openconfig-network-instance:static/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:config/openconfig-local-routing-network-instance:nh-network-instance" {
+    deviate not-supported;
+  }
+
   deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:protocols/openconfig-network-instance:protocol/openconfig-network-instance:static-routes/openconfig-network-instance:static/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:enable-bfd" {
     deviate not-supported;
   }
 
   deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:protocols/openconfig-network-instance:protocol/openconfig-network-instance:static-routes/openconfig-network-instance:static/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:interface-ref" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:protocols/openconfig-network-instance:protocol/openconfig-network-instance:static-routes/openconfig-network-instance:static/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:state/openconfig-local-routing-network-instance:next-network-instance" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-network-instance:network-instances/openconfig-network-instance:network-instance/openconfig-network-instance:protocols/openconfig-network-instance:protocol/openconfig-network-instance:static-routes/openconfig-network-instance:static/openconfig-network-instance:next-hops/openconfig-network-instance:next-hop/openconfig-network-instance:state/openconfig-local-routing-network-instance:nh-network-instance" {
     deviate not-supported;
   }
 
@@ -5526,6 +5772,14 @@ module openconfig-srl-deviations {
   }
 
   deviation "/openconfig-platform:components/openconfig-platform:component/openconfig-platform:properties" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-platform:components/openconfig-platform:component/openconfig-platform:state/openconfig-alarms:equipment-failure" {
+    deviate not-supported;
+  }
+
+  deviation "/openconfig-platform:components/openconfig-platform:component/openconfig-platform:state/openconfig-alarms:equipment-mismatch" {
     deviate not-supported;
   }
 
@@ -6401,7 +6655,7 @@ module openconfig-srl-deviations {
     deviate not-supported;
   }
 
-  deviation "/openconfig-system:system/openconfig-system:alarms" {
+  deviation "/openconfig-system:system/openconfig-system:alarms/openconfig-system:alarm/openconfig-system:config" {
     deviate not-supported;
   }
 

@@ -16,6 +16,10 @@ module srl_nokia-tools-qos-policers {
     "Nokia SR Linux Support
      Web: <http://www.nokia.com>";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-07-31 {
     description
       "SRLinux 24.7.1";
@@ -59,6 +63,8 @@ module srl_nokia-tools-qos-policers {
           type empty;
         }
       }
+      description
+        "Enter the policer-policies context";
     }
   }
 

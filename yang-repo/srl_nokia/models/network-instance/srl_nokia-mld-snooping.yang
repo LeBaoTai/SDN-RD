@@ -30,6 +30,10 @@ module srl_nokia-mld-snooping {
   description
     "This yang file models configuration and state of the mld snooping protocol on mac-vrf";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-07-31 {
     description
       "SRLinux 25.7.1";
@@ -107,7 +111,9 @@ module srl_nokia-mld-snooping {
         "Enter the trace-options context";
       container trace {
         description
-          "Tracing parameter flags";
+          "Enter the trace context
+
+           Tracing parameter flags";
         container packet {
           presence "Enable the tracing of MLD packets";
           description
@@ -308,7 +314,9 @@ module srl_nokia-mld-snooping {
     container proxy-membership-groups {
       config false;
       description
-        "Proxy Database created for the network-instance
+        "Enter the proxy-membership-groups context
+
+         Proxy Database created for the network-instance
 
          The content of this table is used by the router to proxy the
          reports towards the Querier, when the Querier is attached to a
@@ -358,7 +366,9 @@ module srl_nokia-mld-snooping {
     container proxy-evpn-membership-groups {
       config false;
       description
-        "EVPN Proxy Database created for the network-instance
+        "Enter the proxy-evpn-membership-groups context
+
+         EVPN Proxy Database created for the network-instance
 
          The content of this table is used by the router to proxy the
          reports towards the remote PEs via BGP EVPN SMET (Selective
@@ -586,7 +596,9 @@ module srl_nokia-mld-snooping {
     }
     container static-membership-groups {
       description
-        "Container to configure static <S,G>s for this interface";
+        "Enter the static-membership-groups context
+
+         Container to configure static <S,G>s for this interface";
       list group {
         key "group";
         must "not(starts-with(../../interface-name, 'irb'))" {
@@ -876,34 +888,44 @@ module srl_nokia-mld-snooping {
       config false;
       srl_nokia-ext:show-importance "high";
       description
-        "Received message statistics";
+        "Enter the received context
+
+         Received message statistics";
       uses mld-snooping-msg-rx-stats;
     }
     container transmitted {
       config false;
       srl_nokia-ext:show-importance "high";
       description
-        "Transmit message statistics";
+        "Enter the transmitted context
+
+         Transmit message statistics";
       uses mld-snooping-msg-tx-stats;
     }
     container forwarded {
       config false;
       srl_nokia-ext:show-importance "high";
       description
-        "Forward message statistics";
+        "Enter the forwarded context
+
+         Forward message statistics";
       uses mld-snooping-msg-fwd-stats;
     }
     container error {
       config false;
       srl_nokia-ext:show-importance "high";
       description
-        "Error message statistics";
+        "Enter the error context
+
+         Error message statistics";
       uses mld-snooping-msg-error-stats;
     }
     container multicast-states {
       config false;
       description
-        "Multicast state count for this network instance";
+        "Enter the multicast-states context
+
+         Multicast state count for this network instance";
       uses mld-snooping-multicast-state;
     }
   }
@@ -994,7 +1016,9 @@ module srl_nokia-mld-snooping {
     container membership-groups {
       config false;
       description
-        "List of MLD Membership information";
+        "Enter the membership-groups context
+
+         List of MLD Membership information";
       list group {
         key "group";
         config false;
@@ -1027,7 +1051,9 @@ module srl_nokia-mld-snooping {
     container statistics {
       config false;
       description
-        "MLD sub-interface statistics";
+        "Enter the statistics context
+
+         MLD sub-interface statistics";
       uses mld-snooping-statistics-state;
     }
     leaf is-mrouter-port {
@@ -1100,7 +1126,9 @@ module srl_nokia-mld-snooping {
     container statistics {
       config false;
       description
-        "vxlan-interface statistics";
+        "Enter the statistics context
+
+         vxlan-interface statistics";
       uses mld-snooping-bgp-smet-route-stats;
     }
   }

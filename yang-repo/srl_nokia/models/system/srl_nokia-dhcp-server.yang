@@ -27,6 +27,10 @@ module srl_nokia-dhcp-server {
   description
     "This module defines configuration and operational state data related to the dhcp server.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -152,7 +156,9 @@ module srl_nokia-dhcp-server {
     }
     container trace-options {
       description
-        "Container for tracing DHCP server operations instance";
+        "Enter the trace-options context
+
+         Container for tracing DHCP server operations instance";
       leaf-list trace {
         type enumeration {
           enum messages {
@@ -181,6 +187,8 @@ module srl_nokia-dhcp-server {
         description
           "Total dhcp packets sent from DHCP server towards dhcp client(s)";
       }
+      description
+        "Enter the statistics context";
     }
   }
 
@@ -202,6 +210,8 @@ module srl_nokia-dhcp-server {
         uses dhcp-server-v4-options;
       }
       uses dhcpv4-relay-information;
+      description
+        "Enter the static-allocation context";
     }
   }
 
@@ -222,6 +232,8 @@ module srl_nokia-dhcp-server {
         }
         uses dhcp-server-v6-options;
       }
+      description
+        "Enter the static-allocation context";
     }
   }
 
@@ -351,6 +363,8 @@ module srl_nokia-dhcp-server {
           "The IP address of the next server to use for booting - option 54";
       }
       uses dhcpv4-custom-options-common;
+      description
+        "Enter the options context";
     }
   }
 
@@ -372,6 +386,8 @@ module srl_nokia-dhcp-server {
         description
           "An ordered list of domains to return to the dhcp client that the client should search when resolving hostnames";
       }
+      description
+        "Enter the options context";
     }
   }
 
@@ -380,6 +396,8 @@ module srl_nokia-dhcp-server {
       uses dhcp-common;
       uses dhcp-server-v4-options;
       uses static-allocation-v4;
+      description
+        "Enter the dhcpv4 context";
     }
   }
 
@@ -388,6 +406,8 @@ module srl_nokia-dhcp-server {
       uses dhcp-common;
       uses dhcp-server-v6-options;
       uses static-allocation-v6;
+      description
+        "Enter the dhcpv6 context";
     }
   }
 

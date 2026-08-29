@@ -25,6 +25,10 @@ module srl_nokia-system-bridge-table-evpn {
     "This module defines system bridge-table evpn operational
      state data";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-07-31 {
     description
       "SRLinux 24.7.1";
@@ -35,7 +39,9 @@ module srl_nokia-system-bridge-table-evpn {
       if-feature "srl-feat:evpn";
       srl_nokia-ext:first-released "20.10.1";
       description
-        "System bridge-table BGP-EVPN information";
+        "Enter the evpn context
+
+         System bridge-table BGP-EVPN information";
     }
   }
 

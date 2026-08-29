@@ -21,6 +21,10 @@ module srl_nokia-tools-event-handler {
   description
     "This module defines operational commands for the event handler";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2022-03-31 {
     description
       "SRLinux 22.3.1";
@@ -48,7 +52,9 @@ module srl_nokia-tools-event-handler {
         }
         container statistics {
           description
-            "Top-level container for operational commands on event handler statistics";
+            "Enter the statistics context
+
+             Top-level container for operational commands on event handler statistics";
           leaf clear {
             type empty;
             description

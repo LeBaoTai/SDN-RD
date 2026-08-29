@@ -30,6 +30,10 @@ module srl_nokia-system-datapath {
   description
     "This module defines configuration and operational state data related to system wide forwarding options.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -51,7 +55,9 @@ module srl_nokia-system-datapath {
     container secondary-default-lookup {
       if-feature "srl_nokia-feat:system-fallback-routing";
       description
-        "Container with options to control fallback routing achieved by doing a secondary FIB lookup in the default network-instance";
+        "Enter the secondary-default-lookup context
+
+         Container with options to control fallback routing achieved by doing a secondary FIB lookup in the default network-instance";
       leaf admin-state {
         type srl_nokia-comm:admin-state;
         default "disable";
@@ -102,10 +108,14 @@ module srl_nokia-system-datapath {
     container icmp {
       if-feature "srl_nokia-feat:icmp-rate-control";
       description
-        "Context for system-wide control of ICMP message generation";
+        "Enter the icmp context
+
+         Context for system-wide control of ICMP message generation";
       container rate-limit-per-host {
         description
-          "Context for controller rate limiting behavior per host";
+          "Enter the rate-limit-per-host context
+
+           Context for controller rate limiting behavior per host";
         leaf peak-rate {
           description
             "The peak rate for generated ICMP messages sent towards each host
@@ -133,10 +143,14 @@ module srl_nokia-system-datapath {
     container icmp6 {
       if-feature "srl_nokia-feat:icmp-rate-control";
       description
-        "Context for system-wide control of ICMPv6 message generation";
+        "Enter the icmp6 context
+
+         Context for system-wide control of ICMPv6 message generation";
       container rate-limit-per-host {
         description
-          "Context for controller rate limiting behavior per host";
+          "Enter the rate-limit-per-host context
+
+           Context for controller rate limiting behavior per host";
         leaf peak-rate {
           description
             "The peak rate for generated ICMP messages sent towards each host
@@ -167,7 +181,9 @@ module srl_nokia-system-datapath {
     container datapath {
       if-feature "srl_nokia-feat:system-forwarding-mode or srl_nokia-feat:icmp-rate-control or srl_nokia-feat:system-fallback-routing";
       description
-        "Context for system wide forwarding options";
+        "Enter the datapath context
+
+         Context for system wide forwarding options";
       leaf forwarding-mode {
         if-feature "srl_nokia-feat:system-forwarding-mode";
         type enumeration {

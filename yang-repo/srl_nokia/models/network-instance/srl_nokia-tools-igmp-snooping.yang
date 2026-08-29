@@ -21,6 +21,10 @@ module srl_nokia-tools-igmp-snooping {
   description
     "Model for IGMP SNOOPING operational commands";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2023-03-31 {
     description
       "SRLinux 23.3.1";
@@ -36,6 +40,8 @@ module srl_nokia-tools-igmp-snooping {
           description
             "Reset IGMP SNOOPING statistics for all interfaces";
         }
+        description
+          "Enter the statistics context";
       }
       container membership-groups {
         leaf clear {
@@ -73,6 +79,8 @@ module srl_nokia-tools-igmp-snooping {
             }
           }
         }
+        description
+          "Enter the membership-groups context";
       }
       container querier {
         leaf clear {
@@ -80,6 +88,8 @@ module srl_nokia-tools-igmp-snooping {
           description
             "Clear all IGMP SNOOPING querier info on all interfaces";
         }
+        description
+          "Enter the querier context";
       }
       list interface {
         description
@@ -96,6 +106,8 @@ module srl_nokia-tools-igmp-snooping {
             description
               "Reset IGMP SNOOPING statistics for this interface";
           }
+          description
+            "Enter the statistics context";
         }
         container membership-groups {
           leaf clear {
@@ -133,6 +145,8 @@ module srl_nokia-tools-igmp-snooping {
               }
             }
           }
+          description
+            "Enter the membership-groups context";
         }
       }
     }

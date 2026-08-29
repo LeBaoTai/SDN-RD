@@ -21,6 +21,10 @@ module srl_nokia-bridge-table-mac-duplication-entries {
   description
     "This yang file gives a description of bridge table configuration.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2021-03-31 {
     description
       "SRLinux 21.3.1";
@@ -79,6 +83,8 @@ module srl_nokia-bridge-table-mac-duplication-entries {
             "the name of the destination the duplicate mac is installed against in the fdb.";
         }
       }
+      description
+        "Enter the duplicate-entries context";
     }
   }
 

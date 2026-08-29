@@ -18,6 +18,10 @@ module srl_nokia-tools-sync {
   description
     "Model for operational commands on time protocols and statstics";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -69,7 +73,9 @@ module srl_nokia-tools-sync {
         "Top-level grouping for sync operational commands";
       container ptp {
         description
-          "Grouping for ptp operational commands";
+          "Enter the ptp context
+
+           Grouping for ptp operational commands";
         list instance {
           key "instance-index";
           description
@@ -86,7 +92,9 @@ module srl_nokia-tools-sync {
           }
           container default-ds {
             description
-              "The default data set of the PTP Instance
+              "Enter the default-ds context
+
+               The default data set of the PTP Instance
                In the context of the protocol, this data set is required
                for an Ordinary Clock or Boundary Clock";
             container statistics {
@@ -95,6 +103,8 @@ module srl_nokia-tools-sync {
                 description
                   "Clears PTP statistics and event counters in the default-ds";
               }
+              description
+                "Enter the statistics context";
             }
             container time-recovery-engine {
               container statistics {
@@ -103,7 +113,11 @@ module srl_nokia-tools-sync {
                   description
                     "Clears all PTP statistics for PTP time recovery engine";
                 }
+                description
+                  "Enter the statistics context";
               }
+              description
+                "Enter the time-recovery-engine context";
             }
             container freq-recovery-engine {
               if-feature "srl_nokia-feat:sync-ptp-freq";
@@ -113,7 +127,11 @@ module srl_nokia-tools-sync {
                   description
                     "Clears all PTP statistics for PTP freq recovery engine";
                 }
+                description
+                  "Enter the statistics context";
               }
+              description
+                "Enter the freq-recovery-engine context";
             }
           }
           list port-ds-interface {
@@ -129,6 +147,8 @@ module srl_nokia-tools-sync {
                 description
                   "Clears all PTP statistics for this PTP Port DS";
               }
+              description
+                "Enter the statistics context";
             }
           }
           list port-ds-configured-peer {
@@ -145,6 +165,8 @@ module srl_nokia-tools-sync {
                 description
                   "Clears all PTP statistics for this PTP Port DS";
               }
+              description
+                "Enter the statistics context";
             }
           }
           list port-ds-discovered-peer {
@@ -161,6 +183,8 @@ module srl_nokia-tools-sync {
                 description
                   "Clears all PTP statistics for this PTP Port DS";
               }
+              description
+                "Enter the statistics context";
             }
           }
           container port-ds-sync0 {
@@ -194,8 +218,12 @@ module srl_nokia-tools-sync {
                   description
                     "Clears all PTP statistics for this sync0";
                 }
+                description
+                  "Enter the statistics context";
               }
             }
+            description
+              "Enter the port-ds-sync0 context";
           }
           container inactive-peers {
             if-feature "srl_nokia-feat:sync-ptp-ip-peers";
@@ -204,6 +232,8 @@ module srl_nokia-tools-sync {
               description
                 "Clears information related to inactive PTP peers";
             }
+            description
+              "Enter the inactive-peers context";
           }
           container recovery-engine {
             if-feature "srl_nokia-feat:sync-ptp-reset";
@@ -212,12 +242,16 @@ module srl_nokia-tools-sync {
               description
                 "Resets the PTP clock algorithm and restarts the recovery process";
             }
+            description
+              "Enter the recovery-engine context";
           }
         }
       }
       container gnss {
         description
-          "Grouping for GNSS operational commands";
+          "Enter the gnss context
+
+           Grouping for GNSS operational commands";
         leaf restart-position-survey {
           if-feature "srl_nokia-feat:sync-gnss-faster-start";
           type empty;

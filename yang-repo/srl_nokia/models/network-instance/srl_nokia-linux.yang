@@ -15,6 +15,10 @@ module srl_nokia-linux {
   description
     "This YANG file gives a description of network-instance interface to linux";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2019-11-30 {
     description
       "SRLinux 19.11.1";
@@ -23,7 +27,9 @@ module srl_nokia-linux {
   grouping linux-top {
     container linux {
       description
-        "Enables routing interaction with the Linux kernel";
+        "Enter the linux context
+
+         Enables routing interaction with the Linux kernel";
       leaf import-routes {
         type boolean;
         default "false";

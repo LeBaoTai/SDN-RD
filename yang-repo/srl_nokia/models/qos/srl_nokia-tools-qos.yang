@@ -13,6 +13,10 @@ module srl_nokia-tools-qos {
     "Nokia SR Linux Support
      Web: <http://www.nokia.com>";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-07-31 {
     description
       "SRLinux 24.7.1";
@@ -75,7 +79,9 @@ module srl_nokia-tools-qos {
         }
         container pfc {
           description
-            "Clearing PFC statisctics on per interface basis";
+            "Enter the pfc context
+
+             Clearing PFC statisctics on per interface basis";
           if-feature "srl-feat:qos-pfc";
           leaf clear-statistics {
             type empty;
@@ -83,6 +89,8 @@ module srl_nokia-tools-qos {
         }
         container input {
           if-feature "(srl-feat:ingress-subif-policing and srl-feat:subif-policer) or srl-feat:qos-policer-policies";
+          description
+            "Enter the input context";
         }
         container output {
           container queues {
@@ -97,14 +105,22 @@ module srl_nokia-tools-qos {
                 leaf clear {
                   type empty;
                 }
+                description
+                  "Enter the queue-statistics context";
               }
             }
             leaf clear-statistics {
               type empty;
             }
+            description
+              "Enter the queues context";
           }
+          description
+            "Enter the output context";
         }
       }
     }
+    description
+      "Enter the qos context";
   }
 }

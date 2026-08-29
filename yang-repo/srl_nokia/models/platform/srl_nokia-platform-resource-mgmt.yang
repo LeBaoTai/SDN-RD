@@ -24,6 +24,10 @@ module srl_nokia-platform-resource-mgmt {
   description
     "This module defines configuration and operational data for system-wide management of critical resources";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -87,11 +91,34 @@ module srl_nokia-platform-resource-mgmt {
   grouping res-mgmt {
     container resource-management {
       description
-        "Container for managing resources in a system-wide context";
+        "Enter the resource-management context
+
+         Container for managing resources in a system-wide context";
+      container ip-routes {
+        if-feature "srl-feat:ipv4-routes-lem-optimization";
+        description
+          "Enter the ip-routes context
+
+           Resource management related to storage and compression of IPv4 FIB routes";
+        leaf ipv4-lem-optimization {
+          description
+            "Use LEM for storage of compressed IPv4 FIB routes";
+          type boolean;
+          default "false";
+        }
+        leaf chassis-reboot-required {
+          config false;
+          type boolean;
+          description
+            "Returns true if the system needs to be restarted for changes to ipv4-lem-optimization configuration to take effect";
+        }
+      }
       container mdb-profile {
         if-feature "srl-feat:platform-mdb-profile";
         description
-          "Container for managing the allocation of hardware resources according to a Broadcom MDB profile";
+          "Enter the mdb-profile context
+
+           Container for managing the allocation of hardware resources according to a Broadcom MDB profile";
         leaf chassis-reboot-required {
           config false;
           type boolean;
@@ -125,14 +152,41 @@ module srl_nokia-platform-resource-mgmt {
           default "1";
         }
       }
+      container lag-pool {
+        if-feature "srl-feat:platform-dnx-lag-pool-management";
+        description
+          "Enter the lag-pool context
+
+           Container for managing the system-wide reservation of LAG pool resources on Broadcom DNX";
+        leaf chassis-reboot-required {
+          config false;
+          type boolean;
+          description
+            "Indicates if a chassis reboot is required to activate configuration changes in this container.
+             Reads true if the user has committed a change in the configuration of lag-pool but has not yet saved the config and restarted the system, so previous configuration is still in effect.";
+        }
+        leaf max-member-count {
+          description
+            "Configures the maximum allowed numbre of member links in any LAG across the system. Requires system reboot to take effect.
+             The configured value controls the maximum allowed member links within any LAG on the system, and affects the maximum scale of LAG subinterfaces with per-subinterface queueing QoS configuration. A range of discrete values is allowed";
+          type uint16 {
+            range "2|4|8|16|32|64";
+          }
+          default "64";
+        }
+      }
       container tcam {
         description
-          "Container for managing the allocation of TCAM banks to different applications.";
+          "Enter the tcam context
+
+           Container for managing the allocation of TCAM banks to different applications.";
       }
       container unified-forwarding-resources {
         if-feature "srl-feat:unified-forwarding-tables";
         description
-          "Container for managing Broadcom-specific UFT resources.";
+          "Enter the unified-forwarding-resources context
+
+           Container for managing Broadcom-specific UFT resources.";
         leaf xdp-restart-required {
           config false;
           type boolean;
@@ -158,6 +212,20 @@ module srl_nokia-platform-resource-mgmt {
             }
             enum high-scale {
               if-feature "srl-feat:platform-7220-d2 or srl-feat:platform-7220-d3 or srl-feat:trident4";
+            }
+          }
+        }
+        leaf td4-mode {
+          if-feature "srl-feat:unified-forwarding-tables-mode";
+          description
+            "Controls the UFT profile mode on TD4-based platforms
+
+             Supersedes configuration of the alpm leaf.";
+          type enumeration {
+            enum 2 {
+              if-feature "srl-feat:unified-forwarding-tables-mode-2";
+              description
+                "UFT mode 2";
             }
           }
         }
@@ -218,7 +286,9 @@ module srl_nokia-platform-resource-mgmt {
       container counter-banks {
         if-feature "srl-feat:platform-counter-bank-allocation";
         description
-          "Container for managing the allocation of hardware counter banks";
+          "Enter the counter-banks context
+
+           Container for managing the allocation of hardware counter banks";
         leaf chassis-reboot-required {
           config false;
           type boolean;
@@ -266,7 +336,9 @@ module srl_nokia-platform-resource-mgmt {
       container group-based-policy {
         if-feature "srl-feat:platform-group-based-policy";
         description
-          "Container for managing the allocation of hardware resources used for group-based policy";
+          "Enter the group-based-policy context
+
+           Container for managing the allocation of hardware resources used for group-based policy";
         leaf chassis-reboot-required {
           if-feature "srl-feat:platform-group-based-policy-ip-vrf";
           config false;
@@ -294,6 +366,34 @@ module srl_nokia-platform-resource-mgmt {
             "True means the datapath is operating in a mode that can find the source tag from LPM route table lookups
 
              Certain route scale numbers may be reduced when operating in this mode.";
+        }
+      }
+      container dynamic-subinterfaces {
+        if-feature "srl-feat:platform-dynamic-subinterfaces";
+        description
+          "Enter the dynamic-subinterfaces context
+
+           Container for managing resources related to dynamic subinterfaces";
+        leaf chassis-reboot-required {
+          config false;
+          type boolean;
+          description
+            "Indicates if a chassis reboot is required to activate configuration changes in this container
+
+             When set to true, the system allocates resources for dynamic subinterfaces.
+             When set to false, the system does not allocate resources for dynamic subinterfaces
+             and uses those resources for other purposes.";
+        }
+        leaf max-vlans {
+          description
+            "Configures the allowed number of VLAN entries on the interfaces configured for dynamic subinterfaces
+
+             When set to 0, the system does not allocate resources for dynamic subinterfaces.
+             When set to a value greater than 0, the system allocates resources for dynamic subinterfaces, including untagged traffic.";
+          type uint16 {
+            range "0|4095";
+          }
+          default "0";
         }
       }
     }

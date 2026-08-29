@@ -24,6 +24,10 @@ module srl_nokia-load-balancing {
   description
     "This module defines configuration and operational state data related to ECMP and other load-balancing options.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -81,7 +85,9 @@ module srl_nokia-load-balancing {
     container load-balancing {
       if-feature "srl_nokia-feat:load-balancing and not srl_nokia-feat:platform-imgmt";
       description
-        "Adjust system-wide ECMP load balancing options.";
+        "Enter the load-balancing context
+
+         Adjust system-wide ECMP load balancing options.";
       container dynamic {
         if-feature "srl_nokia-feat:dynamic-load-balancing";
         leaf flowset-size {
@@ -183,7 +189,11 @@ module srl_nokia-load-balancing {
             default "10";
             units "percentage";
           }
+          description
+            "Enter the weighting-factor context";
         }
+        description
+          "Enter the dynamic context";
       }
       container hash-options {
         if-feature "not srl_nokia-feat:fpcx";
@@ -196,7 +206,9 @@ module srl_nokia-load-balancing {
           srl_nokia-ext:if-feature "srl_nokia-features:ixr-dnx";
         }
         description
-          "Container for packet header fields and other inputs used in hashing calculations";
+          "Enter the hash-options context
+
+           Container for packet header fields and other inputs used in hashing calculations";
         leaf hash-seed {
           type union {
             type uint16;

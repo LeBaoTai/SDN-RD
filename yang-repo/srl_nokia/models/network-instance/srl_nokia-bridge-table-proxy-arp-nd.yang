@@ -27,6 +27,10 @@ module srl_nokia-bridge-table-proxy-arp-nd {
   description
     "This yang file gives a description of bridge table proxy arp and nd configuration.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-07-31 {
     description
       "SRLinux 24.7.1";
@@ -128,7 +132,9 @@ module srl_nokia-bridge-table-proxy-arp-nd {
     container internal-tags {
       if-feature "srl-feat:internal-tags and srl-feat:l2-proxy-arp-nd-route-internal-tags";
       description
-        "Configuration and state of internal tags";
+        "Enter the internal-tags context
+
+         Configuration and state of internal tags";
       leaf-list set-tag-set {
         max-elements 1;
         type leafref {
@@ -144,7 +150,9 @@ module srl_nokia-bridge-table-proxy-arp-nd {
     container flood {
       if-feature "srl-feat:l2-proxy-arp-nd-control-flood-on-evpn";
       description
-        "How ARP frames received on a proxy service are flooded into the EVPN network";
+        "Enter the flood context
+
+         How ARP frames received on a proxy service are flooded into the EVPN network";
       leaf unknown-arp-req {
         type boolean;
         default "true";
@@ -163,7 +171,9 @@ module srl_nokia-bridge-table-proxy-arp-nd {
   grouping bridge-table-proxy-arp-evpn-config {
     container evpn {
       description
-        "How proxy arp interacts with evpn";
+        "Enter the evpn context
+
+         How proxy arp interacts with evpn";
       uses bridge-table-proxy-arp-nd-evpn-internal-tag-config;
       uses bridge-table-proxy-arp-evpn-flood-config;
     }
@@ -172,7 +182,9 @@ module srl_nokia-bridge-table-proxy-arp-nd {
   grouping bridge-table-proxy-arp-nd-common-dupdetect-config {
     container ip-duplication {
       description
-        "Configuration of the proxy ARP/ND IP duplication procedures";
+        "Enter the ip-duplication context
+
+         Configuration of the proxy ARP/ND IP duplication procedures";
       leaf monitoring-window {
         type uint32 {
           range "1..15";
@@ -229,7 +241,9 @@ module srl_nokia-bridge-table-proxy-arp-nd {
   grouping bridge-table-proxy-arp-trace-options {
     container trace-options {
       description
-        "Debug trace-options for Proxy-ARP";
+        "Enter the trace-options context
+
+         Debug trace-options for Proxy-ARP";
       list flag {
         key "name";
         description
@@ -322,6 +336,42 @@ module srl_nokia-bridge-table-proxy-arp-nd {
            The interval determines the frequency at which the system generates three ARP Requests or Neighbor Solicitations
            with the intend to refresh the proxy entry. The refresh is sent within the age-time window.";
       }
+      description
+        "Enter the dynamic-learning context";
+    }
+  }
+
+  grouping bridge-table-proxy-arp-nd-common-evpn-local-es-config {
+    container evpn-local-es {
+      if-feature "srl-feat:evpn-rt2-proxy-mac-vrf";
+      description
+        "Enter the evpn-local-es context
+
+         Configure EVPN local ES information for proxy entries";
+      leaf advertise {
+        type boolean;
+        default "false";
+        description
+          "Controls whether EVPN-sourced proxy ARP/ND entries are re-advertised as EVPN local Ethernet Segment (ES) routes
+
+           When set to true, an EVPN proxy entry may be re-advertised as an EVPN MAC/IP Advertisement route with the proxy bit set
+           when the route's Ethernet Segment Identifier (ESI) matches a local ES on the mac-vrf. When set to false, EVPN proxy entries
+           are not re-advertised as EVPN local ES routes.";
+      }
+      leaf retention-timer {
+        type uint32 {
+          range "0..65535";
+        }
+        units "seconds";
+        default "0";
+        description
+          "The retention timer in seconds for evpn-local-es entries
+
+           This timer begins when the EVPN MAC/IP Advertisement route that originated the re-advertisement of the evpn-local-es entry
+           is withdrawn and defines how long the evpn-local-es entry is retained. While the timer is active, the router sends ARP Requests
+           or Neighbor Solicitations for the entry to the local ethernet segment. The entry is converted into a dynamic entry if a response
+           is received.";
+      }
     }
   }
 
@@ -352,6 +402,7 @@ module srl_nokia-bridge-table-proxy-arp-nd {
     }
     uses bridge-table-proxy-arp-nd-common-dynamic-learning-config;
     uses bridge-table-proxy-arp-nd-common-dupdetect-config;
+    uses bridge-table-proxy-arp-nd-common-evpn-local-es-config;
   }
 
   grouping bridge-table-proxy-arp-cfg {
@@ -428,6 +479,8 @@ module srl_nokia-bridge-table-proxy-arp-nd {
         }
         uses bridge-table-proxy-duplicate-entries-common-top;
       }
+      description
+        "Enter the duplicate-entries context";
     }
   }
 
@@ -487,6 +540,8 @@ module srl_nokia-bridge-table-proxy-arp-nd {
         }
         uses bridge-table-proxy-dynamic-entries-common-top;
       }
+      description
+        "Enter the dynamic-entries context";
     }
   }
 
@@ -537,6 +592,8 @@ module srl_nokia-bridge-table-proxy-arp-nd {
         }
         uses bridge-table-proxy-table-entries-common-top;
       }
+      description
+        "Enter the table-entries context";
     }
   }
 
@@ -582,6 +639,8 @@ module srl_nokia-bridge-table-proxy-arp-nd {
         }
         uses bridge-table-proxy-evpn-entries-common-top;
       }
+      description
+        "Enter the evpn-entries context";
     }
   }
 
@@ -631,6 +690,8 @@ module srl_nokia-bridge-table-proxy-arp-nd {
         }
         uses bridge-table-proxy-table-statistics-type-top;
       }
+      description
+        "Enter the statistics context";
     }
   }
 
@@ -683,6 +744,8 @@ module srl_nokia-bridge-table-proxy-arp-nd {
         }
         uses bridge-table-proxy-static-entries-common-top;
       }
+      description
+        "Enter the static-entries context";
     }
   }
 
@@ -727,6 +790,8 @@ module srl_nokia-bridge-table-proxy-arp-nd {
             "The evpn-override property of the proxy entry";
         }
       }
+      description
+        "Enter the duplicate-entries context";
     }
   }
 
@@ -757,6 +822,8 @@ module srl_nokia-bridge-table-proxy-arp-nd {
             "The evpn-override property of the proxy entry";
         }
       }
+      description
+        "Enter the dynamic-entries context";
     }
   }
 
@@ -786,6 +853,8 @@ module srl_nokia-bridge-table-proxy-arp-nd {
             "The evpn-override property of the proxy entry";
         }
       }
+      description
+        "Enter the table-entries context";
     }
   }
 
@@ -816,6 +885,8 @@ module srl_nokia-bridge-table-proxy-arp-nd {
             "The evpn-override property of the proxy entry";
         }
       }
+      description
+        "Enter the evpn-entries context";
     }
   }
 
@@ -850,6 +921,8 @@ module srl_nokia-bridge-table-proxy-arp-nd {
             "The evpn-override property of the proxy entry";
         }
       }
+      description
+        "Enter the static-entries context";
     }
   }
 
@@ -857,7 +930,9 @@ module srl_nokia-bridge-table-proxy-arp-nd {
     container flood {
       if-feature "srl-feat:l2-proxy-arp-nd-control-flood-on-evpn";
       description
-        "How Neighbor Discovery frames received on a proxy service are flooded into the EVPN network";
+        "Enter the flood context
+
+         How Neighbor Discovery frames received on a proxy service are flooded into the EVPN network";
       leaf unknown-neighbor-solicitation {
         description
           "Whether to flood Neighbor Solicitation (NS) messages (with source squelching) into the EVPN network";
@@ -882,7 +957,9 @@ module srl_nokia-bridge-table-proxy-arp-nd {
   grouping bridge-table-proxy-nd-evpn-config {
     container evpn {
       description
-        "How proxy ARP/ND interacts with EVPN";
+        "Enter the evpn context
+
+         How proxy ARP/ND interacts with EVPN";
       leaf advertise-neighbor-type {
         description
           "Whether to advertise router entries or host entries into EVPN MAC/IP routes
@@ -909,7 +986,9 @@ module srl_nokia-bridge-table-proxy-arp-nd {
   grouping bridge-table-proxy-nd-trace-options {
     container trace-options {
       description
-        "Debug traceoptions for Proxy-ARP";
+        "Enter the trace-options context
+
+         Debug traceoptions for Proxy-ARP";
       list flag {
         key "name";
         description

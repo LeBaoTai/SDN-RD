@@ -34,6 +34,10 @@ module srl_nokia-lldp {
     "This module defines configuration and operational state data
      for the LLDP protocol.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -451,6 +455,23 @@ module srl_nokia-lldp {
       description
         "A variable-length octet-string containing the value for this TLV";
     }
+    container ue-link-neg-options {
+      if-feature "srl-feat:lldp-ue-link-negotiation";
+      leaf version {
+        type uint8;
+      }
+      container link-options {
+        leaf csig-capability {
+          type identityref {
+            base nokia-lldp-types:CSIG_CAPABALE;
+          }
+        }
+        description
+          "Enter the link-options context";
+      }
+      description
+        "Enter the ue-link-neg-options context";
+    }
     leaf port-id-vlan {
       if-feature "srl-feat:lldp-vlan";
       type uint16 {
@@ -492,7 +513,9 @@ module srl_nokia-lldp {
     container aggregation {
       if-feature "srl-feat:lldp-component";
       description
-        "Context for aggregation capabilities and status";
+        "Enter the aggregation context
+
+         Context for aggregation capabilities and status";
       leaf capable {
         type boolean;
         description
@@ -617,7 +640,9 @@ module srl_nokia-lldp {
     container vlan {
       if-feature "srl-feat:lldp-vlan";
       description
-        "Administrative configuration for organizational LLDP VLAN TLVs (PORT_VLAN_ID and VLAN_NAME)";
+        "Enter the vlan context
+
+         Administrative configuration for organizational LLDP VLAN TLVs (PORT_VLAN_ID and VLAN_NAME)";
       leaf native-vlan {
         type uint16 {
           range "0..4094";
@@ -679,7 +704,9 @@ module srl_nokia-lldp {
     }
     container location {
       description
-        "Selection of location information to transmit when the endpoint supports location capability";
+        "Enter the location context
+
+         Selection of location information to transmit when the endpoint supports location capability";
       leaf system-coordinates {
         type boolean;
         default "false";
@@ -716,7 +743,9 @@ module srl_nokia-lldp {
     container mac-phy-configuration-status {
       config false;
       description
-        "MAC/PHY Configuration/Status TLV information";
+        "Enter the mac-phy-configuration-status context
+
+         MAC/PHY Configuration/Status TLV information";
       container interface {
         leaf auto-negotiation-support {
           type nokia-lldp-types:auto-negotiation-support;
@@ -733,6 +762,8 @@ module srl_nokia-lldp {
           description
             "List of auto-negotiation capabilities advertised";
         }
+        description
+          "Enter the interface context";
       }
       container peer {
         leaf auto-negotiation-support {
@@ -755,6 +786,8 @@ module srl_nokia-lldp {
           description
             "Operational MAU type";
         }
+        description
+          "Enter the peer context";
       }
     }
   }
@@ -874,6 +907,8 @@ module srl_nokia-lldp {
           length "0..32";
         }
       }
+      description
+        "Enter the inventory context";
     }
   }
 
@@ -884,7 +919,9 @@ module srl_nokia-lldp {
       if-feature "srl-feat:lldp-med";
       config false;
       description
-        "LLDP-MED neighbor state";
+        "Enter the lldp-med context
+
+         LLDP-MED neighbor state";
       uses lldp-med-neighbor-capabilities-state;
       uses lldp-med-neighbor-application-state;
       uses lldp-med-neighbor-inventory-state;
@@ -922,6 +959,8 @@ module srl_nokia-lldp {
         if-feature "srl-feat:lldp-med";
         uses lldp-med-interface-config;
         uses lldp-med-interface-state;
+        description
+          "Enter the lldp-med context";
       }
       uses lldp-interface-state;
       uses lldp-neighbor-top;
@@ -1122,6 +1161,8 @@ module srl_nokia-lldp {
       container lldp-med {
         if-feature "srl-feat:lldp-med";
         uses lldp-med-system-config;
+        description
+          "Enter the lldp-med context";
       }
       uses lldp-state;
       uses lldp-interface-top;

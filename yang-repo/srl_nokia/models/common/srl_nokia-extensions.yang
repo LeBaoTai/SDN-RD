@@ -11,6 +11,10 @@ module srl_nokia-extensions {
   description
     "YANG module detailing SRLinux extensions";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2025-10-31 {
     description
       "SRLinux 25.10.1";

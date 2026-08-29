@@ -21,6 +21,10 @@ module srl_nokia-tools-pim {
   description
     "Model for PIM operational commands";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -53,7 +57,9 @@ module srl_nokia-tools-pim {
       container statistics {
         container ipv4 {
           description
-            "IPv4 multicast PDU statistics";
+            "Enter the ipv4 context
+
+             IPv4 multicast PDU statistics";
           leaf clear {
             type empty;
             description
@@ -62,7 +68,9 @@ module srl_nokia-tools-pim {
         }
         container ipv6 {
           description
-            "IPv6 multicast PDU statistics";
+            "Enter the ipv6 context
+
+             IPv6 multicast PDU statistics";
           leaf clear {
             type empty;
             description
@@ -112,7 +120,9 @@ module srl_nokia-tools-pim {
           }
           container ipv4 {
             description
-              "IPv4 multicast PDU statistics";
+              "Enter the ipv4 context
+
+               IPv4 multicast PDU statistics";
             leaf clear {
               type empty;
               description
@@ -121,7 +131,9 @@ module srl_nokia-tools-pim {
           }
           container ipv6 {
             description
-              "IPv6 multicast PDU statistics";
+              "Enter the ipv6 context
+
+               IPv6 multicast PDU statistics";
             leaf clear {
               type empty;
               description
@@ -129,11 +141,15 @@ module srl_nokia-tools-pim {
             }
           }
         }
+        description
+          "Enter the statistics context";
       }
       container database {
         container ipv4 {
           description
-            "IPv4 multicast database tools";
+            "Enter the ipv4 context
+
+             IPv4 multicast database tools";
           leaf clear {
             type empty;
             description
@@ -142,7 +158,9 @@ module srl_nokia-tools-pim {
         }
         container ipv6 {
           description
-            "IPv6 multicast database tools";
+            "Enter the ipv6 context
+
+             IPv6 multicast database tools";
           leaf clear {
             type empty;
             description
@@ -192,7 +210,7 @@ module srl_nokia-tools-pim {
             leaf clear {
               type empty;
               description
-                "Clear all PIM database entries for this source";
+                "Clear all PIM database entries for this group and source";
             }
             list interface {
               description
@@ -226,7 +244,9 @@ module srl_nokia-tools-pim {
           }
           container ipv4 {
             description
-              "IPv4 specific database";
+              "Enter the ipv4 context
+
+               IPv4 specific database";
             leaf clear {
               type empty;
               description
@@ -235,7 +255,9 @@ module srl_nokia-tools-pim {
           }
           container ipv6 {
             description
-              "IPv6 specific statistics";
+              "Enter the ipv6 context
+
+               IPv6 specific statistics";
             leaf clear {
               type empty;
               description
@@ -243,13 +265,19 @@ module srl_nokia-tools-pim {
             }
           }
         }
+        description
+          "Enter the database context";
       }
       container neighbor {
         description
-          "Clear PIM neighbors by disabling pim adjacency messages";
+          "Enter the neighbor context
+
+           Clear PIM neighbors by disabling pim adjacency messages";
         container ipv4 {
           description
-            "Clear all IPv4 PIM adjacency on the system";
+            "Enter the ipv4 context
+
+             Clear all IPv4 PIM adjacency on the system";
           leaf clear {
             type empty;
             description
@@ -258,7 +286,9 @@ module srl_nokia-tools-pim {
         }
         container ipv6 {
           description
-            "Clear all IPv6 PIM adjacency on the systems";
+            "Enter the ipv6 context
+
+             Clear all IPv6 PIM adjacency on the systems";
           leaf clear {
             type empty;
             description
@@ -278,7 +308,9 @@ module srl_nokia-tools-pim {
           }
           container ipv4 {
             description
-              "Clear IPv4 specific adjacency on this interface";
+              "Enter the ipv4 context
+
+               Clear IPv4 specific adjacency on this interface";
             leaf clear {
               type empty;
               description
@@ -287,7 +319,9 @@ module srl_nokia-tools-pim {
           }
           container ipv6 {
             description
-              "Clear IPv6 specific adjacency on this interface";
+              "Enter the ipv6 context
+
+               Clear IPv6 specific adjacency on this interface";
             leaf clear {
               type empty;
               description

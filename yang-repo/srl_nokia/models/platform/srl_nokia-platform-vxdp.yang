@@ -27,6 +27,10 @@ module srl_nokia-platform-vxdp {
   description
     "This module defines configuration and operational state data related to vXDP";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2026-03-31 {
     description
       "SRLinux 26.3.1";
@@ -114,16 +118,22 @@ module srl_nokia-platform-vxdp {
     container statistics {
       config false;
       description
-        "Top-level container for statistics relating to vXDP thread utilization";
+        "Enter the statistics context
+
+         Top-level container for statistics relating to vXDP thread utilization";
       container nic {
         description
-          "Top-level container for NIC thread statistics";
+          "Enter the nic context
+
+           Top-level container for NIC thread statistics";
         uses cpu-idle;
         uses srl-cpu:per-type-statistics;
       }
       container forwarder {
         description
-          "Top-level container for forwarder thread statistics";
+          "Enter the forwarder context
+
+           Top-level container for forwarder thread statistics";
         uses cpu-idle;
         uses srl-cpu:per-type-statistics;
       }

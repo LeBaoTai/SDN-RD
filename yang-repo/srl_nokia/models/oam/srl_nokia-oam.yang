@@ -17,6 +17,10 @@ module srl_nokia-oam {
      related to OAM (Operations, Administration and Maintenance)
      functionality.";
 
+  revision 2026-07-31 {
+    description
+      "SRLinux 26.7.1";
+  }
   revision 2024-03-31 {
     description
       "SRLinux 24.3.1";
@@ -33,7 +37,9 @@ module srl_nokia-oam {
   container oam {
     if-feature "srl-feat:oam";
     description
-      "Enclosing container for OAM";
+      "Enter the oam context
+
+       Enclosing container for OAM";
     container performance-monitoring {
       presence "OAM Performance monitoring";
       if-feature "srl-feat:oam-pm";
