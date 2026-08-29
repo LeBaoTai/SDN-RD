@@ -8,7 +8,6 @@ import (
 	"github.com/LeBaoTai/myco-controller/internal/controller/gnmib"
 	"github.com/LeBaoTai/myco-controller/internal/oc"
 	"github.com/openconfig/gnmi/proto/gnmi"
-	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygot/ytypes"
 	"go.yaml.in/yaml/v4"
 )
@@ -62,8 +61,8 @@ func (s *Session) HandleChageConfiguration(update []byte) {
 	if err != nil {
 		log.Printf("Cannot get schema: %v\n", err)
 	}
-	currentSystem := &oc.Device{}
-	currentSchema.Root = currentSystem
+	//currentSystem := &oc.Device{}
+	//currentSchema.Root = currentSystem
 
 	// get current config
 	for _, n := range res.Notification {
@@ -78,17 +77,17 @@ func (s *Session) HandleChageConfiguration(update []byte) {
 	}
 
 	// create incoming change
-	newSystem := &oc.Device{}
-	if err := oc.Unmarshal(update, newSystem); err != nil {
-		log.Printf("Cannot parse the new config: %v\n", err)
-	}
+	// newSystem := &oc.Device{}
+	// if err := oc.Unmarshal(update, newSystem); err != nil {
+	// 	log.Printf("Cannot parse the new config: %v\n", err)
+	// }
+	//
+	// diff, err := ygot.Diff(currentSystem, newSystem)
+	// if err != nil {
+	// 	log.Printf("Cannot compare the config: %v", err)
+	// }
 
-	diff, err := ygot.Diff(currentSystem, newSystem)
-	if err != nil {
-		log.Printf("Cannot compare the config: %v", err)
-	}
-
-	log.Printf("Config Changes: %v", diff)
+	// log.Printf("Config Changes: %v", diff)
 
 	// err = ytypes.UnmarshalNotifications(
 	// 	currentSchema,

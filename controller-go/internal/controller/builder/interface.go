@@ -1,7 +1,12 @@
 package builder
 
 import (
+	"log"
+
 	"github.com/LeBaoTai/myco-controller/internal/oc"
+	"github.com/LeBaoTai/myco-controller/internal/oc/ocpath"
+	"github.com/openconfig/gnmi/proto/gnmi"
+	"github.com/openconfig/ygnmi/ygnmi"
 	"github.com/openconfig/ygot/ygot"
 )
 
@@ -15,6 +20,30 @@ type IfcReq struct {
 	Mtu         uint16 `json:"mtu"`
 	Speed       int16  `json:"speed"`
 	Duplex      string `json:"duplex"`
+}
+
+func CreateInterfaceUpdate(iface *oc.Interface) *gnmi.Update {
+	ifacePath := ocpath.Root().Interface(*iface.Name)
+	rawPath, _, err := ygnmi.ResolvePath(ifacePath)
+	if err != nil {
+		log.Printf("Cannot resolve path")
+	}
+
+	jsonBytes, err := ygot.EmitJSON(iface, &ygot.EmitJSONConfig{
+		Format: ygot.RFC7951,
+	})
+	if err != nil {
+		log.Printf("Cannot create config: %v", err)
+	}
+
+	return &gnmi.Update{
+		Path: rawPath,
+		Val: &gnmi.TypedValue{
+			Value: &gnmi.TypedValue_JsonIetfVal{
+				JsonIetfVal: []byte(jsonBytes),
+			},
+		},
+	}
 }
 
 func CreateInterface(req *IfcReq) *oc.Interface {

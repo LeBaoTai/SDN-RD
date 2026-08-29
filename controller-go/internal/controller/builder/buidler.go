@@ -1,17 +1,7 @@
 package builder
 
-import "github.com/LeBaoTai/myco-controller/internal/oc"
-
-type Builder struct {
-	device *oc.Device
-}
+type Builder struct{}
 
 func NewBuilder() *Builder {
-	return &Builder{
-		device: &oc.Device{},
-	}
-}
-
-func (b *Builder) Build() *oc.Device {
-	return b.device
+	return &Builder{}
 }
