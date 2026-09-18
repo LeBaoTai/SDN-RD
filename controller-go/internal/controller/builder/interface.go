@@ -1,11 +1,10 @@
 package builder
 
 import (
-	"log"
+	"context"
 
 	"github.com/LeBaoTai/myco-controller/internal/oc"
 	"github.com/LeBaoTai/myco-controller/internal/oc/ocpath"
-	"github.com/openconfig/gnmi/proto/gnmi"
 	"github.com/openconfig/ygnmi/ygnmi"
 	"github.com/openconfig/ygot/ygot"
 )
@@ -14,46 +13,34 @@ type IfcReq struct {
 	Name        string `json:"name"`
 	IP          string `json:"ip"`
 	Description string `json:"description"`
-	Enabled     bool   `json:"enable"`
+	Duplex      string `json:"duplex"`
 	SubIndex    uint32 `json:"sub-index"`
-	Mask        uint8  `json:"mask"`
 	Mtu         uint16 `json:"mtu"`
 	Speed       int16  `json:"speed"`
-	Duplex      string `json:"duplex"`
+	Mask        uint8  `json:"mask"`
+	Enabled     bool   `json:"enable"`
 }
 
-func CreateInterfaceUpdate(iface *oc.Interface) *gnmi.Update {
-	ifacePath := ocpath.Root().Interface(*iface.Name)
-	rawPath, _, err := ygnmi.ResolvePath(ifacePath)
-	if err != nil {
-		log.Printf("Cannot resolve path")
-	}
+func UpdateInterface(iface *oc.Interface, client *ygnmi.Client, ctx context.Context) (*ygnmi.Result, error) {
+	ifaceConfigQuery := ocpath.Root().Interface(*iface.Name).Config()
+	// rawPathg, _, err := ygnmi.ResolvePath(ifaceConfigQuery.PathStruct())
+	// if err != nil {
+	// 	log.Printf("Cannot resolve path")
+	// }
 
-	jsonBytes, err := ygot.EmitJSON(iface, &ygot.EmitJSONConfig{
-		Format: ygot.RFC7951,
-	})
+	result, err := ygnmi.Update(ctx, client, ifaceConfigQuery, iface)
 	if err != nil {
-		log.Printf("Cannot create config: %v", err)
+		return nil, err
 	}
-
-	return &gnmi.Update{
-		Path: rawPath,
-		Val: &gnmi.TypedValue{
-			Value: &gnmi.TypedValue_JsonIetfVal{
-				JsonIetfVal: []byte(jsonBytes),
-			},
-		},
-	}
+	return result, nil
 }
 
 func CreateInterface(req *IfcReq) *oc.Interface {
 	iface := &oc.Interface{}
-
-	iface.Name = ygot.String(req.Name)
-
-	iface.Description = ygot.String(req.Description)
+	iface.Name = new(req.Name)
+	iface.Description = new(req.Description)
 	iface.Mtu = ygot.Uint16(1500)
-	iface.Enabled = ygot.Bool(req.Enabled)
+	iface.Enabled = new(req.Enabled)
 
 	// ethernet
 	eth := iface.GetOrCreateEthernet()
@@ -75,13 +62,15 @@ func CreateInterface(req *IfcReq) *oc.Interface {
 
 	// Subinterface
 	subIface := iface.GetOrCreateSubinterface(req.SubIndex)
-	subIface.Enabled = ygot.Bool(req.Enabled)
+	subIface.Enabled = new(req.Enabled)
+	subIface.Index = new(uint32(0))
 
 	// IPV4
 	ipv4 := subIface.GetOrCreateIpv4()
+	ipv4.Enabled = new(true)
 
 	addr := ipv4.GetOrCreateAddress(req.IP)
-	addr.PrefixLength = ygot.Uint8(req.Mask)
+	addr.PrefixLength = new(req.Mask)
 
 	return iface
 }

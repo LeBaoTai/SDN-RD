@@ -9,6 +9,7 @@ import (
 	"github.com/openconfig/gnmi/proto/gnmi"
 	"github.com/openconfig/gnmic/pkg/api"
 	"github.com/openconfig/gnmic/pkg/api/target"
+	"github.com/openconfig/ygnmi/ygnmi"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/metadata"
@@ -23,12 +24,14 @@ type Client struct {
 }
 
 type TargetClient struct {
-	target *target.Target
+	Target *target.Target
+	Client *ygnmi.Client
 }
 
 type Cfg struct {
 	Address    string
 	Username   string
+	Port       string
 	Password   string
 	SkipVerify bool
 	Timeout    time.Duration
@@ -39,15 +42,18 @@ func CreateTargetConnection(cfg Cfg, ctx context.Context) (*TargetClient, error)
 	if err != nil {
 		return nil, err
 	}
+	client, err := ygnmi.NewClient(target.Client)
 	return &TargetClient{
-		target: target,
+		Target: target,
+		Client: client,
 	}, nil
 }
 
 func NewTarget(cfg Cfg, ctx context.Context) (*target.Target, error) {
 	target, err := api.NewTarget(
-		api.Address(cfg.Address),
-		api.Insecure(cfg.SkipVerify),
+		api.Address(cfg.Address+":"+cfg.Port),
+		api.SkipVerify(cfg.SkipVerify),
+		api.Username(cfg.Username),
 		api.Password(cfg.Password),
 		api.Timeout(cfg.Timeout),
 	)

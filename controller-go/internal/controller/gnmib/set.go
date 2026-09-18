@@ -22,7 +22,3 @@ func (t *TargetClient) CreateTransaction(ctx context.Context, deletes []*gnmi.Pa
 		sr:  sr,
 	}
 }
-
-func (t *TargetClient) SetTransaction(tr *Transaction) (*gnmi.SetResponse, error) {
-	return t.target.Set(tr.ctx, tr.sr)
-}
