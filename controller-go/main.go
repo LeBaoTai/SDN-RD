@@ -9,7 +9,8 @@ import (
 	"time"
 
 	"github.com/LeBaoTai/myco-controller/internal/controller/builder"
-	"github.com/LeBaoTai/myco-controller/internal/controller/gnmib"
+	"github.com/LeBaoTai/myco-controller/internal/controller/router"
+	"google.golang.org/grpc/metadata"
 )
 
 type ConfigPath struct {
@@ -20,54 +21,52 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	cfg := gnmib.Cfg{
+	authCtx := metadata.NewOutgoingContext(ctx, metadata.Pairs(
+		"username", "admin",
+		"password", "NokiaSrl1!",
+	))
+
+	targetCfg := router.TargetCfg{
 		Address:    "192.100.100.101",
-		Username:   "admin",
-		Password:   "NokiaSrl1!",
 		SkipVerify: true,
 		Port:       "57400",
 		Timeout:    time.Second * 5,
 	}
 
-	targetConnection, err := gnmib.CreateTargetConnection(cfg, ctx)
+	targetRouter, err := router.CreateNewTarget(targetCfg, authCtx)
 	if err != nil {
-		log.Fatalf("Cannot establish connection:%v", err)
+		log.Println("Cannot create target: ", err)
 	}
 
-	log.Printf("Connected to: %v\n", targetConnection)
+	clientRouter, err := router.CreateClient(targetRouter)
+	if err != nil {
+		log.Println("Cannot create client: ", err)
+	}
+
 	mockData, err := os.Open("./mock-data/change.json")
 	if err != nil {
 		log.Printf("Cannot open the file: %v\n", err)
 	}
 	defer mockData.Close()
-
-	byteValue, err := io.ReadAll(mockData)
+	jsonData, err := io.ReadAll(mockData)
 	if err != nil {
-		log.Printf("Cannot parse to byte: %v", err)
+		log.Println("Cannot read data", err)
 	}
 
-	defer func() {
-		if r := recover(); r != nil {
-			log.Printf("❌THE PROGRAM IS PANICED: %v", r)
-		}
-	}()
-
-	var ifaceData builder.IfcReq
-	err = json.Unmarshal(byteValue, &ifaceData)
+	var ifaceReq builder.IfcReq
+	err = json.Unmarshal(jsonData, &ifaceReq)
 	if err != nil {
-		log.Printf("Error while Unmarshal, %v\n", err)
+		log.Println("Cannot Unmarshal to struct", err)
 	}
-
-	iface := builder.CreateInterface(&ifaceData)
-	if err := iface.Validate(); err != nil {
-		log.Printf("Invalid configuration: %v\n", err)
-	} else {
-		log.Println("Valid configuration")
-	}
-
-	result, err := builder.UpdateInterface(iface, targetConnection.Client, ctx)
+	log.Println(ifaceReq)
+	ifaceUpdate, err := builder.CreateInterface(&ifaceReq)
 	if err != nil {
-		log.Println("Cannot update the interface: ", err)
+		log.Println("Error when create configution", err)
 	}
-	log.Println("Result: ", result)
+
+	result, err := builder.UpdateInterface(ifaceUpdate, clientRouter, authCtx)
+	if err != nil {
+		log.Println("Error when update interface: ", err)
+	}
+	log.Println("Update result: ", result)
 }

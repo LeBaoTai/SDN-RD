@@ -24,5 +24,10 @@ func CreateNewTarget(cfg TargetCfg, ctx context.Context) (*target.Target, error)
 	if err != nil {
 		return nil, err
 	}
+
+	err = target.CreateGNMIClient(ctx)
+	if err != nil {
+		return nil, err
+	}
 	return target, nil
 }

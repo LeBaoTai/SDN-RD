@@ -2,6 +2,7 @@ package builder
 
 import (
 	"context"
+	"log"
 
 	"github.com/LeBaoTai/myco-controller/internal/oc"
 	"github.com/LeBaoTai/myco-controller/internal/oc/ocpath"
@@ -35,21 +36,22 @@ func UpdateInterface(iface *oc.Interface, client *ygnmi.Client, ctx context.Cont
 	return result, nil
 }
 
-func CreateInterface(req *IfcReq) *oc.Interface {
+func CreateInterface(req *IfcReq) (*oc.Interface, error) {
 	iface := &oc.Interface{}
 	iface.Name = new(req.Name)
 	iface.Description = new(req.Description)
 	iface.Mtu = ygot.Uint16(1500)
 	iface.Enabled = new(req.Enabled)
+	iface.Type = oc.IETFInterfaces_InterfaceType_ethernetCsmacd
 
 	// ethernet
 	eth := iface.GetOrCreateEthernet()
-	switch req.Duplex {
-	case "full":
-		eth.DuplexMode = oc.Ethernet_DuplexMode_FULL
-	case "auto":
-		eth.DuplexMode = oc.Ethernet_DuplexMode_UNSET
-	}
+	// switch req.Duplex {
+	// case "full":
+	// 	eth.DuplexMode = oc.Ethernet_DuplexMode_FULL
+	// case "auto":
+	// 	eth.DuplexMode = oc.Ethernet_DuplexMode_UNSET
+	// }
 
 	switch req.Speed {
 	case 100:
@@ -72,5 +74,10 @@ func CreateInterface(req *IfcReq) *oc.Interface {
 	addr := ipv4.GetOrCreateAddress(req.IP)
 	addr.PrefixLength = new(req.Mask)
 
-	return iface
+	if err := iface.Validate(); err != nil {
+		return nil, err
+	}
+	log.Println("Valid Config")
+
+	return iface, nil
 }
