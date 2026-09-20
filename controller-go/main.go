@@ -2,13 +2,9 @@ package main
 
 import (
 	"context"
-	"encoding/json"
-	"io"
 	"log"
-	"os"
 	"time"
 
-	"github.com/LeBaoTai/myco-controller/internal/controller/builder"
 	"github.com/LeBaoTai/myco-controller/internal/controller/router"
 	"google.golang.org/grpc/metadata"
 )
@@ -26,47 +22,20 @@ func main() {
 		"password", "NokiaSrl1!",
 	))
 
-	targetCfg := router.TargetCfg{
+	deviceCfg := router.DeviceCfg{
 		Address:    "192.100.100.101",
 		SkipVerify: true,
 		Port:       "57400",
 		Timeout:    time.Second * 5,
+		Username:   "admin",
+		Password:   "NokiaSrl1!",
+		ID:         "router-core",
 	}
 
-	targetRouter, err := router.CreateNewTarget(targetCfg, authCtx)
+	deviceManager := router.CreateDeviceManager()
+	newDeviceSession, err := deviceManager.CreateNewDeviceSession(deviceCfg, authCtx)
 	if err != nil {
-		log.Println("Cannot create target: ", err)
+		log.Println("Cannot create a new sesion: ", err)
 	}
-
-	clientRouter, err := router.CreateClient(targetRouter)
-	if err != nil {
-		log.Println("Cannot create client: ", err)
-	}
-
-	mockData, err := os.Open("./mock-data/change.json")
-	if err != nil {
-		log.Printf("Cannot open the file: %v\n", err)
-	}
-	defer mockData.Close()
-	jsonData, err := io.ReadAll(mockData)
-	if err != nil {
-		log.Println("Cannot read data", err)
-	}
-
-	var ifaceReq builder.IfcReq
-	err = json.Unmarshal(jsonData, &ifaceReq)
-	if err != nil {
-		log.Println("Cannot Unmarshal to struct", err)
-	}
-	log.Println(ifaceReq)
-	ifaceUpdate, err := builder.CreateInterface(&ifaceReq)
-	if err != nil {
-		log.Println("Error when create configution", err)
-	}
-
-	result, err := builder.UpdateInterface(ifaceUpdate, clientRouter, authCtx)
-	if err != nil {
-		log.Println("Error when update interface: ", err)
-	}
-	log.Println("Update result: ", result)
+	log.Println("New session: ", newDeviceSession.State.CheckState())
 }

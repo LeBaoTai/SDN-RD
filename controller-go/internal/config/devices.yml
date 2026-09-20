@@ -1,16 +1,10 @@
-connections:
-  username: "admin",
-  password: "NokiaSrl1!",
-  skipverify: true,
-  timeout:    5 * time.Second,
-
 devices:
-  r1:
-    address: 192.100.100.101
-    port: 57400
-  r2:
-    address: 192.100.100.102
-    port: 57400
-  r3:
-    address: 192.100.100.103
-    port: 57400
+  - leaf-r1:
+      address: 192.100.100.101
+      port: 57400
+  - leaf-r2:
+      address: 192.100.100.102
+      port: 57400
+  - leaf-r3:
+      address: 192.100.100.103
+      port: 57400
