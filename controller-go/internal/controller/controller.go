@@ -3,6 +3,8 @@ package controller
 import (
 	"log"
 	"os"
+	"path/filepath"
+	"runtime"
 
 	"go.yaml.in/yaml/v4"
 )
@@ -34,14 +36,23 @@ func (c *Controller) Start() {
 }
 
 func checkDeviceList() {
-	devicesByte, err := os.ReadFile("../config/devices.yml")
+	_, filename, _, ok := runtime.Caller(0)
+	if !ok {
+		log.Fatalln("Không thể lấy thông tin file hiện tại")
+	}
+
+	currentDir := filepath.Dir(filename)
+	devicesPath := filepath.Join(currentDir, "../config/devices.yml")
+	devicesByte, err := os.ReadFile(devicesPath)
 	if err != nil {
-		log.Fatalln("Cannot open DeviceFile: ", err)
+		log.Fatalln("Cannot open Device File: ", err)
 	}
 	var deviceList DeviceList
 	err = yaml.Unmarshal(devicesByte, &deviceList)
 	if err != nil {
 		log.Fatalln("Error when parse yaml: ", err)
 	}
-	log.Println(deviceList)
+	for _, val := range deviceList.Devices {
+		log.Println(val.Address)
+	}
 }
