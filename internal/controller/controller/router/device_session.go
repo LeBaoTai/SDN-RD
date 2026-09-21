@@ -28,9 +28,7 @@ type DeviceSession struct {
 	State  *ConnectionState
 }
 
-func (m *DeviceManager) CreateNewDeviceSession(cfg DeviceCfg, ctx context.Context) (*DeviceSession, error) {
-	m.mu.Lock()
-	defer m.mu.Unlock()
+func CreateNewDeviceSession(cfg DeviceCfg, ctx context.Context) (*DeviceSession, error) {
 	// create target, connection to device firstly
 	target, err := api.NewTarget(
 		api.Address(cfg.Address+":"+cfg.Port),
@@ -60,14 +58,11 @@ func (m *DeviceManager) CreateNewDeviceSession(cfg DeviceCfg, ctx context.Contex
 		ID:     cfg.ID,
 		Client: client,
 		State: &ConnectionState{
-			Connection: "Connected",
-			Telemetry:  "Running",
+			Connection: "Unknown",
+			Telemetry:  "Unknown",
 			Config:     "Idle",
 		},
 	}
-
-	// adding this new session to device manager session list
-	m.DeviceSessions[cfg.ID] = deviceSession
 
 	return deviceSession, nil
 }

@@ -1,0 +1,4 @@
+username: "admin"
+password: "NokiaSrl1!" 
+skipverify: true
+timeout: 5s

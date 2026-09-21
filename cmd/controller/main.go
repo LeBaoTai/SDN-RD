@@ -1,7 +1,10 @@
 package main
 
-import "log"
+import (
+	"github.com/LeBaoTai/SDN-RD/internal/controller/controller"
+)
 
 func main() {
-	log.Println("Hello Controller")
+	controller := controller.NewController()
+	controller.Start()
 }
