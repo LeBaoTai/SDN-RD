@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/LeBaoTai/SDN-RD/internal/backend/domain/user"
 	"github.com/golang-jwt/jwt/v5"
-	"lebaotai.com/backend-go/domain/user"
 )
 
 // Claims extends jwt.RegisteredClaims with our custom fields.

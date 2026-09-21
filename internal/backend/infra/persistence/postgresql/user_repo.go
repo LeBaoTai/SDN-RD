@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/LeBaoTai/SDN-RD/internal/backend/domain/user"
 	"github.com/jackc/pgx/v5/pgxpool"
-	"lebaotai.com/backend-go/domain/user"
 )
 
 // PostgresUserRepository is a thread-safe in-memory adapter.

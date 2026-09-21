@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"lebaotai.com/backend-go/domain/user"
+	"github.com/LeBaoTai/SDN-RD/internal/backend/domain/user"
 )
 
 // LoginUserCommand carries the raw credentials for the login use case.

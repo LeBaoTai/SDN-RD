@@ -2,8 +2,8 @@
 package security
 
 import (
+	"github.com/LeBaoTai/SDN-RD/internal/backend/domain/user"
 	"golang.org/x/crypto/bcrypt"
-	"lebaotai.com/backend-go/domain/user"
 )
 
 const defaultCost = bcrypt.DefaultCost // 10

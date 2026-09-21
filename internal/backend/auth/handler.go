@@ -5,10 +5,10 @@ import (
 	"errors"
 	"net/http"
 
+	"github.com/LeBaoTai/SDN-RD/internal/backend/app/auth"
+	"github.com/LeBaoTai/SDN-RD/internal/backend/auth/dto"
+	"github.com/LeBaoTai/SDN-RD/internal/backend/domain/user"
 	"github.com/gin-gonic/gin"
-	"lebaotai.com/backend-go/app/auth"
-	"lebaotai.com/backend-go/auth/dto"
-	"lebaotai.com/backend-go/domain/user"
 )
 
 // AuthHandler exposes register and login endpoints.

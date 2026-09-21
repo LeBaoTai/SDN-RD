@@ -4,7 +4,7 @@ import (
 	"context"
 	"sync"
 
-	"lebaotai.com/backend-go/domain/user"
+	"github.com/LeBaoTai/SDN-RD/internal/backend/domain/user"
 )
 
 // InMemoryUserRepository is a thread-safe in-memory adapter.
