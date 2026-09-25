@@ -2,55 +2,26 @@ package main
 
 import (
 	"log"
-	"os"
-	"time"
 
-	"github.com/LeBaoTai/SDN-RD/internal/backend/infra/persistence/memory"
-	"github.com/LeBaoTai/SDN-RD/internal/backend/infra/security"
-	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
+	backend "github.com/LeBaoTai/SDN-RD/internal/backend"
+	"github.com/LeBaoTai/SDN-RD/internal/backend/config"
+	"github.com/LeBaoTai/SDN-RD/internal/backend/handler"
+	"github.com/LeBaoTai/SDN-RD/internal/backend/service"
 )
 
-func main() { // load .env file
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatalf("error loading .env file: %v", err)
-	}
-	secret := os.Getenv("JWT_SECRET")
-	ttl := os.Getenv("JWT_TTL")
-	d, e := time.ParseDuration(ttl)
-	if e != nil {
-		log.Fatalf("invalid JWT_TTL: %v", e)
-	}
+func main() {
+	cfg := config.Load()
 
-	// userRepo := postgres.NewPostgresUserRepository(pool)
-	userRepo := memory.NewInMemoryUserRepository()
-	hasher := security.NewBcryptHasher()
-	jwtIssuer := security.NewJWTIssuer(secret, d)
+	// publisher, err := nats.NewPublisher(cfg.NatsURL)
+	// if err != nil {
+	// 	log.Fatalf("failed to connect NATS: %v", err)
+	// }
 
-	// create usecase handlers
-	// registerUseCase := auth.NewRegisterUserHandler(userRepo, hasher)
-	loginUseCase := appauth.NewLoginUserHandler(userRepo, hasher, jwtIssuer)
+	intentService := service.NewIntentService()
+	intentHandler := handler.NewIntentHandler(intentService)
 
-	// create HTTP handlers
-	authHTTPHandler := intauth.NewAuthHandler(
-		loginUseCase,
-	)
-
-	r := gin.Default()
-
-	// auth routes
-	r.POST("/auth/login", authHTTPHandler.Login)
-
-	r.GET("/health", func(ctx *gin.Context) {
-		ctx.JSON(200, gin.H{
-			"status": "ok",
-		})
-	})
-
-	log.Println("======== Backend is starting with port 8080 ========")
-
-	if err := r.Run(":8080"); err != nil {
-		log.Fatalf("failed to start server: %v", err)
+	r := backend.NewRouter(intentHandler)
+	if err := r.Run(cfg.Port); err != nil {
+		log.Fatalf("server failed: %v", err)
 	}
 }
