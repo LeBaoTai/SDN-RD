@@ -1,0 +1,15 @@
+{
+    "device_name": "test_device",
+    "type":"bgp",
+    "data": {
+        "name": "eth1/1",
+        "ip": "192.168.1.1",
+        "description": "uplink",
+        "duplex": "full",
+        "sub-index": 0,
+        "mtu": 1500,
+        "speed": 1000,
+        "mask": 24,
+        "enable": true
+    }
+}

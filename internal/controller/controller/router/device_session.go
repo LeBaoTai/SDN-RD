@@ -16,7 +16,7 @@ type DeviceCfg struct {
 	Username   string
 	Password   string
 	Port       string
-	ID         string
+	Name       string
 	SkipVerify bool
 	Timeout    time.Duration
 }
@@ -28,7 +28,7 @@ type DeviceSession struct {
 	State  *ConnectionState
 }
 
-func CreateNewDeviceSession(cfg DeviceCfg, ctx context.Context) (*DeviceSession, error) {
+func NewDeviceSession(cfg DeviceCfg, ctx context.Context) (*DeviceSession, error) {
 	// create target, connection to device firstly
 	target, err := api.NewTarget(
 		api.Address(cfg.Address+":"+cfg.Port),
@@ -55,11 +55,10 @@ func CreateNewDeviceSession(cfg DeviceCfg, ctx context.Context) (*DeviceSession,
 
 	deviceSession := &DeviceSession{
 		Target: target,
-		ID:     cfg.ID,
+		ID:     cfg.Name,
 		Client: client,
 		State: &ConnectionState{
 			Connection: "Unknown",
-			Telemetry:  "Unknown",
 			Config:     "Idle",
 		},
 	}
@@ -71,7 +70,7 @@ func createClient(cfg *DeviceCfg, target *target.Target) (*ygnmi.Client, error) 
 	client, err := ygnmi.NewClient(
 		target.Client,
 		ygnmi.WithRequestLogLevel(glog.Level(log.Default().Flags())),
-		ygnmi.WithTarget(cfg.ID),
+		ygnmi.WithTarget(cfg.Name),
 	)
 	if err != nil {
 		return nil, err

@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/LeBaoTai/SDN-RD/internal/controller/controller/router"
+	"github.com/LeBaoTai/SDN-RD/internal/controller/nats"
 	"go.yaml.in/yaml/v4"
 	"google.golang.org/grpc/metadata"
 )
@@ -42,15 +43,9 @@ func NewController() *Controller {
 	}
 }
 
-func (c *Controller) Start() {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
-
+func (c *Controller) Init(ctx context.Context) {
 	log.Println("Starting Controller......")
 
-	// TODO: check queue
-
-	// TODO: Check device list and establish connection
 	deviceList := loadDeviceList()
 	deviceCfg := loadDeviceConfig()
 
@@ -74,11 +69,11 @@ func (c *Controller) establishConnection(deviceList *DeviceList, devCfg *DeviceC
 			Username:   devCfg.Username,
 			Password:   devCfg.Password,
 			Port:       dev.Port,
-			ID:         dev.Name,
+			Name:       dev.Name,
 			SkipVerify: devCfg.SkipVerify,
 			Timeout:    devCfg.Timeout,
 		}
-		session, err := router.CreateNewDeviceSession(devCfg, ctx)
+		session, err := router.NewDeviceSession(devCfg, ctx)
 		if err != nil {
 			log.Printf("Cannot establish connection with: %v\n", dev.Name)
 			log.Println(err)
@@ -131,4 +126,16 @@ func loadDeviceConfig() *DeviceCfg {
 	}
 	log.Println("Completed loading Device Config")
 	return &deviceCfg
+}
+
+func (c *Controller) LoadSession(s string) *router.DeviceSession {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	t := c.DeviceSessions[s]
+	return t
+}
+
+func (c *Controller) ProcessIntent(ctx context.Context, payload *nats.IntentEnvelope) error {
+	log.Println("ProcessIntent")
+	return nil
 }

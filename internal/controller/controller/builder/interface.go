@@ -4,30 +4,15 @@ import (
 	"context"
 	"log"
 
+	"github.com/LeBaoTai/SDN-RD/internal/controller/nats"
 	"github.com/LeBaoTai/SDN-RD/internal/oc"
 	"github.com/LeBaoTai/SDN-RD/internal/oc/ocpath"
 	"github.com/openconfig/ygnmi/ygnmi"
 	"github.com/openconfig/ygot/ygot"
 )
 
-type IfcReq struct {
-	Name        string `json:"name"`
-	IP          string `json:"ip"`
-	Description string `json:"description"`
-	Duplex      string `json:"duplex"`
-	SubIndex    uint32 `json:"sub-index"`
-	Mtu         uint16 `json:"mtu"`
-	Speed       int16  `json:"speed"`
-	Mask        uint8  `json:"mask"`
-	Enabled     bool   `json:"enable"`
-}
-
 func UpdateInterface(iface *oc.Interface, client *ygnmi.Client, ctx context.Context) (*ygnmi.Result, error) {
 	ifaceConfigQuery := ocpath.Root().Interface(*iface.Name).Config()
-	// rawPathg, _, err := ygnmi.ResolvePath(ifaceConfigQuery.PathStruct())
-	// if err != nil {
-	// 	log.Printf("Cannot resolve path")
-	// }
 
 	result, err := ygnmi.Update(ctx, client, ifaceConfigQuery, iface)
 	if err != nil {
@@ -36,7 +21,7 @@ func UpdateInterface(iface *oc.Interface, client *ygnmi.Client, ctx context.Cont
 	return result, nil
 }
 
-func CreateInterface(req *IfcReq) (*oc.Interface, error) {
+func CreateInterface(req *nats.IfcReq) (*oc.Interface, error) {
 	iface := &oc.Interface{}
 	iface.Name = new(req.Name)
 	iface.Description = new(req.Description)
@@ -46,13 +31,6 @@ func CreateInterface(req *IfcReq) (*oc.Interface, error) {
 
 	// ethernet
 	eth := iface.GetOrCreateEthernet()
-	// switch req.Duplex {
-	// case "full":
-	// 	eth.DuplexMode = oc.Ethernet_DuplexMode_FULL
-	// case "auto":
-	// 	eth.DuplexMode = oc.Ethernet_DuplexMode_UNSET
-	// }
-
 	switch req.Speed {
 	case 100:
 		eth.PortSpeed = oc.OpenconfigIfEthernet_ETHERNET_SPEED_SPEED_100MB
@@ -77,7 +55,7 @@ func CreateInterface(req *IfcReq) (*oc.Interface, error) {
 	if err := iface.Validate(); err != nil {
 		return nil, err
 	}
-	log.Println("Valid Config")
+	log.Printf("Valid Config for %v\n", req.Name)
 
 	return iface, nil
 }
