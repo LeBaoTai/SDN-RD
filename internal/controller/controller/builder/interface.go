@@ -26,7 +26,7 @@ func CreateInterface(req *model.IfcReq) (*oc.Interface, error) {
 	iface.Name = new(req.Name)
 	iface.Description = new(req.Description)
 	iface.Mtu = ygot.Uint16(1500)
-	iface.Enabled = new(req.Enabled)
+	iface.Enabled = req.Enabled
 	iface.Type = oc.IETFInterfaces_InterfaceType_ethernetCsmacd
 
 	// ethernet
@@ -41,8 +41,8 @@ func CreateInterface(req *model.IfcReq) (*oc.Interface, error) {
 	}
 
 	// Subinterface
-	subIface := iface.GetOrCreateSubinterface(req.SubIndex)
-	subIface.Enabled = new(req.Enabled)
+	subIface := iface.GetOrCreateSubinterface(*req.SubIndex)
+	subIface.Enabled = req.Enabled
 	subIface.Index = new(uint32(0))
 
 	// IPV4

@@ -3,9 +3,9 @@ package model
 import "encoding/json"
 
 type IntentEnvelope struct {
-	DeviceName string          `json:"device_name"`
-	Type       string          `json:"type"`
-	Data       json.RawMessage `json:"data"`
+	DeviceName string          `json:"device_name" binding:"required"`
+	Type       string          `json:"type" binding:"required"`
+	Data       json.RawMessage `json:"data" binding:"required"`
 }
 
 type IntentResponse struct {
@@ -14,13 +14,13 @@ type IntentResponse struct {
 }
 
 type IfcReq struct {
-	Name        string `json:"name"`
-	IP          string `json:"ip"`
-	Description string `json:"description"`
-	Duplex      string `json:"duplex"`
-	SubIndex    uint32 `json:"sub-index"`
-	Mtu         uint16 `json:"mtu"`
-	Speed       int16  `json:"speed"`
-	Mask        uint8  `json:"mask"`
-	Enabled     bool   `json:"enable"`
+	Name        string  `json:"name" binding:"required"`
+	IP          string  `json:"ip" binding:"required"`
+	Description string  `json:"description" binding:"required"`
+	Duplex      string  `json:"duplex" binding:"required"`
+	Mtu         uint16  `json:"mtu" binding:"required"`
+	Speed       int16   `json:"speed" binding:"required"`
+	Mask        uint8   `json:"mask" binding:"required"`
+	SubIndex    *uint32 `json:"sub-index" binding:"required"`
+	Enabled     *bool   `json:"enable" binding:"required"`
 }

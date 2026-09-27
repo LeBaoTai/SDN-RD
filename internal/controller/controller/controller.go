@@ -9,6 +9,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/LeBaoTai/SDN-RD/internal/config"
 	"github.com/LeBaoTai/SDN-RD/internal/controller/controller/router"
 	"github.com/LeBaoTai/SDN-RD/internal/model"
 	"go.yaml.in/yaml/v4"
@@ -43,35 +44,35 @@ func NewController() *Controller {
 	}
 }
 
-func (c *Controller) Init(ctx context.Context) {
+func (c *Controller) Init(ctx context.Context, cfg *config.CTLConfig) {
 	log.Println("Starting Controller......")
 
 	deviceList := loadDeviceList()
-	deviceCfg := loadDeviceConfig()
 
 	authCtx := metadata.NewOutgoingContext(ctx, metadata.Pairs(
-		"username", deviceCfg.Username,
-		"password", deviceCfg.Password,
+		"username", cfg.SR_Username,
+		"password", cfg.SR_Password,
 	))
 
-	c.establishConnection(deviceList, deviceCfg, authCtx)
+	c.establishConnection(deviceList, cfg, authCtx)
 
 	log.Println("Controller is running")
 }
 
-func (c *Controller) establishConnection(deviceList *DeviceList, devCfg *DeviceCfg, ctx context.Context) {
+func (c *Controller) establishConnection(deviceList *DeviceList, cfg *config.CTLConfig, ctx context.Context) {
 	log.Println("Establish connection to router....")
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	for _, dev := range deviceList.Devices {
+		timeout, _ := time.ParseDuration(cfg.SR_Timeout)
 		devCfg := router.DeviceCfg{
 			Address:    dev.Address,
-			Username:   devCfg.Username,
-			Password:   devCfg.Password,
+			Username:   cfg.SR_Username,
+			Password:   cfg.SR_Password,
 			Port:       dev.Port,
 			Name:       dev.Name,
-			SkipVerify: devCfg.SkipVerify,
-			Timeout:    devCfg.Timeout,
+			SkipVerify: cfg.SR_Skipverify,
+			Timeout:    timeout,
 		}
 		session, err := router.NewDeviceSession(devCfg, ctx)
 		if err != nil {
@@ -107,27 +108,6 @@ func loadDeviceList() *DeviceList {
 	return &deviceList
 }
 
-func loadDeviceConfig() *DeviceCfg {
-	log.Println("Loading Device Config")
-	_, filename, _, ok := runtime.Caller(0)
-	if !ok {
-		log.Fatalln("Cannot get the current file information")
-	}
-	currentDir := filepath.Dir(filename)
-	deviceCfgPath := filepath.Join(currentDir, "../config/cfg.yml")
-	deviceCfgByte, err := os.ReadFile(deviceCfgPath)
-	if err != nil {
-		log.Fatalln("Cannot open Device Config File: ", err)
-	}
-	var deviceCfg DeviceCfg
-	err = yaml.Unmarshal(deviceCfgByte, &deviceCfg)
-	if err != nil {
-		log.Fatalln("Error when parse yaml: ", err)
-	}
-	log.Println("Completed loading Device Config")
-	return &deviceCfg
-}
-
 func (c *Controller) LoadSession(s string) *router.DeviceSession {
 	c.mu.Lock()
 	defer c.mu.Unlock()
@@ -136,6 +116,5 @@ func (c *Controller) LoadSession(s string) *router.DeviceSession {
 }
 
 func (c *Controller) ProcessIntent(ctx context.Context, payload *model.IntentEnvelope) error {
-	log.Println(payload)
 	return nil
 }

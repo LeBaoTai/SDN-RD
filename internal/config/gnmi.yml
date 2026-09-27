@@ -1,5 +1,0 @@
-gnmi:
-  timeout: 10s
-  insecure: true
-  skipVerify: true
-  encoding: json_ietf

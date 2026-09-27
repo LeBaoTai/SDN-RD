@@ -21,10 +21,10 @@ func main() {
 	if err := godotenv.Load(); err != nil {
 		log.Fatalf("Cannot load the env file %v", err)
 	}
-	cfg := config.Load()
+	cfg := config.LoadCTLConfig()
 
 	controller := controller.NewController()
-	controller.Init(ctx)
+	controller.Init(ctx, cfg)
 
 	sub, err := nats.NewSubscriber(cfg.NatsURL)
 	if err != nil {

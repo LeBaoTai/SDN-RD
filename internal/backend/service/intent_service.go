@@ -18,6 +18,7 @@ func NewIntentService(pub *nats.Publisher) *IntentService {
 }
 
 func (s *IntentService) HandleIntent(intent model.IntentEnvelope) error {
+	log.Println("handle intent")
 	log.Println(intent)
 	return nil
 }
