@@ -3,8 +3,8 @@ package handler
 import (
 	"net/http"
 
-	"github.com/LeBaoTai/SDN-RD/internal/backend/model"
 	"github.com/LeBaoTai/SDN-RD/internal/backend/service"
+	"github.com/LeBaoTai/SDN-RD/internal/model"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,7 +17,7 @@ func NewIntentHandler(s *service.IntentService) *IntentHandler {
 }
 
 func (h *IntentHandler) CreateIntent(c *gin.Context) {
-	var intent model.Intent
+	var intent model.IntentEnvelope
 	if err := c.ShouldBindJSON(&intent); err != nil {
 		c.JSON(http.StatusBadRequest, model.IntentResponse{
 			Status:  "error",

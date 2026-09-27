@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	"github.com/LeBaoTai/SDN-RD/internal/controller/nats"
+	"github.com/LeBaoTai/SDN-RD/internal/model"
 	"github.com/LeBaoTai/SDN-RD/internal/oc"
 	"github.com/LeBaoTai/SDN-RD/internal/oc/ocpath"
 	"github.com/openconfig/ygnmi/ygnmi"
@@ -21,7 +21,7 @@ func UpdateInterface(iface *oc.Interface, client *ygnmi.Client, ctx context.Cont
 	return result, nil
 }
 
-func CreateInterface(req *nats.IfcReq) (*oc.Interface, error) {
+func CreateInterface(req *model.IfcReq) (*oc.Interface, error) {
 	iface := &oc.Interface{}
 	iface.Name = new(req.Name)
 	iface.Description = new(req.Description)

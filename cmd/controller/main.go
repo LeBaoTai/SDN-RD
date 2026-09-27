@@ -6,9 +6,10 @@ import (
 	"log"
 	"time"
 
-	"github.com/LeBaoTai/SDN-RD/internal/controller/config"
+	"github.com/LeBaoTai/SDN-RD/internal/config"
 	"github.com/LeBaoTai/SDN-RD/internal/controller/controller"
 	"github.com/LeBaoTai/SDN-RD/internal/controller/nats"
+	"github.com/LeBaoTai/SDN-RD/internal/model"
 	"github.com/joho/godotenv"
 )
 
@@ -31,7 +32,7 @@ func main() {
 	}
 	defer sub.Close()
 	err = sub.SubscribeQueue(cfg.NatsSubject, cfg.NatsQueueGroup, func(data []byte) {
-		var payload nats.IntentEnvelope
+		var payload model.IntentEnvelope
 		if err := json.Unmarshal(data, &payload); err != nil {
 			log.Printf("invalid payload: %v", err)
 			return

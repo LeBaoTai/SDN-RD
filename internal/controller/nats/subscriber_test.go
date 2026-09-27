@@ -6,6 +6,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/LeBaoTai/SDN-RD/internal/model"
 	natsgo "github.com/nats-io/nats.go"
 )
 
@@ -25,13 +26,12 @@ func TestSubscribeAndPublishIntent(t *testing.T) {
 
 	// 2. Subscribe and waiting
 	err = sub.SubscribeQueue(subjectTest, queueGroupTest, func(data []byte) {
-		var payload IntentEnvelope
+		var payload model.IntentEnvelope
 		if err := json.Unmarshal(data, &payload); err != nil {
 			log.Printf("[TEST LOGGER] invalid payload: %v", err)
 			done <- false
 			return
 		}
-
 		log.Printf("[TEST LOGGER] received intent successfully: %+v\n", payload)
 		done <- true
 	})

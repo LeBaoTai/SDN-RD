@@ -1,4 +1,4 @@
-package nats
+package model
 
 import "encoding/json"
 
@@ -6,6 +6,11 @@ type IntentEnvelope struct {
 	DeviceName string          `json:"device_name"`
 	Type       string          `json:"type"`
 	Data       json.RawMessage `json:"data"`
+}
+
+type IntentResponse struct {
+	Status  string
+	Message string
 }
 
 type IfcReq struct {

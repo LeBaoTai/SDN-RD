@@ -3,19 +3,21 @@ package service
 import (
 	"log"
 
-	"github.com/LeBaoTai/SDN-RD/internal/backend/model"
+	"github.com/LeBaoTai/SDN-RD/internal/backend/nats"
+	"github.com/LeBaoTai/SDN-RD/internal/model"
 )
 
 type IntentService struct {
-	// publisher sẽ thêm lại sau khi cần NATS
+	Publisher *nats.Publisher
 }
 
-func NewIntentService() *IntentService {
-	return &IntentService{}
+func NewIntentService(pub *nats.Publisher) *IntentService {
+	return &IntentService{
+		Publisher: pub,
+	}
 }
 
-func (s *IntentService) HandleIntent(intent model.Intent) error {
-	// TODO: gọi controller trực tiếp (in-process call hoặc HTTP) khi đã sẵn sàng
-	log.Printf("received intent: %+v\n", intent)
+func (s *IntentService) HandleIntent(intent model.IntentEnvelope) error {
+	log.Println(intent)
 	return nil
 }

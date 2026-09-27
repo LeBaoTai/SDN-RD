@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/LeBaoTai/SDN-RD/internal/controller/controller/router"
-	"github.com/LeBaoTai/SDN-RD/internal/controller/nats"
+	"github.com/LeBaoTai/SDN-RD/internal/model"
 	"go.yaml.in/yaml/v4"
 	"google.golang.org/grpc/metadata"
 )
@@ -135,7 +135,7 @@ func (c *Controller) LoadSession(s string) *router.DeviceSession {
 	return t
 }
 
-func (c *Controller) ProcessIntent(ctx context.Context, payload *nats.IntentEnvelope) error {
-	log.Println("ProcessIntent")
+func (c *Controller) ProcessIntent(ctx context.Context, payload *model.IntentEnvelope) error {
+	log.Println(payload)
 	return nil
 }
