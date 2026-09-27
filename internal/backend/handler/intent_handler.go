@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/LeBaoTai/SDN-RD/internal/backend/service"
-	"github.com/LeBaoTai/SDN-RD/internal/model"
+	"github.com/LeBaoTai/SDN-RD/internal/shared/model"
 	"github.com/gin-gonic/gin"
 )
 

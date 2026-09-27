@@ -11,7 +11,8 @@ import (
 
 	"github.com/LeBaoTai/SDN-RD/internal/config"
 	"github.com/LeBaoTai/SDN-RD/internal/controller/controller/router"
-	"github.com/LeBaoTai/SDN-RD/internal/model"
+	"github.com/LeBaoTai/SDN-RD/internal/shared/model"
+	"github.com/LeBaoTai/SDN-RD/internal/shared/repo"
 	"go.yaml.in/yaml/v4"
 	"google.golang.org/grpc/metadata"
 )
@@ -34,13 +35,15 @@ type DeviceCfg struct {
 }
 
 type Controller struct {
-	DeviceSessions map[string]*router.DeviceSession
+	deviceSessions map[string]*router.DeviceSession
+	repo           *repo.Repo
 	mu             sync.Mutex
 }
 
-func NewController() *Controller {
+func NewController(rp *repo.Repo) *Controller {
 	return &Controller{
-		DeviceSessions: make(map[string]*router.DeviceSession),
+		deviceSessions: make(map[string]*router.DeviceSession),
+		repo:           rp,
 	}
 }
 
@@ -81,7 +84,7 @@ func (c *Controller) establishConnection(deviceList *DeviceList, cfg *config.CTL
 			continue
 		}
 
-		c.DeviceSessions[dev.Name] = session
+		c.deviceSessions[dev.Name] = session
 	}
 	log.Println("Completed establish connection to router....")
 }
@@ -111,7 +114,7 @@ func loadDeviceList() *DeviceList {
 func (c *Controller) LoadSession(s string) *router.DeviceSession {
 	c.mu.Lock()
 	defer c.mu.Unlock()
-	t := c.DeviceSessions[s]
+	t := c.deviceSessions[s]
 	return t
 }
 

@@ -7,7 +7,7 @@ type CTLConfig struct {
 	NatsSubject    string
 	NatsQueueGroup string
 
-	// Backend setting
+	// Controller setting
 	SR_Username   string
 	SR_Password   string
 	SR_Skipverify bool

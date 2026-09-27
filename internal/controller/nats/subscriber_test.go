@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/LeBaoTai/SDN-RD/internal/model"
+	"github.com/LeBaoTai/SDN-RD/internal/shared/model"
 	natsgo "github.com/nats-io/nats.go"
 )
 

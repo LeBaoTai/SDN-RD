@@ -38,3 +38,11 @@ run-backend:
 .PHONY: run-controller
 run-controller:
 	go run ./cmd/controller
+
+.PHONY: run-infra
+run-infra:
+	docker compose --env-file .env -f ./infra/docker-compose.yaml up -d 
+
+.PHONY: stop-infra
+stop-infra:
+	docker compose --env-file .env -f ./infra/docker-compose.yaml down

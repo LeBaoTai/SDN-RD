@@ -1,10 +1,8 @@
 package service
 
 import (
-	"log"
-
 	"github.com/LeBaoTai/SDN-RD/internal/backend/nats"
-	"github.com/LeBaoTai/SDN-RD/internal/model"
+	"github.com/LeBaoTai/SDN-RD/internal/shared/model"
 )
 
 type IntentService struct {
@@ -18,7 +16,5 @@ func NewIntentService(pub *nats.Publisher) *IntentService {
 }
 
 func (s *IntentService) HandleIntent(intent model.IntentEnvelope) error {
-	log.Println("handle intent")
-	log.Println(intent)
 	return nil
 }

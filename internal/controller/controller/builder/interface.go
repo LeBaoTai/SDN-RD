@@ -4,9 +4,9 @@ import (
 	"context"
 	"log"
 
-	"github.com/LeBaoTai/SDN-RD/internal/model"
 	"github.com/LeBaoTai/SDN-RD/internal/oc"
 	"github.com/LeBaoTai/SDN-RD/internal/oc/ocpath"
+	"github.com/LeBaoTai/SDN-RD/internal/shared/model"
 	"github.com/openconfig/ygnmi/ygnmi"
 	"github.com/openconfig/ygot/ygot"
 )

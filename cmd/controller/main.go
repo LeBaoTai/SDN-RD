@@ -9,7 +9,9 @@ import (
 	"github.com/LeBaoTai/SDN-RD/internal/config"
 	"github.com/LeBaoTai/SDN-RD/internal/controller/controller"
 	"github.com/LeBaoTai/SDN-RD/internal/controller/nats"
-	"github.com/LeBaoTai/SDN-RD/internal/model"
+	"github.com/LeBaoTai/SDN-RD/internal/shared/db"
+	"github.com/LeBaoTai/SDN-RD/internal/shared/model"
+	"github.com/LeBaoTai/SDN-RD/internal/shared/repo"
 	"github.com/joho/godotenv"
 )
 
@@ -21,17 +23,28 @@ func main() {
 	if err := godotenv.Load(); err != nil {
 		log.Fatalf("Cannot load the env file %v", err)
 	}
-	cfg := config.LoadCTLConfig()
+	ctlCfg := config.LoadCTLConfig()
+	dbCfg := config.LoadDBConfig()
 
-	controller := controller.NewController()
-	controller.Init(ctx, cfg)
+	// init DB connection
+	db, err := db.NewConnection(*dbCfg)
+	if err != nil {
+		log.Fatalf("Cannot establish DB connection %v", err)
+	}
 
-	sub, err := nats.NewSubscriber(cfg.NatsURL)
+	// Init repository
+	repo := repo.NewRepo(db)
+
+	// init controller
+	controller := controller.NewController(repo)
+	controller.Init(ctx, ctlCfg)
+
+	sub, err := nats.NewSubscriber(ctlCfg.NatsURL)
 	if err != nil {
 		log.Fatalf("failed to connect NATS: %v", err)
 	}
 	defer sub.Close()
-	err = sub.SubscribeQueue(cfg.NatsSubject, cfg.NatsQueueGroup, func(data []byte) {
+	err = sub.SubscribeQueue(ctlCfg.NatsSubject, ctlCfg.NatsQueueGroup, func(data []byte) {
 		var payload model.IntentEnvelope
 		if err := json.Unmarshal(data, &payload); err != nil {
 			log.Printf("invalid payload: %v", err)
@@ -48,6 +61,6 @@ func main() {
 		log.Fatalf("failed to subscribe: %v", err)
 	}
 
-	log.Println("controller listening on subject:", cfg.NatsSubject)
+	log.Println("controller listening on subject:", ctlCfg.NatsSubject)
 	select {}
 }
