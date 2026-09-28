@@ -3,9 +3,7 @@ package controller
 import (
 	"context"
 	"log"
-	"os"
-	"path/filepath"
-	"runtime"
+	"strconv"
 	"sync"
 	"time"
 
@@ -13,7 +11,6 @@ import (
 	"github.com/LeBaoTai/SDN-RD/internal/controller/controller/router"
 	"github.com/LeBaoTai/SDN-RD/internal/shared/model"
 	"github.com/LeBaoTai/SDN-RD/internal/shared/repo"
-	"go.yaml.in/yaml/v4"
 	"google.golang.org/grpc/metadata"
 )
 
@@ -50,29 +47,31 @@ func NewController(rp *repo.Repo) *Controller {
 func (c *Controller) Init(ctx context.Context, cfg *config.CTLConfig) {
 	log.Println("Starting Controller......")
 
-	deviceList := loadDeviceList()
-
 	authCtx := metadata.NewOutgoingContext(ctx, metadata.Pairs(
 		"username", cfg.SR_Username,
 		"password", cfg.SR_Password,
 	))
 
-	c.establishConnection(deviceList, cfg, authCtx)
+	c.establishConnection(cfg, authCtx)
 
 	log.Println("Controller is running")
 }
 
-func (c *Controller) establishConnection(deviceList *DeviceList, cfg *config.CTLConfig, ctx context.Context) {
+func (c *Controller) establishConnection(cfg *config.CTLConfig, ctx context.Context) {
 	log.Println("Establish connection to router....")
 	c.mu.Lock()
 	defer c.mu.Unlock()
-	for _, dev := range deviceList.Devices {
+	devices, err := c.repo.GetAllDevices(ctx)
+	if err != nil {
+		log.Printf("Cannot get all devices :%v\n", err)
+	}
+	for _, dev := range *devices {
 		timeout, _ := time.ParseDuration(cfg.SR_Timeout)
 		devCfg := router.DeviceCfg{
 			Address:    dev.Address,
 			Username:   cfg.SR_Username,
 			Password:   cfg.SR_Password,
-			Port:       dev.Port,
+			Port:       strconv.Itoa(dev.Port),
 			Name:       dev.Name,
 			SkipVerify: cfg.SR_Skipverify,
 			Timeout:    timeout,
@@ -87,28 +86,6 @@ func (c *Controller) establishConnection(deviceList *DeviceList, cfg *config.CTL
 		c.deviceSessions[dev.Name] = session
 	}
 	log.Println("Completed establish connection to router....")
-}
-
-func loadDeviceList() *DeviceList {
-	log.Println("Loading device list")
-	_, filename, _, ok := runtime.Caller(0)
-	if !ok {
-		log.Fatalln("Cannot get the current file information")
-	}
-
-	currentDir := filepath.Dir(filename)
-	devicesPath := filepath.Join(currentDir, "../config/devices.yml")
-	devicesByte, err := os.ReadFile(devicesPath)
-	if err != nil {
-		log.Fatalln("Cannot open Device File: ", err)
-	}
-	var deviceList DeviceList
-	err = yaml.Unmarshal(devicesByte, &deviceList)
-	if err != nil {
-		log.Fatalln("Error when parse yaml: ", err)
-	}
-	log.Println("Completed loading device list")
-	return &deviceList
 }
 
 func (c *Controller) LoadSession(s string) *router.DeviceSession {

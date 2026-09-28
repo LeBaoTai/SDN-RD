@@ -11,6 +11,3 @@ func NewRepo(conn *gorm.DB) *Repo {
 		dbConn: conn,
 	}
 }
-
-func (r *Repo) GetAllDevice() {
-}
