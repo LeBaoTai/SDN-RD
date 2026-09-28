@@ -16,5 +16,6 @@ func NewIntentService(pub *nats.Publisher) *IntentService {
 }
 
 func (s *IntentService) HandleIntent(intent model.IntentEnvelope) error {
-	return nil
+	err := s.Publisher.PublishIntent("sdn.intent", intent)
+	return err
 }

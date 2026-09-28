@@ -3,6 +3,7 @@ package model
 import "encoding/json"
 
 type IntentEnvelope struct {
+	DeviceID   string          `json:"device_id" binding:"required"`
 	DeviceName string          `json:"device_name" binding:"required"`
 	Type       string          `json:"type" binding:"required"`
 	Data       json.RawMessage `json:"data" binding:"required"`

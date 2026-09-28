@@ -13,3 +13,12 @@ CREATE INDEX idx_devices_address ON public.devices (address);
 
 ALTER TABLE public.devices 
 ALTER COLUMN id SET DEFAULT gen_random_uuid();
+
+INSERT INTO public.devices (name, address, port)
+VALUES ('leaf-r1', '192.100.100.101', 57400);
+
+INSERT INTO public.devices (name, address, port)
+VALUES ('leaf-r2', '192.100.100.102', 57400);
+
+INSERT INTO public.devices (name, address, port)
+VALUES ('leaf-r3', '192.100.100.103', 57400);

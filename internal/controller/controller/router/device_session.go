@@ -12,6 +12,7 @@ import (
 )
 
 type DeviceCfg struct {
+	ID         string
 	Address    string
 	Username   string
 	Password   string
@@ -55,7 +56,7 @@ func NewDeviceSession(cfg DeviceCfg, ctx context.Context) (*DeviceSession, error
 
 	deviceSession := &DeviceSession{
 		Target: target,
-		ID:     cfg.Name,
+		ID:     cfg.ID,
 		Client: client,
 		State: &ConnectionState{
 			Connection: "Unknown",

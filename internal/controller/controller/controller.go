@@ -96,5 +96,6 @@ func (c *Controller) LoadSession(s string) *router.DeviceSession {
 }
 
 func (c *Controller) ProcessIntent(ctx context.Context, payload *model.IntentEnvelope) error {
+	log.Println(payload)
 	return nil
 }
