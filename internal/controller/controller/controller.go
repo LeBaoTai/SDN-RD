@@ -2,12 +2,15 @@ package controller
 
 import (
 	"context"
+	"errors"
+	"fmt"
 	"log"
 	"strconv"
 	"sync"
 	"time"
 
 	"github.com/LeBaoTai/SDN-RD/internal/config"
+	"github.com/LeBaoTai/SDN-RD/internal/controller/controller/handler"
 	"github.com/LeBaoTai/SDN-RD/internal/controller/controller/router"
 	"github.com/LeBaoTai/SDN-RD/internal/shared/model"
 	"github.com/LeBaoTai/SDN-RD/internal/shared/repo"
@@ -96,6 +99,20 @@ func (c *Controller) LoadSession(s string) *router.DeviceSession {
 }
 
 func (c *Controller) ProcessIntent(ctx context.Context, payload *model.IntentEnvelope) error {
-	log.Println(payload)
-	return nil
+	switch payload.Type {
+	case "interface":
+		{
+			session := c.LoadSession(payload.DeviceName)
+			if session == nil {
+				return fmt.Errorf("device session not found for %s", payload.DeviceName)
+			}
+			return handler.HandleInterfaceIntent(ctx, payload, session)
+		}
+	case "bgp":
+		return handler.HandleBGPIntent(payload)
+	case "system":
+		return handler.HandleSystemIntent(payload)
+	default:
+		return errors.New("Payload is empty or different type")
+	}
 }

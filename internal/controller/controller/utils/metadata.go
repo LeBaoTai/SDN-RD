@@ -29,3 +29,11 @@ func AuthInterceptor(username, password string) grpc.UnaryClientInterceptor {
 		return invoker(ctx, method, req, reply, cc, opts...)
 	}
 }
+
+func WrapContextWithAuth(parentCtx context.Context, username, password string) context.Context {
+	md := metadata.Pairs(
+		"username", username,
+		"password", password,
+	)
+	return metadata.NewOutgoingContext(parentCtx, md)
+}

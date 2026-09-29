@@ -23,10 +23,15 @@ func UpdateInterface(iface *oc.Interface, client *ygnmi.Client, ctx context.Cont
 
 func CreateInterface(req *model.IfcReq) (*oc.Interface, error) {
 	iface := &oc.Interface{}
-	iface.Name = new(req.Name)
-	iface.Description = new(req.Description)
-	iface.Mtu = ygot.Uint16(1500)
+	iface.Name = ygot.String(req.Name)
+	iface.Description = ygot.String(req.Description)
+	iface.Mtu = ygot.Uint16(req.Mtu)
 	iface.Enabled = req.Enabled
+	if req.Enabled != nil && *req.Enabled {
+		iface.AdminStatus = oc.Interface_AdminStatus_UP
+	} else {
+		iface.AdminStatus = oc.Interface_AdminStatus_DOWN
+	}
 	iface.Type = oc.IETFInterfaces_InterfaceType_ethernetCsmacd
 
 	// ethernet
@@ -40,17 +45,23 @@ func CreateInterface(req *model.IfcReq) (*oc.Interface, error) {
 		eth.PortSpeed = oc.OpenconfigIfEthernet_ETHERNET_SPEED_SPEED_10GB
 	}
 
+	// subindex
+	var subIdx uint32 = 0
+	if req.SubIndex != nil {
+		subIdx = *req.SubIndex
+	}
+
 	// Subinterface
 	subIface := iface.GetOrCreateSubinterface(*req.SubIndex)
 	subIface.Enabled = req.Enabled
-	subIface.Index = new(uint32(0))
+	subIface.Index = ygot.Uint32(subIdx)
 
 	// IPV4
 	ipv4 := subIface.GetOrCreateIpv4()
-	ipv4.Enabled = new(true)
+	ipv4.Enabled = ygot.Bool(true)
 
 	addr := ipv4.GetOrCreateAddress(req.IP)
-	addr.PrefixLength = new(req.Mask)
+	addr.PrefixLength = ygot.Uint8(req.Mask)
 
 	if err := iface.Validate(); err != nil {
 		return nil, err

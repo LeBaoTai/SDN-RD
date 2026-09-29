@@ -31,6 +31,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Cannot establish DB connection %v", err)
 	}
+	log.Println("Connect to database successfully")
 
 	// Init repository
 	repo := repo.NewRepo(db)
@@ -51,11 +52,13 @@ func main() {
 			return
 		}
 
-		if err := controller.ProcessIntent(ctx, &payload); err != nil {
+		processCtx, processCancel := context.WithTimeout(context.Background(), 20*time.Second)
+		defer processCancel()
+
+		if err := controller.ProcessIntent(processCtx, &payload); err != nil {
 			log.Printf("Process failed: %v", err)
 			return
 		}
-		log.Printf("received intent: %+v\n", payload)
 	})
 	if err != nil {
 		log.Fatalf("failed to subscribe: %v", err)
